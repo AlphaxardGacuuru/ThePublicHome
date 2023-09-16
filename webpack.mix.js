@@ -17,8 +17,9 @@ mix.react("resources/js/app.js", "public/js").sass(
 );
 
 mix.browserSync({
-    proxy: "http://localhost:8002",
-    reloadDelay: 1000
+	port: 3004,
+    proxy: "http://localhost:8004",
+    reloadDelay: 500
 });
 
 mix.webpackConfig({

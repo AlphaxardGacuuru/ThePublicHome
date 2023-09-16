@@ -33,6 +33,10 @@
 	<link href="{{ asset('css/app.css') }}"
 		  rel="stylesheet">
 
+	<!-- Styles -->
+	<link href="{{ asset('css/custom.css') }}"
+		  rel="stylesheet">
+
 	{{-- IOS support --}}
 	<link rel="apple-touch-icon"
 		  href="storage/img/musical-note.png">
