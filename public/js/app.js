@@ -80668,7 +80668,9 @@ var DeathAnnouncement = function DeathAnnouncement(props) {
     Axios.post("/api/death-announcement-likes", {
       deathAnnouncementId: deathAnnouncementId
     }).then(function (res) {
-      return props.setMessages([res.data.message]);
+      props.setMessages([res.data.message]);
+      // Update Death Announcements
+      props.get("death-announcements", props.setDeathAnnouncements);
     })["catch"](function (err) {
       return props.getErrors(err);
     });

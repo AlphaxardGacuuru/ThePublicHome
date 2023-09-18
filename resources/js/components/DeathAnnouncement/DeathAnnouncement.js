@@ -22,7 +22,11 @@ const DeathAnnouncement = (props) => {
 		Axios.post(`/api/death-announcement-likes`, {
 			deathAnnouncementId: deathAnnouncementId,
 		})
-			.then((res) => props.setMessages([res.data.message]))
+			.then((res) => {
+				props.setMessages([res.data.message])
+				// Update Death Announcements
+				props.get("death-announcements", props.setDeathAnnouncements)
+			})
 			.catch((err) => props.getErrors(err))
 	}
 
