@@ -27,7 +27,6 @@ Route::apiResources([
     "death-announcement-likes" => DeathAnnouncementLikeController::class,
     "death-announcement-comments" => DeathAnnouncementCommentController::class,
     "users" => UserController::class,
-
 ]);
 
 // Filepond Controller

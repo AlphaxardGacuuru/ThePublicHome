@@ -32,7 +32,7 @@ const getLocalStorage = (state) => {
 const decryptedToken = () => {
 	var CryptoJS = require("crypto-js")
 
-	const secretKey = "BlackMusicAuthorizationToken"
+	const secretKey = "ThePublicHomeAuthorizationToken"
 
 	// Decrypt
 	var bytes = CryptoJS.AES.decrypt(getLocalStorage("sanctumToken"), secretKey)

@@ -53,14 +53,4 @@ class UserService
 
         return new UserResource($auth);
     }
-
-	/*
-	* Search by email
-	*/ 
-	public function searchByEmail($email)
-	{
-        $user = User::where("email", $email)->first();
-
-		return new UserResource($user);
-	}
 }

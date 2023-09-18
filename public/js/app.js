@@ -80023,7 +80023,7 @@ var getLocalStorage = function getLocalStorage(state) {
 // Decrypt Sanctum Token
 var decryptedToken = function decryptedToken() {
   var CryptoJS = __webpack_require__(/*! crypto-js */ "./node_modules/crypto-js/index.js");
-  var secretKey = "BlackMusicAuthorizationToken";
+  var secretKey = "ThePublicHomeAuthorizationToken";
 
   // Decrypt
   var bytes = CryptoJS.AES.decrypt(getLocalStorage("sanctumToken"), secretKey);
@@ -80176,10 +80176,12 @@ var App = function App() {
   // Fetch data on page load
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     // Redirect if URL is not secure
-    var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/);
-    if (unsecureUrl) {
-      window.location.href = "https://music.black.co.ke";
-    }
+    // var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/)
+
+    // if (unsecureUrl) {
+    // window.location.href = "https://music.black.co.ke"
+    // }
+
     get("auth", setAuth, "auth", false);
   }, []);
   console.log("rendered");
@@ -80355,7 +80357,7 @@ var LoginPopUp = function LoginPopUp(props) {
 
   // Encrypt Token
   var encryptedToken = function encryptedToken(token) {
-    var secretKey = "PartyPeopleAuthorizationToken";
+    var secretKey = "ThePublicHomeAuthorizationToken";
     // Encrypt
     return crypto_js__WEBPACK_IMPORTED_MODULE_2___default.a.AES.encrypt(token, secretKey).toString();
   };
@@ -80379,7 +80381,9 @@ var LoginPopUp = function LoginPopUp(props) {
         // Update Logged in user
         props.get("auth", props.setAuth, "auth", false);
         // Reload page
-        // setTimeout(() => window.location.reload(), 1000)
+        setTimeout(function () {
+          return window.location.reload();
+        }, 1000);
       })["catch"](function (err) {
         // Remove loader
         setLoading(false);
@@ -80808,7 +80812,6 @@ var TopNav = function TopNav(props) {
 
   // Hide TopNav from various pages
   var display = location.pathname.match("/404") || location.pathname.match("/login") || location.pathname.match("/register") ? "d-none" : "";
-  console.log(props.login);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "MyElement",
     className: "".concat(menu, " ").concat(display)
@@ -80838,7 +80841,7 @@ var TopNav = function TopNav(props) {
     className: "menu-content-area d-flex align-items-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header-social-area d-flex align-items-center"
-  }, props.auth.name != "Guest" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+  }, props.auth.name == "Guest" ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "#",
     className: "display-4 text-white",
     onClick: function onClick() {

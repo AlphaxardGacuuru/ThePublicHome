@@ -79,11 +79,11 @@ const App = () => {
 	// Fetch data on page load
 	useEffect(() => {
 		// Redirect if URL is not secure
-		var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/)
+		// var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/)
 
-		if (unsecureUrl) {
-			window.location.href = "https://music.black.co.ke"
-		}
+		// if (unsecureUrl) {
+			// window.location.href = "https://music.black.co.ke"
+		// }
 
 		get("auth", setAuth, "auth", false)
 	}, [])

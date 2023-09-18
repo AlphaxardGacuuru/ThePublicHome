@@ -31,7 +31,7 @@ const LoginPopUp = (props) => {
 
 	// Encrypt Token
 	const encryptedToken = (token) => {
-		const secretKey = "PartyPeopleAuthorizationToken"
+		const secretKey = "ThePublicHomeAuthorizationToken"
 		// Encrypt
 		return CryptoJS.AES.encrypt(token, secretKey).toString()
 	}
@@ -58,7 +58,7 @@ const LoginPopUp = (props) => {
 					// Update Logged in user
 					props.get(`auth`, props.setAuth, "auth", false)
 					// Reload page
-					// setTimeout(() => window.location.reload(), 1000)
+					setTimeout(() => window.location.reload(), 1000)
 				})
 				.catch((err) => {
 					// Remove loader
