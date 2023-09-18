@@ -96,7 +96,7 @@ const TopNav = (props) => {
 										<a
 											href="#"
 											id="menuIcon"
-											className="hidden"
+											className="hidden text-white"
 											onClick={(e) => {
 												e.preventDefault()
 												setMenu("menu-open")

@@ -4,11 +4,10 @@ import DeathAnnouncement from "@/components/DeathAnnouncement/DeathAnnouncement"
 import LoadingDeathAnnouncement from "@/components/DeathAnnouncement/LoadingDeathAnnouncement"
 
 const index = (props) => {
-	const [deathAnnouncements, setDeathAnnouncements] = useState([])
 	const [location, setLocation] = useState("home")
 
 	useEffect(() => {
-		props.get("death-announcements", setDeathAnnouncements)
+		props.get("death-announcements", props.setDeathAnnouncements)
 	}, [])
 
 	const active = (current) => {
@@ -49,13 +48,13 @@ const index = (props) => {
 					<div className="d-flex flex-wrap justify-content-center">
 						{/* Loading Death Announcement items */}
 						{dummyArray
-							.filter(() => deathAnnouncements.length < 1)
+							.filter(() => props.deathAnnouncements.length < 1)
 							.map((item, key) => (
 								<LoadingDeathAnnouncement key={key} />
 							))}
 
 						{/* Real Death Announcement items */}
-						{deathAnnouncements
+						{props.deathAnnouncements
 							.filter((announcement) => announcement.location == location)
 							.map((deathAnnouncement, key) => (
 								<DeathAnnouncement

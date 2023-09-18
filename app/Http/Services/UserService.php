@@ -6,7 +6,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class UserService
+class UserService extends Service
 {
 
     /**

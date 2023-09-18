@@ -45,4 +45,21 @@ class DeathAnnouncement extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function deathAnnouncementlikes()
+    {
+        return $this->hasMany(DeathAnnouncementLike::class);
+    }
+
+    /*
+     *    Custom Functions
+     */
+
+    // Check if user has liked video
+    public function hasLiked($id)
+    {
+        return $this->deathAnnouncementlikes
+            ->where("user_id", $id)
+            ->count() > 0 ? true : false;
+    }
 }

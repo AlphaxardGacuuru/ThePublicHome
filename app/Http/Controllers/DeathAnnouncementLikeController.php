@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\DeathAnnouncementLikeService;
 use App\Models\DeathAnnouncementLike;
 use Illuminate\Http\Request;
 
 class DeathAnnouncementLikeController extends Controller
 {
+    public function __construct(protected DeathAnnouncementLikeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +31,13 @@ class DeathAnnouncementLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $like] = $this->service->store($request);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $like,
+        ], 200);
     }
 
     /**

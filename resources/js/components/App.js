@@ -82,7 +82,7 @@ const App = () => {
 		// var unsecureUrl = window.location.href.match(/http:\/\/music.black.co.ke/)
 
 		// if (unsecureUrl) {
-			// window.location.href = "https://music.black.co.ke"
+		// window.location.href = "https://music.black.co.ke"
 		// }
 
 		get("auth", setAuth, "auth", false)
@@ -176,20 +176,15 @@ const App = () => {
 			<ScrollToTop />
 
 			<TopNav {...GLOBAL_STATE} />
-			{/* {routes.map((route, key) => (
+
+			{routes.map((route, key) => (
 				<Route
 					key={key}
 					path={route.path}
 					exact
-					component={() => route.component}
+					render={() => route.component}
 				/>
-			))} */}
-
-			<Route
-				path="/"
-				exact
-				component={() => <Index {...GLOBAL_STATE} />}
-			/>
+			))}
 
 			<LoginPopUp {...GLOBAL_STATE} />
 			<Messages {...GLOBAL_STATE} />

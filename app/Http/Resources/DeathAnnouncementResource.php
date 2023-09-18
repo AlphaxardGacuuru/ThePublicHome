@@ -28,6 +28,8 @@ class DeathAnnouncementResource extends JsonResource
             "poster" => $this->poster,
             "eulogy" => $this->eulogy,
             "location" => $this->location,
+            "likes" => $this->likes,
+            "hasLiked" => $this->hasLiked($id),
             "updatedAt" => $this->updated_at,
             "createdAt" => $this->created_at,
         ];

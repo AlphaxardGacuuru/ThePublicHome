@@ -5,7 +5,7 @@ namespace App\Http\Services;
 use App\Http\Resources\DeathAnnouncementResource;
 use App\Models\DeathAnnouncement;
 
-class DeathAnnouncementService
+class DeathAnnouncementService extends Service
 {
 	/*
 	* Get All Death Announcements
