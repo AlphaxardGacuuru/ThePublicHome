@@ -56,6 +56,7 @@ const TopNav = (props) => {
 					className="header-area"
 					style={{
 						backgroundColor: "purple",
+						borderBottomLeftRadius: "20px",
 						borderBottomRightRadius: "20px",
 					}}>
 					<div className="container-fluid p-0">
@@ -122,30 +123,6 @@ const TopNav = (props) => {
 					</span>
 				)}
 			</div>
-
-			{/* Left Column */}
-			<div
-				id="MyElement"
-				className="left-open">
-				{/* <!-- ***** Side Menu Area Start ***** --> */}
-				<div
-					className="leftMenu d-flex align-items-center justify-content-start"
-					style={{ backgroundColor: "purple" }}>
-					<div
-						className="sonarNav wow fadeInUp w-100 mt-4"
-						data-wow-delay="1s">
-						<nav>
-							<ul className="m-0 p-0">
-								<li className="nav-item"></li>
-							</ul>
-						</nav>
-					</div>
-
-					<br />
-				</div>
-				{/* <!-- ***** Side Menu Area End ***** --> */}
-			</div>
-			{/* Left Column End */}
 
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>
