@@ -102138,12 +102138,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_death_announcement_create__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/pages/death-announcement/create */ "./resources/js/pages/death-announcement/create.js");
 /* harmony import */ var _pages_death_announcement_id___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/pages/death-announcement/[id] */ "./resources/js/pages/death-announcement/[id].js");
 /* harmony import */ var _pages_death_announcement_edit_id___WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/pages/death-announcement/edit/[id] */ "./resources/js/pages/death-announcement/edit/[id].js");
+/* harmony import */ var _components_Auth_Socialite__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/components/Auth/Socialite */ "./resources/js/components/Auth/Socialite.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -102320,6 +102322,9 @@ var App = function App() {
   var routes = [{
     path: "/",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_index__WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE)
+  }, {
+    path: "/socialite/:message/:token",
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Auth_Socialite__WEBPACK_IMPORTED_MODULE_11__["default"], GLOBAL_STATE)
   }, {
     path: "/death-announcement/create",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_death_announcement_create__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE)
@@ -102517,14 +102522,69 @@ var LoginPopUp = function LoginPopUp(props) {
     onClick: function onClick() {
       return onSocial("google");
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnText: "login with email",
-    onClick: function onClick() {
-      return setPhoneLogin(true);
-    }
   })))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (LoginPopUp);
+
+/***/ }),
+
+/***/ "./resources/js/components/Auth/Socialite.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/Auth/Socialite.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var crypto_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! crypto-js */ "./node_modules/crypto-js/index.js");
+/* harmony import */ var crypto_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(crypto_js__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var Socialite = function Socialite(props) {
+  var _useParams = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useParams"])(),
+    message = _useParams.message,
+    token = _useParams.token;
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    props.setMessages([message]);
+
+    // Encrypt Token
+    var encryptedToken = function encryptedToken(token) {
+      var secretKey = "ThePublicHomeAuthorizationToken";
+      // Encrypt
+      return crypto_js__WEBPACK_IMPORTED_MODULE_2___default.a.AES.encrypt(token, secretKey).toString();
+    };
+
+    // Encrypt and Save Sanctum Token to Local Storage
+    props.setLocalStorage("sanctumToken", encryptedToken(token));
+
+    // Redirect to index page
+    window.location.href = "/";
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "preloader",
+    style: {
+      top: "0"
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", {
+    className: "p-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "mb-5"
+  }, "Welcome to The Public Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border text-primary my-auto",
+    style: {
+      width: "5em",
+      height: "5em"
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mt-5"
+  }, "Redirecting...")));
+};
+/* harmony default export */ __webpack_exports__["default"] = (Socialite);
 
 /***/ }),
 

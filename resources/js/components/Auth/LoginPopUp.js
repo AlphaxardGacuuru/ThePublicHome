@@ -132,12 +132,12 @@ const LoginPopUp = (props) => {
 								className="mt-2 rounded-0"
 								onClick={() => onSocial("google")}
 							/>
-							<br />
+							{/* <br /> */}
 
-							<Btn
+							{/* <Btn
 								btnText="login with email"
 								onClick={() => setPhoneLogin(true)}
-							/>
+							/> */}
 						</>
 					)}
 				</div>

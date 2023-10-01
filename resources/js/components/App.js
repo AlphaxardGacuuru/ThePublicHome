@@ -14,6 +14,8 @@ import DeathAnnouncementCreate from "@/pages/death-announcement/create"
 import DeathAnnouncementShow from "@/pages/death-announcement/[id]"
 import DeathAnnouncementEdit from "@/pages/death-announcement/edit/[id]"
 
+import Socialite from "@/components/Auth/Socialite"
+
 const App = () => {
 	// Function for checking local storage
 	const getLocalStorage = (state) => {
@@ -165,6 +167,10 @@ const App = () => {
 		{
 			path: "/",
 			component: <Index {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/socialite/:message/:token",
+			component: <Socialite {...GLOBAL_STATE} />,
 		},
 		{
 			path: "/death-announcement/create",
