@@ -10,6 +10,10 @@ import LoginPopUp from "@/components/Auth/LoginPopUp"
 
 import Index from "@/pages/index"
 
+import DeathAnnouncementCreate from "@/pages/death-announcement/create"
+import DeathAnnouncementShow from "@/pages/death-announcement/[id]"
+import DeathAnnouncementEdit from "@/pages/death-announcement/edit/[id]"
+
 const App = () => {
 	// Function for checking local storage
 	const getLocalStorage = (state) => {
@@ -161,6 +165,18 @@ const App = () => {
 		{
 			path: "/",
 			component: <Index {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/death-announcement/create",
+			component: <DeathAnnouncementCreate {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/death-announcement/show/:id",
+			component: <DeathAnnouncementShow {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/death-announcement/edit/:id",
+			component: <DeathAnnouncementEdit {...GLOBAL_STATE} />,
 		},
 	]
 

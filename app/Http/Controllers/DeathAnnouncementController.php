@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class DeathAnnouncementController extends Controller
 {
-	public function __construct(protected DeathAnnouncementService $service)
-	{
-		// 
-	}
+    public function __construct(protected DeathAnnouncementService $service)
+    {
+        //
+    }
 
     /**
      * Display a listing of the resource.
@@ -31,7 +31,19 @@ class DeathAnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "name" => "required|string",
+            "poster" => "required",
+            "eulogy" => "required|string",
+        ]);
+
+        [$saved, $message, $deathAnnouncement] = $this->service->store($request);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $deathAnnouncement,
+        ], 200);
     }
 
     /**
@@ -40,9 +52,9 @@ class DeathAnnouncementController extends Controller
      * @param  \App\Models\DeathAnnouncement  $deathAnnouncement
      * @return \Illuminate\Http\Response
      */
-    public function show(DeathAnnouncement $deathAnnouncement)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
@@ -52,9 +64,15 @@ class DeathAnnouncementController extends Controller
      * @param  \App\Models\DeathAnnouncement  $deathAnnouncement
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DeathAnnouncement $deathAnnouncement)
+    public function update(Request $request, $id)
     {
-        //
+        [$saved, $message, $deathAnnouncement] = $this->service->update($request, $id);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $deathAnnouncement,
+        ], 200);
     }
 
     /**
@@ -63,8 +81,13 @@ class DeathAnnouncementController extends Controller
      * @param  \App\Models\DeathAnnouncement  $deathAnnouncement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeathAnnouncement $deathAnnouncement)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response([
+            "status" => $deleted,
+            "message" => $message,
+        ], 200);
     }
 }

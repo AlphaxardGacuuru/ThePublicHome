@@ -11,7 +11,7 @@ const TopNavLinks = (props) => {
 	return (
 		<>
 			{/* Admin */}
-			{props.auth?.username != "@blackmusic" && (
+			{props.auth?.id != "@blackmusic" && (
 				<Link
 					to="/admin"
 					className="text-white me-2">
@@ -55,7 +55,7 @@ const TopNavLinks = (props) => {
 				{/* Avatar End */}
 				<div className="dropdown-menu rounded-0 m-0 p-0">
 					<Link
-						to={`/profile/show/${props.auth?.username}`}
+						to={`/profile/show/${props.auth?.id}`}
 						className="p-2 px-3 pt-3 dropdown-item">
 						<div className="d-flex">
 							<div className="align-items-center">

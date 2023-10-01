@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DeathAnnouncementCommentController;
+use App\Http\Controllers\DeathAnnouncementCommentLikeController;
 use App\Http\Controllers\DeathAnnouncementController;
 use App\Http\Controllers\DeathAnnouncementLikeController;
 use App\Http\Controllers\FilePondController;
@@ -26,6 +27,7 @@ Route::apiResources([
     "death-announcements" => DeathAnnouncementController::class,
     "death-announcement-likes" => DeathAnnouncementLikeController::class,
     "death-announcement-comments" => DeathAnnouncementCommentController::class,
+    "death-announcement-comment-likes" => DeathAnnouncementCommentLikeController::class,
     "users" => UserController::class,
 ]);
 

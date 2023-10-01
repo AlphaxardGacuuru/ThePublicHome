@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
+import SocialMediaInput from "@/components/Core/SocialMediaInput"
 
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
@@ -42,7 +43,7 @@ const DeathAnnouncement = (props) => {
 				</div>
 				{/* User info */}
 				<div
-					className="d-flex p-1"
+					className="d-flex justify-content-start p-1"
 					style={{ maxWidth: "220em" }}>
 					{/* Avatar */}
 					<div
@@ -60,27 +61,20 @@ const DeathAnnouncement = (props) => {
 						</Link>
 					</div>
 					{/* Avatar End */}
-					{/* Service Provider Name */}
+					{/* User Name */}
 					<div className="flex-grow-1">
-						<h6 className="service-provider-name mt-1 pt-2 px-1">
+						<h6 className="death-announcement-user-name mt-1 pt-2 px-1">
 							{props.deathAnnouncement.userName}
 						</h6>
 					</div>
-					{/* Service Provider Name End */}
+					{/* User Name End */}
 				</div>
 				{/* User info End */}
-				<center>
-					<h3 className="death-announcement-name">
-						{props.deathAnnouncement.name}
-					</h3>
-					<p className="m-0">
-						<span
-							className="me-1"
-							style={{ color: "#0077B6" }}></span>
-						{props.deathAnnouncement.eulogy}
-					</p>
-				</center>
-				<div className="d-flex justify-content-between px-2">
+				<h3 className="death-announcement-name px-2 mb-0">
+					{props.deathAnnouncement.name}
+				</h3>
+				<p className="m-0">{props.deathAnnouncement.eulogy}</p>
+				<div className="d-flex justify-content-between px-4 py-2">
 					{/* Death Announcement likes */}
 					<div
 						style={{ cursor: "pointer" }}
@@ -110,6 +104,17 @@ const DeathAnnouncement = (props) => {
 						)}
 					</div>
 				</div>
+				{/* SocialMedia Input */}
+				<div>
+					<SocialMediaInput
+						{...props}
+						id={props.deathAnnouncement.id}
+						placeholder="Write Something"
+						urlTo="/death-announcement-comments"
+						editing={false}
+					/>
+				</div>
+				{/* SocialMedia Input End */}
 				{/* Death Announcement likes End */}
 			</div>
 		</span>

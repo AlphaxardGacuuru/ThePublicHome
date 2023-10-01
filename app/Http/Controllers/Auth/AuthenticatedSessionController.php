@@ -10,9 +10,57 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticatedSessionController extends Controller
 {
+    /*
+     * Social Logins*/
+    public function redirectToProvider($website)
+    {
+        return Socialite::driver($website)->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub/Google/Twitter/Facebook.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback($website)
+    {
+        $user = Socialite::driver($website)->user();
+
+        $name = $user->getName() ? $user->getName() : " ";
+
+        $email = $user->getEmail() ? $user->getEmail() : redirect('/');
+
+        $avatar = $user->getAvatar() ? $user->getAvatar() : "avatar/male-avatar.png";
+
+        // Get Database User
+        $dbUser = User::where('email', $user->getEmail());
+
+        $message = "Logged In";
+
+        // Check if user exists
+        if ($dbUser->doesntExist()) {
+            $user = User::create([
+                'name' => $name,
+                'email' => $email,
+                'avatar' => $avatar,
+                'password' => Hash::make($email),
+            ]);
+
+            $message = "Account Created";
+        }
+
+        $token = $dbUser
+            ->first()
+            ->createToken("deviceName")
+            ->plainTextToken;
+
+        return redirect("/#/socialite/" . $message . "/" . $token);
+    }
+
     /**
      * Handle an incoming authentication request.
      */

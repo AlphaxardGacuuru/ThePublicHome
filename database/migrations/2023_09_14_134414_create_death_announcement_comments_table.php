@@ -24,6 +24,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('text');
+            $table->string('likes')->default(0);
             $table->timestamps();
         });
     }

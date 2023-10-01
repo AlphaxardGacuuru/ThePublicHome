@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeathAnnouncementCommentedEvent;
+use App\Http\Services\DeathAnnouncementCommentService;
 use App\Models\DeathAnnouncementComment;
 use Illuminate\Http\Request;
 
 class DeathAnnouncementCommentController extends Controller
 {
+    public function __construct(protected DeathAnnouncementCommentService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +32,22 @@ class DeathAnnouncementCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        [$canDispatch, $message, $deathAnnouncementComment] = $this->service->store($request);
+
+        DeathAnnouncementCommentedEvent::dispatchIf(
+            $canDispatch,
+            $deathAnnouncementComment->deathAnnouncement,
+            $deathAnnouncementComment->user
+        );
+
+        return response([
+            "message" => $message,
+            "data" => $deathAnnouncementComment,
+        ], 200);
     }
 
     /**
@@ -34,9 +56,9 @@ class DeathAnnouncementCommentController extends Controller
      * @param  \App\Models\DeathAnnouncementComment  $deathAnnouncementComment
      * @return \Illuminate\Http\Response
      */
-    public function show(DeathAnnouncementComment $deathAnnouncementComment)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
@@ -46,7 +68,7 @@ class DeathAnnouncementCommentController extends Controller
      * @param  \App\Models\DeathAnnouncementComment  $deathAnnouncementComment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DeathAnnouncementComment $deathAnnouncementComment)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -57,8 +79,13 @@ class DeathAnnouncementCommentController extends Controller
      * @param  \App\Models\DeathAnnouncementComment  $deathAnnouncementComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DeathAnnouncementComment $deathAnnouncementComment)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response([
+			"status" => $deleted,
+			"message" => $message
+		], 200);
     }
 }

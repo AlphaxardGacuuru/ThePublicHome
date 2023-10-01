@@ -993,6 +993,21 @@ div.hidden-scroll span {
 	padding: 0;
 }
 
+.death-announcement-poster {
+	width: 100%;
+	/* height: 50em; */
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.death-announcement-poster img {
+	width: 100%;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+
 /* crop thumbnails */
 .death-announcement-thumbnail {
 	width: 22em;
@@ -1009,7 +1024,7 @@ div.hidden-scroll span {
 	padding: 0;
 }
 
-.service-provider-name {
+.death-announcement-user-name {
 	width: 10em;
 	min-height: 1em;
 	white-space: nowrap;
@@ -1019,12 +1034,13 @@ div.hidden-scroll span {
 }
 
 .death-announcement-name {
-	width: 10em;
-	height: 1.2em;
+	width: 8em;
+	height: 1.3em;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: clip;
 	text-align: left;
+	margin-right: auto;
 }
 
 /* Club Media End */

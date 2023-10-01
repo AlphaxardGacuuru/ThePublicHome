@@ -23,10 +23,9 @@ const LoginPopUp = (props) => {
 	const [loading, setLoading] = useState(false)
 
 	const onSocial = (website) => {
-		// window.location.href = `${props.url}/api/login/${website}`
+		window.location.href = `/login/${website}`
 	}
 
-	// const [phone, setPhone] = useState('07')
 	const [phoneLogin, setPhoneLogin] = useState(false)
 
 	// Encrypt Token

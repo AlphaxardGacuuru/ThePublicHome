@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 import DeathAnnouncement from "@/components/DeathAnnouncement/DeathAnnouncement"
 import LoadingDeathAnnouncement from "@/components/DeathAnnouncement/LoadingDeathAnnouncement"
+
+import PlusSVG from "@/svgs/PlusSVG"
 
 const index = (props) => {
 	const [location, setLocation] = useState("home")
@@ -22,6 +25,14 @@ const index = (props) => {
 		<div className="row">
 			<div className="col-sm-1"></div>
 			<div className="col-sm-10">
+				{/* Chat button */}
+				{props.auth?.username != "@guest" && (
+					<Link
+						to="/death-announcement/create"
+						id="chatFloatBtn">
+						<PlusSVG />
+					</Link>
+				)}
 				<center>
 					<h1>Death and Funeral Announcements</h1>
 
