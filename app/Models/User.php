@@ -54,7 +54,7 @@ class User extends Authenticatable
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => "/storage/" . $value
+            get: fn($value) => preg_match("/http/", $value) ? $value : "/storage/" . $value
         );
     }
 
