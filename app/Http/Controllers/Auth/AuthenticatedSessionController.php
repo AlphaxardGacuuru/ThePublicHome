@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
 
         $email = $user->getEmail() ? $user->getEmail() : redirect('/');
 
-        $avatar = $user->getAvatar() ? $user->getAvatar() : "avatar/male-avatar.png";
+        $avatar = $user->getAvatar() ? $user->getAvatar() : "avatars/male-avatar.png";
 
         // Get Database User
         $dbUser = User::where('email', $user->getEmail());
