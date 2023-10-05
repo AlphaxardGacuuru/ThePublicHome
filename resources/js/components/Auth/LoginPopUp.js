@@ -110,17 +110,17 @@ const LoginPopUp = (props) => {
 										required={true}
 										autoFocus
 									/>
-									<br />
 
 									<Btn
 										type="submit"
+										btnClass="mt-2 btn-primary rounded-pill w-75"
 										btnText="Login"
 										loading={loading}
 									/>
 								</form>
-								<br />
 
 								<Btn
+									btnClass="mt-1 btn-primary rounded-pill w-50"
 									btnText="back"
 									onClick={() => setPhoneLogin(false)}
 								/>
