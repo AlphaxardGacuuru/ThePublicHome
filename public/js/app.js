@@ -102518,9 +102518,15 @@ var LoginPopUp = function LoginPopUp(props) {
       return setPhoneLogin(false);
     }
   }))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_social_login_buttons__WEBPACK_IMPORTED_MODULE_5__["GoogleLoginButton"], {
-    className: "mt-2 rounded-0",
+    className: "mt-2",
     onClick: function onClick() {
       return onSocial("google");
+    }
+  }), !location.pathname.match("/http/") && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    btnClass: "mt-1 btn-primary rounded-pill w-75",
+    btnText: "login with email",
+    onClick: function onClick() {
+      return setPhoneLogin(true);
     }
   })))));
 };
