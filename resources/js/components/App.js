@@ -3,18 +3,13 @@ import ReactDOM from "react-dom"
 import { HashRouter, Route } from "react-router-dom"
 
 import TopNav from "@/components/Layouts/TopNav"
+import LeftNav from "@/components/Layouts/LeftNav"
+import Footer from "@/components/Layouts/Footer"
 
 import ScrollToTop from "@/components/Core/ScrollToTop"
 import Messages from "@/components/Core/Messages"
 import LoginPopUp from "@/components/Auth/LoginPopUp"
-
-import Index from "@/pages/index"
-
-import DeathAnnouncementCreate from "@/pages/death-announcement/create"
-import DeathAnnouncementShow from "@/pages/death-announcement/[id]"
-import DeathAnnouncementEdit from "@/pages/death-announcement/edit/[id]"
-
-import Socialite from "@/components/Auth/Socialite"
+import RouteList from "@/components/Core/RouteList"
 
 const App = () => {
 	// Function for checking local storage
@@ -53,6 +48,7 @@ const App = () => {
 	const [messages, setMessages] = useState([])
 	const [errors, setErrors] = useState([])
 	const [login, setLogin] = useState(false)
+	const [leftMenu, setLeftMenu] = useState("left-open")
 	const [auth, setAuth] = useState(getLocalStorageAuth("auth"))
 
 	const [deathAnnouncements, setDeathAnnouncements] = useState(
@@ -143,6 +139,8 @@ const App = () => {
 		setLocalStorage,
 		login,
 		setLogin,
+		leftMenu,
+		setLeftMenu,
 		url,
 		auth,
 		setAuth,
@@ -163,46 +161,19 @@ const App = () => {
 		setDownloadLinkText,
 	}
 
-	const routes = [
-		{
-			path: "/",
-			component: <Index {...GLOBAL_STATE} />,
-		},
-		{
-			path: "/socialite/:message/:token",
-			component: <Socialite {...GLOBAL_STATE} />,
-		},
-		{
-			path: "/death-announcement/create",
-			component: <DeathAnnouncementCreate {...GLOBAL_STATE} />,
-		},
-		{
-			path: "/death-announcement/show/:id",
-			component: <DeathAnnouncementShow {...GLOBAL_STATE} />,
-		},
-		{
-			path: "/death-announcement/edit/:id",
-			component: <DeathAnnouncementEdit {...GLOBAL_STATE} />,
-		},
-	]
-
 	return (
 		<HashRouter>
 			<ScrollToTop />
 
 			<TopNav {...GLOBAL_STATE} />
+			<LeftNav {...GLOBAL_STATE} />
 
-			{routes.map((route, key) => (
-				<Route
-					key={key}
-					path={route.path}
-					exact
-					render={() => route.component}
-				/>
-			))}
+			<RouteList {...GLOBAL_STATE} />
 
 			<LoginPopUp {...GLOBAL_STATE} />
 			<Messages {...GLOBAL_STATE} />
+
+			<Footer {...GLOBAL_STATE} />
 
 			{/* Install button */}
 			<button

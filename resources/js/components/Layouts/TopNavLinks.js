@@ -10,15 +10,6 @@ import PrivacySVG from "@/svgs/PrivacySVG"
 const TopNavLinks = (props) => {
 	return (
 		<>
-			{/* Admin */}
-			{props.auth?.id != "@blackmusic" && (
-				<Link
-					to="/admin"
-					className="text-white me-2">
-					<PersonSVG />
-				</Link>
-			)}
-
 			{/* Avatar Dropdown */}
 			<div className="dropdown-center pb-2">
 				{/* Avatar */}

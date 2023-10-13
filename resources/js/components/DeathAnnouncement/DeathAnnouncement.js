@@ -6,6 +6,7 @@ import SocialMediaInput from "@/components/Core/SocialMediaInput"
 
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
+import OptionsSVG from "@/svgs/OptionsSVG"
 
 const DeathAnnouncement = (props) => {
 	const [hasLiked, setHasLiked] = useState(props.deathAnnouncement.hasLiked)
@@ -74,9 +75,10 @@ const DeathAnnouncement = (props) => {
 					{props.deathAnnouncement.name}
 				</h3>
 				<p className="m-0">{props.deathAnnouncement.eulogy}</p>
-				<div className="d-flex justify-content-between px-4 py-2">
+				<div className="d-flex justify-content-between px-4">
 					{/* Death Announcement likes */}
 					<div
+						className="p-2"
 						style={{ cursor: "pointer" }}
 						onClick={() => onLike(props.deathAnnouncement.id)}>
 						{hasLiked ? (
@@ -103,6 +105,29 @@ const DeathAnnouncement = (props) => {
 							</div>
 						)}
 					</div>
+					{/* <!-- Options dropup button --> */}
+					<div className="btn-group dropup mt-1">
+						<a
+							href="#"
+							className="p-2"
+							data-bs-toggle="dropdown"
+							aria-expanded="false">
+							<OptionsSVG />
+						</a>
+						<ul className="dropdown-menu dropdown-menu-right">
+							{/* <!-- Dropdown menu links --> */}
+							<a href="#">
+								<li className="dropdown-item">Download</li>
+							</a>
+							<a href="#">
+								<li className="dropdown-item">Mute</li>
+							</a>
+							<a href="#">
+								<li className="dropdown-item">Report Issue</li>
+							</a>
+						</ul>
+					</div>
+					{/* <!-- Options dropup button End --> */}
 				</div>
 				{/* SocialMedia Input */}
 				<div>

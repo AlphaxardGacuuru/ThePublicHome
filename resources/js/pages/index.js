@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-import DeathAnnouncement from "@/components/DeathAnnouncement/DeathAnnouncement"
-import LoadingDeathAnnouncement from "@/components/DeathAnnouncement/LoadingDeathAnnouncement"
-
 import PlusSVG from "@/svgs/PlusSVG"
 
 const index = (props) => {
@@ -23,62 +20,57 @@ const index = (props) => {
 
 	return (
 		<div className="row">
-			<div className="col-sm-1"></div>
-			<div className="col-sm-10">
-				{/* Chat button */}
-				{props.auth?.username != "@guest" && (
-					<Link
-						to="/death-announcement/create"
-						id="chatFloatBtn">
-						<PlusSVG />
-					</Link>
-				)}
-				<center>
-					<h1>Death and Funeral Announcements</h1>
+			{/* Background */}
+			<div
+				className="row p-0 m-0"
+				style={{
+					backgroundImage: "url(storage/death-announcement-posters/1.jpg)",
+					backgroundPosition: "center",
+					backgroundSize: "cover",
+					position: "relative",
+					minHeight: "20em",
+				}}></div>
+			{/* Background End */}
 
-					<div className="d-flex justify-content-around w-25">
-						<div
-							className={`${active("home")} rounded-pill mx-2 px-5 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setLocation("home")}>
-							Home
-						</div>
-						<div
-							className={`${active(
-								"international"
-							)} rounded-pill mx-2 px-5 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setLocation("international")}>
-							International
-						</div>
+			<h1 className="mt-4 ms-3">What would you like to do?</h1>
+			<h6 className="text-muted ms-3">Pick an option</h6>
+
+			<center>
+				<div className="d-flex flex-wrap justify-content-center">
+					<div className="m-2">
+						<Link
+							to="/death-announcement"
+							className="card m-2 p-5 mx-auto text-white"
+							style={{ backgroundColor: "#2A0134" }}>
+							<h3>Death Announcements</h3>
+						</Link>
 					</div>
-
-					<br />
-
-					{/* Death Announcements */}
-					<div className="d-flex flex-wrap justify-content-center">
-						{/* Loading Death Announcement items */}
-						{dummyArray
-							.filter(() => props.deathAnnouncements.length < 1)
-							.map((item, key) => (
-								<LoadingDeathAnnouncement key={key} />
-							))}
-
-						{/* Real Death Announcement items */}
-						{props.deathAnnouncements
-							.filter((announcement) => announcement.location == location)
-							.map((deathAnnouncement, key) => (
-								<DeathAnnouncement
-									{...props}
-									key={key}
-									deathAnnouncement={deathAnnouncement}
-								/>
-							))}
+					<div className="m-2">
+						<Link
+							to="/wedding"
+							className="card m-2 p-5 mx-auto text-white"
+							style={{ backgroundColor: "#FF00D8" }}>
+							<h3>Wedding Announcements</h3>
+						</Link>
 					</div>
-					{/* Death Announcements End */}
-				</center>
-			</div>
-			<div className="col-sm-1"></div>
+					<div className="m-2">
+						<Link
+							to="/graduation"
+							className="card m-2 p-5 mx-auto text-white"
+							style={{ backgroundColor: "#FF00D8" }}>
+							<h3>Graduation Announcements</h3>
+						</Link>
+					</div>
+					<div className="m-2">
+						<Link
+							to="/success"
+							className="card m-2 p-5 mx-auto text-white"
+							style={{ backgroundColor: "#FF00D8" }}>
+							<h3>Success Card</h3>
+						</Link>
+					</div>
+				</div>
+			</center>
 		</div>
 	)
 }

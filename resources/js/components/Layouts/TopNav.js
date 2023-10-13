@@ -52,13 +52,7 @@ const TopNav = (props) => {
 				id="MyElement"
 				className={`${menu} ${display}`}>
 				{/* <!-- ***** Header Area Start ***** --> */}
-				<header
-					className="header-area"
-					style={{
-						backgroundColor: "purple",
-						borderBottomLeftRadius: "20px",
-						borderBottomRightRadius: "20px",
-					}}>
+				<header className="header-area">
 					<div className="container-fluid p-0">
 						<div className="row">
 							<div
@@ -113,8 +107,7 @@ const TopNav = (props) => {
 				<br />
 				<br />
 				{/* Remove for profile page for better background image */}
-				{location.pathname.match(/profile/) ||
-				location.pathname.match(/audio-charts/) ? (
+				{location.pathname.match(/profile/) ? (
 					<br className="hidden" />
 				) : (
 					<span>
