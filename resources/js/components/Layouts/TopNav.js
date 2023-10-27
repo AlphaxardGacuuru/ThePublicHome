@@ -9,6 +9,7 @@ import CloseSVG from "@/svgs/CloseSVG"
 import LogoutSVG from "@/svgs/LogoutSVG"
 import DownloadSVG from "@/svgs/DownloadSVG"
 import PrivacySVG from "@/svgs/PrivacySVG"
+import HomeSVG from "@/svgs/HomeSVG"
 import MenuSVG from "@/svgs/MenuSVG"
 // import PersonSVG from "@/svgs/PersonSVG"
 // import HomeSVG from "@/svgs/HomeSVG"
@@ -46,6 +47,13 @@ const TopNav = (props) => {
 			? "d-none"
 			: ""
 
+	// Function for showing active color
+	const active2 = (check) => {
+		return {
+			color: location.pathname == check ? "#0077B6" : "#232323",
+		}
+	}
+
 	return (
 		<>
 			<div
@@ -59,13 +67,32 @@ const TopNav = (props) => {
 								className="col-12"
 								style={{ padding: "0" }}>
 								<div className="menu-area d-flex justify-content-between">
-									{/* <!-- Logo Area  --> */}
-									<div className="logo-area">
-										<Link
-											to="/"
-											className="text-white">
-											The Public Home
-										</Link>
+									<div className="d-flex align-items-center">
+										{/* <!-- Left Menu Icon --> */}
+										<a
+											href="#"
+											id="menuIcon"
+											className={` text-white me-3 ${
+												location.pathname.match("/profile/")
+													? "d-block"
+													: "d-none"
+											}`}
+											onClick={(e) => {
+												e.preventDefault()
+												props.setLeftMenu(props.leftMenu ? "" : "left-open")
+											}}>
+											<MenuSVG />
+										</a>
+										{/* <!-- Left Menu Icon End --> */}
+
+										{/* <!-- Logo Area  --> */}
+										<div className="logo-area">
+											<Link
+												to="/"
+												className="text-white">
+												The Public Home
+											</Link>
+										</div>
 									</div>
 
 									<div className="menu-content-area d-flex align-items-center">
@@ -91,7 +118,7 @@ const TopNav = (props) => {
 										<a
 											href="#"
 											id="menuIcon"
-											className="hidden text-white"
+											className="text-white"
 											onClick={(e) => {
 												e.preventDefault()
 												setMenu("menu-open")
@@ -115,7 +142,44 @@ const TopNav = (props) => {
 						<br className="hidden" />
 					</span>
 				)}
+
+				{/* <!-- ***** Side Menu Area Start ***** --> */}
+				<div className="mainMenu d-flex align-items-center justify-content-between">
+					{/* <!-- Close Icon --> */}
+					<div
+						className="closeIcon"
+						onClick={() => setMenu("")}>
+						<CloseSVG />
+					</div>
+					{/* <!-- Logo Area --> */}
+					<div className="logo-area">
+						<Link to="/">Party People</Link>
+					</div>
+					{/* <!-- Nav --> */}
+					<div
+						className="sonarNav wow fadeInUp"
+						data-wow-delay="1s">
+						<nav>
+							<ul>
+								<li className="nav-item active">
+									<Link
+										to="/"
+										style={active2("/")}
+										className="nav-link"
+										onClick={() => setMenu("")}>
+										<span style={active2("/")}>
+											<HomeSVG />
+										</span>
+										Home
+									</Link>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					<br />
+				</div>
 			</div>
+			{/* <!-- ***** Side Menu Area End ***** --> */}
 
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>

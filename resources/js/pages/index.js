@@ -47,7 +47,7 @@ const index = (props) => {
 					</div>
 					<div className="m-2">
 						<Link
-							to="/wedding"
+							to="/wedding-announcement"
 							className="card m-2 p-5 mx-auto text-white"
 							style={{ backgroundColor: "#FF00D8" }}>
 							<h3>Wedding Announcements</h3>
@@ -55,7 +55,7 @@ const index = (props) => {
 					</div>
 					<div className="m-2">
 						<Link
-							to="/graduation"
+							to="/graduation-announcement"
 							className="card m-2 p-5 mx-auto text-white"
 							style={{ backgroundColor: "#FF00D8" }}>
 							<h3>Graduation Announcements</h3>
@@ -63,7 +63,7 @@ const index = (props) => {
 					</div>
 					<div className="m-2">
 						<Link
-							to="/success"
+							to="/success-card-announcement"
 							className="card m-2 p-5 mx-auto text-white"
 							style={{ backgroundColor: "#FF00D8" }}>
 							<h3>Success Card</h3>

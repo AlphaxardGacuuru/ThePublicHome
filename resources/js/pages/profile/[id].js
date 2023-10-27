@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
+import MyLink from "@/components/Core/MyLink"
 
 const ProfileShow = (props) => {
 	let { id } = useParams()
@@ -10,7 +11,7 @@ const ProfileShow = (props) => {
 	const [pageLoader, setPageLoader] = useState(true)
 
 	useEffect(() => {
-		Axios.get(`api/users/${id}`)
+		Axios.get(`api/users/${props.auth.id}`)
 			.then((res) => {
 				// Remove loader
 				setPageLoader(false)
@@ -24,22 +25,22 @@ const ProfileShow = (props) => {
 
 	return (
 		<div className="row">
+			{/* Page Loader */}
+			{pageLoader && (
+				<div
+					id="preloader"
+					style={{ top: 60 }}>
+					<div className="preload-content mb-3">
+						<div
+							className="spinner-grow text-primary"
+							style={{ width: "10em", height: "10em" }}></div>
+					</div>
+				</div>
+			)}
+			{/* Page Loader End */}
+
 			<div className="col-sm-2"></div>
 			<div className="col-sm-8">
-				{/* Page Loader */}
-				{pageLoader && (
-					<div
-						id="preloader"
-						style={{ top: 60 }}>
-						<div className="preload-content mb-3">
-							<div
-								className="spinner-grow text-primary"
-								style={{ width: "10em", height: "10em" }}></div>
-						</div>
-					</div>
-				)}
-				{/* Page Loader End */}
-
 				<center>
 					{/* Profile Area */}
 					<div
@@ -66,11 +67,10 @@ const ProfileShow = (props) => {
 							<hr className="w-50 mx-auto" />
 
 							{/* Edit button */}
-							<Link
-								to="/profile/edit"
-								className="btn btn-outline-primary text-uppercase">
-								edit profile
-							</Link>
+							<MyLink
+								linkTo="/profile/edit"
+								text="edit profile"
+							/>
 							{/* Edit button End */}
 							{/* End of Profile Area */}
 						</React.Fragment>

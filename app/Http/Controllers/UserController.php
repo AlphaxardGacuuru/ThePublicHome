@@ -55,7 +55,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'string|nullable|max:20',
-            'phone' => 'string|nullable|startsWith:0|min:10|max:10',
+            // 'phone' => 'string|nullable|startsWith:0|min:10|max:10',
             'filepond-profile-pic' => 'nullable|max:9999',
         ]);
 

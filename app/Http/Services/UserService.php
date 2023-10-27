@@ -35,7 +35,7 @@ class UserService extends Service
 
         if ($request->filled('phone')) {
             $user->phone = $request->input('phone');
-            $user->password = Hash::make($request->input('phone'));
+            // $user->password = Hash::make($request->input('phone'));
         }
 
         $saved = $user->save();

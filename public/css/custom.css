@@ -29,19 +29,19 @@ a {
 	background-color: transparent;
 	padding: 0px 20px;
 	background-color: #2A0134;
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
 }
 
 .header-area .logo-area a {
 	color: #232323;
-	font-size: 36px;
+	font-size: 28px;
 	font-weight: 100;
 }
 
 @media only screen and (max-width: 767px) {
 	.header-area .logo-area a {
-		font-size: 24px;
+		font-size: 18px;
 	}
 }
 
@@ -249,12 +249,11 @@ a {
 /* Left Nav */
 .leftMenu {
 	position: fixed;
-	width: 200px;
+	width: 50px;
 	height: 100%;
 	top: 0;
-	left: -500px;
-	background-color: #FFFFFF;
-	z-index: 994;
+	left: 0;
+	/* z-index: 994; */
 	/* text-align: center; */
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
@@ -263,7 +262,20 @@ a {
 	padding: 50px 0px;
 	-webkit-transition-duration: 800ms;
 	transition-duration: 800ms;
-	/* box-shadow: 0 0 40px rgba(0, 0, 0, 0.2); */
+	box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.left-main {
+	margin-left: 50px;
+}
+
+.leftMenu .nav-link-icon {
+	display: block;
+}
+
+.leftMenu .nav-link-text {
+	display: none;
+	padding: 10px;
 }
 
 .leftMenu .closeIcon {
@@ -281,10 +293,6 @@ a {
 .leftMenu .closeIcon:hover {
 	-webkit-transform: rotate(180deg);
 	transform: rotate(180deg);
-}
-
-.nav-item {
-	list-style-type: none;
 }
 
 .leftMenu .logo-area a {
@@ -305,7 +313,7 @@ a {
 }
 
 .leftMenu .nav-link {
-	color: #232323;
+	color: #FFF;
 	font-size: 15px;
 	position: relative;
 	z-index: 1;
@@ -313,37 +321,9 @@ a {
 	padding: 5px 15px;
 }
 
-.leftMenu .nav-link::after {
-	content: "";
-	bottom: 0;
-	width: 30px;
-	height: 1px;
-	background-color: rgba(255, 255, 255, 0.5);
-	left: 50%;
-	-webkit-transform: translateX(-50%);
-	transform: translateX(-50%);
-	position: absolute;
-	z-index: 5;
-	-webkit-transition-duration: 500ms;
-	transition-duration: 500ms;
-}
-
-.leftMenu .nav-link:hover::after,
-.leftMenu .nav-link:focus::after {
-	width: 70px;
-	background-color: white;
-}
-
 .leftMenu .nav-link span {
 	float: left;
 	padding-right: 15px;
-}
-
-.nav-link-active {
-	background-color: #EEE;
-	border-left: 3px solid #2A0134;
-	border-top-right-radius: 50px;
-	border-bottom-right-radius: 50px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -382,16 +362,31 @@ a {
 @media only screen and (max-width: 767px) {
 	.leftMenu {
 		padding: 50px 0px;
-		width: 200px;
 	}
 }
 
 /* :: Menu Open CSS */
 .left-open .leftMenu {
-	left: 0;
+	width: 200px;
+}
+
+.left-open .leftMenu .nav-link-icon {
+	display: inline;
+}
+
+.left-open .leftMenu .nav-link-text {
+	display: inline;
+	transition: display 800ms;
+}
+
+.left-open .left-main {
+	/* transition: margin-left 800ms; */
+	transition-duration: 800ms;
+	margin-left: 200px;
 }
 
 /* Left Nav End */
+
 
 /* Post Floating button */
 #floatBtn {

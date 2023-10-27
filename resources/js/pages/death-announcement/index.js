@@ -8,7 +8,7 @@ import PlusSVG from "@/svgs/PlusSVG"
 
 const index = (props) => {
 	const [query, setQuery] = useState("")
-	const [location, setLocation] = useState("home")
+	const [location, setLocation] = useState("")
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
@@ -43,7 +43,9 @@ const index = (props) => {
 				<center>
 					<h1>Death and Funeral Announcements</h1>
 
-					<form className="mt-4 mx-auto w-75" onSubmit={onSubmit}>
+					<form
+						className="mt-4 mx-auto w-75"
+						onSubmit={onSubmit}>
 						<div className="input-group mb-3">
 							<input
 								type="text"
@@ -70,6 +72,12 @@ const index = (props) => {
 					</form>
 
 					<div className="d-flex justify-content-around w-25">
+						<div
+							className={`${active("")} rounded-pill mx-2 px-5 py-2`}
+							style={{ cursor: "pointer" }}
+							onClick={() => setLocation("")}>
+							All
+						</div>
 						<div
 							className={`${active("home")} rounded-pill mx-2 px-5 py-2`}
 							style={{ cursor: "pointer" }}
@@ -99,8 +107,8 @@ const index = (props) => {
 
 						{/* Real Death Announcement items */}
 						{props.deathAnnouncements
-							.filter((announcement) => announcement.name.toLowerCase().match(query))
-							.filter((announcement) => announcement.location == location)
+							.filter((death) => death.name.toLowerCase().match(query))
+							.filter((death) => location ? death.location == location : true)
 							.map((deathAnnouncement, key) => (
 								<DeathAnnouncement
 									{...props}

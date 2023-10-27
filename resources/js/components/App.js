@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import { HashRouter, Route } from "react-router-dom"
 
 import TopNav from "@/components/Layouts/TopNav"
-import LeftNav from "@/components/Layouts/LeftNav"
 import Footer from "@/components/Layouts/Footer"
 
 import ScrollToTop from "@/components/Core/ScrollToTop"
@@ -166,7 +165,6 @@ const App = () => {
 			<ScrollToTop />
 
 			<TopNav {...GLOBAL_STATE} />
-			<LeftNav {...GLOBAL_STATE} />
 
 			<RouteList {...GLOBAL_STATE} />
 
