@@ -13,18 +13,12 @@ const ProfileNav = (props) => {
 
 	// Function for showing active color
 	const active = (check) => {
-		return (
-			location.pathname.match(check) &&
-			"rounded-end-pill text-primary bg-primary-subtle"
-		)
+		return location.pathname.match(check) && "active"
 	}
 
 	// Function for showing active color
 	const activeStrict = (check) => {
-		return (
-			location.pathname == check &&
-			"rounded-end-pill text-primary bg-primary-subtle"
-		)
+		return location.pathname == check && "active"
 	}
 
 	return (
@@ -38,14 +32,27 @@ const ProfileNav = (props) => {
 					data-wow-delay="1s">
 					<nav>
 						<ul className="m-0 p-0">
-							<li className="nav-item active">
+							<li
+								className={`nav-item ${
+									active("/profile/show") || active("/profile/edit")
+								}`}>
 								<Link
-									to={`/profile/show`}
-									className={`nav-link text-dark ${active("/profile/")}`}>
+									to={`/profile/show/${props.auth.id}`}
+									className={`nav-link`}>
 									<div className="nav-link-icon">
 										<PersonSVG />
 									</div>
 									<div className="nav-link-text">Profile</div>
+								</Link>
+							</li>
+							<li className={`nav-item ${active("/profile/membership")}`}>
+								<Link
+									to={`/profile/membership`}
+									className={`nav-link`}>
+									<div className="nav-link-icon">
+										<MembershipSVG />
+									</div>
+									<div className="nav-link-text">Membership</div>
 								</Link>
 							</li>
 						</ul>

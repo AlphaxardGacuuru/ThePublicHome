@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 
-import TopNavLinks from "./TopNavLinks"
-
 import Img from "@/components/Core/Img"
 
 import CloseSVG from "@/svgs/CloseSVG"
@@ -106,13 +104,87 @@ const TopNav = (props) => {
 													Login
 												</Link>
 											) : (
-												<TopNavLinks
-													{...props}
-													bottomMenu={bottomMenu}
-													setBottomMenu={setBottomMenu}
-													logout={logout}
-												/>
+												<div className="dropdown-center">
+													{/* Avatar Dropdown */}
+													{/* Avatar */}
+													<a
+														href="#"
+														role="button"
+														className="hidden"
+														data-bs-toggle="dropdown"
+														aria-expanded="false">
+														<Img
+															src={props.auth?.avatar}
+															className="rounded-circle bg-light p-1"
+															width="40px"
+															height="40px"
+															alt="Avatar"
+														/>
+													</a>
+													{/* For small screens */}
+													<span
+														className="anti-hidden me-2"
+														onClick={() => {
+															setBottomMenu(bottomMenu ? "" : "menu-open")
+														}}>
+														<Img
+															src={props.auth?.avatar}
+															className="rounded-circle anti-hidden"
+															width="20px"
+															height="20px"
+															alt="Avatar"
+														/>
+													</span>
+													{/* Avatar End */}
+													<div className="dropdown-menu rounded-0 m-0 p-0 bg-white">
+														<Link
+															to={`/profile/show/${props.auth.id}`}
+															className="p-2 px-3 pt-3 dropdown-item">
+															<div className="d-flex">
+																<div className="align-items-center">
+																	<Img
+																		src={props.auth?.avatar}
+																		className="rounded-circle"
+																		width="25px"
+																		height="25px"
+																		alt="Avatar"
+																	/>
+																</div>
+																<div className="ps-2">
+																	<h5 className="text-wrap">
+																		{props.auth?.name}
+																	</h5>
+																</div>
+															</div>
+														</Link>
+														<Link
+															to="/download"
+															className="p-2 px-3 dropdown-item"
+															style={{
+																display: props.downloadLink ? "block" : "none",
+															}}>
+															<h6>
+																<span className="me-2">
+																	<DownloadSVG />
+																</span>
+																Get App
+															</h6>
+														</Link>
+														<Link
+															to="#"
+															className="p-2 px-3 dropdown-item"
+															onClick={(e) => logout(e)}>
+															<h6>
+																<span className="me-2">
+																	<LogoutSVG />
+																</span>
+																Logout
+															</h6>
+														</Link>
+													</div>
+												</div>
 											)}
+											{/* Avatar Dropdown End */}
 										</div>
 										{/* <!-- Menu Icon --> */}
 										<a
@@ -171,6 +243,54 @@ const TopNav = (props) => {
 											<HomeSVG />
 										</span>
 										Home
+									</Link>
+								</li>
+								<li className="nav-item active">
+									<Link
+										to="/"
+										style={active2("/")}
+										className="nav-link"
+										onClick={() => setMenu("")}>
+										<span style={active2("/")}>
+											<HomeSVG />
+										</span>
+										Death and Funeral Announcements
+									</Link>
+								</li>
+								<li className="nav-item active">
+									<Link
+										to="/"
+										style={active2("/")}
+										className="nav-link"
+										onClick={() => setMenu("")}>
+										<span style={active2("/")}>
+											<HomeSVG />
+										</span>
+										Wedding Announcements
+									</Link>
+								</li>
+								<li className="nav-item active">
+									<Link
+										to="/"
+										style={active2("/")}
+										className="nav-link"
+										onClick={() => setMenu("")}>
+										<span style={active2("/")}>
+											<HomeSVG />
+										</span>
+										Graduation Announcements
+									</Link>
+								</li>
+								<li className="nav-item active">
+									<Link
+										to="/"
+										style={active2("/")}
+										className="nav-link"
+										onClick={() => setMenu("")}>
+										<span style={active2("/")}>
+											<HomeSVG />
+										</span>
+										Success Card
 									</Link>
 								</li>
 							</ul>

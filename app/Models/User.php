@@ -80,4 +80,20 @@ class User extends Authenticatable
     {
         return $this->belongsTo(DeathAnnouncement::class);
     }
-}
+
+    public function userMemberships()
+    {
+        return $this->hasMany(UserMembership::class);
+    }
+
+    /*
+     * Custom functions
+     */
+    public function membershipTypes()
+    {
+        return $this->userMemberships
+            ->map(fn($userMembership) => $userMembership
+                    ->membership
+                    ->type);
+        }
+    }

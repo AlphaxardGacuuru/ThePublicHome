@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom"
 // import Axios from "axios"
 
 import Btn from "@/components/Core/Btn"
+import MyLink from "@/components/Core/MyLink"
 
 import CloseSVG from "@/svgs/CloseSVG"
 
@@ -62,7 +63,10 @@ const DeathAnnouncementCreate = (props) => {
 				// Remove loader for button
 				setLoadingBtn(false)
 				// Redirect to Show Death Announcement
-				setTimeout(() => router.push(`/death-announcement/show/${res.data.data.id}`), 500)
+				setTimeout(
+					() => router.push(`/death-announcement/show/${res.data.data.id}`),
+					500
+				)
 			})
 			.catch((err) => {
 				// Remove loader for button
@@ -147,6 +151,11 @@ const DeathAnnouncementCreate = (props) => {
 						/>
 						<br />
 						<br />
+
+						<MyLink
+							linkTo="/death-announcement"
+							text="back to death announcements"
+						/>
 					</form>
 				</center>
 			</div>

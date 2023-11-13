@@ -13,7 +13,19 @@ a {
 	text-decoration: none;
 	outline: none;
 	font-size: 14px;
-	font-weight: 300;
+	font-weight: 100;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+div,
+p {
+	font-weight: 100;
 }
 
 /* :: Header Area CSS */
@@ -255,6 +267,7 @@ a {
 	left: 0;
 	/* z-index: 994; */
 	/* text-align: center; */
+	background-color: #2A0134;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
@@ -269,12 +282,19 @@ a {
 	margin-left: 50px;
 }
 
+.leftMenu .active {
+	border-top-right-radius: 50px; 
+	border-bottom-right-radius: 50px; 
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
 .leftMenu .nav-link-icon {
 	display: block;
 }
 
 .leftMenu .nav-link-text {
 	display: none;
+	color: white;
 	padding: 10px;
 }
 
@@ -453,7 +473,7 @@ a {
 }
 
 #chatFloatBtn:hover {
-	background-color: rgba(255, 255, 255, 0.3);
+	opacity: 0.8;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {

@@ -12,6 +12,7 @@ import DeathAnnouncementEdit from "@/pages/death-announcement/edit/[id]"
 
 import ProfileShow from "@/pages/profile/[id]"
 import ProfileEdit from "@/pages/profile/edit/[id]"
+import Membership from "@/pages/profile/membership"
 
 import Socialite from "@/components/Auth/Socialite"
 
@@ -45,12 +46,16 @@ const RouteList = (GLOBAL_STATE) => {
 
 	const profileRoutes = [
 		{
-			path: "/profile/show",
+			path: "/profile/show/:id",
 			component: <ProfileShow {...GLOBAL_STATE} />,
 		},
 		{
 			path: "/profile/edit",
 			component: <ProfileEdit {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/profile/membership",
+			component: <Membership {...GLOBAL_STATE} />,
 		},
 	]
 

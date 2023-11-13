@@ -32,13 +32,17 @@ const index = (props) => {
 			<div className="col-sm-1"></div>
 			<div className="col-sm-10">
 				{/* Chat button */}
-				{props.auth?.username != "@guest" && (
-					<Link
-						to="/death-announcement/create"
-						id="chatFloatBtn">
-						<PlusSVG />
-					</Link>
-				)}
+
+				<Link
+					to={
+						props.auth?.membershipTypes?.includes("death")
+							? "/death-announcement/create"
+							: "/death-announcement/create"
+							// : "/profile/membership"
+					}
+					id="chatFloatBtn">
+					<PlusSVG />
+				</Link>
 
 				<center>
 					<h1>Death and Funeral Announcements</h1>
@@ -71,7 +75,7 @@ const index = (props) => {
 						</div>
 					</form>
 
-					<div className="d-flex justify-content-around w-25">
+					<div className="d-flex justify-content-center flex-wrap">
 						<div
 							className={`${active("")} rounded-pill mx-2 px-5 py-2`}
 							style={{ cursor: "pointer" }}
@@ -108,7 +112,7 @@ const index = (props) => {
 						{/* Real Death Announcement items */}
 						{props.deathAnnouncements
 							.filter((death) => death.name.toLowerCase().match(query))
-							.filter((death) => location ? death.location == location : true)
+							.filter((death) => (location ? death.location == location : true))
 							.map((deathAnnouncement, key) => (
 								<DeathAnnouncement
 									{...props}

@@ -145,7 +145,7 @@ const ProfileEdit = (props) => {
 							<br />
 
 							<MyLink
-								linkTo={`/profile/show`}
+								linkTo={`/profile/show/${props.auth.id}`}
 								text="back to profile"
 							/>
 						</form>

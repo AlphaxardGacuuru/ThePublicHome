@@ -40,32 +40,28 @@ const index = (props) => {
 					<div className="m-2">
 						<Link
 							to="/death-announcement"
-							className="card m-2 p-5 mx-auto text-white"
-							style={{ backgroundColor: "#2A0134" }}>
+							className="card m-2 p-5 mx-auto">
 							<h3>Death Announcements</h3>
 						</Link>
 					</div>
 					<div className="m-2">
 						<Link
 							to="/wedding-announcement"
-							className="card m-2 p-5 mx-auto text-white"
-							style={{ backgroundColor: "#FF00D8" }}>
+							className="card m-2 p-5 mx-auto">
 							<h3>Wedding Announcements</h3>
 						</Link>
 					</div>
 					<div className="m-2">
 						<Link
 							to="/graduation-announcement"
-							className="card m-2 p-5 mx-auto text-white"
-							style={{ backgroundColor: "#FF00D8" }}>
+							className="card m-2 p-5 mx-auto">
 							<h3>Graduation Announcements</h3>
 						</Link>
 					</div>
 					<div className="m-2">
 						<Link
 							to="/success-card-announcement"
-							className="card m-2 p-5 mx-auto text-white"
-							style={{ backgroundColor: "#FF00D8" }}>
+							className="card m-2 p-5 mx-auto">
 							<h3>Success Card</h3>
 						</Link>
 					</div>
