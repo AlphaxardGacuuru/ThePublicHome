@@ -32,6 +32,7 @@ class DeathAnnouncementController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            "locale" => "required|string",
             "name" => "required|string",
             "poster" => "required",
             "eulogy" => "required|string",

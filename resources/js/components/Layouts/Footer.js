@@ -72,6 +72,14 @@ const Footer = () => {
 							</span>
 							About Us
 						</Link>
+						<Link
+							to="/about"
+							className="text-white">
+							<span className="me-2">
+								<PrivacySVG />
+							</span>
+							Report Problem
+						</Link>
 					</div>
 				</div>
 				<div className="col-sm-1"></div>

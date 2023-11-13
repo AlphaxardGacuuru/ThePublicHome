@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('poster')->nullable();
             $table->string('eulogy')->nullable();
-            $table->string('location')->nullable();
+            $table->string('locale')->nullable();
             $table->integer('likes')->default(0)->nullable();
             $table->timestamps();
         });

@@ -171,6 +171,16 @@ const TopNav = (props) => {
 															</h6>
 														</Link>
 														<Link
+															to="/"
+															className="p-2 px-3 dropdown-item">
+															<h6>
+																<span className="me-2">
+																	{/* <DownloadSVG /> */}
+																</span>
+																Change Language
+															</h6>
+														</Link>
+														<Link
 															to="#"
 															className="p-2 px-3 dropdown-item"
 															onClick={(e) => logout(e)}>
@@ -190,7 +200,7 @@ const TopNav = (props) => {
 										<a
 											href="#"
 											id="menuIcon"
-											className="text-white"
+											className="text-white anti-hidden"
 											onClick={(e) => {
 												e.preventDefault()
 												setMenu("menu-open")
@@ -239,57 +249,42 @@ const TopNav = (props) => {
 										style={active2("/")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
-										<span style={active2("/")}>
-											<HomeSVG />
-										</span>
 										Home
 									</Link>
 								</li>
 								<li className="nav-item active">
 									<Link
 										to="/"
-										style={active2("/")}
+										style={active2("/death-announcement")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
-										<span style={active2("/")}>
-											<HomeSVG />
-										</span>
 										Death and Funeral Announcements
 									</Link>
 								</li>
 								<li className="nav-item active">
 									<Link
 										to="/"
-										style={active2("/")}
+										style={active2("/wedding-announcement")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
-										<span style={active2("/")}>
-											<HomeSVG />
-										</span>
 										Wedding Announcements
 									</Link>
 								</li>
 								<li className="nav-item active">
 									<Link
 										to="/"
-										style={active2("/")}
+										style={active2("/graduation-announcement")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
-										<span style={active2("/")}>
-											<HomeSVG />
-										</span>
 										Graduation Announcements
 									</Link>
 								</li>
 								<li className="nav-item active">
 									<Link
 										to="/"
-										style={active2("/")}
+										style={active2("/success-card-announcement")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
-										<span style={active2("/")}>
-											<HomeSVG />
-										</span>
 										Success Card
 									</Link>
 								</li>
@@ -351,6 +346,16 @@ const TopNav = (props) => {
 									<DownloadSVG />
 								</span>
 								Get App
+							</h6>
+						</Link>
+						<Link
+							to="/"
+							className="p-3 text-start"
+							onClick={() => setBottomMenu("")}
+							title="Privacy Policy">
+							<h6>
+								<span className="ms-3 me-4">{/* <PrivacySVG /> */}</span>
+								Change Language
 							</h6>
 						</Link>
 						<Link

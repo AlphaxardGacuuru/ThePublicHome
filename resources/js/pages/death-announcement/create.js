@@ -35,6 +35,7 @@ registerPlugin(
 
 const DeathAnnouncementCreate = (props) => {
 	// Declare states
+	const [locale, setLocale] = useState()
 	const [name, setName] = useState()
 	const [poster, setPoster] = useState("")
 	const [eulogy, setEulogy] = useState()
@@ -51,6 +52,7 @@ const DeathAnnouncementCreate = (props) => {
 
 		// Add form data to FormData object
 		const formData = new FormData()
+		formData.append("locale", locale)
 		formData.append("name", name)
 		formData.append("poster", poster)
 		formData.append("eulogy", eulogy)
@@ -120,6 +122,19 @@ const DeathAnnouncementCreate = (props) => {
 							<div className="col-lg-4"></div>
 						</div>
 						<br />
+						<br />
+
+						<select
+							type="text"
+							name="locale"
+							className="form-control"
+							placeholder="locale"
+							required={true}
+							onChange={(e) => setLocale(e.target.value)}>
+							<option value="">Choose Locale</option>
+							<option value="home">Home</option>
+							<option value="international">International</option>
+						</select>
 						<br />
 
 						<input
