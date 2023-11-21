@@ -6,6 +6,7 @@ use App\Http\Controllers\DeathAnnouncementController;
 use App\Http\Controllers\DeathAnnouncementLikeController;
 use App\Http\Controllers\FilePondController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WeddingAnnouncementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ Route::apiResources([
     "death-announcement-comments" => DeathAnnouncementCommentController::class,
     "death-announcement-comment-likes" => DeathAnnouncementCommentLikeController::class,
     "users" => UserController::class,
+	"wedding-announcements" => WeddingAnnouncementController::class,
 ]);
 
 // Filepond Controller

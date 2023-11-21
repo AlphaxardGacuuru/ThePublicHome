@@ -24,7 +24,7 @@ class DeathAnnouncementFactory extends Factory
             'name' => fake()->name(),
             'poster' => 'death-announcement-posters/'. rand(1, 5) . '.jpg',
             'eulogy' => fake()->catchPhrase(),
-            'location' =>$location[rand(0, 1)],
+            'locale' =>$location[rand(0, 1)],
         ];
     }
 }
