@@ -20,7 +20,7 @@ class GraduationFactory extends Factory
     {
         return [
             'user_id' => User::all()->random()->id,
-            'title' => fake()->firstName() . ' graduations',
+            'title' => fake()->firstName() . ' graduates',
             'poster' => 'graduation-posters/' . rand(1, 5) . '.jpg',
             'announcement' => fake()->catchPhrase(),
             'venue' => fake()->address(),
