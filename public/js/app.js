@@ -102896,10 +102896,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_death_announcement_create__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/pages/death-announcement/create */ "./resources/js/pages/death-announcement/create.js");
 /* harmony import */ var _pages_death_announcement_id___WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/pages/death-announcement/[id] */ "./resources/js/pages/death-announcement/[id].js");
 /* harmony import */ var _pages_death_announcement_edit_id___WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/pages/death-announcement/edit/[id] */ "./resources/js/pages/death-announcement/edit/[id].js");
-/* harmony import */ var _pages_profile_id___WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/pages/profile/[id] */ "./resources/js/pages/profile/[id].js");
-/* harmony import */ var _pages_profile_edit_id___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/pages/profile/edit/[id] */ "./resources/js/pages/profile/edit/[id].js");
-/* harmony import */ var _pages_profile_membership__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/pages/profile/membership */ "./resources/js/pages/profile/membership.js");
-/* harmony import */ var _components_Auth_Socialite__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/components/Auth/Socialite */ "./resources/js/components/Auth/Socialite.js");
+/* harmony import */ var _pages_wedding_announcement__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/pages/wedding-announcement */ "./resources/js/pages/wedding-announcement/index.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module '@/pages/wedding-announcement/create'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module '@/pages/wedding-announcement/[id]'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module '@/pages/wedding-announcement/edit/[id]'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _pages_profile_id___WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/pages/profile/[id] */ "./resources/js/pages/profile/[id].js");
+/* harmony import */ var _pages_profile_edit_id___WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/pages/profile/edit/[id] */ "./resources/js/pages/profile/edit/[id].js");
+/* harmony import */ var _pages_profile_membership__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/pages/profile/membership */ "./resources/js/pages/profile/membership.js");
+/* harmony import */ var _components_Auth_Socialite__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/components/Auth/Socialite */ "./resources/js/components/Auth/Socialite.js");
+
+
+
+
 
 
 
@@ -102918,7 +102926,7 @@ var RouteList = function RouteList(GLOBAL_STATE) {
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_index__WEBPACK_IMPORTED_MODULE_3__["default"], GLOBAL_STATE)
   }, {
     path: "/socialite/:message/:token",
-    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Auth_Socialite__WEBPACK_IMPORTED_MODULE_11__["default"], GLOBAL_STATE)
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Auth_Socialite__WEBPACK_IMPORTED_MODULE_12__["default"], GLOBAL_STATE)
   }, {
     path: "/death-announcement",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_death_announcement__WEBPACK_IMPORTED_MODULE_4__["default"], GLOBAL_STATE)
@@ -102931,16 +102939,28 @@ var RouteList = function RouteList(GLOBAL_STATE) {
   }, {
     path: "/death-announcement/edit/:id",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_death_announcement_edit_id___WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE)
+  }, {
+    path: "/wedding-announcement",
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_wedding_announcement__WEBPACK_IMPORTED_MODULE_13__["default"], GLOBAL_STATE)
+  }, {
+    path: "/wedding-announcement/create",
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '@/pages/wedding-announcement/create'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), GLOBAL_STATE)
+  }, {
+    path: "/wedding-announcement/show/:id",
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '@/pages/wedding-announcement/[id]'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), GLOBAL_STATE)
+  }, {
+    path: "/wedding-announcement/edit/:id",
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module '@/pages/wedding-announcement/edit/[id]'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), GLOBAL_STATE)
   }];
   var profileRoutes = [{
     path: "/profile/show/:id",
-    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_profile_id___WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE)
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_profile_id___WEBPACK_IMPORTED_MODULE_9__["default"], GLOBAL_STATE)
   }, {
     path: "/profile/edit",
-    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_profile_edit_id___WEBPACK_IMPORTED_MODULE_9__["default"], GLOBAL_STATE)
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_profile_edit_id___WEBPACK_IMPORTED_MODULE_10__["default"], GLOBAL_STATE)
   }, {
     path: "/profile/membership",
-    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_profile_membership__WEBPACK_IMPORTED_MODULE_10__["default"], GLOBAL_STATE)
+    component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_profile_membership__WEBPACK_IMPORTED_MODULE_11__["default"], GLOBAL_STATE)
   }];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, routes.map(function (route, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
@@ -103199,7 +103219,7 @@ var DeathAnnouncement = function DeathAnnouncement(props) {
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "my-2 mx-2 pt-0 px-0 pb-2 card",
+    className: "my-2 mx-2 pt-0 px-0 pb-2 card bg-white",
     style: {
       display: "inline-block"
     }
@@ -103231,15 +103251,15 @@ var DeathAnnouncement = function DeathAnnouncement(props) {
     alt: "user",
     loading: "lazy"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex-grow-1"
+    className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", {
     className: "death-announcement-user-name mt-1 pt-2 px-1"
   }, props.deathAnnouncement.userName))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "death-announcement-name px-2 mb-0"
   }, props.deathAnnouncement.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "m-0"
+    className: "px-2 text-start"
   }, props.deathAnnouncement.eulogy), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-between px-4"
+    className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2",
     style: {
@@ -103291,7 +103311,9 @@ var DeathAnnouncement = function DeathAnnouncement(props) {
     href: "#"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
     className: "dropdown-item"
-  }, "Report Issue"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_SocialMediaInput__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, props, {
+  }, "Report Issue"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "border-top border-light"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_SocialMediaInput__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({}, props, {
     id: props.deathAnnouncement.id,
     placeholder: "Write Something",
     urlTo: "/death-announcement-comments",
@@ -103601,7 +103623,22 @@ var TopNav = function TopNav(props) {
   var display = location.pathname.match("/404") || location.pathname.match("/login") || location.pathname.match("/register") ? "d-none" : "";
 
   // Function for showing active color
+  var active = function active(check) {
+    return location.pathname.match(check) && "bg-primary rounded-pill py-2 px-5";
+  };
+  var activeStrict = function activeStrict(check) {
+    return location.pathname == check && "bg-primary rounded-pill py-2 px-5";
+  };
+
+  // Function for showing active color
   var active2 = function active2(check) {
+    return {
+      color: location.pathname.match(check) ? "#0077B6" : "#232323"
+    };
+  };
+
+  // Function for showing active color
+  var activeStrict2 = function activeStrict2(check) {
     return {
       color: location.pathname == check ? "#0077B6" : "#232323"
     };
@@ -103638,6 +103675,48 @@ var TopNav = function TopNav(props) {
     to: "/",
     className: "text-white"
   }, "The Public Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex align-items-center justify-content-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/",
+    className: "nav-link mx-4 text-white ".concat(activeStrict("/")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/death-announcement",
+    className: "nav-link mx-4 text-white ".concat(active("/death-announcement")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Death Announcements")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/wedding-announcement",
+    className: "nav-link mx-4 text-white ".concat(active("/wedding-announcement")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Wedding Announcement")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/wedding-announcement",
+    className: "nav-link mx-4 text-white ".concat(active("/wedding-announcement")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Graduation Announcement")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/success-announcement",
+    className: "nav-link mx-4 text-white ".concat(active("/success-announcement")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Success Announcement"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-content-area d-flex align-items-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header-social-area d-flex align-items-center"
@@ -105073,6 +105152,147 @@ var membership = function membership() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Membership Information"))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (membership);
+
+/***/ }),
+
+/***/ "./resources/js/pages/wedding-announcement/index.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/pages/wedding-announcement/index.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _components_DeathAnnouncement_DeathAnnouncement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/DeathAnnouncement/DeathAnnouncement */ "./resources/js/components/DeathAnnouncement/DeathAnnouncement.js");
+/* harmony import */ var _components_DeathAnnouncement_LoadingDeathAnnouncement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/DeathAnnouncement/LoadingDeathAnnouncement */ "./resources/js/components/DeathAnnouncement/LoadingDeathAnnouncement.js");
+/* harmony import */ var _svgs_PlusSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/svgs/PlusSVG */ "./resources/js/svgs/PlusSVG.js");
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+var index = function index(props) {
+  var _props$auth;
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState2 = _slicedToArray(_useState, 2),
+    query = _useState2[0],
+    setQuery = _useState2[1];
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    location = _useState4[0],
+    setLocation = _useState4[1];
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    _useState6 = _slicedToArray(_useState5, 2),
+    loader = _useState6[0],
+    setLoader = _useState6[1];
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    props.get("death-announcements", props.setDeathAnnouncements);
+  }, []);
+  var onSubmit = function onSubmit(e) {
+    e.preventDefault();
+  };
+  var active = function active(current) {
+    if (location == current) {
+      return "bg-primary-subtle";
+    }
+  };
+  var dummyArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-10 p-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: (_props$auth = props.auth) !== null && _props$auth !== void 0 && (_props$auth = _props$auth.membershipTypes) !== null && _props$auth !== void 0 && _props$auth.includes("death") ? "/death-announcement/create" : "/death-announcement/create"
+    // : "/profile/membership"
+    ,
+
+    id: "chatFloatBtn"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlusSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Death and Funeral Announcements"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "mt-4 mx-auto w-75",
+    onSubmit: onSubmit
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "input-group mb-3"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    className: "form-control",
+    placeholder: "Search Death Announcements by Name",
+    "aria-label": "Search Death Announcements by Name",
+    "aria-describedby": "button-addon2",
+    required: true,
+    onChange: function onChange(e) {
+      return setQuery(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "button-addon2",
+    type: "submit",
+    className: "btn btn-outline-primary",
+    disabled: loader
+  }, "Search", loader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "spinner-border my-auto",
+    style: {
+      color: "inherit"
+    }
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center flex-wrap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(active(""), " rounded-pill mx-2 px-5 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setLocation("");
+    }
+  }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(active("home"), " rounded-pill mx-2 px-5 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setLocation("home");
+    }
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(active("international"), " rounded-pill mx-2 px-5 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setLocation("international");
+    }
+  }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex flex-wrap justify-content-center"
+  }, dummyArray.filter(function () {
+    return props.deathAnnouncements.length < 1;
+  }).map(function (item, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_DeathAnnouncement_LoadingDeathAnnouncement__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      key: key
+    });
+  }), props.deathAnnouncements.filter(function (death) {
+    return death.name.toLowerCase().match(query);
+  }).filter(function (death) {
+    return location ? death.location == location : true;
+  }).map(function (deathAnnouncement, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_DeathAnnouncement_DeathAnnouncement__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
+      key: key,
+      deathAnnouncement: deathAnnouncement
+    }));
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-1"
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (index);
 
 /***/ }),
 

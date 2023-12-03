@@ -8,26 +8,26 @@ import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
 
-const DeathAnnouncement = (props) => {
-	const [hasLiked, setHasLiked] = useState(props.deathAnnouncement.hasLiked)
+const WeddingAnnouncement = (props) => {
+	const [hasLiked, setHasLiked] = useState(props.weddingAnnouncement.hasLiked)
 
 	useEffect(() => {
 		// Set new cart with data with auth
-		setHasLiked(props.deathAnnouncement.hasLiked)
-	}, [props.deathAnnouncement])
+		setHasLiked(props.weddingAnnouncement.hasLiked)
+	}, [props.weddingAnnouncement])
 
-	// Function for liking Death Announcement
-	const onLike = (deathAnnouncementId) => {
+	// Function for liking Wedding Announcement
+	const onLike = (weddingAnnouncementId) => {
 		setHasLiked(!hasLiked)
 
 		// Add like to database
-		Axios.post(`/api/death-announcement-likes`, {
-			deathAnnouncementId: deathAnnouncementId,
+		Axios.post(`/api/wedding-announcement-likes`, {
+			weddingAnnouncementId: weddingAnnouncementId,
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				// Update Death Announcements
-				props.get("death-announcements", props.setDeathAnnouncements)
+				// Update Wedding Announcements
+				props.get("wedding-announcements", props.setWeddingAnnouncements)
 			})
 			.catch((err) => props.getErrors(err))
 	}
@@ -38,8 +38,8 @@ const DeathAnnouncement = (props) => {
 			style={{ display: "inline-block" }}>
 			<div className="death-announcement-media">
 				<div className="death-announcement-thumbnail">
-					<Link to={`/death-announcement/show/${props.deathAnnouncement.id}`}>
-						<Img src={props.deathAnnouncement.poster} />
+					<Link to={`/wedding-announcement/show/${props.weddingAnnouncement.id}`}>
+						<Img src={props.weddingAnnouncement.poster} />
 					</Link>
 				</div>
 				{/* User info */}
@@ -50,9 +50,9 @@ const DeathAnnouncement = (props) => {
 					<div
 						className="py-2"
 						style={{ minWidth: "40px" }}>
-						<Link to={`/profile/show/${props.deathAnnouncement.userId}`}>
+						<Link to={`/profile/show/${props.weddingAnnouncement.userId}`}>
 							<Img
-								src={props.deathAnnouncement.userAvatar}
+								src={props.weddingAnnouncement.userAvatar}
 								className="rounded-circle"
 								width="30em"
 								height="30em"
@@ -65,22 +65,22 @@ const DeathAnnouncement = (props) => {
 					{/* User Name */}
 					<div className="">
 						<h6 className="death-announcement-user-name mt-1 pt-2 px-1">
-							{props.deathAnnouncement.userName}
+							{props.weddingAnnouncement.userName}
 						</h6>
 					</div>
 					{/* User Name End */}
 				</div>
 				{/* User info End */}
 				<h3 className="death-announcement-name px-2 mb-0">
-					{props.deathAnnouncement.name}
+					{props.weddingAnnouncement.name}
 				</h3>
-				<p className="px-2 text-start">{props.deathAnnouncement.eulogy}</p>
+				<p className="px-2 text-start">{props.weddingAnnouncement.eulogy}</p>
 				<div className="d-flex justify-content-between">
-					{/* Death Announcement likes */}
+					{/* Wedding Announcement likes */}
 					<div
 						className="p-2"
 						style={{ cursor: "pointer" }}
-						onClick={() => onLike(props.deathAnnouncement.id)}>
+						onClick={() => onLike(props.weddingAnnouncement.id)}>
 						{hasLiked ? (
 							<div>
 								<span style={{ color: "#fb3958", fontSize: "1.2em" }}>
@@ -89,7 +89,7 @@ const DeathAnnouncement = (props) => {
 								<small
 									className="ms-1"
 									style={{ color: "#fb3958", fontWeight: "100" }}>
-									{props.deathAnnouncement.likes}
+									{props.weddingAnnouncement.likes}
 								</small>
 							</div>
 						) : (
@@ -100,7 +100,7 @@ const DeathAnnouncement = (props) => {
 								<small
 									className="ms-1"
 									style={{ color: "inherit", fontWeight: "100" }}>
-									{props.deathAnnouncement.likes}
+									{props.weddingAnnouncement.likes}
 								</small>
 							</div>
 						)}
@@ -133,17 +133,17 @@ const DeathAnnouncement = (props) => {
 				<div className="border-top border-light">
 					<SocialMediaInput
 						{...props}
-						id={props.deathAnnouncement.id}
+						id={props.weddingAnnouncement.id}
 						placeholder="Write Something"
-						urlTo="/death-announcement-comments"
+						urlTo="/wedding-announcement-comments"
 						editing={false}
 					/>
 				</div>
 				{/* SocialMedia Input End */}
-				{/* Death Announcement likes End */}
+				{/* Wedding Announcement likes End */}
 			</div>
 		</span>
 	)
 }
 
-export default DeathAnnouncement
+export default WeddingAnnouncement

@@ -10,6 +10,11 @@ import DeathAnnouncementCreate from "@/pages/death-announcement/create"
 import DeathAnnouncementShow from "@/pages/death-announcement/[id]"
 import DeathAnnouncementEdit from "@/pages/death-announcement/edit/[id]"
 
+import WeddingAnnouncementIndex from "@/pages/wedding-announcement"
+import WeddingAnnouncementCreate from "@/pages/wedding-announcement/create"
+import WeddingAnnouncementShow from "@/pages/wedding-announcement/[id]"
+import WeddingAnnouncementEdit from "@/pages/wedding-announcement/edit/[id]"
+
 import ProfileShow from "@/pages/profile/[id]"
 import ProfileEdit from "@/pages/profile/edit/[id]"
 import Membership from "@/pages/profile/membership"
@@ -41,6 +46,22 @@ const RouteList = (GLOBAL_STATE) => {
 		{
 			path: "/death-announcement/edit/:id",
 			component: <DeathAnnouncementEdit {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/wedding-announcement",
+			component: <WeddingAnnouncementIndex {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/wedding-announcement/create",
+			component: <WeddingAnnouncementCreate {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/wedding-announcement/show/:id",
+			component: <WeddingAnnouncementShow {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/wedding-announcement/edit/:id",
+			component: <WeddingAnnouncementEdit {...GLOBAL_STATE} />,
 		},
 	]
 

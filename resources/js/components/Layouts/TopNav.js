@@ -46,7 +46,27 @@ const TopNav = (props) => {
 			: ""
 
 	// Function for showing active color
+	const active = (check) => {
+		return (
+			location.pathname.match(check) &&
+			"bg-primary rounded-pill py-2 px-5"
+		)
+	}
+	const activeStrict = (check) => {
+		return (
+			location.pathname == check && "bg-primary rounded-pill py-2 px-5"
+		)
+	}
+
+	// Function for showing active color
 	const active2 = (check) => {
+		return {
+			color: location.pathname.match(check) ? "#0077B6" : "#232323",
+		}
+	}
+
+	// Function for showing active color
+	const activeStrict2 = (check) => {
 		return {
 			color: location.pathname == check ? "#0077B6" : "#232323",
 		}
@@ -92,6 +112,61 @@ const TopNav = (props) => {
 											</Link>
 										</div>
 									</div>
+
+									{/* Nav Links */}
+									<div className="d-flex align-items-center justify-content-between">
+										<div className="hidden">
+											<Link
+												to="/"
+												className={`nav-link mx-4 text-white ${activeStrict(
+													"/"
+												)}`}
+												onClick={() => setMenu("")}>
+												Home
+											</Link>
+										</div>
+										<div className="hidden">
+											<Link
+												to="/death-announcement"
+												className={`nav-link mx-4 text-white ${active(
+													"/death-announcement"
+												)}`}
+												onClick={() => setMenu("")}>
+												Death Announcements
+											</Link>
+										</div>
+										<div className="hidden">
+											<Link
+												to="/wedding-announcement"
+												className={`nav-link mx-4 text-white ${active(
+													"/wedding-announcement"
+												)}`}
+												onClick={() => setMenu("")}>
+												Wedding Announcement
+											</Link>
+										</div>
+										<div className="hidden">
+											<Link
+												to="/wedding-announcement"
+												className={`nav-link mx-4 text-white ${active(
+													"/wedding-announcement"
+												)}`}
+												onClick={() => setMenu("")}>
+												Graduation Announcement
+											</Link>
+										</div>
+										<div className="hidden">
+											<Link
+												to="/success-announcement"
+												className={`nav-link mx-4 text-white ${active(
+													"/success-announcement"
+												)}`}
+												onClick={() => setMenu("")}>
+												Success Announcement
+											</Link>
+										</div>
+									</div>
+									{/* Nav Links End */}
 
 									<div className="menu-content-area d-flex align-items-center">
 										{/* <!-- Header Social Area --> */}
