@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
 			MembershipSeeder::class,
             DeathSeeder::class,
 			WeddingSeeder::class,
-			// GraduationSeeder::class,
-			// SuccessCardSeeder::class
+			GraduationSeeder::class,
+			SuccessCardSeeder::class
         ]);
     }
 }

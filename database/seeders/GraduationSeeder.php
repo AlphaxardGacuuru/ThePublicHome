@@ -15,6 +15,9 @@ class GraduationSeeder extends Seeder
      */
     public function run()
     {
-        Graduation::factory()->count(20)->create();
+        Graduation::factory()
+		->count(20)
+		->hasGraduationComments(rand(1, 10))
+		->create();
     }
 }

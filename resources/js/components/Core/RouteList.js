@@ -15,6 +15,16 @@ import WeddingCreate from "@/pages/wedding/create"
 import WeddingShow from "@/pages/wedding/[id]"
 import WeddingEdit from "@/pages/wedding/edit/[id]"
 
+import GraduationIndex from "@/pages/graduation"
+import GraduationCreate from "@/pages/graduation/create"
+import GraduationShow from "@/pages/graduation/[id]"
+import GraduationEdit from "@/pages/graduation/edit/[id]"
+
+import SuccessCardIndex from "@/pages/success-card"
+import SuccessCardCreate from "@/pages/success-card/create"
+import SuccessCardShow from "@/pages/success-card/[id]"
+import SuccessCardEdit from "@/pages/success-card/edit/[id]"
+
 import ProfileShow from "@/pages/profile/[id]"
 import ProfileEdit from "@/pages/profile/edit/[id]"
 import Membership from "@/pages/profile/membership"
@@ -62,6 +72,38 @@ const RouteList = (GLOBAL_STATE) => {
 		{
 			path: "/weddings/edit/:id",
 			component: <WeddingEdit {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/graduations",
+			component: <GraduationIndex {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/graduations/create",
+			component: <GraduationCreate {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/graduations/show/:id",
+			component: <GraduationShow {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/graduations/edit/:id",
+			component: <GraduationEdit {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/success-cards",
+			component: <SuccessCardIndex {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/success-cards/create",
+			component: <SuccessCardCreate {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/success-cards/show/:id",
+			component: <SuccessCardShow {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/success-cards/edit/:id",
+			component: <SuccessCardEdit {...GLOBAL_STATE} />,
 		},
 	]
 

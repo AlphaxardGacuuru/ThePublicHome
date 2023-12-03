@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,13 @@ class GraduationFactory extends Factory
     public function definition()
     {
         return [
-			'likes' => rand(1, 10)
+            'user_id' => User::all()->random()->id,
+            'title' => fake()->firstName() . ' graduations',
+            'poster' => 'graduation-posters/' . rand(1, 5) . '.jpg',
+            'announcement' => fake()->catchPhrase(),
+            'venue' => fake()->address(),
+            'graduation_date' => Carbon::now()->addDays(rand(1, 10)),
+            'likes' => rand(1, 10),
         ];
     }
 }

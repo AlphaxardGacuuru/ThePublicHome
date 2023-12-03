@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\SuccessCardService;
 use App\Models\SuccessCard;
 use Illuminate\Http\Request;
 
 class SuccessCardController extends Controller
 {
+	public function __construct(protected SuccessCardService $service)
+	{
+		// 
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class SuccessCardController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**

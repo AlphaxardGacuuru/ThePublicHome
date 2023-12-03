@@ -15,6 +15,9 @@ class SuccessCardSeeder extends Seeder
      */
     public function run()
     {
-        SuccessCard::factory()->count(20)->create();
+        SuccessCard::factory()
+		->count(20)
+		->hasSuccessCardComments(rand(1, 10))
+		->create();
     }
 }

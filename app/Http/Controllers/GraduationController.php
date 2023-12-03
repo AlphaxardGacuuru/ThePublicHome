@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\GraduationService;
 use App\Models\Graduation;
 use Illuminate\Http\Request;
 
 class GraduationController extends Controller
 {
+	public function __construct(protected GraduationService $service)
+	{
+		// 
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class GraduationController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**

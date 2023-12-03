@@ -329,7 +329,7 @@ const TopNav = (props) => {
 								</li>
 								<li className="nav-item active">
 									<Link
-										to="/"
+										to="/deaths"
 										style={active2("/deaths")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
@@ -338,7 +338,7 @@ const TopNav = (props) => {
 								</li>
 								<li className="nav-item active">
 									<Link
-										to="/"
+										to="/weddings"
 										style={active2("/weddings")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
@@ -347,7 +347,7 @@ const TopNav = (props) => {
 								</li>
 								<li className="nav-item active">
 									<Link
-										to="/"
+										to="/graduations"
 										style={active2("/graduation")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
@@ -356,7 +356,7 @@ const TopNav = (props) => {
 								</li>
 								<li className="nav-item active">
 									<Link
-										to="/"
+										to="/success-cards"
 										style={active2("/success-card")}
 										className="nav-link"
 										onClick={() => setMenu("")}>

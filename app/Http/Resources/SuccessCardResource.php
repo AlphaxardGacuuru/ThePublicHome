@@ -14,6 +14,23 @@ class SuccessCardResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        // Current User ID
+        $auth = auth('sanctum')->user();
+
+        $id = $auth ? $auth->id : 0;
+
+        return [
+            "id" => $this->id,
+            "userId" => $this->user_id,
+            "userName" => $this->user->name,
+            "userAvatar" => $this->user->avatar,
+            "title" => $this->title,
+            "poster" => $this->poster,
+            "announcement" => $this->announcement,
+            "likes" => $this->likes,
+            "hasLiked" => $this->hasLiked($id),
+            "updatedAt" => $this->updated_at,
+            "createdAt" => $this->created_at,
+        ];
     }
 }
