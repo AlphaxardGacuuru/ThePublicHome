@@ -102208,6 +102208,18 @@ var App = function App() {
     _useState12 = _slicedToArray(_useState11, 2),
     deaths = _useState12[0],
     setDeaths = _useState12[1];
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("weddings")),
+    _useState14 = _slicedToArray(_useState13, 2),
+    weddings = _useState14[0],
+    setWeddings = _useState14[1];
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("graduations")),
+    _useState16 = _slicedToArray(_useState15, 2),
+    graduations = _useState16[0],
+    setGraduations = _useState16[1];
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("successCards")),
+    _useState18 = _slicedToArray(_useState17, 2),
+    successCards = _useState18[0],
+    setSuccessCards = _useState18[1];
 
   // Function for fetching data from API
   var get = function get(endpoint, setState) {
@@ -102259,14 +102271,14 @@ var App = function App() {
    * PWA Install button */
   var deferredPrompt;
   var btnAdd = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-    _useState14 = _slicedToArray(_useState13, 2),
-    downloadLink = _useState14[0],
-    setDownloadLink = _useState14[1];
-  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
-    _useState16 = _slicedToArray(_useState15, 2),
-    downloadLinkText = _useState16[0],
-    setDownloadLinkText = _useState16[1];
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    _useState20 = _slicedToArray(_useState19, 2),
+    downloadLink = _useState20[0],
+    setDownloadLink = _useState20[1];
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState22 = _slicedToArray(_useState21, 2),
+    downloadLinkText = _useState22[0],
+    setDownloadLinkText = _useState22[1];
 
   // Listen to the install prompt
   window.addEventListener("beforeinstallprompt", function (e) {
@@ -102312,6 +102324,12 @@ var App = function App() {
     // State
     deaths: deaths,
     setDeaths: setDeaths,
+    weddings: weddings,
+    setWeddings: setWeddings,
+    graduations: graduations,
+    setGraduations: setGraduations,
+    successCards: successCards,
+    setSuccessCards: setSuccessCards,
     // PWA
     btnAdd: btnAdd,
     downloadLink: downloadLink,
@@ -102928,28 +102946,28 @@ var RouteList = function RouteList(GLOBAL_STATE) {
     path: "/socialite/:message/:token",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Auth_Socialite__WEBPACK_IMPORTED_MODULE_15__["default"], GLOBAL_STATE)
   }, {
-    path: "/death",
+    path: "/deaths",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_death__WEBPACK_IMPORTED_MODULE_4__["default"], GLOBAL_STATE)
   }, {
-    path: "/death/create",
+    path: "/deaths/create",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_death_create__WEBPACK_IMPORTED_MODULE_5__["default"], GLOBAL_STATE)
   }, {
-    path: "/death/show/:id",
+    path: "/deaths/show/:id",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_death_id___WEBPACK_IMPORTED_MODULE_6__["default"], GLOBAL_STATE)
   }, {
-    path: "/death/edit/:id",
+    path: "/deaths/edit/:id",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_death_edit_id___WEBPACK_IMPORTED_MODULE_7__["default"], GLOBAL_STATE)
   }, {
-    path: "/wedding",
+    path: "/weddings",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_wedding__WEBPACK_IMPORTED_MODULE_8__["default"], GLOBAL_STATE)
   }, {
-    path: "/wedding/create",
+    path: "/weddings/create",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_wedding_create__WEBPACK_IMPORTED_MODULE_9__["default"], GLOBAL_STATE)
   }, {
-    path: "/wedding/show/:id",
+    path: "/weddings/show/:id",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_wedding_id___WEBPACK_IMPORTED_MODULE_10__["default"], GLOBAL_STATE)
   }, {
-    path: "/wedding/edit/:id",
+    path: "/weddings/edit/:id",
     component: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_wedding_edit_id___WEBPACK_IMPORTED_MODULE_11__["default"], GLOBAL_STATE)
   }];
   var profileRoutes = [{
@@ -103228,7 +103246,7 @@ var Death = function Death(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "death-thumbnail"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/death/show/".concat(props.death.id)
+    to: "/deaths/show/".concat(props.death.id)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: props.death.poster
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103258,7 +103276,7 @@ var Death = function Death(props) {
     className: "death-name px-2 mb-0"
   }, props.death.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "px-2 text-start"
-  }, props.death.eulogy), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.death.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2",
@@ -103687,32 +103705,32 @@ var TopNav = function TopNav(props) {
   }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/death",
-    className: "nav-link mx-4 text-white ".concat(active("/death")),
+    to: "/deaths",
+    className: "nav-link mx-4 text-white ".concat(active("/deaths")),
     onClick: function onClick() {
       return setMenu("");
     }
   }, "Death Announcements")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/wedding",
-    className: "nav-link mx-4 text-white ".concat(active("/wedding")),
+    to: "/weddings",
+    className: "nav-link mx-4 text-white ".concat(active("/weddings")),
     onClick: function onClick() {
       return setMenu("");
     }
   }, "Wedding Announcement")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/wedding",
-    className: "nav-link mx-4 text-white ".concat(active("/wedding")),
+    to: "/graduations",
+    className: "nav-link mx-4 text-white ".concat(active("/graduations")),
     onClick: function onClick() {
       return setMenu("");
     }
   }, "Graduation Announcement")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/success",
-    className: "nav-link mx-4 text-white ".concat(active("/success")),
+    to: "/success-cards",
+    className: "nav-link mx-4 text-white ".concat(active("/success-cards")),
     onClick: function onClick() {
       return setMenu("");
     }
@@ -103821,7 +103839,7 @@ var TopNav = function TopNav(props) {
     className: "nav-item active"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/",
-    style: active2("/"),
+    style: activeStrict2("/"),
     className: "nav-link",
     onClick: function onClick() {
       return setMenu("");
@@ -103830,7 +103848,7 @@ var TopNav = function TopNav(props) {
     className: "nav-item active"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/",
-    style: active2("/death"),
+    style: active2("/deaths"),
     className: "nav-link",
     onClick: function onClick() {
       return setMenu("");
@@ -103839,7 +103857,7 @@ var TopNav = function TopNav(props) {
     className: "nav-item active"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/",
-    style: active2("/wedding"),
+    style: active2("/weddings"),
     className: "nav-link",
     onClick: function onClick() {
       return setMenu("");
@@ -104016,6 +104034,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _svgs_HeartFilledSVG__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/svgs/HeartFilledSVG */ "./resources/js/svgs/HeartFilledSVG.js");
 /* harmony import */ var _svgs_HeartSVG__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/svgs/HeartSVG */ "./resources/js/svgs/HeartSVG.js");
 /* harmony import */ var _svgs_OptionsSVG__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/svgs/OptionsSVG */ "./resources/js/svgs/OptionsSVG.js");
+/* harmony import */ var _svgs_LocationSVG__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/svgs/LocationSVG */ "./resources/js/svgs/LocationSVG.js");
+/* harmony import */ var _svgs_CalenderSVG__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/svgs/CalenderSVG */ "./resources/js/svgs/CalenderSVG.js");
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -104023,6 +104043,8 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
 
 
 
@@ -104040,7 +104062,7 @@ var Wedding = function Wedding(props) {
     setHasLiked(props.wedding.hasLiked);
   }, [props.wedding]);
 
-  // Function for liking Wedding 
+  // Function for liking Wedding
   var onLike = function onLike(weddingId) {
     setHasLiked(!hasLiked);
 
@@ -104065,7 +104087,7 @@ var Wedding = function Wedding(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "death-thumbnail"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/wedding/show/".concat(props.wedding.id)
+    to: "/weddings/show/".concat(props.wedding.id)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Img__WEBPACK_IMPORTED_MODULE_2__["default"], {
     src: props.wedding.poster
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104093,9 +104115,13 @@ var Wedding = function Wedding(props) {
     className: "death-user-name mt-1 pt-2 px-1"
   }, props.wedding.userName))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "death-name px-2 mb-0"
-  }, props.wedding.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "px-2 text-start"
-  }, props.wedding.eulogy), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.wedding.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "mb-1 px-2 text-start"
+  }, props.wedding.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "death-name mb-1 px-2 text-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LocationSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null), " ", props.wedding.venue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "mb-1 px-2 text-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CalenderSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null), " ", props.wedding.weddingDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2",
@@ -104314,7 +104340,7 @@ var DeathShow = function DeathShow(props) {
       textAlign: "left"
     }
   }, death.userName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, death.userId == ((_props$auth = props.auth) === null || _props$auth === void 0 ? void 0 : _props$auth.id) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_MyLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    linkTo: "/death/edit/".concat(id),
+    linkTo: "/deaths/edit/".concat(id),
     text: "edit"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, death.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-9 border-start"
@@ -104548,7 +104574,7 @@ var DeathCreate = function DeathCreate(props) {
     loading: loadingBtn,
     disabled: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_MyLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    linkTo: "/death",
+    linkTo: "/deaths",
     text: "back to death announcements"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-2"
@@ -104678,7 +104704,7 @@ var DeathEdit = function DeathEdit(props) {
       setLoadingBtn(false);
       // Redirect to Show Death Announcement
       setTimeout(function () {
-        return router.push("/death/show/".concat(res.data.data.id));
+        return router.push("/deaths/show/".concat(res.data.data.id));
       }, 500);
     })["catch"](function (err) {
       // Remove loader for button
@@ -104793,7 +104819,7 @@ var DeathEdit = function DeathEdit(props) {
       onDelete();
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_MyLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    linkTo: "/death/show/".concat(id),
+    linkTo: "/deaths/show/".concat(id),
     text: "back to death announcement"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-2"
@@ -104838,8 +104864,8 @@ var index = function index(props) {
     setQuery = _useState2[1];
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
     _useState4 = _slicedToArray(_useState3, 2),
-    location = _useState4[0],
-    setLocation = _useState4[1];
+    locale = _useState4[0],
+    setLocale = _useState4[1];
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
     _useState6 = _slicedToArray(_useState5, 2),
     loader = _useState6[0],
@@ -104851,7 +104877,7 @@ var index = function index(props) {
     e.preventDefault();
   };
   var active = function active(current) {
-    if (location == current) {
+    if (locale == current) {
       return "bg-primary-subtle";
     }
   };
@@ -104863,7 +104889,7 @@ var index = function index(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-10 p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: (_props$auth = props.auth) !== null && _props$auth !== void 0 && (_props$auth = _props$auth.membershipTypes) !== null && _props$auth !== void 0 && _props$auth.includes("death") ? "/death/create" : "/death/create"
+    to: (_props$auth = props.auth) !== null && _props$auth !== void 0 && (_props$auth = _props$auth.membershipTypes) !== null && _props$auth !== void 0 && _props$auth.includes("death") ? "/deaths/create" : "/deaths/create"
     // : "/profile/membership"
     ,
 
@@ -104901,7 +104927,7 @@ var index = function index(props) {
       cursor: "pointer"
     },
     onClick: function onClick() {
-      return setLocation("");
+      return setLocale("");
     }
   }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "".concat(active("home"), " rounded-pill mx-2 px-5 py-2"),
@@ -104909,7 +104935,7 @@ var index = function index(props) {
       cursor: "pointer"
     },
     onClick: function onClick() {
-      return setLocation("home");
+      return setLocale("home");
     }
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "".concat(active("international"), " rounded-pill mx-2 px-5 py-2"),
@@ -104917,7 +104943,7 @@ var index = function index(props) {
       cursor: "pointer"
     },
     onClick: function onClick() {
-      return setLocation("international");
+      return setLocale("international");
     }
   }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-wrap justify-content-center"
@@ -104930,7 +104956,7 @@ var index = function index(props) {
   }), props.deaths.filter(function (death) {
     return death.name.toLowerCase().match(query);
   }).filter(function (death) {
-    return location ? death.location == location : true;
+    return locale ? death.locale == locale : true;
   }).map(function (death, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Death_Death__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
       key: key,
@@ -105000,12 +105026,12 @@ var index = function index(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "m-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/death",
+    to: "/deaths",
     className: "card m-2 p-5 mx-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Death Announcements"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "m-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/wedding",
+    to: "/weddings",
     className: "card m-2 p-5 mx-auto"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Wedding Announcements"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "m-2"
@@ -105525,7 +105551,7 @@ var WeddingShow = function WeddingShow(props) {
       textAlign: "left"
     }
   }, wedding.userName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, wedding.userId == ((_props$auth = props.auth) === null || _props$auth === void 0 ? void 0 : _props$auth.id) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_MyLink__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    linkTo: "/wedding/edit/".concat(id),
+    linkTo: "/weddings/edit/".concat(id),
     text: "edit"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, wedding.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-9 border-start"
@@ -105668,7 +105694,7 @@ var WeddingCreate = function WeddingCreate(props) {
       setLoadingBtn(false);
       // Redirect to Show Wedding Announcement
       setTimeout(function () {
-        return router.push("/wedding/show/".concat(res.data.data.id));
+        return router.push("/weddings/show/".concat(res.data.data.id));
       }, 500);
     })["catch"](function (err) {
       // Remove loader for button
@@ -105759,7 +105785,7 @@ var WeddingCreate = function WeddingCreate(props) {
     loading: loadingBtn,
     disabled: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_MyLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    linkTo: "/wedding",
+    linkTo: "/weddings",
     text: "back to wedding announcements"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-2"
@@ -105889,7 +105915,7 @@ var WeddingEdit = function WeddingEdit(props) {
       setLoadingBtn(false);
       // Redirect to Show Wedding Announcement
       setTimeout(function () {
-        return router.push("/wedding/show/".concat(res.data.data.id));
+        return router.push("/weddings/show/".concat(res.data.data.id));
       }, 500);
     })["catch"](function (err) {
       // Remove loader for button
@@ -106004,7 +106030,7 @@ var WeddingEdit = function WeddingEdit(props) {
       onDelete();
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_MyLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    linkTo: "/wedding/show/".concat(id),
+    linkTo: "/weddings/show/".concat(id),
     text: "back to wedding announcement"
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-2"
@@ -106047,14 +106073,10 @@ var index = function index(props) {
     _useState2 = _slicedToArray(_useState, 2),
     query = _useState2[0],
     setQuery = _useState2[1];
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
     _useState4 = _slicedToArray(_useState3, 2),
-    location = _useState4[0],
-    setLocation = _useState4[1];
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-    _useState6 = _slicedToArray(_useState5, 2),
-    loader = _useState6[0],
-    setLoader = _useState6[1];
+    loader = _useState4[0],
+    setLoader = _useState4[1];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     props.get("weddings", props.setWeddings);
   }, []);
@@ -106074,7 +106096,7 @@ var index = function index(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-10 p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: (_props$auth = props.auth) !== null && _props$auth !== void 0 && (_props$auth = _props$auth.membershipTypes) !== null && _props$auth !== void 0 && _props$auth.includes("wedding") ? "/wedding/create" : "/wedding/create"
+    to: (_props$auth = props.auth) !== null && _props$auth !== void 0 && (_props$auth = _props$auth.membershipTypes) !== null && _props$auth !== void 0 && _props$auth.includes("wedding") ? "/weddings/create" : "/weddings/create"
     // : "/profile/membership"
     ,
 
@@ -106104,33 +106126,7 @@ var index = function index(props) {
     style: {
       color: "inherit"
     }
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center flex-wrap"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "".concat(active(""), " rounded-pill mx-2 px-5 py-2"),
-    style: {
-      cursor: "pointer"
-    },
-    onClick: function onClick() {
-      return setLocation("");
-    }
-  }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "".concat(active("home"), " rounded-pill mx-2 px-5 py-2"),
-    style: {
-      cursor: "pointer"
-    },
-    onClick: function onClick() {
-      return setLocation("home");
-    }
-  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "".concat(active("international"), " rounded-pill mx-2 px-5 py-2"),
-    style: {
-      cursor: "pointer"
-    },
-    onClick: function onClick() {
-      return setLocation("international");
-    }
-  }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex flex-wrap justify-content-center"
   }, dummyArray.filter(function () {
     return props.weddings.length < 1;
@@ -106139,9 +106135,7 @@ var index = function index(props) {
       key: key
     });
   }), props.weddings.filter(function (wedding) {
-    return wedding.name.toLowerCase().match(query);
-  }).filter(function (wedding) {
-    return location ? wedding.location == location : true;
+    return wedding.title.toLowerCase().match(query);
   }).map(function (wedding, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Wedding_Wedding__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
       key: key,
@@ -106152,6 +106146,36 @@ var index = function index(props) {
   }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (index);
+
+/***/ }),
+
+/***/ "./resources/js/svgs/CalenderSVG.js":
+/*!******************************************!*\
+  !*** ./resources/js/svgs/CalenderSVG.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var CalenderSVG = function CalenderSVG() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1em",
+    height: "1em",
+    fill: "currentColor",
+    className: "mb-2 bi bi-calendar-event",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (CalenderSVG);
 
 /***/ }),
 
@@ -106388,6 +106412,36 @@ var HomeSVG = function HomeSVG() {
   }));
 };
 /* harmony default export */ __webpack_exports__["default"] = (HomeSVG);
+
+/***/ }),
+
+/***/ "./resources/js/svgs/LocationSVG.js":
+/*!******************************************!*\
+  !*** ./resources/js/svgs/LocationSVG.js ***!
+  \******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var LocationSVG = function LocationSVG() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "1em",
+    height: "1em",
+    fill: "currentColor",
+    className: "mb-1 bi bi-geo-alt",
+    viewBox: "0 0 16 16"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+  }));
+};
+/* harmony default export */ __webpack_exports__["default"] = (LocationSVG);
 
 /***/ }),
 

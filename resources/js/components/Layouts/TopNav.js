@@ -127,9 +127,9 @@ const TopNav = (props) => {
 										</div>
 										<div className="hidden">
 											<Link
-												to="/death"
+												to="/deaths"
 												className={`nav-link mx-4 text-white ${active(
-													"/death"
+													"/deaths"
 												)}`}
 												onClick={() => setMenu("")}>
 												Death Announcements
@@ -137,9 +137,9 @@ const TopNav = (props) => {
 										</div>
 										<div className="hidden">
 											<Link
-												to="/wedding"
+												to="/weddings"
 												className={`nav-link mx-4 text-white ${active(
-													"/wedding"
+													"/weddings"
 												)}`}
 												onClick={() => setMenu("")}>
 												Wedding Announcement
@@ -147,9 +147,9 @@ const TopNav = (props) => {
 										</div>
 										<div className="hidden">
 											<Link
-												to="/wedding"
+												to="/graduations"
 												className={`nav-link mx-4 text-white ${active(
-													"/wedding"
+													"/graduations"
 												)}`}
 												onClick={() => setMenu("")}>
 												Graduation Announcement
@@ -157,9 +157,9 @@ const TopNav = (props) => {
 										</div>
 										<div className="hidden">
 											<Link
-												to="/success"
+												to="/success-cards"
 												className={`nav-link mx-4 text-white ${active(
-													"/success"
+													"/success-cards"
 												)}`}
 												onClick={() => setMenu("")}>
 												Success Announcement
@@ -321,7 +321,7 @@ const TopNav = (props) => {
 								<li className="nav-item active">
 									<Link
 										to="/"
-										style={active2("/")}
+										style={activeStrict2("/")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
 										Home
@@ -330,7 +330,7 @@ const TopNav = (props) => {
 								<li className="nav-item active">
 									<Link
 										to="/"
-										style={active2("/death")}
+										style={active2("/deaths")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
 										Death and Funeral Announcements
@@ -339,7 +339,7 @@ const TopNav = (props) => {
 								<li className="nav-item active">
 									<Link
 										to="/"
-										style={active2("/wedding")}
+										style={active2("/weddings")}
 										className="nav-link"
 										onClick={() => setMenu("")}>
 										Wedding Announcements

@@ -74,7 +74,7 @@ const DeathEdit = (props) => {
 				setLoadingBtn(false)
 				// Redirect to Show Death Announcement
 				setTimeout(
-					() => router.push(`/death/show/${res.data.data.id}`),
+					() => router.push(`/deaths/show/${res.data.data.id}`),
 					500
 				)
 			})
@@ -216,7 +216,7 @@ const DeathEdit = (props) => {
 						<br />
 
 						<MyLink
-							linkTo={`/death/show/${id}`}
+							linkTo={`/deaths/show/${id}`}
 							text="back to death announcement"
 						/>
 					</form>

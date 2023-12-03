@@ -123,7 +123,7 @@ const WeddingShow = (props) => {
 									{wedding.userId == props.auth?.id && (
 										<div>
 											<MyLink
-												linkTo={`/wedding/edit/${id}`}
+												linkTo={`/weddings/edit/${id}`}
 												text="edit"
 											/>
 										</div>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('announcement');
             $table->string('venue')->nullable();
             $table->timestamp('graduation_date')->nullable();
+			$table->integer('likes')->default(0);
             $table->timestamps();
         });
     }

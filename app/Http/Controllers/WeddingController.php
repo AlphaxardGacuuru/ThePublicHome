@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\WeddingService;
 use App\Models\Wedding;
 use Illuminate\Http\Request;
 
 class WeddingController extends Controller
 {
+    public function __construct(protected WeddingService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class WeddingController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -25,7 +31,21 @@ class WeddingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "title" => "required|string",
+            "poster" => "required|string",
+            "announcement" => "required|string",
+            "venue" => "required|string",
+            "weddingDate" => "required|string",
+        ]);
+
+        [$saved, $message, $wedding] = $this->service->store($request);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $wedding,
+        ], 200);
     }
 
     /**
@@ -34,9 +54,9 @@ class WeddingController extends Controller
      * @param  \App\Models\Wedding  $wedding
      * @return \Illuminate\Http\Response
      */
-    public function show(Wedding $wedding)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
@@ -46,9 +66,23 @@ class WeddingController extends Controller
      * @param  \App\Models\Wedding  $wedding
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Wedding $wedding)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            "title" => "nullable|string",
+            "poster" => "nullable|string",
+            "announcement" => "nullable|string",
+            "venue" => "nullable|string",
+            "weddingDate" => "nullable|string",
+        ]);
+
+        [$saved, $message, $wedding] = $this->service->update($request, $id);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $wedding,
+        ], 200);
     }
 
     /**
@@ -57,8 +91,13 @@ class WeddingController extends Controller
      * @param  \App\Models\Wedding  $wedding
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Wedding $wedding)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response([
+            "status" => $deleted,
+            "message" => $message,
+        ], 200);
     }
 }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('poster');
             $table->string('announcement');
+			$table->integer('likes')->default(0);
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Death;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,9 @@ class DeathSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Death::factory()
+		->count(20)
+		->hasDeathComments(rand(1, 10))
+		->create();
     }
 }

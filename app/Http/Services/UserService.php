@@ -4,7 +4,6 @@ namespace App\Http\Services;
 
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class UserService extends Service
 {
@@ -17,7 +16,7 @@ class UserService extends Service
     {
         $user = User::find($id);
 
-		return new UserResource($user);
+        return new UserResource($user);
     }
 
     /**
@@ -49,8 +48,15 @@ class UserService extends Service
      */
     public function auth()
     {
-        $auth = auth('sanctum')->user();
+        if (auth("sanctum")->check()) {
+            $auth = auth('sanctum')->user();
 
-        return new UserResource($auth);
+            return new UserResource($auth);
+        } else {
+            return response([
+                "status" => "error",
+                "message" => "Not Authenticated"],
+                401);
+        }
     }
 }

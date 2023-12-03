@@ -123,7 +123,7 @@ const DeathShow = (props) => {
 									{death.userId == props.auth?.id && (
 										<div>
 											<MyLink
-												linkTo={`/death/edit/${id}`}
+												linkTo={`/deaths/edit/${id}`}
 												text="edit"
 											/>
 										</div>

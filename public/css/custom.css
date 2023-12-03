@@ -283,8 +283,8 @@ p {
 }
 
 .leftMenu .active {
-	border-top-right-radius: 50px; 
-	border-bottom-right-radius: 50px; 
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -1197,13 +1197,25 @@ div.hidden-scroll span {
 }
 
 .death-name {
-	width: 10em;
+	width: 13em;
 	height: 1.3em;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: clip;
 	text-align: left;
 	margin-right: auto;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	.death-name {
+		width: 15em;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.death-name {
+		width: 15em;
+	}
 }
 
 /* Death Media End */

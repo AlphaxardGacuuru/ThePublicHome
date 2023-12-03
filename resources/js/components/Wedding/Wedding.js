@@ -7,6 +7,8 @@ import SocialMediaInput from "@/components/Core/SocialMediaInput"
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
+import LocationSVG from "@/svgs/LocationSVG"
+import CalenderSVG from "@/svgs/CalenderSVG"
 
 const Wedding = (props) => {
 	const [hasLiked, setHasLiked] = useState(props.wedding.hasLiked)
@@ -16,7 +18,7 @@ const Wedding = (props) => {
 		setHasLiked(props.wedding.hasLiked)
 	}, [props.wedding])
 
-	// Function for liking Wedding 
+	// Function for liking Wedding
 	const onLike = (weddingId) => {
 		setHasLiked(!hasLiked)
 
@@ -38,7 +40,7 @@ const Wedding = (props) => {
 			style={{ display: "inline-block" }}>
 			<div className="death-media">
 				<div className="death-thumbnail">
-					<Link to={`/wedding/show/${props.wedding.id}`}>
+					<Link to={`/weddings/show/${props.wedding.id}`}>
 						<Img src={props.wedding.poster} />
 					</Link>
 				</div>
@@ -71,10 +73,14 @@ const Wedding = (props) => {
 					{/* User Name End */}
 				</div>
 				{/* User info End */}
-				<h3 className="death-name px-2 mb-0">
-					{props.wedding.name}
-				</h3>
-				<p className="px-2 text-start">{props.wedding.eulogy}</p>
+				<h3 className="death-name px-2 mb-0">{props.wedding.title}</h3>
+				<p className="mb-1 px-2 text-start">{props.wedding.announcement}</p>
+				<p className="death-name mb-1 px-2 text-start">
+					<LocationSVG /> {props.wedding.venue}
+				</p>
+				<p className="mb-1 px-2 text-start">
+					<CalenderSVG /> {props.wedding.weddingDate}
+				</p>
 				<div className="d-flex justify-content-between">
 					{/* Wedding  likes */}
 					<div

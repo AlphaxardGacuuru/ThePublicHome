@@ -38,7 +38,7 @@ const Death = (props) => {
 			style={{ display: "inline-block" }}>
 			<div className="death-media">
 				<div className="death-thumbnail">
-					<Link to={`/death/show/${props.death.id}`}>
+					<Link to={`/deaths/show/${props.death.id}`}>
 						<Img src={props.death.poster} />
 					</Link>
 				</div>
@@ -74,7 +74,7 @@ const Death = (props) => {
 				<h3 className="death-name px-2 mb-0">
 					{props.death.name}
 				</h3>
-				<p className="px-2 text-start">{props.death.eulogy}</p>
+				<p className="px-2 text-start">{props.death.announcement}</p>
 				<div className="d-flex justify-content-between">
 					{/* Death  likes */}
 					<div

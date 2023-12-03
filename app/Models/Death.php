@@ -51,6 +51,11 @@ class Death extends Model
         return $this->hasMany(DeathLike::class);
     }
 
+    public function deathComments()
+    {
+        return $this->hasMany(DeathComment::class);
+    }
+
     /*
      *    Custom Functions
      */

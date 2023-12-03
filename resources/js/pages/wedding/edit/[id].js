@@ -74,7 +74,7 @@ const WeddingEdit = (props) => {
 				setLoadingBtn(false)
 				// Redirect to Show Wedding Announcement
 				setTimeout(
-					() => router.push(`/wedding/show/${res.data.data.id}`),
+					() => router.push(`/weddings/show/${res.data.data.id}`),
 					500
 				)
 			})
@@ -216,7 +216,7 @@ const WeddingEdit = (props) => {
 						<br />
 
 						<MyLink
-							linkTo={`/wedding/show/${id}`}
+							linkTo={`/weddings/show/${id}`}
 							text="back to wedding announcement"
 						/>
 					</form>

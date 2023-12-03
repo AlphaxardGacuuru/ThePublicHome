@@ -50,8 +50,11 @@ const App = () => {
 	const [leftMenu, setLeftMenu] = useState("left-open")
 	const [auth, setAuth] = useState(getLocalStorageAuth("auth"))
 
-	const [deaths, setDeaths] = useState(
-		getLocalStorage("deaths")
+	const [deaths, setDeaths] = useState(getLocalStorage("deaths"))
+	const [weddings, setWeddings] = useState(getLocalStorage("weddings"))
+	const [graduations, setGraduations] = useState(getLocalStorage("graduations"))
+	const [successCards, setSuccessCards] = useState(
+		getLocalStorage("successCards")
 	)
 
 	// Function for fetching data from API
@@ -151,6 +154,12 @@ const App = () => {
 		// State
 		deaths,
 		setDeaths,
+		weddings,
+		setWeddings,
+		graduations,
+		setGraduations,
+		successCards,
+		setSuccessCards,
 
 		// PWA
 		btnAdd,

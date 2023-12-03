@@ -8,7 +8,6 @@ import PlusSVG from "@/svgs/PlusSVG"
 
 const index = (props) => {
 	const [query, setQuery] = useState("")
-	const [location, setLocation] = useState("")
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
@@ -36,8 +35,8 @@ const index = (props) => {
 				<Link
 					to={
 						props.auth?.membershipTypes?.includes("wedding")
-							? "/wedding/create"
-							: "/wedding/create"
+							? "/weddings/create"
+							: "/weddings/create"
 							// : "/profile/membership"
 					}
 					id="chatFloatBtn">
@@ -75,29 +74,6 @@ const index = (props) => {
 						</div>
 					</form>
 
-					<div className="d-flex justify-content-center flex-wrap">
-						<div
-							className={`${active("")} rounded-pill mx-2 px-5 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setLocation("")}>
-							All
-						</div>
-						<div
-							className={`${active("home")} rounded-pill mx-2 px-5 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setLocation("home")}>
-							Home
-						</div>
-						<div
-							className={`${active(
-								"international"
-							)} rounded-pill mx-2 px-5 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setLocation("international")}>
-							International
-						</div>
-					</div>
-
 					<br />
 
 					{/* Wedding Announcements */}
@@ -111,8 +87,7 @@ const index = (props) => {
 
 						{/* Real Wedding Announcement items */}
 						{props.weddings
-							.filter((wedding) => wedding.name.toLowerCase().match(query))
-							.filter((wedding) => (location ? wedding.location == location : true))
+							.filter((wedding) => wedding.title.toLowerCase().match(query))
 							.map((wedding, key) => (
 								<Wedding
 									{...props}

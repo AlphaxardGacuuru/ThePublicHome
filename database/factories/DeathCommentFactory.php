@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\DeathComment>
  */
-class GraduationFactory extends Factory
+class DeathCommentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,6 +18,8 @@ class GraduationFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => User::all()->random()->id,
+			'text' => fake()->realTextBetween($minNbChars = 160, $maxNbChars = 200, $indexSize = 2),
 			'likes' => rand(1, 10)
         ];
     }

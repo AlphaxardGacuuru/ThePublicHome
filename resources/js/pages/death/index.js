@@ -8,7 +8,7 @@ import PlusSVG from "@/svgs/PlusSVG"
 
 const index = (props) => {
 	const [query, setQuery] = useState("")
-	const [location, setLocation] = useState("")
+	const [locale, setLocale] = useState("")
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
@@ -20,7 +20,7 @@ const index = (props) => {
 	}
 
 	const active = (current) => {
-		if (location == current) {
+		if (locale == current) {
 			return "bg-primary-subtle"
 		}
 	}
@@ -36,8 +36,8 @@ const index = (props) => {
 				<Link
 					to={
 						props.auth?.membershipTypes?.includes("death")
-							? "/death/create"
-							: "/death/create"
+							? "/deaths/create"
+							: "/deaths/create"
 							// : "/profile/membership"
 					}
 					id="chatFloatBtn">
@@ -79,13 +79,13 @@ const index = (props) => {
 						<div
 							className={`${active("")} rounded-pill mx-2 px-5 py-2`}
 							style={{ cursor: "pointer" }}
-							onClick={() => setLocation("")}>
+							onClick={() => setLocale("")}>
 							All
 						</div>
 						<div
 							className={`${active("home")} rounded-pill mx-2 px-5 py-2`}
 							style={{ cursor: "pointer" }}
-							onClick={() => setLocation("home")}>
+							onClick={() => setLocale("home")}>
 							Home
 						</div>
 						<div
@@ -93,7 +93,7 @@ const index = (props) => {
 								"international"
 							)} rounded-pill mx-2 px-5 py-2`}
 							style={{ cursor: "pointer" }}
-							onClick={() => setLocation("international")}>
+							onClick={() => setLocale("international")}>
 							International
 						</div>
 					</div>
@@ -112,7 +112,7 @@ const index = (props) => {
 						{/* Real Death Announcement items */}
 						{props.deaths
 							.filter((death) => death.name.toLowerCase().match(query))
-							.filter((death) => (location ? death.location == location : true))
+							.filter((death) => (locale ? death.locale == locale : true))
 							.map((death, key) => (
 								<Death
 									{...props}

@@ -17,7 +17,7 @@ class SuccessCardFactory extends Factory
     public function definition()
     {
         return [
-            //
+			'likes' => rand(1, 10)
         ];
     }
 }

@@ -23,8 +23,9 @@ class DeathFactory extends Factory
 			'user_id' => User::all()->random()->id,
             'name' => fake()->name(),
             'poster' => 'death-posters/'. rand(1, 5) . '.jpg',
-            'eulogy' => fake()->catchPhrase(),
+            'announcement' => fake()->catchPhrase(),
             'locale' =>$location[rand(0, 1)],
+			'likes' => rand(1, 10)
         ];
     }
 }

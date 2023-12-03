@@ -39,14 +39,14 @@ const index = (props) => {
 				<div className="d-flex flex-wrap justify-content-center">
 					<div className="m-2">
 						<Link
-							to="/death"
+							to="/deaths"
 							className="card m-2 p-5 mx-auto">
 							<h3>Death Announcements</h3>
 						</Link>
 					</div>
 					<div className="m-2">
 						<Link
-							to="/wedding"
+							to="/weddings"
 							className="card m-2 p-5 mx-auto">
 							<h3>Wedding Announcements</h3>
 						</Link>

@@ -32,35 +32,35 @@ const RouteList = (GLOBAL_STATE) => {
 			component: <Socialite {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/death",
+			path: "/deaths",
 			component: <DeathIndex {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/death/create",
+			path: "/deaths/create",
 			component: <DeathCreate {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/death/show/:id",
+			path: "/deaths/show/:id",
 			component: <DeathShow {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/death/edit/:id",
+			path: "/deaths/edit/:id",
 			component: <DeathEdit {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/wedding",
+			path: "/weddings",
 			component: <WeddingIndex {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/wedding/create",
+			path: "/weddings/create",
 			component: <WeddingCreate {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/wedding/show/:id",
+			path: "/weddings/show/:id",
 			component: <WeddingShow {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/wedding/edit/:id",
+			path: "/weddings/edit/:id",
 			component: <WeddingEdit {...GLOBAL_STATE} />,
 		},
 	]

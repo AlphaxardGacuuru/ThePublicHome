@@ -32,10 +32,12 @@ class DeathController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "locale" => "required|string",
             "name" => "required|string",
-            "poster" => "required",
+            "poster" => "required|string",
+            "announcement" => "required|string",
             "eulogy" => "required|string",
+            "locale" => "required|string",
+            "burialDate" => "required|string",
         ]);
 
         [$saved, $message, $death] = $this->service->store($request);
@@ -67,6 +69,15 @@ class DeathController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            "name" => "nullable|string",
+            "poster" => "nullable|string",
+            "announcement" => "nullable|string",
+            "eulogy" => "nullable|string",
+            "locale" => "nullable|string",
+            "burialDate" => "nullable|string",
+        ]);
+
         [$saved, $message, $death] = $this->service->update($request, $id);
 
         return response([

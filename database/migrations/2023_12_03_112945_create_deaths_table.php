@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('eulogy')->nullable();
             $table->string('locale')->nullable();
             $table->timestamp('burial_date')->nullable();
+			$table->integer('likes')->default(0);
             $table->timestamps();
         });
     }
