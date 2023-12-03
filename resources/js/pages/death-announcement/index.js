@@ -28,9 +28,9 @@ const index = (props) => {
 	const dummyArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 	return (
-		<div className="row">
+		<div className="row p-0">
 			<div className="col-sm-1"></div>
-			<div className="col-sm-10">
+			<div className="col-sm-10 p-0">
 				{/* Chat button */}
 
 				<Link

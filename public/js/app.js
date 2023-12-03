@@ -104561,11 +104561,11 @@ var index = function index(props) {
   };
   var dummyArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
+    className: "row p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-10"
+    className: "col-sm-10 p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: (_props$auth = props.auth) !== null && _props$auth !== void 0 && (_props$auth = _props$auth.membershipTypes) !== null && _props$auth !== void 0 && _props$auth.includes("death") ? "/death-announcement/create" : "/death-announcement/create"
     // : "/profile/membership"

@@ -1173,8 +1173,8 @@ div.hidden-scroll span {
 
 /* crop thumbnails */
 .death-announcement-thumbnail {
-	width: 22em;
-	height: 11em;
+	width: 24em;
+	height: 12em;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
