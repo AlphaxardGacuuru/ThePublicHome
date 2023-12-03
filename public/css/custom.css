@@ -1149,14 +1149,14 @@ div.hidden-scroll span {
 	height: 3rem;
 }
 
-/* Club Media */
-.death-announcement-media {
+/* Death Media */
+.death-media {
 	/* position: relative; */
 	margin: 0;
 	padding: 0;
 }
 
-.death-announcement-poster {
+.death-poster {
 	width: 100%;
 	/* height: 50em; */
 	margin: 0;
@@ -1164,7 +1164,7 @@ div.hidden-scroll span {
 	overflow: hidden;
 }
 
-.death-announcement-poster img {
+.death-poster img {
 	width: 100%;
 	height: auto;
 	margin: 0;
@@ -1172,7 +1172,7 @@ div.hidden-scroll span {
 }
 
 /* crop thumbnails */
-.death-announcement-thumbnail {
+.death-thumbnail {
 	width: 24em;
 	height: 12em;
 	margin: 0;
@@ -1180,14 +1180,14 @@ div.hidden-scroll span {
 	overflow: hidden;
 }
 
-.death-announcement-thumbnail img {
+.death-thumbnail img {
 	width: 100%;
 	height: auto;
 	margin: 0;
 	padding: 0;
 }
 
-.death-announcement-user-name {
+.death-user-name {
 	width: 10em;
 	min-height: 1em;
 	white-space: nowrap;
@@ -1196,7 +1196,7 @@ div.hidden-scroll span {
 	text-align: left;
 }
 
-.death-announcement-name {
+.death-name {
 	width: 10em;
 	height: 1.3em;
 	white-space: nowrap;
@@ -1206,7 +1206,7 @@ div.hidden-scroll span {
 	margin-right: auto;
 }
 
-/* Club Media End */
+/* Death Media End */
 
 /* Event Media */
 .event-media {

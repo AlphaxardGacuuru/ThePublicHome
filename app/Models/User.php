@@ -76,9 +76,9 @@ class User extends Authenticatable
      * Relationships
      */
 
-    public function deathAnnouncement()
+    public function death()
     {
-        return $this->belongsTo(DeathAnnouncement::class);
+        return $this->belongsTo(Death::class);
     }
 
     public function userMemberships()

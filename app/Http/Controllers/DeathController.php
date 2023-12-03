@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\DeathService;
 use App\Models\Death;
 use Illuminate\Http\Request;
 
 class DeathController extends Controller
 {
+    public function __construct(protected DeathService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class DeathController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -25,7 +31,20 @@ class DeathController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "locale" => "required|string",
+            "name" => "required|string",
+            "poster" => "required",
+            "eulogy" => "required|string",
+        ]);
+
+        [$saved, $message, $death] = $this->service->store($request);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $death,
+        ], 200);
     }
 
     /**
@@ -34,9 +53,9 @@ class DeathController extends Controller
      * @param  \App\Models\Death  $death
      * @return \Illuminate\Http\Response
      */
-    public function show(Death $death)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
@@ -46,9 +65,15 @@ class DeathController extends Controller
      * @param  \App\Models\Death  $death
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Death $death)
+    public function update(Request $request, $id)
     {
-        //
+        [$saved, $message, $death] = $this->service->update($request, $id);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $death,
+        ], 200);
     }
 
     /**
@@ -57,8 +82,13 @@ class DeathController extends Controller
      * @param  \App\Models\Death  $death
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Death $death)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response([
+            "status" => $deleted,
+            "message" => $message,
+        ], 200);
     }
 }

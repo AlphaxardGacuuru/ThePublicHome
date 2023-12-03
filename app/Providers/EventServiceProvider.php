@@ -2,10 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\DeathAnnouncementCommentedEvent;
-use App\Events\DeathAnnouncementCommentLikedEvent;
-use App\Listeners\DeathAnnouncementCommentedListener;
-use App\Listeners\DeathAnnouncementCommentLikedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,8 +18,6 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        DeathAnnouncementCommentedEvent::class => [DeathAnnouncementCommentedListener::class],
-        DeathAnnouncementCommentLikedEvent::class => [DeathAnnouncementCommentLikedListener::class],
     ];
 
     /**

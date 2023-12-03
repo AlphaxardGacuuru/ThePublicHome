@@ -15,6 +15,16 @@ return new class extends Migration
     {
         Schema::create('deaths', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('name');
+            $table->string('poster');
+            $table->string('announcement');
+            $table->string('eulogy')->nullable();
+            $table->string('locale')->nullable();
+            $table->timestamp('burial_date')->nullable();
             $table->timestamps();
         });
     }

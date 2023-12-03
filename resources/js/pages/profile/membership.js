@@ -8,7 +8,7 @@ const membership = () => {
 				className="row"
 				style={{
 					height: "50vh",
-					backgroundImage: 'url("/storage/death-announcement-posters/1.jpg")',
+					backgroundImage: 'url("/storage/death-posters/1.jpg")',
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}>

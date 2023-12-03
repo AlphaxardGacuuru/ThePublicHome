@@ -7,7 +7,7 @@ const index = (props) => {
 	const [location, setLocation] = useState("home")
 
 	useEffect(() => {
-		props.get("death-announcements", props.setDeathAnnouncements)
+		props.get("deaths", props.setDeaths)
 	}, [])
 
 	const active = (current) => {
@@ -24,7 +24,7 @@ const index = (props) => {
 			<div
 				className="row p-0 m-0"
 				style={{
-					backgroundImage: "url(storage/death-announcement-posters/1.jpg)",
+					backgroundImage: "url(storage/death-posters/1.jpg)",
 					backgroundPosition: "center",
 					backgroundSize: "cover",
 					position: "relative",
@@ -39,28 +39,28 @@ const index = (props) => {
 				<div className="d-flex flex-wrap justify-content-center">
 					<div className="m-2">
 						<Link
-							to="/death-announcement"
+							to="/death"
 							className="card m-2 p-5 mx-auto">
 							<h3>Death Announcements</h3>
 						</Link>
 					</div>
 					<div className="m-2">
 						<Link
-							to="/wedding-announcement"
+							to="/wedding"
 							className="card m-2 p-5 mx-auto">
 							<h3>Wedding Announcements</h3>
 						</Link>
 					</div>
 					<div className="m-2">
 						<Link
-							to="/graduation-announcement"
+							to="/graduation"
 							className="card m-2 p-5 mx-auto">
 							<h3>Graduation Announcements</h3>
 						</Link>
 					</div>
 					<div className="m-2">
 						<Link
-							to="/success-card-announcement"
+							to="/success-card"
 							className="card m-2 p-5 mx-auto">
 							<h3>Success Card</h3>
 						</Link>

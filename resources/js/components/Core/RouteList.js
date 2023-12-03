@@ -5,15 +5,15 @@ import ProfileNav from "@/components/Layouts/ProfileNav"
 
 import Index from "@/pages/index"
 
-import DeathAnnouncementIndex from "@/pages/death-announcement"
-import DeathAnnouncementCreate from "@/pages/death-announcement/create"
-import DeathAnnouncementShow from "@/pages/death-announcement/[id]"
-import DeathAnnouncementEdit from "@/pages/death-announcement/edit/[id]"
+import DeathIndex from "@/pages/death"
+import DeathCreate from "@/pages/death/create"
+import DeathShow from "@/pages/death/[id]"
+import DeathEdit from "@/pages/death/edit/[id]"
 
-import WeddingAnnouncementIndex from "@/pages/wedding-announcement"
-import WeddingAnnouncementCreate from "@/pages/wedding-announcement/create"
-import WeddingAnnouncementShow from "@/pages/wedding-announcement/[id]"
-import WeddingAnnouncementEdit from "@/pages/wedding-announcement/edit/[id]"
+import WeddingIndex from "@/pages/wedding"
+import WeddingCreate from "@/pages/wedding/create"
+import WeddingShow from "@/pages/wedding/[id]"
+import WeddingEdit from "@/pages/wedding/edit/[id]"
 
 import ProfileShow from "@/pages/profile/[id]"
 import ProfileEdit from "@/pages/profile/edit/[id]"
@@ -32,36 +32,36 @@ const RouteList = (GLOBAL_STATE) => {
 			component: <Socialite {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/death-announcement",
-			component: <DeathAnnouncementIndex {...GLOBAL_STATE} />,
+			path: "/death",
+			component: <DeathIndex {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/death-announcement/create",
-			component: <DeathAnnouncementCreate {...GLOBAL_STATE} />,
+			path: "/death/create",
+			component: <DeathCreate {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/death-announcement/show/:id",
-			component: <DeathAnnouncementShow {...GLOBAL_STATE} />,
+			path: "/death/show/:id",
+			component: <DeathShow {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/death-announcement/edit/:id",
-			component: <DeathAnnouncementEdit {...GLOBAL_STATE} />,
+			path: "/death/edit/:id",
+			component: <DeathEdit {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/wedding-announcement",
-			component: <WeddingAnnouncementIndex {...GLOBAL_STATE} />,
+			path: "/wedding",
+			component: <WeddingIndex {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/wedding-announcement/create",
-			component: <WeddingAnnouncementCreate {...GLOBAL_STATE} />,
+			path: "/wedding/create",
+			component: <WeddingCreate {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/wedding-announcement/show/:id",
-			component: <WeddingAnnouncementShow {...GLOBAL_STATE} />,
+			path: "/wedding/show/:id",
+			component: <WeddingShow {...GLOBAL_STATE} />,
 		},
 		{
-			path: "/wedding-announcement/edit/:id",
-			component: <WeddingAnnouncementEdit {...GLOBAL_STATE} />,
+			path: "/wedding/edit/:id",
+			component: <WeddingEdit {...GLOBAL_STATE} />,
 		},
 	]
 

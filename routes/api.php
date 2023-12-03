@@ -1,23 +1,23 @@
 <?php
 
-use App\Http\Controllers\DeathAnnouncementCommentController;
-use App\Http\Controllers\DeathAnnouncementCommentLikeController;
-use App\Http\Controllers\DeathAnnouncementController;
-use App\Http\Controllers\DeathAnnouncementLikeController;
+use App\Http\Controllers\DeathCommentController;
+use App\Http\Controllers\DeathCommentLikeController;
+use App\Http\Controllers\DeathController;
+use App\Http\Controllers\DeathLikeController;
 use App\Http\Controllers\FilePondController;
-use App\Http\Controllers\GraduationAnnouncementCommentController;
-use App\Http\Controllers\GraduationAnnouncementCommentLikeController;
-use App\Http\Controllers\GraduationAnnouncementController;
-use App\Http\Controllers\GraduationAnnouncementLikeController;
-use App\Http\Controllers\SuccessCardAnnouncementCommentController;
-use App\Http\Controllers\SuccessCardAnnouncementCommentLikeController;
-use App\Http\Controllers\SuccessCardAnnouncementController;
-use App\Http\Controllers\SuccessCardAnnouncementLikeController;
+use App\Http\Controllers\GraduationCommentController;
+use App\Http\Controllers\GraduationCommentLikeController;
+use App\Http\Controllers\GraduationController;
+use App\Http\Controllers\GraduationLikeController;
+use App\Http\Controllers\SuccessCardCommentController;
+use App\Http\Controllers\SuccessCardCommentLikeController;
+use App\Http\Controllers\SuccessCardController;
+use App\Http\Controllers\SuccessCardLikeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\WeddingAnnouncementCommentController;
-use App\Http\Controllers\WeddingAnnouncementCommentLikeController;
-use App\Http\Controllers\WeddingAnnouncementController;
-use App\Http\Controllers\WeddingAnnouncementLikeController;
+use App\Http\Controllers\WeddingCommentController;
+use App\Http\Controllers\WeddingCommentLikeController;
+use App\Http\Controllers\WeddingController;
+use App\Http\Controllers\WeddingLikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,32 +36,32 @@ use Illuminate\Support\Facades\Route;
 Route::get('auth', [UserController::class, 'auth']);
 
 Route::apiResources([
-    "deaths" => DeathAnnouncementController::class,
-    "death-likes" => DeathAnnouncementLikeController::class,
-    "death-comments" => DeathAnnouncementCommentController::class,
-    "death-comment-likes" => DeathAnnouncementCommentLikeController::class,
+    "deaths" => DeathController::class,
+    "death-likes" => DeathLikeController::class,
+    "death-comments" => DeathCommentController::class,
+    "death-comment-likes" => DeathCommentLikeController::class,
     "users" => UserController::class,
-    "weddings" => WeddingAnnouncementController::class,
-    "wedding-likes" => WeddingAnnouncementLikeController::class,
-    "wedding-comments" => WeddingAnnouncementCommentController::class,
-    "wedding-comment-likes" => WeddingAnnouncementCommentLikeController::class,
-    "graduations" => GraduationAnnouncementController::class,
-    "graduation-likes" => GraduationAnnouncementLikeController::class,
-    "graduation-comments" => GraduationAnnouncementCommentController::class,
-    "graduation-comment-likes" => GraduationAnnouncementCommentLikeController::class,
-    "success-cards" => SuccessCardAnnouncementController::class,
-    "success-card-likes" => SuccessCardAnnouncementLikeController::class,
-    "success-card-comments" => SuccessCardAnnouncementCommentController::class,
-    "success-card-comment-likes" => SuccessCardAnnouncementCommentLikeController::class,
+    "weddings" => WeddingController::class,
+    "wedding-likes" => WeddingLikeController::class,
+    "wedding-comments" => WeddingCommentController::class,
+    "wedding-comment-likes" => WeddingCommentLikeController::class,
+    "graduations" => GraduationController::class,
+    "graduation-likes" => GraduationLikeController::class,
+    "graduation-comments" => GraduationCommentController::class,
+    "graduation-comment-likes" => GraduationCommentLikeController::class,
+    "success-cards" => SuccessCardController::class,
+    "success-card-likes" => SuccessCardLikeController::class,
+    "success-card-comments" => SuccessCardCommentController::class,
+    "success-card-comment-likes" => SuccessCardCommentLikeController::class,
 ]);
 
 // Filepond Controller
 Route::prefix('filepond')->group(function () {
     Route::controller(FilePondController::class)->group(function () {
 
-        // Death Announcement
-        Route::post('death-poster', 'storeDeathAnnouncementPoster');
-        Route::delete('death-poster/{id}', 'destoryDeathAnnouncementPoster');
+        // Death 
+        Route::post('death-poster', 'storeDeathPoster');
+        Route::delete('death-poster/{id}', 'destoryDeathPoster');
 
         // User
         Route::post('avatar/{id}', 'updateAvatar');

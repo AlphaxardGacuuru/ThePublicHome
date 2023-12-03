@@ -9,18 +9,18 @@ use Illuminate\Support\Facades\Storage;
 class FilePondController extends Controller
 {
 	/*
-	* Handle Death Announcement Media
+	* Handle Death  Media
 	*/ 
 
     /*
-     * Handle Death Announcement Poster Upload */
-    public function storeDeathAnnouncementPoster(Request $request)
+     * Handle Death  Poster Upload */
+    public function storeDeathPoster(Request $request)
     {
         $this->validate($request, [
             'filepond-poster' => 'required|file',
         ]);
 
-        $poster = $request->file('filepond-poster')->store('public/death-announcement-posters');
+        $poster = $request->file('filepond-poster')->store('public/death-posters');
         $posterShort = substr($poster, 7);
 
         return $posterShort;
@@ -28,11 +28,11 @@ class FilePondController extends Controller
 
     /*
      * Handle Club Poster Delete */
-    public function destoryDeathAnnouncementPoster($id)
+    public function destoryDeathPoster($id)
     {
-		Storage::delete('public/death-announcement-posters/' . $id);
+		Storage::delete('public/death-posters/' . $id);
 
-        return response("Death Announcement Poster deleted", 200);
+        return response("Death  Poster deleted", 200);
     }
 
 	/*
