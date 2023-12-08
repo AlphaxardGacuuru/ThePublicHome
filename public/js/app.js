@@ -103261,7 +103261,7 @@ var Death = function Death(props) {
     setHasLiked(props.death.hasLiked);
   }, [props.death]);
 
-  // Function for liking Death 
+  // Function for liking Death
   var onLike = function onLike(deathId) {
     setHasLiked(!hasLiked);
 
@@ -103315,8 +103315,12 @@ var Death = function Death(props) {
   }, props.death.userName))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
     className: "death-name px-2 mb-0"
   }, props.death.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "px-2 text-start"
-  }, props.death.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mb-0 px-2 text-start"
+  }, props.death.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "mb-0 px-2 text-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "bg-2 my-1 p-1 text-white"
+  }, props.death.tier)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2",
@@ -103538,9 +103542,13 @@ var Graduation = function Graduation(props) {
   }, props.graduation.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1 px-2 text-start"
   }, props.graduation.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "my-1 px-2 text-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "bg-2 my-1 p-1 text-white"
+  }, props.graduation.tier)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "death-name mb-1 px-2 text-start"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LocationSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null), " ", props.graduation.venue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "mb-1 px-2 text-start"
+    className: "mb-0 px-2 text-start"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CalenderSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null), " ", props.graduation.graduationDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103699,7 +103707,7 @@ var Footer = function Footer() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mt-5 p-5 ".concat(hide),
     style: {
-      backgroundColor: "#2A0134"
+      backgroundColor: "rgb(36, 37, 37)"
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
@@ -103907,24 +103915,20 @@ var TopNav = function TopNav(props) {
 
   // Function for showing active color
   var active = function active(check) {
-    return location.pathname.match(check) && "bg-primary rounded-pill py-2 px-5";
+    return location.pathname.match(check) && "active";
   };
   var activeStrict = function activeStrict(check) {
-    return location.pathname == check && "bg-primary rounded-pill py-2 px-5";
+    return location.pathname == check && "active";
   };
 
   // Function for showing active color
   var active2 = function active2(check) {
-    return {
-      color: location.pathname.match(check) ? "#0077B6" : "#232323"
-    };
+    return location.pathname == check ? "active" : "text-white";
   };
 
   // Function for showing active color
   var activeStrict2 = function activeStrict2(check) {
-    return {
-      color: location.pathname == check ? "#0077B6" : "#232323"
-    };
+    return location.pathname == check ? "active" : "text-white";
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "MyElement",
@@ -103958,7 +103962,7 @@ var TopNav = function TopNav(props) {
     to: "/",
     className: "text-white"
   }, "The Public Home"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex align-items-center justify-content-between"
+    className: "d-flex align-items-center justify-content-between hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -103975,7 +103979,7 @@ var TopNav = function TopNav(props) {
     onClick: function onClick() {
       return setMenu("");
     }
-  }, "Death Announcements")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Deaths")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/weddings",
@@ -103983,7 +103987,7 @@ var TopNav = function TopNav(props) {
     onClick: function onClick() {
       return setMenu("");
     }
-  }, "Wedding Announcement")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Weddings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/graduations",
@@ -103991,7 +103995,7 @@ var TopNav = function TopNav(props) {
     onClick: function onClick() {
       return setMenu("");
     }
-  }, "Graduation Announcement")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Graduations")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/success-cards",
@@ -103999,7 +104003,23 @@ var TopNav = function TopNav(props) {
     onClick: function onClick() {
       return setMenu("");
     }
-  }, "Success Announcement"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Success Cards")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/anniversaries",
+    className: "nav-link mx-4 text-white ".concat(active("/anniversaries")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Anniversaries")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/celebrations",
+    className: "nav-link mx-4 text-white ".concat(active("/celebrations")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Celebrations"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "menu-content-area d-flex align-items-center"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "header-social-area d-flex align-items-center"
@@ -104094,58 +104114,69 @@ var TopNav = function TopNav(props) {
       return setMenu("");
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CloseSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "logo-area"
+    className: "logo-area me-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/"
-  }, "Party People")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "The Public Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "sonarNav wow fadeInUp",
     "data-wow-delay": "1s"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item active"
+    className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/",
-    style: activeStrict2("/"),
-    className: "nav-link",
+    className: "nav-link ".concat(activeStrict2("/")),
     onClick: function onClick() {
       return setMenu("");
     }
   }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item active"
+    className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/deaths",
-    style: active2("/deaths"),
-    className: "nav-link",
+    className: "nav-link ".concat(active2("/deaths")),
     onClick: function onClick() {
       return setMenu("");
     }
-  }, "Death and Funeral Announcements")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item active"
+  }, "Deaths")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/weddings",
-    style: active2("/weddings"),
-    className: "nav-link",
+    className: "nav-link ".concat(active2("/weddings")),
     onClick: function onClick() {
       return setMenu("");
     }
-  }, "Wedding Announcements")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item active"
+  }, "Weddings")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/graduations",
-    style: active2("/graduation"),
-    className: "nav-link",
+    className: "nav-link ".concat(active2("/graduations")),
     onClick: function onClick() {
       return setMenu("");
     }
-  }, "Graduation Announcements")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item active"
+  }, "Graduations")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/success-cards",
-    style: active2("/success-card"),
-    className: "nav-link",
+    className: "nav-link ".concat(active2("/success-cards")),
     onClick: function onClick() {
       return setMenu("");
     }
-  }, "Success Card"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "Success Cards")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/anniversaries",
+    className: "nav-link ".concat(active2("/success-cards")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Anniversaries")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+    className: "nav-item"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+    to: "/celebrations",
+    className: "nav-link ".concat(active2("/success-cards")),
+    onClick: function onClick() {
+      return setMenu("");
+    }
+  }, "Celebrations"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: bottomMenu
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bottomMenu"
@@ -104382,7 +104413,11 @@ var Wedding = function Wedding(props) {
     className: "death-name px-2 mb-0"
   }, props.successCard.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1 px-2 text-start"
-  }, props.successCard.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, props.successCard.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "my-1 px-2 text-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "bg-2 my-1 p-1 text-white"
+  }, props.successCard.tier)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-2",
@@ -104604,9 +104639,13 @@ var Wedding = function Wedding(props) {
   }, props.wedding.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-1 px-2 text-start"
   }, props.wedding.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "my-1 px-2 text-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "bg-2 my-1 p-1 text-white"
+  }, props.wedding.tier)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "death-name mb-1 px-2 text-start"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_LocationSVG__WEBPACK_IMPORTED_MODULE_7__["default"], null), " ", props.wedding.venue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "mb-1 px-2 text-start"
+    className: "mb-0 px-2 text-start"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_CalenderSVG__WEBPACK_IMPORTED_MODULE_8__["default"], null), " ", props.wedding.weddingDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104967,7 +105006,7 @@ var DeathCreate = function DeathCreate(props) {
       props.setMessages([res.data.message]);
       // Remove loader for button
       setLoadingBtn(false);
-      // Redirect to Show Death 
+      // Redirect to Show Death
       setTimeout(function () {
         return router.push("/death/show/".concat(res.data.data.id));
       }, 500);
@@ -105038,13 +105077,31 @@ var DeathCreate = function DeathCreate(props) {
   }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     name: "name",
-    className: "form-control",
+    className: "form-control mb-2",
     placeholder: "Name",
     required: true,
     onChange: function onChange(e) {
       return setName(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    name: "name",
+    className: "form-control mb-2",
+    placeholder: "Sunrise",
+    required: true,
+    onChange: function onChange(e) {
+      return setName(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    name: "name",
+    className: "form-control mb-2",
+    placeholder: "Sunset",
+    required: true,
+    onChange: function onChange(e) {
+      return setName(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     type: "text",
     name: "description",
     className: "form-control",
@@ -105055,7 +105112,75 @@ var DeathCreate = function DeathCreate(props) {
     onChange: function onChange(e) {
       return setEulogy(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Related Images"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-lg-4"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-lg-4 col-sm-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-poster",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
+    imageCropAspectRatio: "16:9",
+    acceptedFileTypes: ["image/*"],
+    stylePanelAspectRatio: "16:9",
+    allowRevert: true,
+    server: {
+      url: "/api/filepond",
+      process: {
+        url: "/death-poster",
+        onload: function onload(res) {
+          return setPoster(res);
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
+        }
+      },
+      revert: {
+        url: "/death-poster/".concat(poster.substr(27)),
+        onload: function onload(res) {
+          props.setMessages([res]);
+          // Clear Poster
+          setPoster("");
+        }
+      }
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-lg-4"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Eulogy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-lg-4"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-lg-4 col-sm-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-poster",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
+    imageCropAspectRatio: "16:9",
+    acceptedFileTypes: ["image/*"],
+    stylePanelAspectRatio: "16:9",
+    allowRevert: true,
+    server: {
+      url: "/api/filepond",
+      process: {
+        url: "/death-poster",
+        onload: function onload(res) {
+          return setPoster(res);
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
+        }
+      },
+      revert: {
+        url: "/death-poster/".concat(poster.substr(27)),
+        onload: function onload(res) {
+          props.setMessages([res]);
+          // Clear Poster
+          setPoster("");
+        }
+      }
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
     btnText: "create death announcement",
     loading: loadingBtn,
     disabled: loadingBtn
@@ -105352,19 +105477,28 @@ var index = function index(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     locale = _useState4[0],
     setLocale = _useState4[1];
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
     _useState6 = _slicedToArray(_useState5, 2),
-    loader = _useState6[0],
-    setLoader = _useState6[1];
+    tier = _useState6[0],
+    setTier = _useState6[1];
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    _useState8 = _slicedToArray(_useState7, 2),
+    loader = _useState8[0],
+    setLoader = _useState8[1];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     props.get("deaths", props.setDeaths);
   }, []);
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
   };
-  var active = function active(current) {
+  var activeLocale = function activeLocale(current) {
     if (locale == current) {
-      return "bg-primary-subtle";
+      return "active";
+    }
+  };
+  var activeTier = function activeTier(current) {
+    if (tier == current) {
+      return "active";
     }
   };
   var dummyArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -105406,9 +105540,9 @@ var index = function index(props) {
       color: "inherit"
     }
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-center flex-wrap"
+    className: "d-flex justify-content-center flex-wrap mb-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "".concat(active(""), " rounded-pill mx-2 px-5 py-2"),
+    className: "".concat(activeLocale(""), " px-4 py-2"),
     style: {
       cursor: "pointer"
     },
@@ -105416,7 +105550,7 @@ var index = function index(props) {
       return setLocale("");
     }
   }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "".concat(active("home"), " rounded-pill mx-2 px-5 py-2"),
+    className: "".concat(activeLocale("home"), " px-4 py-2"),
     style: {
       cursor: "pointer"
     },
@@ -105424,15 +105558,49 @@ var index = function index(props) {
       return setLocale("home");
     }
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "".concat(active("international"), " rounded-pill mx-2 px-5 py-2"),
+    className: "".concat(activeLocale("international"), " px-4 py-2"),
     style: {
       cursor: "pointer"
     },
     onClick: function onClick() {
       return setLocale("international");
     }
-  }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex flex-wrap justify-content-center"
+  }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-center flex-wrap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(activeTier(""), " px-3 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setTier("");
+    }
+  }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(activeTier("standard"), " px-3 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setTier("standard");
+    }
+  }, "Standard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(activeTier("vip"), " px-3 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setTier("vip");
+    }
+  }, "VIP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(activeTier("executive"), " px-3 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setTier("executive");
+    }
+  }, "Executive")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex flex-wrap justify-content-center mb-2"
   }, dummyArray.filter(function () {
     return props.deaths.length < 1;
   }).map(function (item, key) {
@@ -105443,6 +105611,8 @@ var index = function index(props) {
     return death.name.toLowerCase().match(query);
   }).filter(function (death) {
     return locale ? death.locale == locale : true;
+  }).filter(function (death) {
+    return tier ? death.tier == tier : true;
   }).map(function (death, key) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Death_Death__WEBPACK_IMPORTED_MODULE_2__["default"], _extends({}, props, {
       key: key,
@@ -105450,7 +105620,43 @@ var index = function index(props) {
     }));
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-1"
-  }));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-sm-none"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "fixed-bottom bg text-white p-1 d-flex justify-content-center flex-wrap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(activeTier(""), " px-3 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setTier("");
+    }
+  }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(activeTier("standard"), " px-3 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setTier("standard");
+    }
+  }, "Standard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(activeTier("vip"), " px-3 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setTier("vip");
+    }
+  }, "VIP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "".concat(activeTier("executive"), " px-3 py-2"),
+    style: {
+      cursor: "pointer"
+    },
+    onClick: function onClick() {
+      return setTier("executive");
+    }
+  }, "Executive"))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (index);
 
@@ -108511,7 +108717,7 @@ var MenuSVG = function MenuSVG() {
     width: "1em",
     height: "1em",
     fill: "currentColor",
-    className: "mb-2 bi bi-list",
+    className: "bi bi-list",
     viewBox: "0 0 16 16"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
     fillRule: "evenodd",

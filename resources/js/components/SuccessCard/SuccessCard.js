@@ -75,6 +75,11 @@ const Wedding = (props) => {
 				{/* User info End */}
 				<h3 className="death-name px-2 mb-0">{props.successCard.title}</h3>
 				<p className="mb-1 px-2 text-start">{props.successCard.announcement}</p>
+				<p className="my-1 px-2 text-start">
+					<span className="bg-2 my-1 p-1 text-white">
+						{props.successCard.tier}
+					</span>
+				</p>
 				<div className="d-flex justify-content-between">
 					{/* Wedding  likes */}
 					<div

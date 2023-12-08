@@ -75,10 +75,13 @@ const Graduation = (props) => {
 				{/* User info End */}
 				<h3 className="death-name px-2 mb-0">{props.graduation.title}</h3>
 				<p className="mb-1 px-2 text-start">{props.graduation.announcement}</p>
+				<p className="my-1 px-2 text-start">
+					<span className="bg-2 my-1 p-1 text-white">{props.graduation.tier}</span>
+				</p>
 				<p className="death-name mb-1 px-2 text-start">
 					<LocationSVG /> {props.graduation.venue}
 				</p>
-				<p className="mb-1 px-2 text-start">
+				<p className="mb-0 px-2 text-start">
 					<CalenderSVG /> {props.graduation.graduationDate}
 				</p>
 				<div className="d-flex justify-content-between">

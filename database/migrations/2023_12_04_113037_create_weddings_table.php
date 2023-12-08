@@ -21,6 +21,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('title');
             $table->string('poster');
+            $table->string('photos');
             $table->string('announcement');
             $table->string('venue')->nullable();
             $table->timestamp('wedding_date')->nullable();

@@ -9,6 +9,7 @@ import PlusSVG from "@/svgs/PlusSVG"
 const index = (props) => {
 	const [query, setQuery] = useState("")
 	const [locale, setLocale] = useState("")
+	const [tier, setTier] = useState("")
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
@@ -19,9 +20,15 @@ const index = (props) => {
 		e.preventDefault()
 	}
 
-	const active = (current) => {
+	const activeLocale = (current) => {
 		if (locale == current) {
-			return "bg-primary-subtle"
+			return "active"
+		}
+	}
+
+	const activeTier = (current) => {
+		if (tier == current) {
+			return "active"
 		}
 	}
 
@@ -38,7 +45,7 @@ const index = (props) => {
 						props.auth?.membershipTypes?.includes("death")
 							? "/deaths/create"
 							: "/deaths/create"
-							// : "/profile/membership"
+						// : "/profile/membership"
 					}
 					id="chatFloatBtn">
 					<PlusSVG />
@@ -75,33 +82,60 @@ const index = (props) => {
 						</div>
 					</form>
 
-					<div className="d-flex justify-content-center flex-wrap">
+					{/* Locales */}
+					<div className="d-flex justify-content-center flex-wrap mb-2">
 						<div
-							className={`${active("")} rounded-pill mx-2 px-5 py-2`}
+							className={`${activeLocale("")} px-4 py-2`}
 							style={{ cursor: "pointer" }}
 							onClick={() => setLocale("")}>
 							All
 						</div>
 						<div
-							className={`${active("home")} rounded-pill mx-2 px-5 py-2`}
+							className={`${activeLocale("home")} px-4 py-2`}
 							style={{ cursor: "pointer" }}
 							onClick={() => setLocale("home")}>
 							Home
 						</div>
 						<div
-							className={`${active(
-								"international"
-							)} rounded-pill mx-2 px-5 py-2`}
+							className={`${activeLocale("international")} px-4 py-2`}
 							style={{ cursor: "pointer" }}
 							onClick={() => setLocale("international")}>
 							International
 						</div>
 					</div>
+					{/* Locales End */}
 
-					<br />
+					{/* Tiers */}
+					<div className="d-flex justify-content-center flex-wrap">
+						<div
+							className={`${activeTier("")} px-3 py-2`}
+							style={{ cursor: "pointer" }}
+							onClick={() => setTier("")}>
+							All
+						</div>
+						<div
+							className={`${activeTier("standard")} px-3 py-2`}
+							style={{ cursor: "pointer" }}
+							onClick={() => setTier("standard")}>
+							Standard
+						</div>
+						<div
+							className={`${activeTier("vip")} px-3 py-2`}
+							style={{ cursor: "pointer" }}
+							onClick={() => setTier("vip")}>
+							VIP
+						</div>
+						<div
+							className={`${activeTier("executive")} px-3 py-2`}
+							style={{ cursor: "pointer" }}
+							onClick={() => setTier("executive")}>
+							Executive
+						</div>
+					</div>
+					{/* Tiers End */}
 
 					{/* Death Announcements */}
-					<div className="d-flex flex-wrap justify-content-center">
+					<div className="d-flex flex-wrap justify-content-center mb-2">
 						{/* Loading Death Announcement items */}
 						{dummyArray
 							.filter(() => props.deaths.length < 1)
@@ -113,6 +147,7 @@ const index = (props) => {
 						{props.deaths
 							.filter((death) => death.name.toLowerCase().match(query))
 							.filter((death) => (locale ? death.locale == locale : true))
+							.filter((death) => (tier ? death.tier == tier : true))
 							.map((death, key) => (
 								<Death
 									{...props}
@@ -125,6 +160,36 @@ const index = (props) => {
 				</center>
 			</div>
 			<div className="col-sm-1"></div>
+			{/* Bottom Filter */}
+			<div className="d-sm-none">
+				<div className="fixed-bottom bg text-white p-1 d-flex justify-content-center flex-wrap">
+					<div
+						className={`${activeTier("")} px-3 py-2`}
+						style={{ cursor: "pointer" }}
+						onClick={() => setTier("")}>
+						All
+					</div>
+					<div
+						className={`${activeTier("standard")} px-3 py-2`}
+						style={{ cursor: "pointer" }}
+						onClick={() => setTier("standard")}>
+						Standard
+					</div>
+					<div
+						className={`${activeTier("vip")} px-3 py-2`}
+						style={{ cursor: "pointer" }}
+						onClick={() => setTier("vip")}>
+						VIP
+					</div>
+					<div
+						className={`${activeTier("executive")} px-3 py-2`}
+						style={{ cursor: "pointer" }}
+						onClick={() => setTier("executive")}>
+						Executive
+					</div>
+				</div>
+			</div>
+			{/* Bottom Filter End */}
 		</div>
 	)
 }

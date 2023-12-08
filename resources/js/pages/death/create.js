@@ -64,11 +64,8 @@ const DeathCreate = (props) => {
 				props.setMessages([res.data.message])
 				// Remove loader for button
 				setLoadingBtn(false)
-				// Redirect to Show Death 
-				setTimeout(
-					() => router.push(`/death/show/${res.data.data.id}`),
-					500
-				)
+				// Redirect to Show Death
+				setTimeout(() => router.push(`/death/show/${res.data.data.id}`), 500)
 			})
 			.catch((err) => {
 				// Remove loader for button
@@ -140,12 +137,29 @@ const DeathCreate = (props) => {
 						<input
 							type="text"
 							name="name"
-							className="form-control"
+							className="form-control mb-2"
 							placeholder="Name"
 							required={true}
 							onChange={(e) => setName(e.target.value)}
 						/>
-						<br />
+
+						<input
+							type="text"
+							name="name"
+							className="form-control mb-2"
+							placeholder="Sunrise"
+							required={true}
+							onChange={(e) => setName(e.target.value)}
+						/>
+
+						<input
+							type="text"
+							name="name"
+							className="form-control mb-2"
+							placeholder="Sunset"
+							required={true}
+							onChange={(e) => setName(e.target.value)}
+						/>
 
 						<textarea
 							type="text"
@@ -159,6 +173,74 @@ const DeathCreate = (props) => {
 						/>
 						<br />
 
+						{/* Death  Poster */}
+						<label>Upload Related Images</label>
+						<br />
+
+						<div className="row">
+							<div className="col-lg-4"></div>
+							<div className="col-lg-4 col-sm-12">
+								<FilePond
+									name="filepond-poster"
+									labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+									imageCropAspectRatio="16:9"
+									acceptedFileTypes={["image/*"]}
+									stylePanelAspectRatio="16:9"
+									allowRevert={true}
+									server={{
+										url: `/api/filepond`,
+										process: {
+											url: "/death-poster",
+											onload: (res) => setPoster(res),
+											onerror: (err) => console.log(err.response.data),
+										},
+										revert: {
+											url: `/death-poster/${poster.substr(27)}`,
+											onload: (res) => {
+												props.setMessages([res])
+												// Clear Poster
+												setPoster("")
+											},
+										},
+									}}
+								/>
+							</div>
+							<div className="col-lg-4"></div>
+						</div>
+
+						{/* Death  Poster */}
+						<label>Upload Eulogy</label>
+						<br />
+						<div className="row">
+							<div className="col-lg-4"></div>
+							<div className="col-lg-4 col-sm-12">
+								<FilePond
+									name="filepond-poster"
+									labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+									imageCropAspectRatio="16:9"
+									acceptedFileTypes={["image/*"]}
+									stylePanelAspectRatio="16:9"
+									allowRevert={true}
+									server={{
+										url: `/api/filepond`,
+										process: {
+											url: "/death-poster",
+											onload: (res) => setPoster(res),
+											onerror: (err) => console.log(err.response.data),
+										},
+										revert: {
+											url: `/death-poster/${poster.substr(27)}`,
+											onload: (res) => {
+												props.setMessages([res])
+												// Clear Poster
+												setPoster("")
+											},
+										},
+									}}
+								/>
+							</div>
+						</div>
+						
 						<Btn
 							btnText="create death announcement"
 							loading={loadingBtn}

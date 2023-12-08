@@ -75,10 +75,13 @@ const Wedding = (props) => {
 				{/* User info End */}
 				<h3 className="death-name px-2 mb-0">{props.wedding.title}</h3>
 				<p className="mb-1 px-2 text-start">{props.wedding.announcement}</p>
+				<p className="my-1 px-2 text-start">
+					<span className="bg-2 my-1 p-1 text-white">{props.wedding.tier}</span>
+				</p>
 				<p className="death-name mb-1 px-2 text-start">
 					<LocationSVG /> {props.wedding.venue}
 				</p>
-				<p className="mb-1 px-2 text-start">
+				<p className="mb-0 px-2 text-start">
 					<CalenderSVG /> {props.wedding.weddingDate}
 				</p>
 				<div className="d-flex justify-content-between">

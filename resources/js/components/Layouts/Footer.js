@@ -26,7 +26,7 @@ const Footer = () => {
 	return (
 		<div
 			className={`mt-5 p-5 ${hide}`}
-			style={{ backgroundColor: "#2A0134" }}>
+			style={{ backgroundColor: "rgb(36, 37, 37)" }}>
 			<div className="row">
 				<div className="col-sm-1"></div>
 				<div className="col-sm-3 mb-5">

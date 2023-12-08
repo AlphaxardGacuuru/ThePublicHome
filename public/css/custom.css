@@ -39,16 +39,20 @@ p {
 	-webkit-transition-duration: 500ms;
 	transition-duration: 500ms;
 	background-color: transparent;
-	padding: 0px 20px;
-	background-color: #2A0134;
-	border-bottom-left-radius: 30px;
-	border-bottom-right-radius: 30px;
+	padding: 0px 0px 0px 20px;
+	background-color: rgb(36, 37, 37);
 }
 
 .header-area .logo-area a {
 	color: #232323;
 	font-size: 28px;
 	font-weight: 100;
+}
+
+.header-area .active {
+	color: rgb(186, 173, 123);
+	border-top: 2px solid rgb(186, 173, 123);
+	padding: 10px 5px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -117,11 +121,11 @@ p {
 
 .mainMenu {
 	position: fixed;
-	width: 480px;
+	width: 400px;
 	height: 100%;
 	top: 0;
-	right: -500px;
-	background-color: #FFFFFF;
+	right: -400px;
+	background-color: rgb(36, 37, 37);
 	z-index: 99999;
 	text-align: center;
 	-webkit-box-orient: vertical;
@@ -139,7 +143,7 @@ p {
 	right: 50px;
 	top: 50px;
 	z-index: 9;
-	color: #232323;
+	color: #FFF;
 	font-size: 20px;
 	cursor: pointer;
 	-webkit-transition-duration: 750ms;
@@ -157,6 +161,7 @@ p {
 
 @media only screen and (max-width: 767px) {
 	.mainMenu .closeIcon {
+		color: #FFF;
 		right: 30px;
 		top: 20px;
 		font-size: 15px;
@@ -164,7 +169,7 @@ p {
 }
 
 .mainMenu .logo-area a {
-	color: #232323;
+	color: #FFF;
 	font-size: 30px;
 	display: block;
 	font-weight: 100;
@@ -178,7 +183,7 @@ p {
 
 .mainMenu p {
 	margin-bottom: 0;
-	color: #232323;
+	color: #FFF;
 }
 
 @media only screen and (max-width: 767px) {
@@ -189,31 +194,32 @@ p {
 
 .mainMenu a {
 	font-weight: 300;
-	color: #232323;
+	/* color: #FFF; */
 }
 
 .mainMenu .nav-link {
-	color: #232323;
-	font-size: 18px;
+	/* color: #FFF; */
+	font-size: 15px;
 	position: relative;
 	z-index: 1;
 	font-weight: 300;
-	padding: 12px 15px;
+	padding: 10px 15px;
 }
 
 @media only screen and (max-width: 767px) {
 	.mainMenu .nav-link {
 		font-size: 14px;
-		padding: 10px;
+		margin: 10px;
+		padding: 5px;
 	}
 }
 
-.mainMenu .nav-link::after {
+/* .mainMenu .nav-link::after {
 	content: "";
-	bottom: 0;
+	top: 0;
 	width: 30px;
 	height: 1px;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgb(186, 173, 123);
 	left: 50%;
 	-webkit-transform: translateX(-50%);
 	transform: translateX(-50%);
@@ -226,8 +232,8 @@ p {
 .mainMenu .nav-link:hover::after,
 .mainMenu .nav-link:focus::after {
 	width: 70px;
-	background-color: white;
-}
+	background-color: rgb(186, 173, 123);
+} */
 
 .nav-link span {
 	float: left;
@@ -420,7 +426,7 @@ p {
 	background-color: #FFFFFF;
 	border-radius: 50%;
 	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-	color: #232323;
+	color: rgb(36, 37, 37);
 	font-size: 30px;
 	height: 70px;
 	text-align: center;
@@ -462,7 +468,7 @@ p {
 	outline: none;
 	cursor: pointer;
 	color: white;
-	background-color: #2A0134;
+	background-color: rgb(36, 37, 37);
 	border-radius: 50%;
 	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
 	font-size: 30px;
@@ -478,7 +484,7 @@ p {
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 	#chatFloatBtn {
-		bottom: 20px;
+		bottom: 60px;
 		right: 20px;
 		height: 50px;
 		width: 50px;
@@ -488,7 +494,7 @@ p {
 
 @media only screen and (max-width: 767px) {
 	#chatFloatBtn {
-		bottom: 20px;
+		bottom: 60px;
 		right: 20px;
 		height: 50px;
 		width: 50px;
@@ -998,19 +1004,20 @@ div.hidden-scroll span {
 	height: auto;
 	-webkit-transition-duration: 500ms;
 	transition-duration: 500ms;
-	background-color: #FFFFFF;
+	background-color: rgb(36, 37, 37);
 	padding: 0px 0px;
 	/* display: none; */
 }
 
 .bottomNav .logo-area a {
-	color: #232323;
+	color: #FFF;
 	font-size: 36px;
 	font-weight: 100;
 }
 
 @media only screen and (max-width: 767px) {
 	.bottomNav .logo-area a {
+		color: #FFF;
 		font-size: 24px;
 		/* display: block; */
 	}
@@ -1023,14 +1030,14 @@ div.hidden-scroll span {
 .bottomNav .menu-content-area .header-social-area a {
 	font-size: 18px;
 	padding: 0 0px;
-	color: #232323;
+	color: #FFF;
 }
 
 @media only screen and (max-width: 767px) {
 	.bottomNav .menu-content-area .header-social-area a {
 		padding: 0 0px;
 		font-size: 14px;
-		/* display: block; */
+		color: #FFF;
 	}
 }
 
@@ -1121,7 +1128,7 @@ div.hidden-scroll span {
 
 /* the draggable scrolling handle */
 ::-webkit-scrollbar-thumb {
-	background: #0077B6;
+	background: rgb(36, 37, 37);
 	border-radius: 0px;
 	border: none;
 }
@@ -1129,12 +1136,12 @@ div.hidden-scroll span {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 	background: #FFFFFF;
-	border: 1px solid #232323;
+	border: 1px solid white;
 }
 
 /*the track (progress bar) NOT covered by the handle*/
 ::-webkit-scrollbar-track-piece {
-	border: 1px solid black;
+	border: 1px solid white;
 }
 
 /*Horizontal Scroll buttons*/
@@ -1434,12 +1441,17 @@ div.hidden-scroll span {
 }
 
 .bottomMenu .nav-link {
-	color: #232323;
+	color: #FFF;
 	font-size: 18px;
 	position: relative;
 	z-index: 1;
 	font-weight: 300;
 	padding: 12px 15px;
+}
+
+
+.bottomMenu .nav-link a {
+	color: #FFF;
 }
 
 @media only screen and (max-width: 767px) {
@@ -1844,3 +1856,21 @@ div.hidden-scroll span {
 }
 
 /* Card End */
+
+.bg {
+	background-color: rgb(36, 37, 37);
+}
+
+.bg-2 {
+	background-color: rgb(186, 173, 123);
+}
+
+.text {
+	color: rgb(186, 173, 123);
+}
+
+.active {
+	color: rgb(186, 173, 123);
+	border-top: 2px solid rgb(186, 173, 123);
+	padding: 10px 5px;
+}

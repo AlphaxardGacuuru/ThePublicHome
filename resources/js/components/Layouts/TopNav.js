@@ -47,29 +47,20 @@ const TopNav = (props) => {
 
 	// Function for showing active color
 	const active = (check) => {
-		return (
-			location.pathname.match(check) &&
-			"bg-primary rounded-pill py-2 px-5"
-		)
+		return location.pathname.match(check) && "active"
 	}
 	const activeStrict = (check) => {
-		return (
-			location.pathname == check && "bg-primary rounded-pill py-2 px-5"
-		)
+		return location.pathname == check && "active"
 	}
 
 	// Function for showing active color
 	const active2 = (check) => {
-		return {
-			color: location.pathname.match(check) ? "#0077B6" : "#232323",
-		}
+		return location.pathname == check ? "active" : "text-white"
 	}
 
 	// Function for showing active color
 	const activeStrict2 = (check) => {
-		return {
-			color: location.pathname == check ? "#0077B6" : "#232323",
-		}
+		return location.pathname == check ? "active" : "text-white"
 	}
 
 	return (
@@ -114,7 +105,7 @@ const TopNav = (props) => {
 									</div>
 
 									{/* Nav Links */}
-									<div className="d-flex align-items-center justify-content-between">
+									<div className="d-flex align-items-center justify-content-between hidden">
 										<div className="hidden">
 											<Link
 												to="/"
@@ -132,7 +123,7 @@ const TopNav = (props) => {
 													"/deaths"
 												)}`}
 												onClick={() => setMenu("")}>
-												Death Announcements
+												Deaths
 											</Link>
 										</div>
 										<div className="hidden">
@@ -142,7 +133,7 @@ const TopNav = (props) => {
 													"/weddings"
 												)}`}
 												onClick={() => setMenu("")}>
-												Wedding Announcement
+												Weddings
 											</Link>
 										</div>
 										<div className="hidden">
@@ -152,7 +143,7 @@ const TopNav = (props) => {
 													"/graduations"
 												)}`}
 												onClick={() => setMenu("")}>
-												Graduation Announcement
+												Graduations
 											</Link>
 										</div>
 										<div className="hidden">
@@ -162,7 +153,27 @@ const TopNav = (props) => {
 													"/success-cards"
 												)}`}
 												onClick={() => setMenu("")}>
-												Success Announcement
+												Success Cards
+											</Link>
+										</div>
+										<div className="hidden">
+											<Link
+												to="/anniversaries"
+												className={`nav-link mx-4 text-white ${active(
+													"/anniversaries"
+												)}`}
+												onClick={() => setMenu("")}>
+												Anniversaries
+											</Link>
+										</div>
+										<div className="hidden">
+											<Link
+												to="/celebrations"
+												className={`nav-link mx-4 text-white ${active(
+													"/celebrations"
+												)}`}
+												onClick={() => setMenu("")}>
+												Celebrations
 											</Link>
 										</div>
 									</div>
@@ -309,8 +320,8 @@ const TopNav = (props) => {
 						<CloseSVG />
 					</div>
 					{/* <!-- Logo Area --> */}
-					<div className="logo-area">
-						<Link to="/">Party People</Link>
+					<div className="logo-area me-5">
+						<Link to="/">The Public Home</Link>
 					</div>
 					{/* <!-- Nav --> */}
 					<div
@@ -318,49 +329,60 @@ const TopNav = (props) => {
 						data-wow-delay="1s">
 						<nav>
 							<ul>
-								<li className="nav-item active">
+								<li className="nav-item">
 									<Link
 										to="/"
-										style={activeStrict2("/")}
-										className="nav-link"
+										className={`nav-link ${activeStrict2("/")}`}
 										onClick={() => setMenu("")}>
 										Home
 									</Link>
 								</li>
-								<li className="nav-item active">
+								<li className="nav-item">
 									<Link
 										to="/deaths"
-										style={active2("/deaths")}
-										className="nav-link"
+										className={`nav-link ${active2("/deaths")}`}
 										onClick={() => setMenu("")}>
-										Death and Funeral Announcements
+										Deaths
 									</Link>
 								</li>
-								<li className="nav-item active">
+								<li className="nav-item">
 									<Link
 										to="/weddings"
-										style={active2("/weddings")}
-										className="nav-link"
+										className={`nav-link ${active2("/weddings")}`}
 										onClick={() => setMenu("")}>
-										Wedding Announcements
+										Weddings
 									</Link>
 								</li>
-								<li className="nav-item active">
+								<li className="nav-item">
 									<Link
 										to="/graduations"
-										style={active2("/graduation")}
-										className="nav-link"
+										className={`nav-link ${active2("/graduations")}`}
 										onClick={() => setMenu("")}>
-										Graduation Announcements
+										Graduations
 									</Link>
 								</li>
-								<li className="nav-item active">
+								<li className="nav-item">
 									<Link
 										to="/success-cards"
-										style={active2("/success-card")}
-										className="nav-link"
+										className={`nav-link ${active2("/success-cards")}`}
 										onClick={() => setMenu("")}>
-										Success Card
+										Success Cards
+									</Link>
+								</li>
+								<li className="nav-item">
+									<Link
+										to="/anniversaries"
+										className={`nav-link ${active2("/success-cards")}`}
+										onClick={() => setMenu("")}>
+										Anniversaries
+									</Link>
+								</li>
+								<li className="nav-item">
+									<Link
+										to="/celebrations"
+										className={`nav-link ${active2("/success-cards")}`}
+										onClick={() => setMenu("")}>
+										Celebrations
 									</Link>
 								</li>
 							</ul>
