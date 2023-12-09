@@ -13,19 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('death_likes', function (Blueprint $table) {
+        Schema::create('celebration_likes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('death_id')
+            $table->foreignId('celebration_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->timestamps();
-
-			$table->unique(['user_id', 'death_id']);
         });
     }
 
@@ -36,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('death_likes');
+        Schema::dropIfExists('celebration_likes');
     }
 };

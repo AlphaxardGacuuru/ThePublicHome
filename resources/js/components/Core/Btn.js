@@ -16,7 +16,7 @@ const Btn = ({ btnStyle, btnClass, btnText, onClick, loading, disabled }) => (
 )
 
 Btn.defaultProps = {
-	btnClass: "btn-primary rounded-pill text-white",
+	btnClass: "text-white rounded-0",
 	loading: false,
 	disabled: false,
 }

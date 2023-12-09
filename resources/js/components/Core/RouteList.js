@@ -25,6 +25,16 @@ import SuccessCardCreate from "@/pages/success-card/create"
 import SuccessCardShow from "@/pages/success-card/[id]"
 import SuccessCardEdit from "@/pages/success-card/edit/[id]"
 
+import AnniversaryIndex from "@/pages/anniversary"
+import AnniversaryCreate from "@/pages/anniversary/create"
+import AnniversaryShow from "@/pages/anniversary/[id]"
+import AnniversaryEdit from "@/pages/anniversary/edit/[id]"
+
+import CelebrationIndex from "@/pages/celebration"
+import CelebrationCreate from "@/pages/celebration/create"
+import CelebrationShow from "@/pages/celebration/[id]"
+import CelebrationEdit from "@/pages/celebration/edit/[id]"
+
 import ProfileShow from "@/pages/profile/[id]"
 import ProfileEdit from "@/pages/profile/edit/[id]"
 import Membership from "@/pages/profile/membership"
@@ -104,6 +114,38 @@ const RouteList = (GLOBAL_STATE) => {
 		{
 			path: "/success-cards/edit/:id",
 			component: <SuccessCardEdit {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/anniversaries",
+			component: <AnniversaryIndex {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/anniversaries/create",
+			component: <AnniversaryCreate {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/anniversaries/show/:id",
+			component: <AnniversaryShow {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/anniversaries/edit/:id",
+			component: <AnniversaryEdit {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/celebrations",
+			component: <CelebrationIndex {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/celebrations/create",
+			component: <CelebrationCreate {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/celebrations/show/:id",
+			component: <CelebrationShow {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/celebrations/edit/:id",
+			component: <CelebrationEdit {...GLOBAL_STATE} />,
 		},
 	]
 

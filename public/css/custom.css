@@ -38,7 +38,6 @@ p {
 	height: auto;
 	-webkit-transition-duration: 500ms;
 	transition-duration: 500ms;
-	background-color: transparent;
 	padding: 0px 0px 0px 20px;
 	background-color: rgb(36, 37, 37);
 }
@@ -47,12 +46,6 @@ p {
 	color: #232323;
 	font-size: 28px;
 	font-weight: 100;
-}
-
-.header-area .active {
-	color: rgb(186, 173, 123);
-	border-top: 2px solid rgb(186, 173, 123);
-	padding: 10px 5px;
 }
 
 @media only screen and (max-width: 767px) {
@@ -1873,4 +1866,10 @@ div.hidden-scroll span {
 	color: rgb(186, 173, 123);
 	border-top: 2px solid rgb(186, 173, 123);
 	padding: 10px 5px;
+}
+
+.btn {
+	border: 2px solid rgb(186, 173, 123);
+	background-color: rgb(186, 173, 123);
+	color: #FFF;
 }

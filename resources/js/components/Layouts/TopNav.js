@@ -47,10 +47,10 @@ const TopNav = (props) => {
 
 	// Function for showing active color
 	const active = (check) => {
-		return location.pathname.match(check) && "active"
+		return location.pathname.match(check) ? "active" : "text-white"
 	}
 	const activeStrict = (check) => {
-		return location.pathname == check && "active"
+		return location.pathname == check ? "active" : "text-white"
 	}
 
 	// Function for showing active color
@@ -98,7 +98,7 @@ const TopNav = (props) => {
 										<div className="logo-area">
 											<Link
 												to="/"
-												className="text-white">
+												className="text-white fw-lighter">
 												The Public Home
 											</Link>
 										</div>
@@ -109,7 +109,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/"
-												className={`nav-link mx-4 text-white ${activeStrict(
+												className={`nav-link mx-4 ${activeStrict(
 													"/"
 												)}`}
 												onClick={() => setMenu("")}>
@@ -119,7 +119,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/deaths"
-												className={`nav-link mx-4 text-white ${active(
+												className={`nav-link mx-4 ${active(
 													"/deaths"
 												)}`}
 												onClick={() => setMenu("")}>
@@ -129,7 +129,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/weddings"
-												className={`nav-link mx-4 text-white ${active(
+												className={`nav-link mx-4 ${active(
 													"/weddings"
 												)}`}
 												onClick={() => setMenu("")}>
@@ -139,7 +139,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/graduations"
-												className={`nav-link mx-4 text-white ${active(
+												className={`nav-link mx-4 ${active(
 													"/graduations"
 												)}`}
 												onClick={() => setMenu("")}>
@@ -149,7 +149,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/success-cards"
-												className={`nav-link mx-4 text-white ${active(
+												className={`nav-link mx-4 ${active(
 													"/success-cards"
 												)}`}
 												onClick={() => setMenu("")}>
@@ -159,7 +159,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/anniversaries"
-												className={`nav-link mx-4 text-white ${active(
+												className={`nav-link mx-4 ${active(
 													"/anniversaries"
 												)}`}
 												onClick={() => setMenu("")}>
@@ -169,7 +169,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/celebrations"
-												className={`nav-link mx-4 text-white ${active(
+												className={`nav-link mx-4 ${active(
 													"/celebrations"
 												)}`}
 												onClick={() => setMenu("")}>

@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('success_card_comment_likes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_id")
+            $table->foreignId('user_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId("success_card_comment_id")
+            $table->foreignId('success_card_comment_id')
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
