@@ -21,7 +21,6 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('title');
             $table->string('poster');
-            $table->string('photos');
             $table->string('announcement');
 			$table->integer('likes')->default(0);
             $table->timestamps();

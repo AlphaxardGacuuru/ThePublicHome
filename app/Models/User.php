@@ -89,11 +89,11 @@ class User extends Authenticatable
     /*
      * Custom functions
      */
-    public function membershipTypes()
+    public function membership()
     {
         return $this->userMemberships
             ->map(fn($userMembership) => $userMembership
-                    ->membership
-                    ->type);
-        }
+                    ->membership)
+                ->first();
     }
+}

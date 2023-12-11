@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('memberships', function (Blueprint $table) {
             $table->id();
-			$table->string('name');
-			$table->string('price');
-			$table->string('type');
+            $table->string('name');
+            $table->string('tier');
+            $table->jsonb('features');
+			$table->decimal('price', 10, 2)->nullable();
             $table->timestamps();
         });
     }

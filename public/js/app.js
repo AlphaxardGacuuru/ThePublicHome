@@ -102503,11 +102503,11 @@ var LoginPopUp = function LoginPopUp(props) {
     autoFocus: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
-    btnClass: "mt-2 btn-primary rounded-pill w-75",
+    btnClass: "mt-2 w-75",
     btnText: "Login",
     loading: loading
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: "mt-1 btn-primary rounded-pill w-50",
+    btnClass: "mt-1 w-50",
     btnText: "back",
     onClick: function onClick() {
       return setPhoneLogin(false);
@@ -102518,7 +102518,7 @@ var LoginPopUp = function LoginPopUp(props) {
       return onSocial("google");
     }
   }), !location.pathname.match("/http/") && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    btnClass: "mt-1 btn-primary rounded-pill w-75",
+    btnClass: "mt-1 w-75",
     btnText: "login with email",
     onClick: function onClick() {
       return setPhoneLogin(true);
@@ -102610,7 +102610,7 @@ var Btn = function Btn(_ref) {
     disabled = _ref.disabled;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     style: btnStyle,
-    className: "btn text-uppercase ".concat(btnClass),
+    className: "btn text-uppercase rounded-0 ".concat(btnClass),
     onClick: onClick,
     disabled: disabled
   }, btnText, loading && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102621,7 +102621,7 @@ var Btn = function Btn(_ref) {
   }));
 };
 Btn.defaultProps = {
-  btnClass: "text-white rounded-0",
+  btnClass: "",
   loading: false,
   disabled: false
 };
@@ -102886,7 +102886,7 @@ var MyLink = function MyLink(_ref) {
     linkTo = _ref.linkTo;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: linkTo,
-    className: "btn btn-outline-primary rounded-0 text-uppercase"
+    className: "btn rounded-0 text-uppercase"
   }, text);
 };
 MyLink.defaultProps = {
@@ -103226,7 +103226,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
     },
     required: props.required
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "pt-2 px-2"
+    className: "pt-2 px-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "fs-5",
     style: {
@@ -103239,7 +103239,7 @@ var SocialMediaInput = function SocialMediaInput(props) {
     className: "p-1"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: "submit",
-    btnClass: "btn-outline-dark rounded-pill",
+    btnClass: "btn-sm btn-outline-dark rounded-0",
     btnText: props.btnText,
     loading: loading
   }))), showEmojiPicker && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(emoji_picker_react__WEBPACK_IMPORTED_MODULE_2___default.a, {
@@ -103359,7 +103359,7 @@ var Death = function Death(props) {
   }, props.death.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-0 px-2 text-start"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "bg-2 my-1 p-1 text-white"
+    className: "bg-2 my-1 p-1 text-white text-uppercase fs-6"
   }, props.death.tier)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103857,19 +103857,19 @@ var ProfileNav = function ProfileNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
     className: "m-0 p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item ".concat(active("/profile/show") || active("/profile/edit"))
+    className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/profile/show/".concat(props.auth.id),
-    className: "nav-link"
+    className: "nav-link ".concat(active("/profile/show") || active("/profile/edit"))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "nav-link-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PersonSVG__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "nav-link-text"
   }, "Profile"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-    className: "nav-item ".concat(active("/profile/membership"))
+    className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/profile/membership",
-    className: "nav-link"
+    className: "nav-link ".concat(active("/profile/membership"))
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "nav-link-icon"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_MembershipSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -104122,11 +104122,6 @@ var TopNav = function TopNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "me-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DownloadSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null)), "Get App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/",
-    className: "p-2 px-3 dropdown-item"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "me-2"
-  }), "Change Language")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "#",
     className: "p-2 px-3 dropdown-item",
     onClick: function onClick(e) {
@@ -104265,15 +104260,6 @@ var TopNav = function TopNav(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "ms-3 me-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_DownloadSVG__WEBPACK_IMPORTED_MODULE_5__["default"], null)), "Get App")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: "/",
-    className: "p-3 text-start",
-    onClick: function onClick() {
-      return setBottomMenu("");
-    },
-    title: "Privacy Policy"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h6", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "ms-3 me-4"
-  }), "Change Language")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/privacy",
     className: "p-3 text-start",
     onClick: function onClick() {
@@ -105449,7 +105435,7 @@ var DeathEdit = function DeathEdit(props) {
     loading: loadingBtn,
     disabled: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-outline-danger rounded-pill text-uppercase",
+    className: "btn btn-outline-danger text-uppercase",
     type: "button",
     "data-bs-toggle": "collapse",
     "data-bs-target": "#collapseExample",
@@ -105461,7 +105447,7 @@ var DeathEdit = function DeathEdit(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you sure you want to delete the death announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "This process is irreversible"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    btnClass: "btn-danger rounded-pill text-white",
+    btnClass: "btn-danger text-white",
     btnText: "delete death announcement",
     loading: loadingBtn2,
     disabled: loadingBtn2,
@@ -106399,7 +106385,7 @@ var DeathEdit = function DeathEdit(props) {
     loading: loadingBtn,
     disabled: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-outline-danger rounded-pill text-uppercase",
+    className: "btn btn-outline-danger text-uppercase",
     type: "button",
     "data-bs-toggle": "collapse",
     "data-bs-target": "#collapseExample",
@@ -106411,7 +106397,7 @@ var DeathEdit = function DeathEdit(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you sure you want to delete the death announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "This process is irreversible"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    btnClass: "btn-danger rounded-pill text-white",
+    btnClass: "btn-danger text-white",
     btnText: "delete death announcement",
     loading: loadingBtn2,
     disabled: loadingBtn2,
@@ -106870,6 +106856,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
 /* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -106916,39 +106906,84 @@ var DeathCreate = function DeathCreate(props) {
     _useState6 = _slicedToArray(_useState5, 2),
     poster = _useState6[0],
     setPoster = _useState6[1];
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
     _useState8 = _slicedToArray(_useState7, 2),
-    eulogy = _useState8[0],
-    setEulogy = _useState8[1];
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    sunrise = _useState8[0],
+    setSunrise = _useState8[1];
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
     _useState10 = _slicedToArray(_useState9, 2),
-    loadingBtn = _useState10[0],
-    setLoadingBtn = _useState10[1];
+    sunset = _useState10[0],
+    setSunset = _useState10[1];
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState12 = _slicedToArray(_useState11, 2),
+    burialDate = _useState12[0],
+    setBurialDate = _useState12[1];
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState14 = _slicedToArray(_useState13, 2),
+    announcement = _useState14[0],
+    setAnnouncement = _useState14[1];
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState16 = _slicedToArray(_useState15, 2),
+    images = _useState16[0],
+    setImages = _useState16[1];
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState18 = _slicedToArray(_useState17, 2),
+    eulogy = _useState18[0],
+    setEulogy = _useState18[1];
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState20 = _slicedToArray(_useState19, 2),
+    loadingBtn = _useState20[0],
+    setLoadingBtn = _useState20[1];
 
   // Get history for page location
   var router = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+
+  // Set Word and Page limit
+  switch (props.auth.membership) {
+    case "standard":
+      var wordLimit = 100;
+      var pageLimit = 2;
+      break;
+    case "vip":
+      var wordLimit = 200;
+      var pageLimit = 5;
+      break;
+    default:
+      var wordLimit = 500;
+      var pageLimit = 10;
+      break;
+  }
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
+
+    // Check if announcement limit is set
+    if (announcement.length > wordLimit) {
+      return props.setErrors(["Announcement cannot be greater than ".concat(wordLimit, " words")]);
+    }
 
     // Show loader and disable button
     setLoadingBtn(true);
 
-    // Add form data to FormData object
-    var formData = new FormData();
-    formData.append("locale", locale);
-    formData.append("name", name);
-    formData.append("poster", poster);
-    formData.append("eulogy", eulogy);
-
     // Send data to PostsController
     // Get csrf cookie from Laravel inorder to send a POST request
-    Axios.post("/api/deaths", formData).then(function (res) {
+    Axios.post("/api/deaths", {
+      membershipId: props.auth.membershipId,
+      locale: locale,
+      name: name,
+      poster: poster,
+      sunrise: sunrise,
+      sunset: sunset,
+      burialDate: burialDate,
+      announcement: announcement,
+      images: images,
+      eulogy: eulogy
+    }).then(function (res) {
       props.setMessages([res.data.message]);
       // Remove loader for button
       setLoadingBtn(false);
       // Redirect to Show Death
       setTimeout(function () {
-        return router.push("/death/show/".concat(res.data.data.id));
+        return router.push("/deaths/show/".concat(res.data.data.id));
       }, 500);
     })["catch"](function (err) {
       // Remove loader for button
@@ -106964,42 +106999,7 @@ var DeathCreate = function DeathCreate(props) {
     className: "col-sm-8"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Upload your Death Announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: onSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Death Announcement Poster"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4 col-sm-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
-    name: "filepond-poster",
-    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
-    imageCropAspectRatio: "16:9",
-    acceptedFileTypes: ["image/*"],
-    stylePanelAspectRatio: "16:9",
-    allowRevert: true,
-    server: {
-      url: "/api/filepond",
-      process: {
-        url: "/death-poster",
-        onload: function onload(res) {
-          return setPoster(res);
-        },
-        onerror: function onerror(err) {
-          return console.log(err.response.data);
-        }
-      },
-      revert: {
-        url: "/death-poster/".concat(poster.substr(27)),
-        onload: function onload(res) {
-          props.setMessages([res]);
-          // Clear Poster
-          setPoster("");
-        }
-      }
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
     type: "text",
     name: "locale",
     className: "form-control",
@@ -107017,48 +107017,73 @@ var DeathCreate = function DeathCreate(props) {
   }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     name: "name",
-    className: "form-control mb-2",
+    className: "form-control text-secondary mb-2",
     placeholder: "Name",
     required: true,
     onChange: function onChange(e) {
       return setName(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ms-2 mb-2 d-flex justify-content-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: ""
+  }, "Sunrise")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "date",
     name: "name",
-    className: "form-control mb-2",
+    className: "form-control text-secondary mb-2",
     placeholder: "Sunrise",
     required: true,
     onChange: function onChange(e) {
-      return setName(e.target.value);
+      return setSunrise(e.target.value);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ms-2 mb-2 d-flex justify-content-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: ""
+  }, "Sunset")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "date",
     name: "name",
-    className: "form-control mb-2",
+    className: "form-control text-secondary mb-2",
     placeholder: "Sunset",
     required: true,
     onChange: function onChange(e) {
-      return setName(e.target.value);
+      return setSunset(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ms-2 mb-2 d-flex justify-content-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: ""
+  }, "Date of Burial")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "date",
+    name: "name",
+    className: "form-control text-secondary mb-2",
+    placeholder: "Date of Burial",
+    required: true,
+    onChange: function onChange(e) {
+      return setBurialDate(e.target.value);
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
     type: "text",
     name: "description",
     className: "form-control",
-    placeholder: "Say something about your death announcement",
+    placeholder: "Write your death announcement",
     cols: "30",
     rows: "5",
-    required: true,
     onChange: function onChange(e) {
-      return setEulogy(e.target.value);
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Related Images"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return setAnnouncement(e.target.value);
+    },
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-end p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "p-1\n\t\t\t\t\t\t\t\t\t".concat(announcement.length > wordLimit * 0.8 ? announcement.length <= wordLimit ? "bg-warning-subtle" : "bg-danger-subtle" : "bg-secondary-subtle", "\n\t\t\t\t\t\t\t\t")
+  }, "Word Count: ", announcement.length, " / ", wordLimit)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-lg-4"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4 col-sm-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "mb-2"
+  }, "Upload Death Announcement Poster"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
     name: "filepond-poster",
     labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
     imageCropAspectRatio: "16:9",
@@ -107087,40 +107112,65 @@ var DeathCreate = function DeathCreate(props) {
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-lg-4"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Eulogy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4 col-sm-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
-    name: "filepond-poster",
-    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
-    imageCropAspectRatio: "16:9",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "mb-2"
+  }, "Upload Related Images"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-images"
+    // labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+    // imageCropAspectRatio="16:9"
+    ,
     acceptedFileTypes: ["image/*"],
-    stylePanelAspectRatio: "16:9",
+    allowMultiple: true,
+    allowRevert: false,
+    allowRemove: false,
+    server: {
+      url: "/api/filepond",
+      process: {
+        url: "/death-images",
+        onload: function onload(res) {
+          return setImages([].concat(_toConsumableArray(images), [res]));
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
+        }
+      }
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-lg-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "mb-2"
+  }, "Upload Eulogy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-eulogy",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>"
+    // imageCropAspectRatio="16:9"
+    // acceptedFileTypes={[".doc, .docx, .pdf"]}
+    // stylePanelAspectRatio="16:9"
+    ,
     allowRevert: true,
     server: {
       url: "/api/filepond",
       process: {
-        url: "/death-poster",
+        url: "/eulogy",
         onload: function onload(res) {
-          return setPoster(res);
+          return setEulogy(res);
         },
         onerror: function onerror(err) {
           return console.log(err.response.data);
         }
       },
       revert: {
-        url: "/death-poster/".concat(poster.substr(27)),
+        url: "/eulogy/".concat(eulogy.substr(27)),
         onload: function onload(res) {
           props.setMessages([res]);
           // Clear Poster
-          setPoster("");
+          setEulogy("");
         }
       }
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    btnStyle: {
+      zIndex: "10000"
+    },
     btnText: "create death announcement",
     loading: loadingBtn,
     disabled: loadingBtn
@@ -107349,7 +107399,7 @@ var DeathEdit = function DeathEdit(props) {
     loading: loadingBtn,
     disabled: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-outline-danger rounded-pill text-uppercase",
+    className: "btn btn-outline-danger text-uppercase",
     type: "button",
     "data-bs-toggle": "collapse",
     "data-bs-target": "#collapseExample",
@@ -107361,7 +107411,7 @@ var DeathEdit = function DeathEdit(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you sure you want to delete the death announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "This process is irreversible"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    btnClass: "btn-danger rounded-pill text-white",
+    btnClass: "btn-danger text-white",
     btnText: "delete death announcement",
     loading: loadingBtn2,
     disabled: loadingBtn2,
@@ -107449,10 +107499,7 @@ var index = function index(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-10 p-0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-    to: (_props$auth = props.auth) !== null && _props$auth !== void 0 && (_props$auth = _props$auth.membershipTypes) !== null && _props$auth !== void 0 && _props$auth.includes("death") ? "/deaths/create" : "/deaths/create"
-    // : "/profile/membership"
-    ,
-
+    to: ((_props$auth = props.auth) === null || _props$auth === void 0 ? void 0 : _props$auth.membershipName) == "death" ? "/deaths/create" : "/profile/membership",
     id: "chatFloatBtn"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_svgs_PlusSVG__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Death and Funeral Announcements"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     className: "mt-4 mx-auto w-75",
@@ -107461,7 +107508,7 @@ var index = function index(props) {
     className: "input-group mb-3"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
-    className: "form-control",
+    className: "form-control rounded-0",
     placeholder: "Search Death Announcements by Name",
     "aria-label": "Search Death Announcements by Name",
     "aria-describedby": "button-addon2",
@@ -107472,7 +107519,7 @@ var index = function index(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     id: "button-addon2",
     type: "submit",
-    className: "btn btn-outline-primary",
+    className: "btn btn-outline-primary rounded-0",
     disabled: loader
   }, "Search", loader && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "spinner-border my-auto",
@@ -108213,7 +108260,7 @@ var WeddingEdit = function WeddingEdit(props) {
     loading: loadingBtn,
     disabled: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-outline-danger rounded-pill text-uppercase",
+    className: "btn btn-outline-danger text-uppercase",
     type: "button",
     "data-bs-toggle": "collapse",
     "data-bs-target": "#collapseExample",
@@ -108225,7 +108272,7 @@ var WeddingEdit = function WeddingEdit(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you sure you want to delete the wedding announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "This process is irreversible"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    btnClass: "btn-danger rounded-pill text-white",
+    btnClass: "btn-danger text-white",
     btnText: "delete wedding announcement",
     loading: loadingBtn2,
     disabled: loadingBtn2,
@@ -108709,69 +108756,103 @@ var ProfileEdit = function ProfileEdit(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_Core_Btn__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/Core/Btn */ "./resources/js/components/Core/Btn.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var membership = function membership() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container-fluid"
+
+var membership = function membership(props) {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    groupedMemberships = _useState2[0],
+    setGroupedMemberships = _useState2[1];
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    Axios.get("api/memberships").then(function (res) {
+      // Format data
+      var data = [res.data.data.death, res.data.data.wedding, res.data.data.graduation, res.data.data.success_card, res.data.data.anniversary, res.data.data.celebration];
+      setGroupedMemberships(data);
+    });
+  }, []);
+  var onMembership = function onMembership(membershipId) {
+    // Show Loader
+    setLoading(membershipId);
+    Axios.post("api/user-memberships", {
+      membershipId: membershipId
+    }).then(function (res) {
+      // Remove loader
+      setLoading();
+      // Set Messages
+      props.setMessages([res.data.message]);
+      // Update Auth
+      props.get("auth", props.setAuth, "auth");
+    })["catch"](function (err) {
+      // Remove loader
+      setLoading();
+      // Set Errors
+      props.getErrors(err);
+    });
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "container-fluid m-0 p-0",
+    style: {
+      height: "100vh"
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row",
+    className: "d-flex justify-content-center flex-wrap",
     style: {
       height: "50vh",
-      backgroundImage: 'url("/storage/death-posters/1.jpg")',
+      backgroundImage: 'url("/storage/img/our_projects-1.jpg")',
       backgroundSize: "cover",
-      backgroundPosition: "center"
+      backgroundPosition: "top"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-12 d-flex align-items-center justify-content-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card text-white bg-secondary mb-3",
-    style: {
-      maxWidth: "25rem"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-header"
-  }, "Standard"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "card-title"
-  }, "Card Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "card-text",
-    style: {
-      listStyleType: "none"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Candidate 2 photos + 1 page = $1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graduation 5 photos + 1 page = $5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Wedding 10 photos + 1 page = $10"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Aniversary 10 photos + 1 page = $10"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Celebration 10 photos + 1 page = $10")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card text-white bg-primary mb-3 mx-3",
-    style: {
-      maxWidth: "25rem"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-header"
-  }, "VIP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "card-title"
-  }, "Card Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "card-text",
-    style: {
-      listStyleType: "none"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Candidate 10 photos + 2 pages = $30"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graduation 20 photos + 4 pages = $40"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Wedding 50 photos + 4 pages = $50"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Aniversary 50 photos + 4 pages = $50"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Celebration 50 photos + 4 pages = $50")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card text-white bg-success mb-3",
-    style: {
-      maxWidth: "25rem"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-header"
-  }, "Executive"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "card-body"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-    className: "card-title"
-  }, "Card Title"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
-    className: "card-text",
-    style: {
-      listStyleType: "none"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Candidate no limit = $80"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Graduation no limit = $90"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Wedding no limit = $100"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Aniversary no limite = $100"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "Celebration no limite = $100")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, groupedMemberships.map(function (memberships, key) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: key,
+      className: "card bg-2 border-0 mb-3 mt-5",
+      style: {
+        maxWidth: "20rem",
+        minWidth: "20rem",
+        backgroundImage: "linear-gradient(to bottom, rgb(186, 173, 123), rgb(255, 255, 255))"
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "card-header text-white border-0 py-4"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+      className: "card-title text-center"
+    }, memberships[0].name.split("_").map(function (name, key) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        key: key,
+        className: "me-1 text-capitalize"
+      }, name);
+    }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "card-body pt-4 pb-5"
+    }, memberships.map(function (membership, key) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        key: key,
+        className: "card-text mb-2"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "d-flex justify-content-between"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "text-capitalize"
+      }, membership.tier), !props.auth.membershipName && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        btnText: "get",
+        btnClass: "btn-sm px-4",
+        onClick: function onClick() {
+          return onMembership(membership.id);
+        },
+        loading: loading == membership.id
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Announcement: ", membership.features.announcement, " words"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Photos: ", membership.features.photos, " photos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Eulogy: ", membership.features.eulogy, " words"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Price: $", membership.price));
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "card-footer text-center border-0 py-4"
+    }));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row mt-5"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-12"
@@ -109392,7 +109473,7 @@ var WeddingEdit = function WeddingEdit(props) {
     loading: loadingBtn,
     disabled: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-outline-danger rounded-pill text-uppercase",
+    className: "btn btn-outline-danger text-uppercase",
     type: "button",
     "data-bs-toggle": "collapse",
     "data-bs-target": "#collapseExample",
@@ -109404,7 +109485,7 @@ var WeddingEdit = function WeddingEdit(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you sure you want to delete the wedding announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "This process is irreversible"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    btnClass: "btn-danger rounded-pill text-white",
+    btnClass: "btn-danger text-white",
     btnText: "delete wedding announcement",
     loading: loadingBtn2,
     disabled: loadingBtn2,
@@ -110143,7 +110224,7 @@ var WeddingEdit = function WeddingEdit(props) {
     loading: loadingBtn,
     disabled: loadingBtn
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-outline-danger rounded-pill text-uppercase",
+    className: "btn btn-outline-danger text-uppercase",
     type: "button",
     "data-bs-toggle": "collapse",
     "data-bs-target": "#collapseExample",
@@ -110155,7 +110236,7 @@ var WeddingEdit = function WeddingEdit(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you sure you want to delete the wedding announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "This process is irreversible"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    btnClass: "btn-danger rounded-pill text-white",
+    btnClass: "btn-danger text-white",
     btnText: "delete wedding announcement",
     loading: loadingBtn2,
     disabled: loadingBtn2,

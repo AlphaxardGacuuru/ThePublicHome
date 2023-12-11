@@ -41,12 +41,7 @@ const index = (props) => {
 				{/* Chat button */}
 
 				<Link
-					to={
-						props.auth?.membershipTypes?.includes("death")
-							? "/deaths/create"
-							: "/deaths/create"
-						// : "/profile/membership"
-					}
+					to={props.auth?.membershipName == "death" ? "/deaths/create" : "/profile/membership"}
 					id="chatFloatBtn">
 					<PlusSVG />
 				</Link>
@@ -60,7 +55,7 @@ const index = (props) => {
 						<div className="input-group mb-3">
 							<input
 								type="text"
-								className="form-control"
+								className="form-control rounded-0"
 								placeholder="Search Death Announcements by Name"
 								aria-label="Search Death Announcements by Name"
 								aria-describedby="button-addon2"
@@ -70,7 +65,7 @@ const index = (props) => {
 							<button
 								id="button-addon2"
 								type="submit"
-								className="btn btn-outline-primary"
+								className="btn btn-outline-primary rounded-0"
 								disabled={loader}>
 								Search
 								{loader && (

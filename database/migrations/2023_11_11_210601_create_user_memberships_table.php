@@ -23,7 +23,7 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->timestamp('expiry')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

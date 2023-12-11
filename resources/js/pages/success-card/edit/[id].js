@@ -47,10 +47,7 @@ const WeddingEdit = (props) => {
 	const [loadingBtn, setLoadingBtn] = useState()
 	const [loadingBtn2, setLoadingBtn2] = useState()
 
-	useEffect(
-		() => props.get(`weddings/${id}`, setWedding),
-		[]
-	)
+	useEffect(() => props.get(`weddings/${id}`, setWedding), [])
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -73,10 +70,7 @@ const WeddingEdit = (props) => {
 				// Remove loader for button
 				setLoadingBtn(false)
 				// Redirect to Show Wedding Announcement
-				setTimeout(
-					() => router.push(`/weddings/show/${res.data.data.id}`),
-					500
-				)
+				setTimeout(() => router.push(`/weddings/show/${res.data.data.id}`), 500)
 			})
 			.catch((err) => {
 				// Remove loader for button
@@ -183,7 +177,7 @@ const WeddingEdit = (props) => {
 
 						{/* Collapse */}
 						<button
-							className="btn btn-outline-danger rounded-pill text-uppercase"
+							className="btn btn-outline-danger text-uppercase"
 							type="button"
 							data-bs-toggle="collapse"
 							data-bs-target="#collapseExample"
@@ -196,11 +190,13 @@ const WeddingEdit = (props) => {
 							id="collapseExample">
 							<div className="">
 								<br />
-								<h4>Are you sure you want to delete the wedding announcement</h4>
+								<h4>
+									Are you sure you want to delete the wedding announcement
+								</h4>
 								<h3>This process is irreversible</h3>
 								<br />
 								<Btn
-									btnClass="btn-danger rounded-pill text-white"
+									btnClass="btn-danger text-white"
 									btnText="delete wedding announcement"
 									loading={loadingBtn2}
 									disabled={loadingBtn2}

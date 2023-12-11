@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\MembershipService;
 use App\Models\Membership;
 use Illuminate\Http\Request;
 
 class MembershipController extends Controller
 {
+	public function __construct(protected MembershipService $service)
+	{
+		// 
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class MembershipController extends Controller
      */
     public function index()
     {
-        //
+        return $this->service->index();
     }
 
     /**
@@ -25,7 +31,18 @@ class MembershipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "tier" => "required|string",
+            "price" => "required|string",
+        ]);
+
+        [$saved, $message, $membership] = $this->service->store($request);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $membership,
+        ], 200);
     }
 
     /**

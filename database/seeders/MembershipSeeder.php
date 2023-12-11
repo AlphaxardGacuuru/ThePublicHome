@@ -14,31 +14,138 @@ class MembershipSeeder extends Seeder
      */
     public function run()
     {
-        $types = ["death", "graduation", "wedding", "annivesary", "celebration"];
-
         $memberships = [
-            [
-                "name" => "standard",
-                "price" => "1",
+            "death" => [
+                "standard" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 28,
+                ],
+                "vip" => [
+                    "announcement" => "unlimited",
+                    "photos" => 60,
+                    "videos" => "100Mbs",
+                    "eulogy" => "unlimited",
+                    "price" => 280,
+                ],
+                "executive" => [
+					"announcement" => "unlimited",
+                    "photos" => "unlimited",
+					"videos" => "unlimited",
+                    "eulogy" => "unlimited",
+                    "price" => 2800,
+                ],
             ],
-            [
-                "name" => "vip",
-                "price" => "5",
+            "wedding" => [
+                "standard" => [
+                    "announcement" => 400,
+                    "photos" => 10,
+                    "price" => 10,
+                ],
+                "vip" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "executive" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
             ],
-            [
-                "name" => "executive",
-                "price" => "10",
+            "graduation" => [
+                "standard" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "vip" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "executive" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+            ],
+            "success_card" => [
+                "standard" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "vip" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "executive" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+            ],
+            "anniversary" => [
+                "standard" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "vip" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "executive" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+            ],
+            "celebration" => [
+                "standard" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "vip" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
+                "executive" => [
+                    "announcement" => 400,
+                    "photos" => 15,
+                    "eulogy" => 1500,
+                    "price" => 1,
+                ],
             ],
         ];
 
-        foreach ($types as $type) {
-            foreach ($memberships as $membership) {
-                Membership::factory()
-                    ->create([
-                        "name" => $membership["name"],
-                        "price" => $membership["price"],
-                        "type" => $type,
-                    ]);
+        foreach ($memberships as $name => $tiers) {
+            foreach ($tiers as $tierName => $features) {
+                Membership::factory()->create([
+                    "name" => $name,
+                    "tier" => $tierName,
+                    "features" => $features,
+                    "price" => $features["price"],
+                ]);
             }
         }
     }

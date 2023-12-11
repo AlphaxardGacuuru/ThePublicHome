@@ -3,7 +3,7 @@ import React from "react"
 const Btn = ({ btnStyle, btnClass, btnText, onClick, loading, disabled }) => (
 	<button
 		style={btnStyle}
-		className={`btn text-uppercase ${btnClass}`}
+		className={`btn text-uppercase rounded-0 ${btnClass}`}
 		onClick={onClick}
 		disabled={disabled}>
 		{btnText}
@@ -16,7 +16,7 @@ const Btn = ({ btnStyle, btnClass, btnText, onClick, loading, disabled }) => (
 )
 
 Btn.defaultProps = {
-	btnClass: "text-white rounded-0",
+	btnClass: "",
 	loading: false,
 	disabled: false,
 }

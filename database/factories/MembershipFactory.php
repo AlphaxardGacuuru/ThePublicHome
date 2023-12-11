@@ -17,7 +17,7 @@ class MembershipFactory extends Factory
     public function definition()
     {
         return [
-			// 
+            //
         ];
     }
 }

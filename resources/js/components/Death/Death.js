@@ -74,7 +74,7 @@ const Death = (props) => {
 				<h3 className="death-name px-2 mb-0">{props.death.name}</h3>
 				<p className="mb-0 px-2 text-start">{props.death.announcement}</p>
 				<p className="mb-0 px-2 text-start">
-					<span className="bg-2 my-1 p-1 text-white">{props.death.tier}</span>
+					<span className="bg-2 my-1 p-1 text-white text-uppercase fs-6">{props.death.tier}</span>
 				</p>
 				<div className="d-flex justify-content-between">
 					{/* Death  likes */}

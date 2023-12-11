@@ -1,72 +1,111 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
-const membership = () => {
+import Btn from "@/components/Core/Btn"
+
+const membership = (props) => {
+	const [groupedMemberships, setGroupedMemberships] = useState([])
+	const [loading, setLoading] = useState("")
+
+	useEffect(() => {
+		Axios.get("api/memberships").then((res) => {
+			// Format data
+			var data = [
+				res.data.data.death,
+				res.data.data.wedding,
+				res.data.data.graduation,
+				res.data.data.success_card,
+				res.data.data.anniversary,
+				res.data.data.celebration,
+			]
+			setGroupedMemberships(data)
+		})
+	}, [])
+
+	const onMembership = (membershipId) => {
+		// Show Loader
+		setLoading(membershipId)
+
+		Axios.post("api/user-memberships", { membershipId: membershipId })
+			.then((res) => {
+				// Remove loader
+				setLoading()
+				// Set Messages
+				props.setMessages([res.data.message])
+				// Update Auth
+				props.get("auth", props.setAuth, "auth")
+			})
+			.catch((err) => {
+				// Remove loader
+				setLoading()
+				// Set Errors
+				props.getErrors(err)
+			})
+	}
+
 	return (
-		<div className="container-fluid">
-			{/* Background Image */}
+		<React.Fragment>
 			<div
-				className="row"
-				style={{
-					height: "50vh",
-					backgroundImage: 'url("/storage/death-posters/1.jpg")',
-					backgroundSize: "cover",
-					backgroundPosition: "center",
-				}}>
-				{/* Cards */}
-				<div className="col-12 d-flex align-items-center justify-content-center">
-					<div
-						className="card text-white bg-secondary mb-3"
-						style={{ maxWidth: "25rem" }}>
-						<div className="card-header">Standard</div>
-						<div className="card-body">
-							<h5 className="card-title">Card Title</h5>
-							<ul
-								className="card-text"
-								style={{ listStyleType: "none" }}>
-								<li>Candidate 2 photos + 1 page = $1</li>
-								<li>Graduation 5 photos + 1 page = $5</li>
-								<li>Wedding 10 photos + 1 page = $10</li>
-								<li>Aniversary 10 photos + 1 page = $10</li>
-								<li>Celebration 10 photos + 1 page = $10</li>
-							</ul>
+				className="container-fluid m-0 p-0"
+				style={{ height: "100vh" }}>
+				{/* Background Image */}
+				<div
+					className="d-flex justify-content-center flex-wrap"
+					style={{
+						height: "50vh",
+						backgroundImage: 'url("/storage/img/our_projects-1.jpg")',
+						backgroundSize: "cover",
+						backgroundPosition: "top",
+					}}>
+					{/* Cards */}
+					{groupedMemberships.map((memberships, key) => (
+						<div
+							key={key}
+							className="card bg-2 border-0 mb-3 mt-5"
+							style={{
+								maxWidth: "20rem",
+								minWidth: "20rem",
+								backgroundImage:
+									"linear-gradient(to bottom, rgb(186, 173, 123), rgb(255, 255, 255))",
+							}}>
+							<div className="card-header text-white border-0 py-4">
+								<h5 className="card-title text-center">
+									{memberships[0].name.split("_").map((name, key) => (
+										<span
+											key={key}
+											className="me-1 text-capitalize">
+											{name}
+										</span>
+									))}
+								</h5>
+							</div>
+							<div className="card-body pt-4 pb-5">
+								{memberships.map((membership, key) => (
+									<div
+										key={key}
+										className="card-text mb-2">
+										<div className="d-flex justify-content-between">
+											<h4 className="text-capitalize">{membership.tier}</h4>
+											{!props.auth.membershipName && (
+												<Btn
+													btnText="get"
+													btnClass="btn-sm px-4"
+													onClick={() => onMembership(membership.id)}
+													loading={loading == membership.id}
+												/>
+											)}
+										</div>
+										<div>
+											Announcement: {membership.features.announcement} words
+										</div>
+										<div>Photos: {membership.features.photos} photos</div>
+										<div>Eulogy: {membership.features.eulogy} words</div>
+										<div>Price: ${membership.price}</div>
+									</div>
+								))}
+							</div>
+							<div className="card-footer text-center border-0 py-4"></div>
 						</div>
-					</div>
-
-					<div
-						className="card text-white bg-primary mb-3 mx-3"
-						style={{ maxWidth: "25rem" }}>
-						<div className="card-header">VIP</div>
-						<div className="card-body">
-							<h5 className="card-title">Card Title</h5>
-							<ul
-								className="card-text"
-								style={{ listStyleType: "none" }}>
-								<li>Candidate 10 photos + 2 pages = $30</li>
-								<li>Graduation 20 photos + 4 pages = $40</li>
-								<li>Wedding 50 photos + 4 pages = $50</li>
-								<li>Aniversary 50 photos + 4 pages = $50</li>
-								<li>Celebration 50 photos + 4 pages = $50</li>
-							</ul>
-						</div>
-					</div>
-
-					<div
-						className="card text-white bg-success mb-3"
-						style={{ maxWidth: "25rem" }}>
-						<div className="card-header">Executive</div>
-						<div className="card-body">
-							<h5 className="card-title">Card Title</h5>
-							<ul
-								className="card-text"
-								style={{ listStyleType: "none" }}>
-								<li>Candidate no limit = $80</li>
-								<li>Graduation no limit = $90</li>
-								<li>Wedding no limit = $100</li>
-								<li>Aniversary no limite = $100</li>
-								<li>Celebration no limite = $100</li>
-							</ul>
-						</div>
-					</div>
+					))}
 				</div>
 			</div>
 
@@ -77,7 +116,7 @@ const membership = () => {
 					{/* Add your membership information content here */}
 				</div>
 			</div>
-		</div>
+		</React.Fragment>
 	)
 }
 

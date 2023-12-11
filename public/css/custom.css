@@ -264,9 +264,7 @@ p {
 	height: 100%;
 	top: 0;
 	left: 0;
-	/* z-index: 994; */
-	/* text-align: center; */
-	background-color: #2A0134;
+	background-color: rgb(36, 37, 37);
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
@@ -281,13 +279,8 @@ p {
 	margin-left: 50px;
 }
 
-.leftMenu .active {
-	border-top-right-radius: 50px;
-	border-bottom-right-radius: 50px;
-	background-color: rgba(255, 255, 255, 0.2);
-}
-
 .leftMenu .nav-link-icon {
+	padding: 0 0 0 10px;
 	display: block;
 }
 
@@ -332,12 +325,13 @@ p {
 }
 
 .leftMenu .nav-link {
+	margin: 0 40px 10px 10px;
 	color: #FFF;
 	font-size: 15px;
 	position: relative;
 	z-index: 1;
 	font-weight: 300;
-	padding: 5px 15px;
+	/* padding: 5px 0px; */
 }
 
 .leftMenu .nav-link span {
@@ -461,7 +455,8 @@ p {
 	outline: none;
 	cursor: pointer;
 	color: white;
-	background-color: rgb(36, 37, 37);
+	/* background-color: rgb(36, 37, 37); */
+	background-color: rgb(186, 173, 123);
 	border-radius: 50%;
 	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
 	font-size: 30px;
@@ -601,7 +596,7 @@ p {
 }
 
 #snackbar div {
-	border-radius: 20px;
+	border-radius: 0px;
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
@@ -1872,4 +1867,11 @@ div.hidden-scroll span {
 	border: 2px solid rgb(186, 173, 123);
 	background-color: rgb(186, 173, 123);
 	color: #FFF;
+}
+
+.btn:hover,
+.btn:focus {
+	border: 2px solid rgb(186, 173, 123);
+	background-color: none;
+	color: rgb(186, 173, 123);
 }

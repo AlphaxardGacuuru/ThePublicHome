@@ -9,11 +9,13 @@ use App\Http\Controllers\GraduationCommentController;
 use App\Http\Controllers\GraduationCommentLikeController;
 use App\Http\Controllers\GraduationController;
 use App\Http\Controllers\GraduationLikeController;
+use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\SuccessCardCommentController;
 use App\Http\Controllers\SuccessCardCommentLikeController;
 use App\Http\Controllers\SuccessCardController;
 use App\Http\Controllers\SuccessCardLikeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserMembershipController;
 use App\Http\Controllers\WeddingCommentController;
 use App\Http\Controllers\WeddingCommentLikeController;
 use App\Http\Controllers\WeddingController;
@@ -41,6 +43,8 @@ Route::apiResources([
     "death-comments" => DeathCommentController::class,
     "death-comment-likes" => DeathCommentLikeController::class,
     "users" => UserController::class,
+    "memberships" => MembershipController::class,
+    "user-memberships" => UserMembershipController::class,
     "weddings" => WeddingController::class,
     "wedding-likes" => WeddingLikeController::class,
     "wedding-comments" => WeddingCommentController::class,
@@ -59,8 +63,10 @@ Route::apiResources([
 Route::prefix('filepond')->group(function () {
     Route::controller(FilePondController::class)->group(function () {
 
-        // Death 
+        // Death
         Route::post('death-poster', 'storeDeathPoster');
+        Route::post('death-images', 'storeDeathImages');
+        Route::post('eulogy', 'storeEulogy');
         Route::delete('death-poster/{id}', 'destoryDeathPoster');
 
         // User

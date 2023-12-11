@@ -19,13 +19,20 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('name');
-            $table->string('poster');
-            $table->string('announcement');
-            $table->string('eulogy')->nullable();
+            $table->foreignId('membership_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('locale')->nullable();
+            $table->string('name');
+            $table->string('sunrise');
+            $table->string('sunset');
             $table->timestamp('burial_date')->nullable();
-			$table->integer('likes')->default(0);
+            $table->string('announcement');
+            $table->string('poster');
+            $table->jsonb('photos')->nullable();
+            $table->string('eulogy')->nullable();
+            $table->integer('likes')->default(0);
             $table->timestamps();
         });
     }

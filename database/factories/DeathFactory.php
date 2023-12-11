@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Membership;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,15 +19,19 @@ class DeathFactory extends Factory
      */
     public function definition()
     {
-		$location = ["home", "international"];
-		
+        $location = ["home", "international"];
+
         return [
-			'user_id' => User::all()->random()->id,
+            'user_id' => User::all()->random()->id,
+            'membership_id' => Membership::all()->random()->id,
+            'locale' => $location[rand(0, 1)],
             'name' => fake()->name(),
-            'poster' => 'death-posters/'. rand(1, 5) . '.jpg',
+            'sunrise' => Carbon::now()->subYears(rand(10, 90)),
+            'sunset' => Carbon::now()->subDays(rand(10, 90)),
+            'burial_date' => Carbon::now()->addDays(rand(1, 10)),
+            'poster' => 'death-posters/' . rand(1, 5) . '.jpg',
             'announcement' => fake()->catchPhrase(),
-            'locale' =>$location[rand(0, 1)],
-			'likes' => rand(1, 10)
+            'likes' => rand(1, 10),
         ];
     }
 }

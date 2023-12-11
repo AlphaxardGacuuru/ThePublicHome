@@ -47,10 +47,7 @@ const DeathEdit = (props) => {
 	const [loadingBtn, setLoadingBtn] = useState()
 	const [loadingBtn2, setLoadingBtn2] = useState()
 
-	useEffect(
-		() => props.get(`deaths/${id}`, setDeath),
-		[]
-	)
+	useEffect(() => props.get(`deaths/${id}`, setDeath), [])
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -73,10 +70,7 @@ const DeathEdit = (props) => {
 				// Remove loader for button
 				setLoadingBtn(false)
 				// Redirect to Show Death Announcement
-				setTimeout(
-					() => router.push(`/deaths/show/${res.data.data.id}`),
-					500
-				)
+				setTimeout(() => router.push(`/deaths/show/${res.data.data.id}`), 500)
 			})
 			.catch((err) => {
 				// Remove loader for button
@@ -183,7 +177,7 @@ const DeathEdit = (props) => {
 
 						{/* Collapse */}
 						<button
-							className="btn btn-outline-danger rounded-pill text-uppercase"
+							className="btn btn-outline-danger text-uppercase"
 							type="button"
 							data-bs-toggle="collapse"
 							data-bs-target="#collapseExample"
@@ -200,7 +194,7 @@ const DeathEdit = (props) => {
 								<h3>This process is irreversible</h3>
 								<br />
 								<Btn
-									btnClass="btn-danger rounded-pill text-white"
+									btnClass="btn-danger text-white"
 									btnText="delete death announcement"
 									loading={loadingBtn2}
 									disabled={loadingBtn2}

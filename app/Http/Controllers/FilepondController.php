@@ -27,6 +27,34 @@ class FilePondController extends Controller
     }
 
     /*
+     * Handle Death  Images Upload */
+    public function storeDeathImages(Request $request)
+    {
+        $this->validate($request, [
+            'filepond-images' => 'required|file',
+        ]);
+
+        $image = $request->file('filepond-images')->store('public/death-images');
+        $imageShort = substr($image, 7);
+
+        return $imageShort;
+    }
+
+    /*
+     * Handle Eulogy Upload */
+    public function storeEulogy(Request $request)
+    {
+        $this->validate($request, [
+            'filepond-eulogy' => 'required|file',
+        ]);
+
+        $eulogy = $request->file('filepond-eulogy')->store('public/eulogies');
+        $eulogy = substr($eulogy, 7);
+
+        return $eulogy;
+    }
+
+    /*
      * Handle Club Poster Delete */
     public function destoryDeathPoster($id)
     {

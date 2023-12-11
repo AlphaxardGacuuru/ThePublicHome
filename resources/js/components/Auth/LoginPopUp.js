@@ -113,14 +113,14 @@ const LoginPopUp = (props) => {
 
 									<Btn
 										type="submit"
-										btnClass="mt-2 btn-primary rounded-pill w-75"
+										btnClass="mt-2 w-75"
 										btnText="Login"
 										loading={loading}
 									/>
 								</form>
 
 								<Btn
-									btnClass="mt-1 btn-primary rounded-pill w-50"
+									btnClass="mt-1 w-50"
 									btnText="back"
 									onClick={() => setPhoneLogin(false)}
 								/>
@@ -135,7 +135,7 @@ const LoginPopUp = (props) => {
 
 							{!location.pathname.match("/http/") && (
 								<Btn
-									btnClass="mt-1 btn-primary rounded-pill w-75"
+									btnClass="mt-1 w-75"
 									btnText="login with email"
 									onClick={() => setPhoneLogin(true)}
 								/>

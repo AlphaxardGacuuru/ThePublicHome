@@ -257,16 +257,6 @@ const TopNav = (props) => {
 															</h6>
 														</Link>
 														<Link
-															to="/"
-															className="p-2 px-3 dropdown-item">
-															<h6>
-																<span className="me-2">
-																	{/* <DownloadSVG /> */}
-																</span>
-																Change Language
-															</h6>
-														</Link>
-														<Link
 															to="#"
 															className="p-2 px-3 dropdown-item"
 															onClick={(e) => logout(e)}>
@@ -443,16 +433,6 @@ const TopNav = (props) => {
 									<DownloadSVG />
 								</span>
 								Get App
-							</h6>
-						</Link>
-						<Link
-							to="/"
-							className="p-3 text-start"
-							onClick={() => setBottomMenu("")}
-							title="Privacy Policy">
-							<h6>
-								<span className="ms-3 me-4">{/* <PrivacySVG /> */}</span>
-								Change Language
 							</h6>
 						</Link>
 						<Link

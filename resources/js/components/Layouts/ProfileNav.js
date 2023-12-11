@@ -32,23 +32,22 @@ const ProfileNav = (props) => {
 					data-wow-delay="1s">
 					<nav>
 						<ul className="m-0 p-0">
-							<li
-								className={`nav-item ${
-									active("/profile/show") || active("/profile/edit")
-								}`}>
+							<li className={`nav-item`}>
 								<Link
 									to={`/profile/show/${props.auth.id}`}
-									className={`nav-link`}>
+									className={`nav-link ${
+										active("/profile/show") || active("/profile/edit")
+									}`}>
 									<div className="nav-link-icon">
 										<PersonSVG />
 									</div>
 									<div className="nav-link-text">Profile</div>
 								</Link>
 							</li>
-							<li className={`nav-item ${active("/profile/membership")}`}>
+							<li className={`nav-item`}>
 								<Link
 									to={`/profile/membership`}
-									className={`nav-link`}>
+									className={`nav-link ${active("/profile/membership")}`}>
 									<div className="nav-link-icon">
 										<MembershipSVG />
 									</div>

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom"
 // import Axios from "axios"
 import Picker from "emoji-picker-react"
 
-import Button from "@/components/Core/Btn"
+import Btn from "@/components/Core/Btn"
 import Img from "@/components/Core/Img"
 
 import EmojiSVG from "@/svgs/EmojiSVG"
@@ -90,7 +90,7 @@ const SocialMediaInput = (props) => {
 					</div>
 					{/* Input End */}
 					{/* Emoji icon */}
-					<div className="pt-2 px-2">
+					<div className="pt-2 px-1">
 						<div
 							className="fs-5"
 							style={{ cursor: "pointer" }}
@@ -101,9 +101,9 @@ const SocialMediaInput = (props) => {
 					{/* Emoji icon End */}
 					{/* Button */}
 					<div className="p-1">
-						<Button
+						<Btn
 							type="submit"
-							btnClass="btn-outline-dark rounded-pill"
+							btnClass="btn-sm btn-outline-dark rounded-0"
 							btnText={props.btnText}
 							loading={loading}
 						/>

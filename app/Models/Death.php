@@ -46,6 +46,11 @@ class Death extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
+
     public function deathLikes()
     {
         return $this->hasMany(DeathLike::class);

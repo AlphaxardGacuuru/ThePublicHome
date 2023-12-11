@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Membership extends Model
 {
     use HasFactory;
+
+	/*
+	* Cast Attributes
+	*/ 
+	protected $casts = [
+		"features" => "array"
+	];
 }

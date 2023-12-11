@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\UserMembershipService;
 use App\Models\UserMembership;
 use Illuminate\Http\Request;
 
 class UserMembershipController extends Controller
 {
+    public function __construct(protected UserMembershipService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +31,17 @@ class UserMembershipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "membershipId" => "required",
+        ]);
+
+        [$saved, $message, $userMembership] = $this->service->store($request);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $userMembership,
+        ], 200);
     }
 
     /**
