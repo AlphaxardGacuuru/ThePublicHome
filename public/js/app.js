@@ -102220,6 +102220,14 @@ var App = function App() {
     _useState18 = _slicedToArray(_useState17, 2),
     successCards = _useState18[0],
     setSuccessCards = _useState18[1];
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("anniversaries")),
+    _useState20 = _slicedToArray(_useState19, 2),
+    anniversaries = _useState20[0],
+    setAnniversaries = _useState20[1];
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(getLocalStorage("celebrations")),
+    _useState22 = _slicedToArray(_useState21, 2),
+    celebrations = _useState22[0],
+    setCelebrations = _useState22[1];
 
   // Function for fetching data from API
   var get = function get(endpoint, setState) {
@@ -102271,14 +102279,14 @@ var App = function App() {
    * PWA Install button */
   var deferredPrompt;
   var btnAdd = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])();
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
-    _useState20 = _slicedToArray(_useState19, 2),
-    downloadLink = _useState20[0],
-    setDownloadLink = _useState20[1];
-  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
-    _useState22 = _slicedToArray(_useState21, 2),
-    downloadLinkText = _useState22[0],
-    setDownloadLinkText = _useState22[1];
+  var _useState23 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    _useState24 = _slicedToArray(_useState23, 2),
+    downloadLink = _useState24[0],
+    setDownloadLink = _useState24[1];
+  var _useState25 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState26 = _slicedToArray(_useState25, 2),
+    downloadLinkText = _useState26[0],
+    setDownloadLinkText = _useState26[1];
 
   // Listen to the install prompt
   window.addEventListener("beforeinstallprompt", function (e) {
@@ -102330,6 +102338,10 @@ var App = function App() {
     setGraduations: setGraduations,
     successCards: successCards,
     setSuccessCards: setSuccessCards,
+    anniversaries: anniversaries,
+    setAnniversaries: setAnniversaries,
+    celebrations: celebrations,
+    setCelebrations: setCelebrations,
     // PWA
     btnAdd: btnAdd,
     downloadLink: downloadLink,
@@ -103358,8 +103370,11 @@ var Death = function Death(props) {
     className: "mb-0 px-2 text-start"
   }, props.death.announcement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "mb-0 px-2 text-start"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "bg-2 my-1 p-1 text-white text-uppercase fs-6"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "bg-2 my-1 p-1 text-white text-uppercase",
+    style: {
+      fontSize: "0.8em"
+    }
   }, props.death.tier)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "d-flex justify-content-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103963,7 +103978,7 @@ var TopNav = function TopNav(props) {
 
   // Function for showing active color
   var active2 = function active2(check) {
-    return location.pathname == check ? "active" : "text-white";
+    return location.pathname.match(check) ? "active" : "text-white";
   };
 
   // Function for showing active color
@@ -104199,7 +104214,7 @@ var TopNav = function TopNav(props) {
     className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/anniversaries",
-    className: "nav-link ".concat(active2("/success-cards")),
+    className: "nav-link ".concat(active2("/anniversaries")),
     onClick: function onClick() {
       return setMenu("");
     }
@@ -104207,7 +104222,7 @@ var TopNav = function TopNav(props) {
     className: "nav-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     to: "/celebrations",
-    className: "nav-link ".concat(active2("/success-cards")),
+    className: "nav-link ".concat(active2("/celebrations")),
     onClick: function onClick() {
       return setMenu("");
     }
@@ -106856,10 +106871,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css */ "./node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css");
 /* harmony import */ var filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_image_preview_dist_filepond_plugin_image_preview_css__WEBPACK_IMPORTED_MODULE_13__);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -106893,6 +106904,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // Register the plugins
 Object(react_filepond__WEBPACK_IMPORTED_MODULE_5__["registerPlugin"])(filepond_plugin_image_exif_orientation__WEBPACK_IMPORTED_MODULE_7___default.a, filepond_plugin_image_preview__WEBPACK_IMPORTED_MODULE_8___default.a, filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_9___default.a, filepond_plugin_image_crop__WEBPACK_IMPORTED_MODULE_10___default.a, filepond_plugin_image_transform__WEBPACK_IMPORTED_MODULE_11___default.a, filepond_plugin_file_validate_size__WEBPACK_IMPORTED_MODULE_12___default.a);
 var DeathCreate = function DeathCreate(props) {
+  var _props$auth$membershi;
   // Declare states
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
     _useState2 = _slicedToArray(_useState, 2),
@@ -106924,42 +106936,22 @@ var DeathCreate = function DeathCreate(props) {
     setAnnouncement = _useState14[1];
   var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
     _useState16 = _slicedToArray(_useState15, 2),
-    images = _useState16[0],
-    setImages = _useState16[1];
-  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
-    _useState18 = _slicedToArray(_useState17, 2),
-    eulogy = _useState18[0],
-    setEulogy = _useState18[1];
-  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
-    _useState20 = _slicedToArray(_useState19, 2),
-    loadingBtn = _useState20[0],
-    setLoadingBtn = _useState20[1];
+    loadingBtn = _useState16[0],
+    setLoadingBtn = _useState16[1];
 
   // Get history for page location
   var router = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // Redirect if user has no membership
+    if (!props.auth.membershipId) {
+      router.push("/profile/membership");
+    }
+  }, []);
 
-  // Set Word and Page limit
-  switch (props.auth.membership) {
-    case "standard":
-      var wordLimit = 100;
-      var pageLimit = 2;
-      break;
-    case "vip":
-      var wordLimit = 200;
-      var pageLimit = 5;
-      break;
-    default:
-      var wordLimit = 500;
-      var pageLimit = 10;
-      break;
-  }
+  // Get Word limit for announcement based on user's membership
+  var wordLimit = (_props$auth$membershi = props.auth.membershipFeatures) === null || _props$auth$membershi === void 0 ? void 0 : _props$auth$membershi.announcement;
   var onSubmit = function onSubmit(e) {
     e.preventDefault();
-
-    // Check if announcement limit is set
-    if (announcement.length > wordLimit) {
-      return props.setErrors(["Announcement cannot be greater than ".concat(wordLimit, " words")]);
-    }
 
     // Show loader and disable button
     setLoadingBtn(true);
@@ -106974,16 +106966,14 @@ var DeathCreate = function DeathCreate(props) {
       sunrise: sunrise,
       sunset: sunset,
       burialDate: burialDate,
-      announcement: announcement,
-      images: images,
-      eulogy: eulogy
+      announcement: announcement
     }).then(function (res) {
       props.setMessages([res.data.message]);
       // Remove loader for button
       setLoadingBtn(false);
       // Redirect to Show Death
       setTimeout(function () {
-        return router.push("/deaths/show/".concat(res.data.data.id));
+        return router.push("/deaths/edit/".concat(res.data.data.id));
       }, 500);
     })["catch"](function (err) {
       // Remove loader for button
@@ -106997,12 +106987,45 @@ var DeathCreate = function DeathCreate(props) {
     className: "col-sm-2"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-sm-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Upload your Death Announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "mb-4"
+  }, "Upload your Death Announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: onSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-50 mb-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "mb-2"
+  }, "Upload Death Announcement Poster"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-poster",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
+    imageCropAspectRatio: "16:9",
+    acceptedFileTypes: ["image/*"],
+    stylePanelAspectRatio: "16:9",
+    allowRevert: true,
+    server: {
+      url: "/api/filepond",
+      process: {
+        url: "/death-poster",
+        onload: function onload(res) {
+          return setPoster(res);
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
+        }
+      },
+      revert: {
+        url: "/death-poster/".concat(poster.substr(27)),
+        onload: function onload(res) {
+          props.setMessages([res]);
+          // Clear Poster
+          setPoster("");
+        }
+      }
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
     type: "text",
     name: "locale",
-    className: "form-control",
+    className: "form-control mb-2",
     placeholder: "locale",
     required: true,
     onChange: function onChange(e) {
@@ -107014,7 +107037,7 @@ var DeathCreate = function DeathCreate(props) {
     value: "home"
   }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
     value: "international"
-  }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+  }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "text",
     name: "name",
     className: "form-control text-secondary mb-2",
@@ -107029,7 +107052,7 @@ var DeathCreate = function DeathCreate(props) {
     htmlFor: ""
   }, "Sunrise")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "date",
-    name: "name",
+    name: "sunrise",
     className: "form-control text-secondary mb-2",
     placeholder: "Sunrise",
     required: true,
@@ -107042,7 +107065,7 @@ var DeathCreate = function DeathCreate(props) {
     htmlFor: ""
   }, "Sunset")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "date",
-    name: "name",
+    name: "sunset",
     className: "form-control text-secondary mb-2",
     placeholder: "Sunset",
     required: true,
@@ -107074,103 +107097,10 @@ var DeathCreate = function DeathCreate(props) {
     },
     required: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "d-flex justify-content-end p-2"
+    className: "d-flex justify-content-end py-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
     className: "p-1\n\t\t\t\t\t\t\t\t\t".concat(announcement.length > wordLimit * 0.8 ? announcement.length <= wordLimit ? "bg-warning-subtle" : "bg-danger-subtle" : "bg-secondary-subtle", "\n\t\t\t\t\t\t\t\t")
-  }, "Word Count: ", announcement.length, " / ", wordLimit)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "mb-2"
-  }, "Upload Death Announcement Poster"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
-    name: "filepond-poster",
-    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
-    imageCropAspectRatio: "16:9",
-    acceptedFileTypes: ["image/*"],
-    stylePanelAspectRatio: "16:9",
-    allowRevert: true,
-    server: {
-      url: "/api/filepond",
-      process: {
-        url: "/death-poster",
-        onload: function onload(res) {
-          return setPoster(res);
-        },
-        onerror: function onerror(err) {
-          return console.log(err.response.data);
-        }
-      },
-      revert: {
-        url: "/death-poster/".concat(poster.substr(27)),
-        onload: function onload(res) {
-          props.setMessages([res]);
-          // Clear Poster
-          setPoster("");
-        }
-      }
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "mb-2"
-  }, "Upload Related Images"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
-    name: "filepond-images"
-    // labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-    // imageCropAspectRatio="16:9"
-    ,
-    acceptedFileTypes: ["image/*"],
-    allowMultiple: true,
-    allowRevert: false,
-    allowRemove: false,
-    server: {
-      url: "/api/filepond",
-      process: {
-        url: "/death-images",
-        onload: function onload(res) {
-          return setImages([].concat(_toConsumableArray(images), [res]));
-        },
-        onerror: function onerror(err) {
-          return console.log(err.response.data);
-        }
-      }
-    }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    className: "mb-2"
-  }, "Upload Eulogy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
-    name: "filepond-eulogy",
-    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>"
-    // imageCropAspectRatio="16:9"
-    // acceptedFileTypes={[".doc, .docx, .pdf"]}
-    // stylePanelAspectRatio="16:9"
-    ,
-    allowRevert: true,
-    server: {
-      url: "/api/filepond",
-      process: {
-        url: "/eulogy",
-        onload: function onload(res) {
-          return setEulogy(res);
-        },
-        onerror: function onerror(err) {
-          return console.log(err.response.data);
-        }
-      },
-      revert: {
-        url: "/eulogy/".concat(eulogy.substr(27)),
-        onload: function onload(res) {
-          props.setMessages([res]);
-          // Clear Poster
-          setEulogy("");
-        }
-      }
-    }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    btnStyle: {
-      zIndex: "10000"
-    },
+  }, "Word Count: ", announcement.length, " /", " ", wordLimit == 1000000 ? "Unlimited" : wordLimit)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
     btnText: "create death announcement",
     loading: loadingBtn,
     disabled: loadingBtn
@@ -107263,24 +107193,44 @@ var DeathEdit = function DeathEdit(props) {
     setDeath = _useState2[1];
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
     _useState4 = _slicedToArray(_useState3, 2),
-    name = _useState4[0],
-    setName = _useState4[1];
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    locale = _useState4[0],
+    setLocale = _useState4[1];
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
     _useState6 = _slicedToArray(_useState5, 2),
-    poster = _useState6[0],
-    setPoster = _useState6[1];
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    name = _useState6[0],
+    setName = _useState6[1];
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
     _useState8 = _slicedToArray(_useState7, 2),
-    eulogy = _useState8[0],
-    setEulogy = _useState8[1];
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    poster = _useState8[0],
+    setPoster = _useState8[1];
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
     _useState10 = _slicedToArray(_useState9, 2),
-    loadingBtn = _useState10[0],
-    setLoadingBtn = _useState10[1];
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    sunrise = _useState10[0],
+    setSunrise = _useState10[1];
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
     _useState12 = _slicedToArray(_useState11, 2),
-    loadingBtn2 = _useState12[0],
-    setLoadingBtn2 = _useState12[1];
+    sunset = _useState12[0],
+    setSunset = _useState12[1];
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState14 = _slicedToArray(_useState13, 2),
+    burialDate = _useState14[0],
+    setBurialDate = _useState14[1];
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState16 = _slicedToArray(_useState15, 2),
+    announcement = _useState16[0],
+    setAnnouncement = _useState16[1];
+  var _useState17 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(""),
+    _useState18 = _slicedToArray(_useState17, 2),
+    eulogy = _useState18[0],
+    setEulogy = _useState18[1];
+  var _useState19 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    _useState20 = _slicedToArray(_useState19, 2),
+    loadingBtn = _useState20[0],
+    setLoadingBtn = _useState20[1];
+  var _useState21 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+    _useState22 = _slicedToArray(_useState21, 2),
+    loadingBtn2 = _useState22[0],
+    setLoadingBtn2 = _useState22[1];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     return props.get("deaths/".concat(id), setDeath);
   }, []);
@@ -107290,23 +107240,26 @@ var DeathEdit = function DeathEdit(props) {
     // Show loader and disable button
     setLoadingBtn(true);
 
-    // Add form data to FormData object
-    var formData = new FormData();
-    name && formData.append("name", name);
-    poster && formData.append("poster", poster);
-    eulogy && formData.append("eulogy", eulogy);
-    formData.append("_method", "PUT");
+    // Check if announcement limit is reached
+    if (announcement.length > death.wordLimit) {
+      return props.setErrors(["Announcement cannot be greater than ".concat(death.wordLimit, " words")]);
+    }
 
     // Send data to PostsController
     // Get csrf cookie from Laravel inorder to send a POST request
-    Axios.post("/api/deaths/".concat(id), formData).then(function (res) {
+    Axios.post("/api/deaths/".concat(id), {
+      locale: locale,
+      name: name,
+      poster: poster,
+      sunrise: sunrise,
+      sunset: sunset,
+      burialDate: burialDate,
+      announcement: announcement,
+      _method: "PUT"
+    }).then(function (res) {
       props.setMessages([res.data.message]);
       // Remove loader for button
       setLoadingBtn(false);
-      // Redirect to Show Death Announcement
-      setTimeout(function () {
-        return router.push("/deaths/show/".concat(res.data.data.id));
-      }, 500);
     })["catch"](function (err) {
       // Remove loader for button
       setLoadingBtn(false);
@@ -107333,26 +107286,107 @@ var DeathEdit = function DeathEdit(props) {
       props.getErrors(err);
     });
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "my-4"
+  }, "Upload your Death Announcement")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "row"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-2"
+    className: "col-sm-1"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-8"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Upload your Death Announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    onSubmit: onSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Upload Death Announcement Poster"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "row"
+    className: "col-sm-5"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("center", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+    type: "text",
+    name: "locale",
+    className: "form-control mt-4",
+    placeholder: "locale",
+    required: true,
+    onChange: function onChange(e) {
+      return setLocale(e.target.value);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: ""
+  }, "Choose Locale"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "home",
+    selected: death.locale == "home"
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+    value: "international",
+    selected: death.locale == "international"
+  }, "International")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "text",
+    name: "name",
+    className: "form-control text-secondary mb-2",
+    placeholder: death.name,
+    required: true,
+    onChange: function onChange(e) {
+      return setName(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ms-2 mb-2 d-flex justify-content-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: ""
+  }, "Sunrise")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "date",
+    name: "name",
+    className: "form-control text-secondary mb-2",
+    value: death.sunrise,
+    required: true,
+    onChange: function onChange(e) {
+      return setSunrise(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ms-2 mb-2 d-flex justify-content-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: ""
+  }, "Sunset")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "date",
+    name: "name",
+    className: "form-control text-secondary mb-2",
+    value: death.sunset,
+    required: true,
+    onChange: function onChange(e) {
+      return setSunset(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ms-2 mb-2 d-flex justify-content-start"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    htmlFor: ""
+  }, "Date of Burial")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    type: "date",
+    name: "name",
+    className: "form-control text-secondary mb-2",
+    value: death.burialDate,
+    required: true,
+    onChange: function onChange(e) {
+      return setBurialDate(e.target.value);
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+    type: "text",
+    name: "description",
+    className: "form-control",
+    placeholder: death.announcement,
+    cols: "30",
+    rows: "5",
+    onChange: function onChange(e) {
+      return setAnnouncement(e.target.value);
+    },
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "d-flex justify-content-end py-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("small", {
+    className: "p-1\n\t\t\t\t\t\t\t\t\t".concat(announcement.length > death.wordLimit * 0.8 ? announcement.length <= death.wordLimit ? "bg-warning-subtle" : "bg-danger-subtle" : "bg-secondary-subtle", "\n\t\t\t\t\t\t\t\t")
+  }, "Word Count: ", announcement.length, " /", " ", death.wordLimit == 1000000 ? "Unlimited" : death.wordLimit))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4 col-sm-12"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    className: "w-75 mb-4 mx-auto text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "mb-2"
+  }, "Upload Death Announcement Poster"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
     name: "filepond-poster",
     labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>",
     imageCropAspectRatio: "16:9",
-    acceptedFileTypes: ["image/*"],
-    stylePanelAspectRatio: "16:9",
+    acceptedFileTypes: ["image/*"]
+    // stylePanelAspectRatio="16:9"
+    ,
     allowRevert: true,
     server: {
       url: "/api/filepond",
@@ -107375,31 +107409,100 @@ var DeathEdit = function DeathEdit(props) {
       }
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-lg-4"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    type: "text",
-    name: "name",
-    className: "form-control",
-    placeholder: death.name,
-    onChange: function onChange(e) {
-      return setName(e.target.value);
+    className: "w-75 mb-4 mx-auto text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "mb-2"
+  }, "Upload Related Photos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-photos"
+    // labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+    // imageCropAspectRatio="16:9"
+    ,
+    acceptedFileTypes: ["image/*"],
+    allowMultiple: true,
+    allowRevert: false,
+    allowRemove: false,
+    server: {
+      url: "/api/filepond",
+      process: {
+        url: "/death-photos/".concat(id, "/").concat(death.photoLimit),
+        onload: function onload(res) {
+          return props.setMessages([JSON.parse(err).message]);
+        },
+        onerror: function onerror(err) {
+          return props.setErrors([JSON.parse(err).message]);
+        }
+      }
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
-    type: "text",
-    name: "description",
-    className: "form-control",
-    placeholder: death.eulogy,
-    cols: "30",
-    rows: "5",
-    onChange: function onChange(e) {
-      return setEulogy(e.target.value);
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-75 mb-4 mx-auto text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "mb-2"
+  }, "Upload Related Videos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-videos"
+    // labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+    // imageCropAspectRatio="16:9"
+    ,
+    acceptedFileTypes: ["video/*"],
+    allowMultiple: true,
+    allowRevert: false,
+    allowRemove: false,
+    maxTotalFileSize: "".concat(death.videoLimit, "MB"),
+    server: {
+      url: "/api/filepond",
+      process: {
+        url: "/death-videos/".concat(id, "/").concat(death.videoLimit),
+        onload: function onload(res) {
+          return props.setMessages([JSON.parse(err).message]);
+        },
+        onerror: function onerror(err) {
+          return props.setErrors([JSON.parse(err).message]);
+        }
+      }
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-75 mb-4 mx-auto text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+    className: "mb-2"
+  }, "Upload Eulogy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_filepond__WEBPACK_IMPORTED_MODULE_5__["FilePond"], {
+    name: "filepond-eulogy",
+    labelIdle: "Drag & Drop your Image or <span class=\"filepond--label-action text-dark\"> Browse </span>"
+    // imageCropAspectRatio="16:9"
+    // acceptedFileTypes={[".doc, .docx, .pdf"]}
+    // stylePanelAspectRatio="16:9"
+    ,
+    allowRevert: true,
+    server: {
+      url: "/api/filepond",
+      process: {
+        url: "/eulogy",
+        onload: function onload(res) {
+          return setEulogy(res);
+        },
+        onerror: function onerror(err) {
+          return console.log(err.response.data);
+        }
+      },
+      revert: {
+        url: "/eulogy/".concat(eulogy.substr(27)),
+        onload: function onload(res) {
+          props.setMessages([res]);
+          // Clear Poster
+          setEulogy("");
+        }
+      }
+    }
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "col-sm-1"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "row w-75 mx-auto text-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    btnClass: "mb-2",
     btnText: "update death announcement",
+    onSubmit: onSubmit,
     loading: loadingBtn,
     disabled: loadingBtn
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "btn btn-outline-danger text-uppercase",
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "btn text-uppercase rounded-0 mb-2",
     type: "button",
     "data-bs-toggle": "collapse",
     "data-bs-target": "#collapseExample",
@@ -107409,9 +107512,9 @@ var DeathEdit = function DeathEdit(props) {
     className: "collapse",
     id: "collapseExample"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: ""
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you sure you want to delete the death announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "This process is irreversible"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    btnClass: "btn-danger text-white",
+    className: "text-center mb-2 py-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Are you sure you want to delete the death announcement"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "This process is irreversible"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_Btn__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    btnClass: "btn-outline-danger text-white rounded-0",
     btnText: "delete death announcement",
     loading: loadingBtn2,
     disabled: loadingBtn2,
@@ -107419,12 +107522,10 @@ var DeathEdit = function DeathEdit(props) {
       e.preventDefault();
       onDelete();
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_MyLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Core_MyLink__WEBPACK_IMPORTED_MODULE_3__["default"], {
     linkTo: "/deaths/show/".concat(id),
     text: "back to death announcement"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-sm-2"
-  }));
+  })));
 };
 /* harmony default export */ __webpack_exports__["default"] = (DeathEdit);
 
@@ -108429,6 +108530,11 @@ var index = function index(props) {
     setLocation = _useState2[1];
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     props.get("deaths", props.setDeaths);
+    props.get("weddings", props.setWeddings);
+    props.get("graduations", props.setGraduations);
+    props.get("success-cards", props.setSuccessCards);
+    props.get("anniversaries", props.setAnniversaries);
+    props.get("celebrations", props.setCelebrations);
   }, []);
   var active = function active(current) {
     if (location == current) {
@@ -108819,7 +108925,7 @@ var membership = function membership(props) {
       className: "card bg-2 border-0 mb-3 mt-5",
       style: {
         maxWidth: "20rem",
-        minWidth: "20rem",
+        minWidth: "19rem",
         backgroundImage: "linear-gradient(to bottom, rgb(186, 173, 123), rgb(255, 255, 255))"
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -108848,7 +108954,7 @@ var membership = function membership(props) {
           return onMembership(membership.id);
         },
         loading: loading == membership.id
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Announcement: ", membership.features.announcement, " words"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Photos: ", membership.features.photos, " photos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Eulogy: ", membership.features.eulogy, " words"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Price: $", membership.price));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Announcement:", " ", membership.features.announcement == 1000000 ? "Unlimited" : membership.features.announcement, " ", "words"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Photos:", " ", membership.features.photos == 1000000 ? "Unlimited" : membership.features.photos, " ", "photos"), membership.features.videos ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Videos:", " ", membership.features.videos == 1000000 ? "Unlimited" : membership.features.videos, " ", "MBs") : "", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Eulogy:", " ", membership.features.eulogy == 1000000 ? "Unlimited" : membership.features.eulogy, " ", "words"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Price: $", membership.price));
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "card-footer text-center border-0 py-4"
     }));

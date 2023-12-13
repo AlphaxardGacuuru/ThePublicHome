@@ -55,7 +55,7 @@ const TopNav = (props) => {
 
 	// Function for showing active color
 	const active2 = (check) => {
-		return location.pathname == check ? "active" : "text-white"
+		return location.pathname.match(check) ? "active" : "text-white"
 	}
 
 	// Function for showing active color
@@ -362,7 +362,7 @@ const TopNav = (props) => {
 								<li className="nav-item">
 									<Link
 										to="/anniversaries"
-										className={`nav-link ${active2("/success-cards")}`}
+										className={`nav-link ${active2("/anniversaries")}`}
 										onClick={() => setMenu("")}>
 										Anniversaries
 									</Link>
@@ -370,7 +370,7 @@ const TopNav = (props) => {
 								<li className="nav-item">
 									<Link
 										to="/celebrations"
-										className={`nav-link ${active2("/success-cards")}`}
+										className={`nav-link ${active2("/celebrations")}`}
 										onClick={() => setMenu("")}>
 										Celebrations
 									</Link>

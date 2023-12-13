@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Death;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FilePondController extends Controller
 {
-	/*
-	* Handle Death  Media
-	*/ 
+    /*
+     * Handle Death  Media
+     */
 
     /*
      * Handle Death  Poster Upload */
@@ -27,17 +28,74 @@ class FilePondController extends Controller
     }
 
     /*
-     * Handle Death  Images Upload */
-    public function storeDeathImages(Request $request)
+     * Handle Death  Photos Upload */
+    public function storeDeathPhotos(Request $request, $id, $limit)
     {
         $this->validate($request, [
-            'filepond-images' => 'required|file',
+            'filepond-photos' => 'required|file',
         ]);
 
-        $image = $request->file('filepond-images')->store('public/death-images');
-        $imageShort = substr($image, 7);
+        // Update Death
+        $death = Death::find($id);
 
-        return $imageShort;
+        // Get Photos in Database
+        $photosInDB = $death->photos ? $death->photos : [];
+
+        // Check if user has reached photo upload limit
+        if (count($photosInDB) <= $limit) {
+            $photos = $request
+                ->file('filepond-photos')
+                ->store('public/death-photos');
+
+            $photos = substr($photos, 7);
+        } else {
+            return response([
+                "status" => "error",
+                "message" => "Photo limit reached",
+            ], 422);
+        }
+
+        // Add new photos to array
+        array_push($photosInDB, $photos);
+
+        $death->photos = $photosInDB;
+        $saved = $death->save();
+
+        return response([
+            "status" => $saved,
+            "message" => "Photo saved successfully",
+        ], 200);
+    }
+
+    /*
+     * Handle Death  Videos Upload */
+    public function storeDeathVideos(Request $request, $id)
+    {
+        $this->validate($request, [
+            'filepond-videos' => 'required|file',
+        ]);
+
+        $videos = $request
+            ->file('filepond-videos')
+            ->store('public/death-videos');
+        $videos = substr($videos, 7);
+
+        // Update Death
+        $death = Death::find($id);
+
+        // Get Photos in Database
+        $videosInDB = $death->videos ? $death->videos : [];
+
+        // Add new photos to array
+        array_push($videosInDB, $videos);
+
+        $death->videos = $videosInDB;
+        $saved = $death->save();
+
+        return response([
+            "status" => $saved,
+            "message" => "Video saved successfully",
+        ], 200);
     }
 
     /*
@@ -58,15 +116,15 @@ class FilePondController extends Controller
      * Handle Club Poster Delete */
     public function destoryDeathPoster($id)
     {
-		Storage::delete('public/death-posters/' . $id);
+        Storage::delete('public/death-posters/' . $id);
 
         return response("Death  Poster deleted", 200);
     }
 
-	/*
-	* Avatar Media
-	*/ 
-	
+    /*
+     * Avatar Media
+     */
+
     /*
      * Handle Avatar Upload */
     public function updateAvatar(Request $request, $id)

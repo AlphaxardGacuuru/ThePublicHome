@@ -4,7 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Resources\DeathResource;
 use App\Models\Death;
-use App\Models\Membership;
+use App\Models\UserMembership;
 use Illuminate\Support\Facades\Storage;
 
 class DeathService extends Service
@@ -30,7 +30,7 @@ class DeathService extends Service
     }
 
     /*
-     * Store Club
+     * Store Death
      */
     public function store($request)
     {
@@ -50,7 +50,9 @@ class DeathService extends Service
         $saved = $death->save();
 
         // Update Membership
-        $membership = Membership::find($request->membershipId);
+        $membership = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->first();
         $membership->status = "used";
         $membership->save();
 
@@ -60,7 +62,7 @@ class DeathService extends Service
     }
 
     /*
-     * Update Club
+     * Update Death
      */
     public function update($request, $id)
     {
@@ -127,7 +129,7 @@ class DeathService extends Service
 
         Storage::disk("public")->delete($oldPoster);
 
-        // Delete Club
+        // Delete Death
         $deleted = $death->delete();
 
         return [$deleted, $death->name . " announcement deleted"];

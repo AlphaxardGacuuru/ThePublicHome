@@ -25,7 +25,7 @@ class DeathResource extends JsonResource
             "userName" => $this->user->name,
             "userAvatar" => $this->user->avatar,
             "locale" => $this->locale,
-			"tier" => $this->membership->tier,
+            "tier" => $this->membership->tier,
             "name" => $this->name,
             "sunrise" => $this->sunrise,
             "sunset" => $this->sunset,
@@ -36,6 +36,9 @@ class DeathResource extends JsonResource
             "eulogy" => $this->eulogy,
             "likes" => $this->likes,
             "hasLiked" => $this->hasLiked($id),
+            "wordLimit" => $this->membership->features["announcement"],
+            "photoLimit" => $this->membership->features["photos"],
+            "videoLimit" => $this->membership->features["videos"],
             "updatedAt" => $this->updated_at,
             "createdAt" => $this->created_at,
         ];

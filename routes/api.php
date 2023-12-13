@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\AnniversaryCommentController;
+use App\Http\Controllers\AnniversaryCommentLikeController;
+use App\Http\Controllers\AnniversaryController;
+use App\Http\Controllers\AnniversaryLikeController;
+use App\Http\Controllers\CelebrationCommentController;
+use App\Http\Controllers\CelebrationCommentLikeController;
+use App\Http\Controllers\CelebrationController;
+use App\Http\Controllers\CelebrationLikeController;
 use App\Http\Controllers\DeathCommentController;
 use App\Http\Controllers\DeathCommentLikeController;
 use App\Http\Controllers\DeathController;
@@ -43,8 +51,8 @@ Route::apiResources([
     "death-comments" => DeathCommentController::class,
     "death-comment-likes" => DeathCommentLikeController::class,
     "users" => UserController::class,
-    "memberships" => MembershipController::class,
     "user-memberships" => UserMembershipController::class,
+    "memberships" => MembershipController::class,
     "weddings" => WeddingController::class,
     "wedding-likes" => WeddingLikeController::class,
     "wedding-comments" => WeddingCommentController::class,
@@ -57,6 +65,14 @@ Route::apiResources([
     "success-card-likes" => SuccessCardLikeController::class,
     "success-card-comments" => SuccessCardCommentController::class,
     "success-card-comment-likes" => SuccessCardCommentLikeController::class,
+    "anniversaries" => AnniversaryController::class,
+    "anniversary-likes" => AnniversaryLikeController::class,
+    "anniversary-comments" => AnniversaryCommentController::class,
+    "anniversary-comment-likes" => AnniversaryCommentLikeController::class,
+    "celebrations" => CelebrationController::class,
+    "celebration-likes" => CelebrationLikeController::class,
+    "celebration-comments" => CelebrationCommentController::class,
+    "celebration-comment-likes" => CelebrationCommentLikeController::class,
 ]);
 
 // Filepond Controller
@@ -65,7 +81,8 @@ Route::prefix('filepond')->group(function () {
 
         // Death
         Route::post('death-poster', 'storeDeathPoster');
-        Route::post('death-images', 'storeDeathImages');
+        Route::post('death-photos/{id}/{limit}', 'storeDeathPhotos');
+        Route::post('death-videos/{id}/{limit}', 'storeDeathVideos');
         Route::post('eulogy', 'storeEulogy');
         Route::delete('death-poster/{id}', 'destoryDeathPoster');
 

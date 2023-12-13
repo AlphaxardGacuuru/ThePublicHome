@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 // import Axios from "axios"
 
@@ -42,40 +42,23 @@ const DeathCreate = (props) => {
 	const [sunset, setSunset] = useState("")
 	const [burialDate, setBurialDate] = useState("")
 	const [announcement, setAnnouncement] = useState("")
-	const [images, setImages] = useState("")
-	const [eulogy, setEulogy] = useState("")
 	const [loadingBtn, setLoadingBtn] = useState("")
 
 	// Get history for page location
 	const router = useHistory()
 
-	// Set Word and Page limit
-	switch (props.auth.membership) {
-		case "standard":
-			var wordLimit = 100
-			var pageLimit = 2
-			break
+	useEffect(() => {
+		// Redirect if user has no membership
+		if (!props.auth.membershipId) {
+			router.push("/profile/membership")
+		}
+	}, [])
 
-		case "vip":
-			var wordLimit = 200
-			var pageLimit = 5
-			break
-
-		default:
-			var wordLimit = 500
-			var pageLimit = 10
-			break
-	}
+	// Get Word limit for announcement based on user's membership
+	var wordLimit = props.auth.membershipFeatures?.announcement
 
 	const onSubmit = (e) => {
 		e.preventDefault()
-
-		// Check if announcement limit is set
-		if (announcement.length > wordLimit) {
-			return props.setErrors([
-				`Announcement cannot be greater than ${wordLimit} words`,
-			])
-		}
 
 		// Show loader and disable button
 		setLoadingBtn(true)
@@ -91,15 +74,13 @@ const DeathCreate = (props) => {
 			sunset: sunset,
 			burialDate: burialDate,
 			announcement: announcement,
-			images: images,
-			eulogy: eulogy,
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
 				// Remove loader for button
 				setLoadingBtn(false)
 				// Redirect to Show Death
-				setTimeout(() => router.push(`/deaths/show/${res.data.data.id}`), 500)
+				setTimeout(() => router.push(`/deaths/edit/${res.data.data.id}`), 500)
 			})
 			.catch((err) => {
 				// Remove loader for button
@@ -113,15 +94,41 @@ const DeathCreate = (props) => {
 			<div className="col-sm-2"></div>
 			<div className="col-sm-8">
 				<center>
-					<h2>Upload your Death Announcement</h2>
-
-					<br />
+					<h2 className="mb-4">Upload your Death Announcement</h2>
 
 					<form onSubmit={onSubmit}>
+						<div className="w-50 mb-5">
+							<label className="mb-2">Upload Death Announcement Poster</label>
+							<FilePond
+								name="filepond-poster"
+								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								imageCropAspectRatio="16:9"
+								acceptedFileTypes={["image/*"]}
+								stylePanelAspectRatio="16:9"
+								allowRevert={true}
+								server={{
+									url: `/api/filepond`,
+									process: {
+										url: "/death-poster",
+										onload: (res) => setPoster(res),
+										onerror: (err) => console.log(err.response.data),
+									},
+									revert: {
+										url: `/death-poster/${poster.substr(27)}`,
+										onload: (res) => {
+											props.setMessages([res])
+											// Clear Poster
+											setPoster("")
+										},
+									},
+								}}
+							/>
+						</div>
+
 						<select
 							type="text"
 							name="locale"
-							className="form-control"
+							className="form-control mb-2"
 							placeholder="locale"
 							required={true}
 							onChange={(e) => setLocale(e.target.value)}>
@@ -129,7 +136,6 @@ const DeathCreate = (props) => {
 							<option value="home">Home</option>
 							<option value="international">International</option>
 						</select>
-						<br />
 
 						<input
 							type="text"
@@ -145,7 +151,7 @@ const DeathCreate = (props) => {
 						</div>
 						<input
 							type="date"
-							name="name"
+							name="sunrise"
 							className="form-control text-secondary mb-2"
 							placeholder="Sunrise"
 							required={true}
@@ -155,10 +161,9 @@ const DeathCreate = (props) => {
 						<div className="ms-2 mb-2 d-flex justify-content-start">
 							<label htmlFor="">Sunset</label>
 						</div>
-
 						<input
 							type="date"
-							name="name"
+							name="sunset"
 							className="form-control text-secondary mb-2"
 							placeholder="Sunset"
 							required={true}
@@ -168,7 +173,6 @@ const DeathCreate = (props) => {
 						<div className="ms-2 mb-2 d-flex justify-content-start">
 							<label htmlFor="">Date of Burial</label>
 						</div>
-
 						<input
 							type="date"
 							name="name"
@@ -187,7 +191,8 @@ const DeathCreate = (props) => {
 							rows="5"
 							onChange={(e) => setAnnouncement(e.target.value)}
 							required={true}></textarea>
-						<div className="d-flex justify-content-end p-2">
+
+						<div className="d-flex justify-content-end py-2">
 							<small
 								className={`p-1
 									${
@@ -198,96 +203,12 @@ const DeathCreate = (props) => {
 											: "bg-secondary-subtle"
 									}
 								`}>
-								Word Count: {announcement.length} / {wordLimit}
+								Word Count: {announcement.length} /{" "}
+								{wordLimit == 1000000 ? "Unlimited" : wordLimit}
 							</small>
 						</div>
-						<br />
-
-						<div className="row">
-							<div className="col-lg-4">
-								<label className="mb-2">Upload Death Announcement Poster</label>
-								<FilePond
-									name="filepond-poster"
-									labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-									imageCropAspectRatio="16:9"
-									acceptedFileTypes={["image/*"]}
-									stylePanelAspectRatio="16:9"
-									allowRevert={true}
-									server={{
-										url: `/api/filepond`,
-										process: {
-											url: "/death-poster",
-											onload: (res) => setPoster(res),
-											onerror: (err) => console.log(err.response.data),
-										},
-										revert: {
-											url: `/death-poster/${poster.substr(27)}`,
-											onload: (res) => {
-												props.setMessages([res])
-												// Clear Poster
-												setPoster("")
-											},
-										},
-									}}
-								/>
-							</div>
-							<div className="col-lg-4">
-								<label className="mb-2">Upload Related Images</label>
-
-								<div>
-									<FilePond
-										name="filepond-images"
-										// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-										// imageCropAspectRatio="16:9"
-										acceptedFileTypes={["image/*"]}
-										allowMultiple={true}
-										allowRevert={false}
-										allowRemove={false}
-										server={{
-											url: `/api/filepond`,
-											process: {
-												url: "/death-images",
-												onload: (res) => setImages([...images, res]),
-												onerror: (err) => console.log(err.response.data),
-											},
-										}}
-									/>
-								</div>
-							</div>
-							<div className="col-lg-4">
-								<label className="mb-2">Upload Eulogy</label>
-
-								<FilePond
-									name="filepond-eulogy"
-									labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-									// imageCropAspectRatio="16:9"
-									// acceptedFileTypes={[".doc, .docx, .pdf"]}
-									// stylePanelAspectRatio="16:9"
-									allowRevert={true}
-									server={{
-										url: `/api/filepond`,
-										process: {
-											url: "/eulogy",
-											onload: (res) => setEulogy(res),
-											onerror: (err) => console.log(err.response.data),
-										},
-										revert: {
-											url: `/eulogy/${eulogy.substr(27)}`,
-											onload: (res) => {
-												props.setMessages([res])
-												// Clear Poster
-												setEulogy("")
-											},
-										},
-									}}
-								/>
-							</div>
-						</div>
-						<br />
-						<br />
 
 						<Btn
-							btnStyle={{ zIndex: "10000" }}
 							btnText="create death announcement"
 							loading={loadingBtn}
 							disabled={loadingBtn}

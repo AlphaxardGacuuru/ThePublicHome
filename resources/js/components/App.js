@@ -56,6 +56,12 @@ const App = () => {
 	const [successCards, setSuccessCards] = useState(
 		getLocalStorage("successCards")
 	)
+	const [anniversaries, setAnniversaries] = useState(
+		getLocalStorage("anniversaries")
+	)
+	const [celebrations, setCelebrations] = useState(
+		getLocalStorage("celebrations")
+	)
 
 	// Function for fetching data from API
 	const get = (endpoint, setState, storage = null, errors = true) => {
@@ -160,6 +166,10 @@ const App = () => {
 		setGraduations,
 		successCards,
 		setSuccessCards,
+		anniversaries,
+		setAnniversaries,
+		celebrations,
+		setCelebrations,
 
 		// PWA
 		btnAdd,

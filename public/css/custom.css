@@ -273,6 +273,7 @@ p {
 	-webkit-transition-duration: 800ms;
 	transition-duration: 800ms;
 	box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+	z-index: 10;
 }
 
 .left-main {

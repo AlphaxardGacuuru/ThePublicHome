@@ -8,6 +8,11 @@ const index = (props) => {
 
 	useEffect(() => {
 		props.get("deaths", props.setDeaths)
+		props.get("weddings", props.setWeddings)
+		props.get("graduations", props.setGraduations)
+		props.get("success-cards", props.setSuccessCards)
+		props.get("anniversaries", props.setAnniversaries)
+		props.get("celebrations", props.setCelebrations)
 	}, [])
 
 	const active = (current) => {

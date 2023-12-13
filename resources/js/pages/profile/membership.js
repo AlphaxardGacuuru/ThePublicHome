@@ -63,7 +63,7 @@ const membership = (props) => {
 							className="card bg-2 border-0 mb-3 mt-5"
 							style={{
 								maxWidth: "20rem",
-								minWidth: "20rem",
+								minWidth: "19rem",
 								backgroundImage:
 									"linear-gradient(to bottom, rgb(186, 173, 123), rgb(255, 255, 255))",
 							}}>
@@ -95,10 +95,37 @@ const membership = (props) => {
 											)}
 										</div>
 										<div>
-											Announcement: {membership.features.announcement} words
+											Announcement:{" "}
+											{membership.features.announcement == 1000000
+												? "Unlimited"
+												: membership.features.announcement}{" "}
+											words
 										</div>
-										<div>Photos: {membership.features.photos} photos</div>
-										<div>Eulogy: {membership.features.eulogy} words</div>
+										<div>
+											Photos:{" "}
+											{membership.features.photos == 1000000
+												? "Unlimited"
+												: membership.features.photos}{" "}
+											photos
+										</div>
+										{membership.features.videos ? (
+											<div>
+												Videos:{" "}
+												{membership.features.videos == 1000000
+													? "Unlimited"
+													: membership.features.videos}{" "}
+												MBs
+											</div>
+										) : (
+											""
+										)}
+										<div>
+											Eulogy:{" "}
+											{membership.features.eulogy == 1000000
+												? "Unlimited"
+												: membership.features.eulogy}{" "}
+											words
+										</div>
 										<div>Price: ${membership.price}</div>
 									</div>
 								))}

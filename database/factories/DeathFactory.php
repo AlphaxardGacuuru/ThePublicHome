@@ -19,11 +19,15 @@ class DeathFactory extends Factory
      */
     public function definition()
     {
+        $membership = Membership::where("name", "death")
+            ->get()
+            ->random();
+
         $location = ["home", "international"];
 
         return [
             'user_id' => User::all()->random()->id,
-            'membership_id' => Membership::all()->random()->id,
+            'membership_id' => $membership->id,
             'locale' => $location[rand(0, 1)],
             'name' => fake()->name(),
             'sunrise' => Carbon::now()->subYears(rand(10, 90)),
