@@ -32,7 +32,6 @@ class DeathController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "poster" => "required|string",
             "locale" => "required|string",
             "name" => "required|string",
             "sunrise" => "required|string",
@@ -78,6 +77,8 @@ class DeathController extends Controller
             "sunset" => "nullable|string",
             "burialDate" => "nullable|string",
             "announcement" => "nullable|string",
+			"photo" => "nullable|string",
+			"video" => "nullable|string"
         ]);
 
         [$saved, $message, $death] = $this->service->update($request, $id);

@@ -20,14 +20,14 @@ class MembershipSeeder extends Seeder
                     "announcement" => 400,
                     "photos" => 15,
                     "videos" => 0,
-                    "eulogy" => 1500,
+                    "eulogy" => 1,
                     "price" => 28,
                 ],
                 "vip" => [
                     "announcement" => 1000000,
                     "photos" => 60,
                     "videos" => 100,
-                    "eulogy" => 1000000,
+                    "eulogy" => 10,
                     "price" => 280,
                 ],
                 "executive" => [

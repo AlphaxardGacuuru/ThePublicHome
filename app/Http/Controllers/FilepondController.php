@@ -6,6 +6,7 @@ use App\Models\Death;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Spatie\PdfToImage\Pdf;
 
 class FilePondController extends Controller
 {
@@ -15,16 +16,28 @@ class FilePondController extends Controller
 
     /*
      * Handle Death  Poster Upload */
-    public function storeDeathPoster(Request $request)
+    public function storeDeathPoster(Request $request, $id)
     {
         $this->validate($request, [
             'filepond-poster' => 'required|file',
         ]);
 
+        // Store poster
         $poster = $request->file('filepond-poster')->store('public/death-posters');
-        $posterShort = substr($poster, 7);
 
-        return $posterShort;
+        $poster = substr($poster, 7);
+
+        // Retrieve Death
+        $death = Death::findOrFail($id);
+
+        $oldPoster = substr($death->poster, 8);
+
+        // Delete the old poster
+        Storage::disk("public")->delete($oldPoster);
+
+        $death->poster = $poster;
+
+        return $death->save();
     }
 
     /*
@@ -36,7 +49,7 @@ class FilePondController extends Controller
         ]);
 
         // Update Death
-        $death = Death::find($id);
+        $death = Death::findOrFail($id);
 
         // Get Photos in Database
         $photosInDB = $death->photos ? $death->photos : [];
@@ -59,66 +72,90 @@ class FilePondController extends Controller
         array_push($photosInDB, $photos);
 
         $death->photos = $photosInDB;
-        $saved = $death->save();
 
-        return response([
-            "status" => $saved,
-            "message" => "Photo saved successfully",
-        ], 200);
+        $death->save();
+
+        return $photosInDB;
     }
 
     /*
      * Handle Death  Videos Upload */
-    public function storeDeathVideos(Request $request, $id)
+    public function storeDeathVideos(Request $request, $id, $limit)
     {
         $this->validate($request, [
             'filepond-videos' => 'required|file',
         ]);
 
-        $videos = $request
-            ->file('filepond-videos')
-            ->store('public/death-videos');
-        $videos = substr($videos, 7);
-
         // Update Death
-        $death = Death::find($id);
+        $death = Death::findOrFail($id);
 
         // Get Photos in Database
         $videosInDB = $death->videos ? $death->videos : [];
+
+        $count = $this->calculateFileSize($videosInDB);
+
+        if ($count <= $limit) {
+            $videos = $request
+                ->file('filepond-videos')
+                ->store('public/death-videos');
+
+            $videos = substr($videos, 7);
+        } else {
+            return response([
+                "status" => "error",
+                "message" => "Photo limit reached",
+            ], 422);
+        }
 
         // Add new photos to array
         array_push($videosInDB, $videos);
 
         $death->videos = $videosInDB;
-        $saved = $death->save();
 
-        return response([
-            "status" => $saved,
-            "message" => "Video saved successfully",
-        ], 200);
+        $death->save();
+
+        return $videosInDB;
     }
 
     /*
      * Handle Eulogy Upload */
-    public function storeEulogy(Request $request)
+    public function storeEulogy(Request $request, $id, $limit)
     {
         $this->validate($request, [
             'filepond-eulogy' => 'required|file',
         ]);
 
-        $eulogy = $request->file('filepond-eulogy')->store('public/eulogies');
-        $eulogy = substr($eulogy, 7);
+        $eulogy = $request->file('filepond-eulogy')->getRealPath();
 
-        return $eulogy;
+        $pdf = new Pdf($eulogy);
+
+        $pageCount = $pdf->getNumberOfPages();
+
+        if ($pageCount <= $limit) {
+            $eulogy = $request->file('filepond-eulogy')->store('public/eulogies');
+
+            $eulogy = substr($eulogy, 7);
+
+            $death = Death::findOrFail($id);
+			
+            $death->eulogy = $eulogy;
+
+            return $death->save();
+        } else {
+            return response([
+                "status" => "error",
+                "message" => "Eulogy cannot have more than " . $limit . " pages",
+            ], 422);
+        }
     }
 
     /*
-     * Handle Club Poster Delete */
-    public function destoryDeathPoster($id)
+     * Handle Eulogy Delete */
+    public function destoryEulogy($id)
     {
-        Storage::delete('public/death-posters/' . $id);
+        Storage::delete('public/eulogies/' . $id);
 
-        return response("Death  Poster deleted", 200);
+        return response("Eulogy deleted", 200);
     }
 
     /*
@@ -136,7 +173,7 @@ class FilePondController extends Controller
         $avatar = $request->file('filepond-avatar')->store('public/avatars');
         $avatar = substr($avatar, 7);
 
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         // Delete Avatar if it's not the default one
         if ($user->avatar != '/storage/avatars/male-avatar.png') {
@@ -151,5 +188,24 @@ class FilePondController extends Controller
         $user->save();
 
         return response(["message" => "Avatar updated"], 200);
+    }
+
+    /*
+     * Calculate Size of Files
+     */
+    public function calculateFileSize($filePaths)
+    {
+        // Calculate the total size of the specified files in bytes
+        $totalSize = collect($filePaths)->reduce(function ($carry, $file) {
+            // Check if the file exists in the storage
+            if (Storage::disk("public")->exists($file)) {
+                return $carry + Storage::disk("public")->size($file);
+            }
+            return $carry;
+        }, 0);
+
+        $mbs = $totalSize / (1024 * 1024);
+
+        return round($mbs, 2);
     }
 }

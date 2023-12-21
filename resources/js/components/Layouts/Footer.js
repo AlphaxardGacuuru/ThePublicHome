@@ -19,7 +19,20 @@ const Footer = () => {
 	}
 
 	const hide =
-		location.pathname.match("/admin") || location.pathname.match("/profile")
+		location.pathname.match("/celebrations/edit") ||
+		location.pathname.match("/celebrations/create") ||
+		location.pathname.match("/anniversaries/edit") ||
+		location.pathname.match("/anniversaries/create") ||
+		location.pathname.match("/success-cards/edit") ||
+		location.pathname.match("/success-cards/create") ||
+		location.pathname.match("/graduations/edit") ||
+		location.pathname.match("/graduations/create") ||
+		location.pathname.match("/weddings/edit") ||
+		location.pathname.match("/weddings/create") ||
+		location.pathname.match("/deaths/edit") ||
+		location.pathname.match("/deaths/create") ||
+		location.pathname.match("/admin") ||
+		location.pathname.match("/profile")
 			? "d-none"
 			: ""
 

@@ -37,7 +37,6 @@ const DeathCreate = (props) => {
 	// Declare states
 	const [locale, setLocale] = useState()
 	const [name, setName] = useState()
-	const [poster, setPoster] = useState("")
 	const [sunrise, setSunrise] = useState("")
 	const [sunset, setSunset] = useState("")
 	const [burialDate, setBurialDate] = useState("")
@@ -69,7 +68,6 @@ const DeathCreate = (props) => {
 			membershipId: props.auth.membershipId,
 			locale: locale,
 			name: name,
-			poster: poster,
 			sunrise: sunrise,
 			sunset: sunset,
 			burialDate: burialDate,
@@ -97,34 +95,6 @@ const DeathCreate = (props) => {
 					<h2 className="mb-4">Upload your Death Announcement</h2>
 
 					<form onSubmit={onSubmit}>
-						<div className="w-50 mb-5">
-							<label className="mb-2">Upload Death Announcement Poster</label>
-							<FilePond
-								name="filepond-poster"
-								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-								imageCropAspectRatio="16:9"
-								acceptedFileTypes={["image/*"]}
-								stylePanelAspectRatio="16:9"
-								allowRevert={true}
-								server={{
-									url: `/api/filepond`,
-									process: {
-										url: "/death-poster",
-										onload: (res) => setPoster(res),
-										onerror: (err) => console.log(err.response.data),
-									},
-									revert: {
-										url: `/death-poster/${poster.substr(27)}`,
-										onload: (res) => {
-											props.setMessages([res])
-											// Clear Poster
-											setPoster("")
-										},
-									},
-								}}
-							/>
-						</div>
-
 						<select
 							type="text"
 							name="locale"

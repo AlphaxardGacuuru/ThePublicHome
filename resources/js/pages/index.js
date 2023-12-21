@@ -58,16 +58,30 @@ const index = (props) => {
 					</div>
 					<div className="m-2">
 						<Link
-							to="/graduation"
+							to="/graduations"
 							className="card m-2 p-5 mx-auto">
 							<h3>Graduation Announcements</h3>
 						</Link>
 					</div>
 					<div className="m-2">
 						<Link
-							to="/success-card"
+							to="/success-cards"
 							className="card m-2 p-5 mx-auto">
-							<h3>Success Card</h3>
+							<h3>Success Card Announcements</h3>
+						</Link>
+					</div>
+					<div className="m-2">
+						<Link
+							to="/anniversaries"
+							className="card m-2 p-5 mx-auto">
+							<h3>Anniversary Announcements</h3>
+						</Link>
+					</div>
+					<div className="m-2">
+						<Link
+							to="/celebrations"
+							className="card m-2 p-5 mx-auto">
+							<h3>Celebration Announcements</h3>
 						</Link>
 					</div>
 				</div>

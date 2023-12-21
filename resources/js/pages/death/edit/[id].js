@@ -3,6 +3,7 @@ import { Link, useHistory, useParams } from "react-router-dom"
 // import Axios from "axios"
 
 import Btn from "@/components/Core/Btn"
+import Img from "@/components/Core/Img"
 import MyLink from "@/components/Core/MyLink"
 
 import CloseSVG from "@/svgs/CloseSVG"
@@ -54,9 +55,7 @@ const DeathEdit = (props) => {
 
 	useEffect(() => props.get(`deaths/${id}`, setDeath), [])
 
-	const onSubmit = (e) => {
-		e.preventDefault()
-
+	const onSubmit = () => {
 		// Show loader and disable button
 		setLoadingBtn(true)
 
@@ -83,6 +82,8 @@ const DeathEdit = (props) => {
 				props.setMessages([res.data.message])
 				// Remove loader for button
 				setLoadingBtn(false)
+				// Reload page
+				window.location.reload()
 			})
 			.catch((err) => {
 				// Remove loader for button
@@ -92,7 +93,47 @@ const DeathEdit = (props) => {
 	}
 
 	/*
-	 * Delete Club */
+	 * Delete Photos
+	 */
+	const onDeletePhotos = (photoPath) => {
+		Axios.put(`api/deaths/${id}`, {
+			photo: photoPath,
+		})
+			.then((res) => {
+				// Set Messages
+				props.setMessages([res.data.message])
+				// Remove photos
+				var filteredPhotos = death.photos.filter((photo) => photo != photoPath)
+
+				death.photos = filteredPhotos
+
+				setDeath(death)
+			})
+			.catch((err) => props.getErrors(err))
+	}
+
+	/*
+	 * Delete Videos
+	 */
+	const onDeleteVideos = (videoPath) => {
+		Axios.put(`api/deaths/${id}`, {
+			video: videoPath,
+		})
+			.then((res) => {
+				// Set Messages
+				props.setMessages([res.data.message])
+				// Remove videos
+				var filteredVideos = death.videos.filter((video) => video != videoPath)
+
+				death.videos = filteredVideos
+
+				setDeath(death)
+			})
+			.catch((err) => props.getErrors(err))
+	}
+
+	/*
+	 * Delete Death */
 	const onDelete = () => {
 		// Set Loader
 		setLoadingBtn2(true)
@@ -113,16 +154,21 @@ const DeathEdit = (props) => {
 	}
 
 	return (
-		<div>
-			<center>
-				<h2 className="my-4">Upload your Death Announcement</h2>
-			</center>
+		<div className="mb-5">
+			<div className="border rounded m-2 p-2">
+				<h2 className="text-center">Upload your Death Announcement</h2>
+			</div>
 
-			<div className="row">
-				<div className="col-sm-1"></div>
-				<div className="col-sm-5">
-					<center>
+			<div className="row p-0">
+				<div className="col-sm-4">
+					<div className="text-center border rounded mx-2 my-2 px-2 py-5">
+						<h3 className="text-center mb-4">Announcement Details</h3>
+
 						<form>
+							<div className="text-center bg-2 my-1 p-1 text-white text-uppercase">
+								{death.tier}
+							</div>
+
 							<select
 								type="text"
 								name="locale"
@@ -160,7 +206,7 @@ const DeathEdit = (props) => {
 								type="date"
 								name="name"
 								className="form-control text-secondary mb-2"
-								value={death.sunrise}
+								defaultValue={death.sunrise}
 								required={true}
 								onChange={(e) => setSunrise(e.target.value)}
 							/>
@@ -173,7 +219,7 @@ const DeathEdit = (props) => {
 								type="date"
 								name="name"
 								className="form-control text-secondary mb-2"
-								value={death.sunset}
+								defaultValue={death.sunset}
 								required={true}
 								onChange={(e) => setSunset(e.target.value)}
 							/>
@@ -186,7 +232,7 @@ const DeathEdit = (props) => {
 								type="date"
 								name="name"
 								className="form-control text-secondary mb-2"
-								value={death.burialDate}
+								defaultValue={death.burialDate}
 								required={true}
 								onChange={(e) => setBurialDate(e.target.value)}
 							/>
@@ -216,163 +262,255 @@ const DeathEdit = (props) => {
 									{death.wordLimit == 1000000 ? "Unlimited" : death.wordLimit}
 								</small>
 							</div>
+
+							{/* Buttons */}
+							<div className="row w-75 mx-auto text-center">
+								<Btn
+									btnClass="mb-2"
+									btnText="update death announcement"
+									onClick={onSubmit}
+									loading={loadingBtn}
+									disabled={loadingBtn}
+								/>
+
+								{/* Collapse */}
+								<button
+									className="btn text-uppercase rounded-0 mb-2"
+									type="button"
+									data-bs-toggle="collapse"
+									data-bs-target="#collapseExample"
+									aria-expanded="false"
+									aria-controls="collapseExample">
+									delete death announcement
+								</button>
+								<div
+									className="collapse"
+									id="collapseExample">
+									<div className="text-center mb-2 py-4">
+										<h4>
+											Are you sure you want to delete the death announcement
+										</h4>
+										<h5>This process is irreversible</h5>
+										<br />
+										<Btn
+											btnClass="btn-outline-danger text-white rounded-0"
+											btnText="delete death announcement"
+											loading={loadingBtn2}
+											disabled={loadingBtn2}
+											onClick={(e) => {
+												e.preventDefault()
+												onDelete()
+											}}
+										/>
+									</div>
+								</div>
+								{/* Collapse End */}
+
+								<MyLink
+									linkTo={`/deaths/show/${id}`}
+									text="back to death announcement"
+								/>
+							</div>
+							{/* Buttons End */}
 						</form>
-					</center>
+					</div>
 				</div>
 
-				<div className="col-sm-6">
-					<div className="w-75 mb-4 mx-auto text-center">
-						<label className="mb-2">Upload Death Announcement Poster</label>
-						<FilePond
-							name="filepond-poster"
-							labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-							imageCropAspectRatio="16:9"
-							acceptedFileTypes={["image/*"]}
-							// stylePanelAspectRatio="16:9"
-							allowRevert={true}
-							server={{
-								url: `/api/filepond`,
-								process: {
-									url: "/death-poster",
-									onload: (res) => setPoster(res),
-									onerror: (err) => console.log(err.response.data),
-								},
-								revert: {
-									url: `/death-poster/${poster.substr(27)}`,
-									onload: (res) => {
-										props.setMessages([res])
-										// Clear Poster
-										setPoster("")
+				<div className="col-sm-4">
+					<div className="text-center border rounded mx-2 my-2 px-2 py-5">
+						<h3 className="text-center mb-4">Upload Media</h3>
+
+						<div className="w-100 mb-4 mx-auto text-center">
+							<label className="mb-2">Upload Death Announcement Poster</label>
+							<FilePond
+								name="filepond-poster"
+								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								imageCropAspectRatio="16:9"
+								acceptedFileTypes={["image/*"]}
+								// stylePanelAspectRatio="16:9"
+								allowReplace={true}
+								allowRevert={true}
+								server={{
+									url: `/api/filepond`,
+									process: {
+										url: `/death-poster/${id}`,
+										onload: () => props.get(`deaths/${id}`, setDeath),
+										onerror: (err) => console.log(err.response.data),
 									},
-								},
-							}}
-						/>
-					</div>
-
-					<div className="w-75 mb-4 mx-auto text-center">
-						<label className="mb-2">Upload Related Photos</label>
-
-						<FilePond
-							name="filepond-photos"
-							// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-							// imageCropAspectRatio="16:9"
-							acceptedFileTypes={["image/*"]}
-							allowMultiple={true}
-							allowRevert={false}
-							allowRemove={false}
-							server={{
-								url: `/api/filepond`,
-								process: {
-									url: `/death-photos/${id}/${death.photoLimit}`,
-									onload: (res) => props.setMessages([JSON.parse(err).message]),
-									onerror: (err) => props.setErrors([JSON.parse(err).message]),
-								},
-							}}
-						/>
-					</div>
-
-					<div className="w-75 mb-4 mx-auto text-center">
-						<label className="mb-2">Upload Related Videos</label>
-
-						<FilePond
-							name="filepond-videos"
-							// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-							// imageCropAspectRatio="16:9"
-							acceptedFileTypes={["video/*"]}
-							allowMultiple={true}
-							allowRevert={false}
-							allowRemove={false}
-							maxTotalFileSize={`${death.videoLimit}MB`}
-							server={{
-								url: `/api/filepond`,
-								process: {
-									url: `/death-videos/${id}/${death.videoLimit}`,
-									onload: (res) => props.setMessages([JSON.parse(err).message]),
-									onerror: (err) => props.setErrors([JSON.parse(err).message]),
-								},
-							}}
-						/>
-					</div>
-
-					<div className="w-75 mb-4 mx-auto text-center">
-						<label className="mb-2">Upload Eulogy</label>
-
-						<FilePond
-							name="filepond-eulogy"
-							labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-							// imageCropAspectRatio="16:9"
-							// acceptedFileTypes={[".doc, .docx, .pdf"]}
-							// stylePanelAspectRatio="16:9"
-							allowRevert={true}
-							server={{
-								url: `/api/filepond`,
-								process: {
-									url: "/eulogy",
-									onload: (res) => setEulogy(res),
-									onerror: (err) => console.log(err.response.data),
-								},
-								revert: {
-									url: `/eulogy/${eulogy.substr(27)}`,
-									onload: (res) => {
-										props.setMessages([res])
-										// Clear Poster
-										setEulogy("")
+									revert: {
+										url: `/death-poster/${poster.substr(14)}`,
+										onload: (res) => {
+											props.setMessages([res])
+											// Clear Poster
+											setPoster("")
+										},
 									},
-								},
-							}}
-						/>
+								}}
+							/>
+						</div>
+
+						<div className="w-100 mb-4 mx-auto text-center">
+							<label className="mb-2">Upload Related Photos</label>
+
+							<FilePond
+								name="filepond-photos"
+								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								// imageCropAspectRatio="16:9"
+								acceptedFileTypes={["image/*"]}
+								allowMultiple={true}
+								allowRevert={false}
+								allowRemove={false}
+								server={{
+									url: `/api/filepond`,
+									process: {
+										url: `/death-photos/${id}/${death.photoLimit}`,
+										onload: () => props.get(`deaths/${id}`, setDeath),
+										onerror: (err) => console.log(err),
+									},
+								}}
+							/>
+						</div>
+
+						<div className="w-100 mb-4 mx-auto text-center">
+							<label className="mb-2">Upload Related Videos</label>
+
+							<FilePond
+								name="filepond-videos"
+								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								// imageCropAspectRatio="16:9"
+								acceptedFileTypes={["video/*"]}
+								allowMultiple={true}
+								allowRevert={false}
+								allowRemove={false}
+								maxTotalFileSize={`${death.videoLimit}MB`}
+								server={{
+									url: `/api/filepond`,
+									process: {
+										url: `/death-videos/${id}/${death.videoLimit}`,
+										onload: () => props.get(`deaths/${id}`, setDeath),
+										onerror: (err) => console.log(err),
+									},
+								}}
+							/>
+						</div>
+
+						<div className="w-100 mb-4 mx-auto text-center">
+							<label className="mb-2">Upload Eulogy</label>
+
+							<FilePond
+								name="filepond-eulogy"
+								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								// imageCropAspectRatio="16:9"
+								acceptedFileTypes={["application/pdf"]}
+								// stylePanelAspectRatio="16:9"
+								allowRevert={true}
+								server={{
+									url: `/api/filepond`,
+									process: {
+										url: `/eulogy/${id}/${death.eulogyLimit}`,
+										onload: (res) => props.get(`deaths/${id}`, setDeath),
+										onerror: (err) => console.log(err.response.data),
+									},
+									revert: {
+										url: `/eulogy/${eulogy.substr(9)}`,
+										onload: (res) => {
+											props.setMessages([res])
+											// Clear Poster
+											setEulogy("")
+										},
+									},
+								}}
+							/>
+						</div>
 					</div>
 				</div>
-				<div className="col-sm-1"></div>
-			</div>
 
-			{/* Buttons */}
-			<div className="row w-75 mx-auto text-center">
-				<Btn
-					btnClass="mb-2"
-					btnText="update death announcement"
-					onSubmit={onSubmit}
-					loading={loadingBtn}
-					disabled={loadingBtn}
-				/>
+				<div className="col-sm-4">
+					<div className="border rounded mx-2 my-2 px-2 py-5">
+						<h3 className="text-center mb-4">Media Details</h3>
 
-				{/* Collapse */}
-				<button
-					className="btn text-uppercase rounded-0 mb-2"
-					type="button"
-					data-bs-toggle="collapse"
-					data-bs-target="#collapseExample"
-					aria-expanded="false"
-					aria-controls="collapseExample">
-					delete death announcement
-				</button>
-				<div
-					className="collapse"
-					id="collapseExample">
-					<div className="text-center mb-2 py-4">
-						<h4>Are you sure you want to delete the death announcement</h4>
-						<h3>This process is irreversible</h3>
-						<br />
-						<Btn
-							btnClass="btn-outline-danger text-white rounded-0"
-							btnText="delete death announcement"
-							loading={loadingBtn2}
-							disabled={loadingBtn2}
-							onClick={(e) => {
-								e.preventDefault()
-								onDelete()
-							}}
-						/>
+						{/* Poster */}
+						<h5>Poster</h5>
+						<div
+							className="mb-4 card shadow p-2"
+							style={{ width: "16.5em" }}>
+							{death.poster != "/storage/" && (
+								<Img
+									src={death.poster}
+									style={{ width: "15em", height: "auto" }}
+								/>
+							)}
+						</div>
+						{/* Poster End */}
+
+						{/* List Images */}
+						<h5>Photos</h5>
+						<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll custom-scroll">
+							{death.photos?.map((photo, key) => (
+								<div
+									key={key}
+									className="shadow m-1 p-1">
+									<div className="text-end">
+										<span
+											className="text-muted p-1"
+											style={{ cursor: "pointer" }}
+											onClick={() => onDeletePhotos(photo)}>
+											<CloseSVG />
+										</span>
+									</div>
+									<Img
+										src={`/storage/${photo}`}
+										className="mx-2"
+										style={{ width: "8em", height: "auto" }}
+									/>
+								</div>
+							))}
+						</div>
+						{/* List Images End */}
+
+						{/* List Videos */}
+						<h5>Videos</h5>
+						<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
+							{death.videos?.map((video, key) => (
+								<div
+									key={key}
+									className="shadow m-1 p-1">
+									<div className="text-end">
+										<span
+											className="text-muted p-1"
+											style={{ cursor: "pointer" }}
+											onClick={() => onDeleteVideos(video)}>
+											<CloseSVG />
+										</span>
+									</div>
+									<video
+										className="mx-2"
+										style={{ width: "20em", height: "auto" }}
+										controls>
+										<source
+											src={`/storage/${video}`}
+											// type="video/mp4"
+										/>
+										Your browser does not support the video tag.
+									</video>
+								</div>
+							))}
+						</div>
+						{/* List Videos End */}
+
+						{/* Eulogy */}
+						<h5>Eulogy</h5>
+						<div className="d-flex justify-content-center flex-wrap mb-4">
+							<div className="card shadow p-2">
+								<iframe
+									src={`/storage/${death.eulogy}`}
+									style={{ width: "15em", height: "30em" }}></iframe>
+							</div>
+						</div>
+						{/* Eulogy End */}
 					</div>
 				</div>
-				{/* Collapse End */}
-
-				<MyLink
-					linkTo={`/deaths/show/${id}`}
-					text="back to death announcement"
-				/>
 			</div>
-			{/* Buttons End */}
 		</div>
 	)
 }

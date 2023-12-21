@@ -124,7 +124,7 @@ const membership = (props) => {
 											{membership.features.eulogy == 1000000
 												? "Unlimited"
 												: membership.features.eulogy}{" "}
-											words
+											pages
 										</div>
 										<div>Price: ${membership.price}</div>
 									</div>

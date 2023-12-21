@@ -1101,8 +1101,7 @@ div.hidden-scroll span {
 	}
 }
 
-/*customize the scrollbar*/
-/* width */
+/* Scrollbar */
 ::-webkit-scrollbar {
 	width: 5px;
 }
@@ -1124,14 +1123,28 @@ div.hidden-scroll span {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #FFFFFF;
-	border: 1px solid white;
+	background: rgba(36, 37, 37, 0.8);
 }
 
 /*the track (progress bar) NOT covered by the handle*/
 ::-webkit-scrollbar-track-piece {
 	border: 1px solid white;
 }
+
+/* Scroll End */
+
+/* Custom Scroll */
+.custom-scroll {
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+
+.custom-scroll::-webkit-scrollbar {
+	width: 1px;
+}
+
+/* Custom Scroll End */
 
 /*Horizontal Scroll buttons*/
 .myScrollBtn {

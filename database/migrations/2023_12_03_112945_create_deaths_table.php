@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('sunset')->nullable();
             $table->string('burial_date')->nullable();
             $table->string('announcement');
-            $table->string('poster');
+            $table->string('poster')->nullable();
             $table->jsonb('photos')->nullable();
             $table->jsonb('videos')->nullable();
             $table->string('eulogy')->nullable();

@@ -49,7 +49,7 @@ class SuccessCardCommentService extends Service
      */
     public function destroy($id)
     {
-        $deleted = SuccessCardComment::find($id)->delete();
+        $deleted = SuccessCardComment::findOrFail($id)->delete();
 
         return [$deleted, "Comment deleted"];
     }

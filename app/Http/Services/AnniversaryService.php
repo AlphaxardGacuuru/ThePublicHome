@@ -8,25 +8,25 @@ use Illuminate\Support\Facades\Storage;
 
 class AnniversaryService extends Service
 {
-	/*
-	* Get All Anniversary s
-	*/ 
-	public function index()
-	{
-		$getAnniversarys = Anniversary::all();
+    /*
+     * Get All Anniversary s
+     */
+    public function index()
+    {
+        $getAnniversarys = Anniversary::all();
 
-		return AnniversaryResource::collection($getAnniversarys);
-	}
+        return AnniversaryResource::collection($getAnniversarys);
+    }
 
-	/*
-	* Get One Anniversary 
-	*/ 
-	public function show($id)
-	{
-		$getAnniversary = Anniversary::find($id);
+    /*
+     * Get One Anniversary
+     */
+    public function show($id)
+    {
+        $getAnniversary = Anniversary::findOrFail($id);
 
-		return new AnniversaryResource($getAnniversary);
-	}
+        return new AnniversaryResource($getAnniversary);
+    }
 
     /*
      * Store Anniversary
@@ -41,9 +41,9 @@ class AnniversaryService extends Service
         $anniversary->venue = $request->venue;
         $anniversary->anniversary_date = $request->anniversaryDate;
 
-		$saved = $anniversary->save();
+        $saved = $anniversary->save();
 
-		$message = $anniversary->name . " announcement created";
+        $message = $anniversary->name . " announcement created";
 
         return [$saved, $message, $anniversary];
     }
@@ -53,7 +53,7 @@ class AnniversaryService extends Service
      */
     public function update($request, $id)
     {
-        $anniversary = Anniversary::find($id);
+        $anniversary = Anniversary::findOrFail($id);
 
         if ($request->name) {
             $anniversary->name = $request->name;
@@ -93,7 +93,7 @@ class AnniversaryService extends Service
      */
     public function destroy($id)
     {
-        $anniversary = Anniversary::find($id);
+        $anniversary = Anniversary::findOrFail($id);
 
         // Get old poster and delete it
         $deleted = $oldPoster = substr($anniversary->poster, 8);

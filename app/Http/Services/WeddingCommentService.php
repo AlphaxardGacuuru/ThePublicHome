@@ -49,7 +49,7 @@ class WeddingCommentService extends Service
      */
     public function destroy($id)
     {
-        $deleted = WeddingComment::find($id)->delete();
+        $deleted = WeddingComment::findOrFail($id)->delete();
 
         return [$deleted, "Comment deleted"];
     }

@@ -49,7 +49,7 @@ class DeathCommentService extends Service
      */
     public function destroy($id)
     {
-        $deleted = DeathComment::find($id)->delete();
+        $deleted = DeathComment::findOrFail($id)->delete();
 
         return [$deleted, "Comment deleted"];
     }

@@ -23,7 +23,7 @@ class SuccessCardService extends Service
      */
     public function show($id)
     {
-        $getSuccessCard = SuccessCard::find($id);
+        $getSuccessCard = SuccessCard::findOrFail($id);
 
         return new SuccessCardResource($getSuccessCard);
     }
@@ -53,7 +53,7 @@ class SuccessCardService extends Service
      */
     public function update($request, $id)
     {
-        $successCard = SuccessCard::find($id);
+        $successCard = SuccessCard::findOrFail($id);
 
         if ($request->title) {
             $successCard->title = $request->title;
@@ -93,7 +93,7 @@ class SuccessCardService extends Service
      */
     public function destroy($id)
     {
-        $successCard = SuccessCard::find($id);
+        $successCard = SuccessCard::findOrFail($id);
 
         // Get old poster and delete it
         $deleted = $oldPoster = substr($successCard->poster, 8);

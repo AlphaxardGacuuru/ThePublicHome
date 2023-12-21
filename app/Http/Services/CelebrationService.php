@@ -8,25 +8,25 @@ use Illuminate\Support\Facades\Storage;
 
 class CelebrationService extends Service
 {
-	/*
-	* Get All Celebration s
-	*/ 
-	public function index()
-	{
-		$getCelebrations = Celebration::all();
+    /*
+     * Get All Celebration s
+     */
+    public function index()
+    {
+        $getCelebrations = Celebration::all();
 
-		return CelebrationResource::collection($getCelebrations);
-	}
+        return CelebrationResource::collection($getCelebrations);
+    }
 
-	/*
-	* Get One Celebration 
-	*/ 
-	public function show($id)
-	{
-		$getCelebration = Celebration::find($id);
+    /*
+     * Get One Celebration
+     */
+    public function show($id)
+    {
+        $getCelebration = Celebration::findOrFail($id);
 
-		return new CelebrationResource($getCelebration);
-	}
+        return new CelebrationResource($getCelebration);
+    }
 
     /*
      * Store Anniversary
@@ -41,9 +41,9 @@ class CelebrationService extends Service
         $celebration->venue = $request->venue;
         $celebration->celebration_date = $request->celebrationDate;
 
-		$saved = $celebration->save();
+        $saved = $celebration->save();
 
-		$message = $celebration->name . " announcement created";
+        $message = $celebration->name . " announcement created";
 
         return [$saved, $message, $celebration];
     }
@@ -53,7 +53,7 @@ class CelebrationService extends Service
      */
     public function update($request, $id)
     {
-        $celebration = Celebration::find($id);
+        $celebration = Celebration::findOrFail($id);
 
         if ($request->name) {
             $celebration->name = $request->name;
@@ -93,7 +93,7 @@ class CelebrationService extends Service
      */
     public function destroy($id)
     {
-        $celebration = Celebration::find($id);
+        $celebration = Celebration::findOrFail($id);
 
         // Get old poster and delete it
         $deleted = $oldPoster = substr($celebration->poster, 8);

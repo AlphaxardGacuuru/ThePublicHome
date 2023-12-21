@@ -14,7 +14,7 @@ class UserService extends Service
      */
     public function show($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         return new UserResource($user);
     }
@@ -26,7 +26,7 @@ class UserService extends Service
     public function update($request, $id)
     {
         /* Update profile */
-        $user = User::find($id);
+        $user = User::findOrFail($id);
 
         if ($request->filled('name')) {
             $user->name = $request->input('name');

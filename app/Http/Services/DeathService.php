@@ -24,7 +24,7 @@ class DeathService extends Service
      */
     public function show($id)
     {
-        $getDeath = Death::find($id);
+        $getDeath = Death::findOrFail($id);
 
         return new DeathResource($getDeath);
     }
@@ -43,9 +43,6 @@ class DeathService extends Service
         $death->sunset = $request->sunset;
         $death->burial_date = $request->burialDate;
         $death->announcement = $request->announcement;
-        $death->poster = $request->poster;
-        $death->photos = $request->photos;
-        $death->eulogy = $request->eulogy;
 
         $saved = $death->save();
 
@@ -66,7 +63,7 @@ class DeathService extends Service
      */
     public function update($request, $id)
     {
-        $death = Death::find($id);
+        $death = Death::findOrFail($id);
 
         if ($request->locale) {
             $death->locale = $request->locale;
@@ -94,15 +91,33 @@ class DeathService extends Service
 
         if ($request->poster) {
             // Get old poster and delete it
-            $oldPoster = substr($death->poster, 8);
+            $oldPoster = substr($death->poster, 9);
 
             Storage::disk("public")->delete($oldPoster);
 
             $death->poster = $request->input("poster");
         }
 
-        if ($request->photos) {
-            $death->photos = $request->photos;
+        if ($request->photo) {
+            // Delete photo from storage
+            Storage::disk("public")->delete($request->photo);
+
+            // Remove photo from array
+            $death->photos = collect($death->photos)
+                ->reject(fn($photo) => $photo == $request->photo)
+                ->values()
+                ->all();
+        }
+
+        if ($request->video) {
+            // Delete video from storage
+            Storage::disk("public")->delete($request->video);
+
+            // Remove video from array
+            $death->videos = collect($death->videos)
+                ->reject(fn($video) => $video == $request->video)
+                ->values()
+                ->all();
         }
 
         if ($request->eulogy) {
@@ -122,17 +137,29 @@ class DeathService extends Service
      */
     public function destroy($id)
     {
-        $death = Death::find($id);
+        $death = Death::findOrFail($id);
 
         // Get old poster and delete it
-        $deleted = $oldPoster = substr($death->poster, 8);
+        $poster = substr($death->poster, 8);
 
-        Storage::disk("public")->delete($oldPoster);
+        Storage::disk("public")->delete($poster);
+
+        // Delete Photos
+        foreach ($death->photos as $photo) {
+            Storage::disk("public")->delete($photo);
+        }
+
+        // Delete Videos
+        foreach ($death->videos as $video) {
+            Storage::disk("public")->delete($video);
+        }
 
         // Delete Death
         $deleted = $death->delete();
 
-        return [$deleted, $death->name . " announcement deleted"];
+        $message = $death->name . " announcement deleted";
+
+        return [$deleted, $message];
     }
 
 }

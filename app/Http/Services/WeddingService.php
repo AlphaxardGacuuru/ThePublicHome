@@ -23,7 +23,7 @@ class WeddingService extends Service
      */
     public function show($id)
     {
-        $getWedding = Wedding::find($id);
+        $getWedding = Wedding::findOrFail($id);
 
         return new WeddingResource($getWedding);
     }
@@ -53,7 +53,7 @@ class WeddingService extends Service
      */
     public function update($request, $id)
     {
-        $wedding = Wedding::find($id);
+        $wedding = Wedding::findOrFail($id);
 
         if ($request->title) {
             $wedding->title = $request->title;
@@ -93,7 +93,7 @@ class WeddingService extends Service
      */
     public function destroy($id)
     {
-        $wedding = Wedding::find($id);
+        $wedding = Wedding::findOrFail($id);
 
         // Get old poster and delete it
         $deleted = $oldPoster = substr($wedding->poster, 8);

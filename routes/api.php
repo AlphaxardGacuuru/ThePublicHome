@@ -80,11 +80,12 @@ Route::prefix('filepond')->group(function () {
     Route::controller(FilePondController::class)->group(function () {
 
         // Death
-        Route::post('death-poster', 'storeDeathPoster');
+        Route::post('death-poster/{id}', 'storeDeathPoster');
         Route::post('death-photos/{id}/{limit}', 'storeDeathPhotos');
         Route::post('death-videos/{id}/{limit}', 'storeDeathVideos');
-        Route::post('eulogy', 'storeEulogy');
+        Route::post('eulogy/{id}/{limit}', 'storeEulogy');
         Route::delete('death-poster/{id}', 'destoryDeathPoster');
+        Route::delete('eulogy/{id}', 'destoryEulogy');
 
         // User
         Route::post('avatar/{id}', 'updateAvatar');

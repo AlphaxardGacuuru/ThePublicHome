@@ -23,7 +23,7 @@ class GraduationService extends Service
      */
     public function show($id)
     {
-        $getGraduation = Graduation::find($id);
+        $getGraduation = Graduation::findOrFail($id);
 
         return new GraduationResource($getGraduation);
     }
@@ -53,7 +53,7 @@ class GraduationService extends Service
      */
     public function update($request, $id)
     {
-        $graduation = Graduation::find($id);
+        $graduation = Graduation::findOrFail($id);
 
         if ($request->title) {
             $graduation->title = $request->title;
@@ -93,7 +93,7 @@ class GraduationService extends Service
      */
     public function destroy($id)
     {
-        $graduation = Graduation::find($id);
+        $graduation = Graduation::findOrFail($id);
 
         // Get old poster and delete it
         $deleted = $oldPoster = substr($graduation->poster, 8);
