@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class SuccessCardCommentLike extends Model
 {
     use HasFactory;
+
+	/*
+	* Relationships
+	*/ 
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	} 
+
+	public function comment()
+	{
+		return $this->belongsTo(SuccessCardComment::class, "success_card_comment_id");
+	}
 }

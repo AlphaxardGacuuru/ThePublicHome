@@ -46,6 +46,11 @@ class Anniversary extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
+
     public function anniversaryLikes()
     {
         return $this->hasMany(AnniversaryLike::class);

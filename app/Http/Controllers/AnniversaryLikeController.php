@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AnniversaryLikedEvent;
 use App\Http\Services\AnniversaryLikeService;
 use App\Models\AnniversaryLike;
 use Illuminate\Http\Request;
@@ -32,6 +33,12 @@ class AnniversaryLikeController extends Controller
     public function store(Request $request)
     {
         [$saved, $message, $like] = $this->service->store($request);
+
+        AnniversaryLikedEvent::dispatchIf(
+            $saved,
+            $like->anniversary,
+            $like->user
+        );
 
         return response([
             "status" => $saved,

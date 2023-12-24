@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AnniversaryCommentLikedEvent;
 use App\Http\Services\AnniversaryCommentLikeService;
 use App\Models\AnniversaryCommentLike;
 use Illuminate\Http\Request;

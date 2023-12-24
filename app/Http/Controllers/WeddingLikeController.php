@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\WeddingLikedEvent;
+use App\Http\Services\WeddingLikeService;
 use App\Models\WeddingLike;
 use Illuminate\Http\Request;
 
 class WeddingLikeController extends Controller
 {
+	public function __construct(protected WeddingLikeService $service)
+	{
+		// 
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +32,19 @@ class WeddingLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $like] = $this->service->store($request);
+
+        WeddingLikedEvent::dispatchIf(
+            $saved,
+            $like->wedding,
+            $like->user
+        );
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $like,
+        ], 200);
     }
 
     /**

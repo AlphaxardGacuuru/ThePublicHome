@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeathLikedEvent;
 use App\Http\Services\DeathLikeService;
 use App\Models\DeathLike;
 use Illuminate\Http\Request;
@@ -32,6 +33,12 @@ class DeathLikeController extends Controller
     public function store(Request $request)
     {
         [$saved, $message, $like] = $this->service->store($request);
+
+        DeathLikedEvent::dispatchIf(
+            $saved,
+            $like->death,
+            $like->user
+        );
 
         return response([
             "status" => $saved,

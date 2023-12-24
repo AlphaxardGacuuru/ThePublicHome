@@ -53,6 +53,11 @@ class Graduation extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
+
     public function graduationLikes()
     {
         return $this->hasMany(GraduationLike::class);

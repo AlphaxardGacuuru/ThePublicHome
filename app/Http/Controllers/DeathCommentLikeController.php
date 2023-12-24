@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeathCommentLikedEvent;
 use App\Http\Services\DeathCommentLikeService;
 use App\Models\DeathCommentLike;
 use Illuminate\Http\Request;

@@ -2,10 +2,10 @@
 
 namespace App\Http\Services;
 
-use App\Http\Resources\DeathCommentResource;
-use App\Models\DeathComment;
+use App\Http\Resources\AnniversaryCommentResource;
+use App\Models\AnniversaryComment;
 
-class DeathCommentService extends Service
+class AnniversaryCommentService extends Service
 {
     /**
      * Display the specified resource.
@@ -13,11 +13,11 @@ class DeathCommentService extends Service
      */
     public function show($id)
     {
-        $getDeathComments = DeathComment::where("death_id", $id)
+        $getAnniversaryComments = AnniversaryComment::where("anniversary_id", $id)
             ->orderBy('id', 'DESC')
             ->paginate(10);
 
-        return DeathCommentResource::collection($getDeathComments);
+        return AnniversaryCommentResource::collection($getAnniversaryComments);
     }
 
     /**
@@ -29,18 +29,18 @@ class DeathCommentService extends Service
     public function store($request)
     {
         /* Create new post */
-        $deathComment = new DeathComment;
-        $deathComment->death_id = $request->input('id');
-        $deathComment->user_id = auth('sanctum')->user()->id;
-        $deathComment->text = $request->input('text');
+        $anniversaryComment = new AnniversaryComment;
+        $anniversaryComment->anniversary_id = $request->input('id');
+        $anniversaryComment->user_id = auth('sanctum')->user()->id;
+        $anniversaryComment->text = $request->input('text');
 
-        $saved = $deathComment->save();
-        // Check if commenter is owner of deaths
-        $notCurrentUser = $deathComment->death->user_id != $this->id;
+        $saved = $anniversaryComment->save();
+        // Check if commenter is owner of anniversarys
+        $notCurrentUser = $anniversaryComment->anniversary->user_id != $this->id;
         // Dispatch if comment is saved successfully and commenter is not owner of audio
         $canDispatch = $notCurrentUser && $saved;
 
-        return [$canDispatch, "Comment posted", $deathComment];
+        return [$canDispatch, "Comment posted", $anniversaryComment];
     }
 
     /**
@@ -49,7 +49,7 @@ class DeathCommentService extends Service
      */
     public function destroy($id)
     {
-        $deleted = DeathComment::findOrFail($id)->delete();
+        $deleted = AnniversaryComment::findOrFail($id)->delete();
 
         return [$deleted, "Comment deleted"];
     }

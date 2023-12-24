@@ -7,11 +7,15 @@ import MyLink from "@/components/Core/MyLink"
 import SocialMediaInput from "@/components/Core/SocialMediaInput"
 import CommentMedia from "@/components/Core/CommentMedia"
 
+import HeartFilledSVG from "@/svgs/HeartFilledSVG"
+import HeartSVG from "@/svgs/HeartSVG"
+
 const DeathShow = (props) => {
 	const { id } = useParams()
 
 	const [death, setDeath] = useState({})
 	const [deathComments, setDeathComments] = useState([])
+	const [hasLiked, setHasLiked] = useState()
 	const [deletedIds, setDeletedIds] = useState([])
 	const [pageLoader, setPageLoader] = useState(true)
 
@@ -19,14 +23,30 @@ const DeathShow = (props) => {
 		Axios.get(`api/deaths/${id}`)
 			.then((res) => {
 				setPageLoader(false)
-				// Set Death 
 				setDeath(res.data.data)
+				setHasLiked(death.hasLiked)
 			})
 			.catch((err) => props.getErrors(err))
 
 		// Fetch Death s Comments
 		props.get(`death-comments/${id}`, setDeathComments)
 	}, [])
+
+	// Function for liking Death
+	const onLike = (deathId) => {
+		setHasLiked(!hasLiked)
+
+		// Add like to database
+		Axios.post(`/api/death-likes`, {
+			deathId: deathId,
+		})
+			.then((res) => {
+				props.setMessages([res.data.message])
+				// Update Death s
+				props.get(`deaths/${id}`, setDeath)
+			})
+			.catch((err) => props.getErrors(err))
+	}
 
 	/*
 	 * Function for liking comments */
@@ -37,7 +57,7 @@ const DeathShow = (props) => {
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				props.get(`death-comments/${id}`, setVideoComments)
+				props.get(`death-comments/${id}`, setDeathComments)
 			})
 			.catch((err) => props.getErrors(err))
 	}
@@ -83,60 +103,136 @@ const DeathShow = (props) => {
 					{/* Death  Info */}
 					<div className="row">
 						<div className="col-sm-3 mb-4 px-3">
-							{/* User info */}
-							<div
-								className="d-flex p-1"
-								style={{ maxWidth: "220em" }}>
-								{/* Avatar */}
+							<div className="border rounded my-2 px-2 pb-5">
+								{/* User info */}
 								<div
-									className="py-2"
-									style={{ minWidth: "40px" }}>
-									<Link to={`/profile/show/${death.userId}`}>
-										<Img
-											src={death.userAvatar}
-											className="rounded-circle"
-											width="30px"
-											height="30px"
-											alt="user"
-											loading="lazy"
-										/>
-									</Link>
+									className="d-flex p-1"
+									style={{ maxWidth: "220em" }}>
+									{/* Avatar */}
+									<div
+										className="py-2"
+										style={{ minWidth: "40px" }}>
+										<Link to={`/profile/show/${death.userId}`}>
+											<Img
+												src={death.userAvatar}
+												className="rounded-circle"
+												width="30px"
+												height="30px"
+												alt="user"
+												loading="lazy"
+											/>
+										</Link>
+									</div>
+									{/* Avatar End */}
+									{/* Service Provider Name */}
+									<div className="flex-grow-1">
+										<h6
+											className="mt-1 pt-2 px-1"
+											style={{
+												width: "10em",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip",
+												textAlign: "left",
+											}}>
+											{death.userName}
+										</h6>
+									</div>
+									{/* Service Provider Name End */}
+									{/* Likes */}
+									<div
+										className="p-2"
+										style={{ cursor: "pointer" }}
+										onClick={() => onLike(id)}>
+										{hasLiked ? (
+											<div>
+												<span style={{ color: "#fb3958", fontSize: "1.2em" }}>
+													<HeartFilledSVG />
+												</span>
+												<small
+													className="ms-1"
+													style={{ color: "#fb3958", fontWeight: "100" }}>
+													{death.likes}
+												</small>
+											</div>
+										) : (
+											<div>
+												<span style={{ color: "inherit", fontSize: "1.2em" }}>
+													<HeartSVG />
+												</span>
+												<small
+													className="ms-1"
+													style={{ color: "inherit", fontWeight: "100" }}>
+													{death.likes}
+												</small>
+											</div>
+										)}
+									</div>
+									{/* Likes End */}
 								</div>
-								{/* Avatar End */}
-								{/* Service Provider Name */}
-								<div className="flex-grow-1">
-									<h6
-										className="mt-1 pt-2 px-1"
-										style={{
-											width: "10em",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip",
-											textAlign: "left",
-										}}>
-										{death.userName}
-									</h6>
-								</div>
-								{/* Service Provider Name End */}
-								{/* Edit Button */}
-								<div>
-									{death.userId == props.auth?.id && (
-										<div>
-											<MyLink
-												linkTo={`/deaths/edit/${id}`}
-												text="edit"
+								{/* User info End */}
+								<h2>{death.name}</h2>
+								<hr />
+								<h6>{death.announcement}</h6>
+								<hr />
+								<h6 className="text-capitalize">Locale: {death.locale}</h6>
+								<h6>Sunrise: {death.sunriseFormated}</h6>
+								<h6>Sunset: {death.sunsetFormated}</h6>
+								<h6>Burial Date: {death.burialDateFormated}</h6>
+							</div>
+						</div>
+						<div className="col-sm-9">
+							<div className="border rounded my-2 px-2 pt-3 pb-5">
+								{/* List Images */}
+								<h5>Photos</h5>
+								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll custom-scroll">
+									{death.photos?.map((photo, key) => (
+										<div
+											key={key}
+											className="shadow m-1 p-1">
+											<Img
+												src={`/storage/${photo}`}
+												className="mx-2"
+												style={{ width: "10em", height: "auto" }}
 											/>
 										</div>
-									)}
-									{/* Edit Button End */}
+									))}
 								</div>
+								{/* List Images End */}
+
+								{/* List Videos */}
+								<h5>Videos</h5>
+								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
+									{death.videos?.map((video, key) => (
+										<div
+											key={key}
+											className="shadow m-1 p-1">
+											<video
+												className="mx-2"
+												style={{ width: "25em", height: "auto" }}
+												controls>
+												<source
+													src={`/storage/${video}`}
+													// type="video/mp4"
+												/>
+												Your browser does not support the video tag.
+											</video>
+										</div>
+									))}
+								</div>
+								{/* List Videos End */}
+
+								{/* Eulogy */}
+								<h5>Eulogy</h5>
+								<div className="d-flex justify-content-center flex-wrap mb-4">
+									<div className="card shadow p-2">
+										<iframe
+											src={`/storage/${death.eulogy}`}
+											style={{ width: "100%", height: "30em" }}></iframe>
+									</div>
+								</div>
+								{/* Eulogy End */}
 							</div>
-							{/* User info End */}
-							<h2>{death.name}</h2>
-						</div>
-						<div className="col-sm-9 border-start">
-							<h2>Eulogy</h2>
-							<p>{death.eulogy}</p>
 						</div>
 					</div>
 					{/* Death  Info End */}
@@ -151,10 +247,7 @@ const DeathShow = (props) => {
 								urlTo="/death-comments"
 								editing={false}
 								stateToUpdate={() => {
-									props.get(
-										`death-comments/${id}`,
-										setDeathComments
-									)
+									props.get(`death-comments/${id}`, setDeathComments)
 								}}
 							/>
 						)}
@@ -175,6 +268,16 @@ const DeathShow = (props) => {
 
 					<br />
 					<center>
+						{/* Edit Button */}
+						{death.userId == props.auth?.id && (
+							<div className="mb-2">
+								<MyLink
+									linkTo={`/deaths/edit/${id}`}
+									text="edit death announcement"
+								/>
+							</div>
+						)}
+						{/* Edit Button End */}
 						<MyLink
 							linkTo="/"
 							text="back to death announcements"

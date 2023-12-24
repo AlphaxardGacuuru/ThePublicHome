@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CelebrationLikedEvent;
 use App\Http\Services\CelebrationLikeService;
 use App\Models\CelebrationLike;
 use Illuminate\Http\Request;
@@ -32,6 +33,12 @@ class CelebrationLikeController extends Controller
     public function store(Request $request)
     {
         [$saved, $message, $like] = $this->service->store($request);
+
+        CelebrationLikedEvent::dispatchIf(
+            $saved,
+            $like->celebration,
+            $like->user
+        );
 
         return response([
             "status" => $saved,

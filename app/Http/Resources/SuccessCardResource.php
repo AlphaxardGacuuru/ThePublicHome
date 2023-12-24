@@ -24,6 +24,8 @@ class SuccessCardResource extends JsonResource
             "userId" => $this->user_id,
             "userName" => $this->user->name,
             "userAvatar" => $this->user->avatar,
+            "locale" => $this->locale,
+            "tier" => $this->membership->tier,
             "title" => $this->title,
             "poster" => $this->poster,
             "announcement" => $this->announcement,

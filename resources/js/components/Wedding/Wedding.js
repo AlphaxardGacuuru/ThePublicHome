@@ -7,8 +7,6 @@ import SocialMediaInput from "@/components/Core/SocialMediaInput"
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
-import LocationSVG from "@/svgs/LocationSVG"
-import CalenderSVG from "@/svgs/CalenderSVG"
 
 const Wedding = (props) => {
 	const [hasLiked, setHasLiked] = useState(props.wedding.hasLiked)
@@ -28,7 +26,7 @@ const Wedding = (props) => {
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				// Update Wedding s
+				// Update Weddings
 				props.get("weddings", props.setWeddings)
 			})
 			.catch((err) => props.getErrors(err))
@@ -74,15 +72,13 @@ const Wedding = (props) => {
 				</div>
 				{/* User info End */}
 				<h3 className="death-name px-2 mb-0">{props.wedding.title}</h3>
-				<p className="mb-1 px-2 text-start">{props.wedding.announcement}</p>
-				<p className="my-1 px-2 text-start">
-					<span className="bg-2 my-1 p-1 text-white">{props.wedding.tier}</span>
-				</p>
-				<p className="death-name mb-1 px-2 text-start">
-					<LocationSVG /> {props.wedding.venue}
-				</p>
+				<p className="mb-0 px-2 text-start">{props.wedding.announcement}</p>
 				<p className="mb-0 px-2 text-start">
-					<CalenderSVG /> {props.wedding.weddingDate}
+					<small
+						className="bg-2 my-1 p-1 text-white text-uppercase"
+						style={{ fontSize: "0.8em" }}>
+						{props.wedding.tier}
+					</small>
 				</p>
 				<div className="d-flex justify-content-between">
 					{/* Wedding  likes */}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SuccessCardLikedEvent;
 use App\Models\SuccessCardLike;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,19 @@ class SuccessCardLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $like] = $this->service->store($request);
+
+        SuccessCardLikedEvent::dispatchIf(
+            $saved,
+            $like->successCard,
+            $like->user
+        );
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $like,
+        ], 200);
     }
 
     /**

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-import Death from "@/components/Death/Death"
-import LoadingDeath from "@/components/Death/LoadingDeath"
+import Celebration from "@/components/Celebration/Celebration"
+import LoadingCelebration from "@/components/Celebration/LoadingCelebration"
 
 import PlusSVG from "@/svgs/PlusSVG"
 
@@ -13,7 +13,7 @@ const index = (props) => {
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
-		props.get("deaths", props.setDeaths)
+		props.get("celebrations", props.setCelebrations)
 	}, [])
 
 	const onSubmit = (e) => {
@@ -42,17 +42,16 @@ const index = (props) => {
 
 				<Link
 					to={
-						props.auth?.membershipTypes?.includes("death")
-							? "/deaths/create"
-							: "/deaths/create"
-						// : "/profile/membership"
+						props.auth?.membershipName == "celebration"
+							? "/celebrations/create"
+							: "/profile/membership"
 					}
 					id="chatFloatBtn">
 					<PlusSVG />
 				</Link>
 
 				<center>
-					<h1>Death and Funeral Announcements</h1>
+					<h1>Celebration and Funeral Announcements</h1>
 
 					<form
 						className="mt-4 mx-auto w-75"
@@ -60,9 +59,9 @@ const index = (props) => {
 						<div className="input-group mb-3">
 							<input
 								type="text"
-								className="form-control"
-								placeholder="Search Death Announcements by Name"
-								aria-label="Search Death Announcements by Name"
+								className="form-control rounded-0"
+								placeholder="Search Celebration Announcements by Name"
+								aria-label="Search Celebration Announcements by Name"
 								aria-describedby="button-addon2"
 								required={true}
 								onChange={(e) => setQuery(e.target.value)}
@@ -70,7 +69,7 @@ const index = (props) => {
 							<button
 								id="button-addon2"
 								type="submit"
-								className="btn btn-outline-primary"
+								className="btn btn-outline-primary rounded-0"
 								disabled={loader}>
 								Search
 								{loader && (
@@ -106,57 +105,59 @@ const index = (props) => {
 					{/* Locales End */}
 
 					{/* Tiers */}
-					<div className="d-flex justify-content-center flex-wrap">
-						<div
-							className={`${activeTier("")} px-3 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setTier("")}>
-							All
-						</div>
-						<div
-							className={`${activeTier("standard")} px-3 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setTier("standard")}>
-							Standard
-						</div>
-						<div
-							className={`${activeTier("vip")} px-3 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setTier("vip")}>
-							VIP
-						</div>
-						<div
-							className={`${activeTier("executive")} px-3 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setTier("executive")}>
-							Executive
+					<div className="d-none d-lg-block">
+						<div className="d-flex justify-content-center flex-wrap">
+							<div
+								className={`${activeTier("")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("")}>
+								All
+							</div>
+							<div
+								className={`${activeTier("standard")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("standard")}>
+								Standard
+							</div>
+							<div
+								className={`${activeTier("vip")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("vip")}>
+								VIP
+							</div>
+							<div
+								className={`${activeTier("executive")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("executive")}>
+								Executive
+							</div>
 						</div>
 					</div>
 					{/* Tiers End */}
 
-					{/* Death Announcements */}
+					{/* Celebration Announcements */}
 					<div className="d-flex flex-wrap justify-content-center mb-2">
-						{/* Loading Death Announcement items */}
+						{/* Loading Celebration Announcement items */}
 						{dummyArray
-							.filter(() => props.deaths.length < 1)
+							.filter(() => props.celebrations.length < 1)
 							.map((item, key) => (
-								<LoadingDeath key={key} />
+								<LoadingCelebration key={key} />
 							))}
 
-						{/* Real Death Announcement items */}
-						{props.deaths
-							.filter((death) => death.name.toLowerCase().match(query))
-							.filter((death) => (locale ? death.locale == locale : true))
-							.filter((death) => (tier ? death.tier == tier : true))
-							.map((death, key) => (
-								<Death
+						{/* Real Celebration Announcement items */}
+						{props.celebrations
+							.filter((celebration) => celebration.title.toLowerCase().match(query))
+							.filter((celebration) => (locale ? celebration.locale == locale : true))
+							.filter((celebration) => (tier ? celebration.tier == tier : true))
+							.map((celebration, key) => (
+								<Celebration
 									{...props}
 									key={key}
-									death={death}
+									celebration={celebration}
 								/>
 							))}
 					</div>
-					{/* Death Announcements End */}
+					{/* Celebration Announcements End */}
 				</center>
 			</div>
 			<div className="col-sm-1"></div>

@@ -19,6 +19,11 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('membership_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('locale')->nullable();
             $table->string('title');
             $table->string('poster');
             $table->string('announcement');

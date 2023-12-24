@@ -53,6 +53,11 @@ class Wedding extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
+
     public function weddingLikes()
     {
         return $this->hasMany(WeddingLike::class);

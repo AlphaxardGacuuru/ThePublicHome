@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class DeathLike extends Model
 {
     use HasFactory;
+
+	/*
+	* Relationships
+	*/ 
+
+	public function user()
+	{
+		return $this->belongsTo(User::class);
+	}
+
+	public function death()
+	{
+		return $this->belongsTo(Death::class);
+	}
 }

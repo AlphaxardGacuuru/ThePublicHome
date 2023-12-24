@@ -41,7 +41,11 @@ const index = (props) => {
 				{/* Chat button */}
 
 				<Link
-					to={props.auth?.membershipName == "death" ? "/deaths/create" : "/profile/membership"}
+					to={
+						props.auth?.membershipName == "death"
+							? "/deaths/create"
+							: "/profile/membership"
+					}
 					id="chatFloatBtn">
 					<PlusSVG />
 				</Link>
@@ -101,30 +105,32 @@ const index = (props) => {
 					{/* Locales End */}
 
 					{/* Tiers */}
-					<div className="d-flex justify-content-center flex-wrap">
-						<div
-							className={`${activeTier("")} px-3 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setTier("")}>
-							All
-						</div>
-						<div
-							className={`${activeTier("standard")} px-3 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setTier("standard")}>
-							Standard
-						</div>
-						<div
-							className={`${activeTier("vip")} px-3 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setTier("vip")}>
-							VIP
-						</div>
-						<div
-							className={`${activeTier("executive")} px-3 py-2`}
-							style={{ cursor: "pointer" }}
-							onClick={() => setTier("executive")}>
-							Executive
+					<div className="d-none d-lg-block">
+						<div className="d-flex justify-content-center flex-wrap">
+							<div
+								className={`${activeTier("")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("")}>
+								All
+							</div>
+							<div
+								className={`${activeTier("standard")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("standard")}>
+								Standard
+							</div>
+							<div
+								className={`${activeTier("vip")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("vip")}>
+								VIP
+							</div>
+							<div
+								className={`${activeTier("executive")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("executive")}>
+								Executive
+							</div>
 						</div>
 					</div>
 					{/* Tiers End */}

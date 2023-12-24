@@ -49,6 +49,7 @@ class DeathService extends Service
         // Update Membership
         $membership = UserMembership::where("user_id", $this->id)
             ->where("membership_id", $request->membershipId)
+            ->where("status", "pending")
             ->first();
         $membership->status = "used";
         $membership->save();

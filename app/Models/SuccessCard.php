@@ -53,6 +53,11 @@ class SuccessCard extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
+
     public function successCardLikes()
     {
         return $this->hasMany(SuccessCardLike::class);

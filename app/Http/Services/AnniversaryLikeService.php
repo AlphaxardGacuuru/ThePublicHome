@@ -2,18 +2,18 @@
 
 namespace App\Http\Services;
 
-use App\Models\Death;
-use App\Models\DeathLike;
+use App\Models\Anniversary;
+use App\Models\AnniversaryLike;
 use Illuminate\Support\Facades\DB;
 
-class DeathLikeService extends Service
+class AnniversaryLikeService extends Service
 {
     /*
-     * Add Death  Like
+     * Add Anniversary  Like
      */
     public function store($request)
     {
-        $getLike = DeathLike::where("death_id", $request->deathId)
+        $getLike = AnniversaryLike::where("anniversary_id", $request->anniversaryId)
             ->where("user_id", $this->id);
 
         $hasLiked = $getLike->exists();
@@ -28,7 +28,7 @@ class DeathLikeService extends Service
                 $getLike->delete();
 
                 // Decrement Likes
-                Death::find($request->deathId)
+                Anniversary::find($request->anniversaryId)
                     ->decrement("likes");
             });
 
@@ -36,19 +36,19 @@ class DeathLikeService extends Service
             $message = "Liked removed";
             $added = false;
         } else {
-            $like = new DeathLike;
+            $like = new AnniversaryLike;
             $like->user_id = $this->id;
-            $like->death_id = $request->deathId;
+            $like->anniversary_id = $request->anniversaryId;
 
             DB::transaction(function () use ($like, $request) {
                 $like->save();
 
                 // Increment Likes
-                Death::find($request->deathId)
+                Anniversary::find($request->anniversaryId)
                     ->increment("likes");
             });
 
-            $message = "Death  Liked";
+            $message = "Anniversary  Liked";
             $added = true;
         }
 

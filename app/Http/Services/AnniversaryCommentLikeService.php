@@ -2,18 +2,18 @@
 
 namespace App\Http\Services;
 
-use App\Models\DeathComment;
-use App\Models\DeathCommentLike;
+use App\Models\AnniversaryComment;
+use App\Models\AnniversaryCommentLike;
 use Illuminate\Support\Facades\DB;
 
-class DeathCommentLikeService extends Service
+class AnniversaryCommentLikeService extends Service
 {
 	/*
 	* Store Like
 	*/ 
 	public function store($request)
 	{
-        $getLike = DeathCommentLike::where("death_comment_id", $request->input("commentId"))
+        $getLike = AnniversaryCommentLike::where("anniversary_comment_id", $request->input("commentId"))
             ->where("user_id", $this->id);
 
         $hasLiked = $getLike->exists();
@@ -28,7 +28,7 @@ class DeathCommentLikeService extends Service
                 $getLike->delete();
 
                 // Decrement Anniversary Review Likes
-                DeathComment::find($request->input("commentId"))->decrement("likes");
+                AnniversaryComment::find($request->input("commentId"))->decrement("likes");
             });
 
             $saved = false;
@@ -36,13 +36,13 @@ class DeathCommentLikeService extends Service
         } else {
 
             $like = DB::transaction(function () use ($request) {
-                $like = new DeathCommentLike;
-                $like->death_comment_id = $request->input("commentId");
+                $like = new AnniversaryCommentLike;
+                $like->anniversary_comment_id = $request->input("commentId");
                 $like->user_id = $this->id;
                 $like->save();
 
                 // Decrement Anniversary Review Likes
-                DeathComment::find($request->input("commentId"))->increment("likes");
+                AnniversaryComment::find($request->input("commentId"))->increment("likes");
 
                 return $like;
             });

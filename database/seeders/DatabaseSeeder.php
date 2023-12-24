@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
             DeathSeeder::class,
 			WeddingSeeder::class,
 			GraduationSeeder::class,
-			SuccessCardSeeder::class
+			SuccessCardSeeder::class,
+			AnniversarySeeder::class,
+			CelebrationSeeder::class
         ]);
     }
 }

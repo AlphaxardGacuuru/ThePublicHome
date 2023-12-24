@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GraduationLikedEvent;
 use App\Models\GraduationLike;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,19 @@ class GraduationLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $like] = $this->service->store($request);
+
+        GraduationLikedEvent::dispatchIf(
+            $saved,
+            $like->graduation,
+            $like->user
+        );
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $like,
+        ], 200);
     }
 
     /**

@@ -7,10 +7,8 @@ import SocialMediaInput from "@/components/Core/SocialMediaInput"
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
-import LocationSVG from "@/svgs/LocationSVG"
-import CalenderSVG from "@/svgs/CalenderSVG"
 
-const Wedding = (props) => {
+const SuccessCard = (props) => {
 	const [hasLiked, setHasLiked] = useState(props.successCard.hasLiked)
 
 	useEffect(() => {
@@ -18,7 +16,7 @@ const Wedding = (props) => {
 		setHasLiked(props.successCard.hasLiked)
 	}, [props.successCard])
 
-	// Function for liking Wedding
+	// Function for liking Success Card
 	const onLike = (successCardId) => {
 		setHasLiked(!hasLiked)
 
@@ -28,8 +26,8 @@ const Wedding = (props) => {
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				// Update Wedding s
-				props.get("successCards", props.setWeddings)
+				// Update Success Cards
+				props.get("success-cards", props.setSuccessCards)
 			})
 			.catch((err) => props.getErrors(err))
 	}
@@ -74,14 +72,16 @@ const Wedding = (props) => {
 				</div>
 				{/* User info End */}
 				<h3 className="death-name px-2 mb-0">{props.successCard.title}</h3>
-				<p className="mb-1 px-2 text-start">{props.successCard.announcement}</p>
-				<p className="my-1 px-2 text-start">
-					<span className="bg-2 my-1 p-1 text-white">
+				<p className="mb-0 px-2 text-start">{props.successCard.announcement}</p>
+				<p className="mb-0 px-2 text-start">
+					<small
+						className="bg-2 my-1 p-1 text-white text-uppercase"
+						style={{ fontSize: "0.8em" }}>
 						{props.successCard.tier}
-					</span>
+					</small>
 				</p>
 				<div className="d-flex justify-content-between">
-					{/* Wedding  likes */}
+					{/* Success Card  likes */}
 					<div
 						className="p-2"
 						style={{ cursor: "pointer" }}
@@ -145,10 +145,10 @@ const Wedding = (props) => {
 					/>
 				</div>
 				{/* SocialMedia Input End */}
-				{/* Wedding  likes End */}
+				{/* Success Card  likes End */}
 			</div>
 		</span>
 	)
 }
 
-export default Wedding
+export default SuccessCard

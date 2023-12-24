@@ -8,6 +8,8 @@ import PlusSVG from "@/svgs/PlusSVG"
 
 const index = (props) => {
 	const [query, setQuery] = useState("")
+	const [locale, setLocale] = useState("")
+	const [tier, setTier] = useState("")
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
@@ -18,9 +20,15 @@ const index = (props) => {
 		e.preventDefault()
 	}
 
-	const active = (current) => {
-		if (location == current) {
-			return "bg-primary-subtle"
+	const activeLocale = (current) => {
+		if (locale == current) {
+			return "active"
+		}
+	}
+
+	const activeTier = (current) => {
+		if (tier == current) {
+			return "active"
 		}
 	}
 
@@ -34,10 +42,9 @@ const index = (props) => {
 
 				<Link
 					to={
-						props.auth?.membershipTypes?.includes("success_card")
-							? "/success-card/create"
-							: "/success-card/create"
-							// : "/profile/membership"
+						props.auth?.membershipName == "success_card"
+							? "/success-cards/create"
+							: "/profile/membership"
 					}
 					id="chatFloatBtn">
 					<PlusSVG />
@@ -52,7 +59,7 @@ const index = (props) => {
 						<div className="input-group mb-3">
 							<input
 								type="text"
-								className="form-control"
+								className="form-control rounded-0"
 								placeholder="Search Success Card Announcements by Name"
 								aria-label="Search Success Card Announcements by Name"
 								aria-describedby="button-addon2"
@@ -62,7 +69,7 @@ const index = (props) => {
 							<button
 								id="button-addon2"
 								type="submit"
-								className="btn btn-outline-primary"
+								className="btn btn-outline-primary rounded-0"
 								disabled={loader}>
 								Search
 								{loader && (
@@ -74,10 +81,62 @@ const index = (props) => {
 						</div>
 					</form>
 
-					<br />
+					{/* Locales */}
+					<div className="d-flex justify-content-center flex-wrap mb-2">
+						<div
+							className={`${activeLocale("")} px-4 py-2`}
+							style={{ cursor: "pointer" }}
+							onClick={() => setLocale("")}>
+							All
+						</div>
+						<div
+							className={`${activeLocale("home")} px-4 py-2`}
+							style={{ cursor: "pointer" }}
+							onClick={() => setLocale("home")}>
+							Home
+						</div>
+						<div
+							className={`${activeLocale("international")} px-4 py-2`}
+							style={{ cursor: "pointer" }}
+							onClick={() => setLocale("international")}>
+							International
+						</div>
+					</div>
+					{/* Locales End */}
+
+					{/* Tiers */}
+					<div className="d-none d-lg-block">
+						<div className="d-flex justify-content-center flex-wrap">
+							<div
+								className={`${activeTier("")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("")}>
+								All
+							</div>
+							<div
+								className={`${activeTier("standard")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("standard")}>
+								Standard
+							</div>
+							<div
+								className={`${activeTier("vip")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("vip")}>
+								VIP
+							</div>
+							<div
+								className={`${activeTier("executive")} px-3 py-2`}
+								style={{ cursor: "pointer" }}
+								onClick={() => setTier("executive")}>
+								Executive
+							</div>
+						</div>
+					</div>
+					{/* Tiers End */}
 
 					{/* Success Card Announcements */}
-					<div className="d-flex flex-wrap justify-content-center">
+					<div className="d-flex flex-wrap justify-content-center mb-2">
 						{/* Loading Success Card Announcement items */}
 						{dummyArray
 							.filter(() => props.successCards.length < 1)
@@ -88,6 +147,8 @@ const index = (props) => {
 						{/* Real Success Card Announcement items */}
 						{props.successCards
 							.filter((successCard) => successCard.title.toLowerCase().match(query))
+							.filter((successCard) => (locale ? successCard.locale == locale : true))
+							.filter((successCard) => (tier ? successCard.tier == tier : true))
 							.map((successCard, key) => (
 								<SuccessCard
 									{...props}
@@ -100,6 +161,36 @@ const index = (props) => {
 				</center>
 			</div>
 			<div className="col-sm-1"></div>
+			{/* Bottom Filter */}
+			<div className="d-sm-none">
+				<div className="fixed-bottom bg text-white p-1 d-flex justify-content-center flex-wrap">
+					<div
+						className={`${activeTier("")} px-3 py-2`}
+						style={{ cursor: "pointer" }}
+						onClick={() => setTier("")}>
+						All
+					</div>
+					<div
+						className={`${activeTier("standard")} px-3 py-2`}
+						style={{ cursor: "pointer" }}
+						onClick={() => setTier("standard")}>
+						Standard
+					</div>
+					<div
+						className={`${activeTier("vip")} px-3 py-2`}
+						style={{ cursor: "pointer" }}
+						onClick={() => setTier("vip")}>
+						VIP
+					</div>
+					<div
+						className={`${activeTier("executive")} px-3 py-2`}
+						style={{ cursor: "pointer" }}
+						onClick={() => setTier("executive")}>
+						Executive
+					</div>
+				</div>
+			</div>
+			{/* Bottom Filter End */}
 		</div>
 	)
 }

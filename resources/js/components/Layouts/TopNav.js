@@ -109,9 +109,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/"
-												className={`nav-link mx-4 ${activeStrict(
-													"/"
-												)}`}
+												className={`nav-link mx-4 ${activeStrict("/")}`}
 												onClick={() => setMenu("")}>
 												Home
 											</Link>
@@ -119,9 +117,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/deaths"
-												className={`nav-link mx-4 ${active(
-													"/deaths"
-												)}`}
+												className={`nav-link mx-4 ${active("/deaths")}`}
 												onClick={() => setMenu("")}>
 												Deaths
 											</Link>
@@ -129,9 +125,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/weddings"
-												className={`nav-link mx-4 ${active(
-													"/weddings"
-												)}`}
+												className={`nav-link mx-4 ${active("/weddings")}`}
 												onClick={() => setMenu("")}>
 												Weddings
 											</Link>
@@ -139,9 +133,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/graduations"
-												className={`nav-link mx-4 ${active(
-													"/graduations"
-												)}`}
+												className={`nav-link mx-4 ${active("/graduations")}`}
 												onClick={() => setMenu("")}>
 												Graduations
 											</Link>
@@ -149,9 +141,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/success-cards"
-												className={`nav-link mx-4 ${active(
-													"/success-cards"
-												)}`}
+												className={`nav-link mx-4 ${active("/success-cards")}`}
 												onClick={() => setMenu("")}>
 												Success Cards
 											</Link>
@@ -159,9 +149,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/anniversaries"
-												className={`nav-link mx-4 ${active(
-													"/anniversaries"
-												)}`}
+												className={`nav-link mx-4 ${active("/anniversaries")}`}
 												onClick={() => setMenu("")}>
 												Anniversaries
 											</Link>
@@ -169,9 +157,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/celebrations"
-												className={`nav-link mx-4 ${active(
-													"/celebrations"
-												)}`}
+												className={`nav-link mx-4 ${active("/celebrations")}`}
 												onClick={() => setMenu("")}>
 												Celebrations
 											</Link>

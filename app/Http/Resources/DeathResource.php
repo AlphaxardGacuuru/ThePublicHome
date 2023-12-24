@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DeathResource extends JsonResource
@@ -28,8 +29,11 @@ class DeathResource extends JsonResource
             "tier" => $this->membership->tier,
             "name" => $this->name,
             "sunrise" => $this->sunrise,
+            "sunriseFormated" => Carbon::parse($this->sunrise)->format("d M Y"),
             "sunset" => $this->sunset,
+            "sunsetFormated" => Carbon::parse($this->sunset)->format("d M Y"),
             "burialDate" => $this->burial_date,
+            "burialDateFormated" => Carbon::parse($this->burial_date)->format("d M Y"),
             "announcement" => $this->announcement,
             "poster" => $this->poster,
             "photos" => $this->photos,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CelebrationCommentedEvent;
 use App\Http\Services\CelebrationCommentService;
 use Illuminate\Http\Request;
 

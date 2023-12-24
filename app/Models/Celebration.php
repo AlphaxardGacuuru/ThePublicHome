@@ -46,6 +46,11 @@ class Celebration extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function membership()
+    {
+        return $this->belongsTo(Membership::class);
+    }
+
     public function celebrationLikes()
     {
         return $this->hasMany(CelebrationLike::class);

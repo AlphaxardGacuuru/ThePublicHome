@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CelebrationResource extends JsonResource
@@ -24,11 +25,14 @@ class CelebrationResource extends JsonResource
             "userId" => $this->user_id,
             "userName" => $this->user->name,
             "userAvatar" => $this->user->avatar,
+            "locale" => $this->locale,
+            "tier" => $this->membership->tier,
             "title" => $this->title,
             "poster" => $this->poster,
             "announcement" => $this->announcement,
             "venue" => $this->venue,
             "celebrationDate" => $this->celebration_date,
+            "celebrationFormated" => Carbon::parse($this->celebration_date)->format("d M Y"),
             "likes" => $this->likes,
             "hasLiked" => $this->hasLiked($id),
             "updatedAt" => $this->updated_at,
