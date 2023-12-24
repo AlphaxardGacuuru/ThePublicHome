@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SuccessCardCommentedEvent;
+use App\Http\Services\SuccessCardCommentService;
 use App\Models\SuccessCardComment;
 use Illuminate\Http\Request;
 
 class SuccessCardCommentController extends Controller
 {
+    public function __construct(protected SuccessCardCommentService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +32,22 @@ class SuccessCardCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        [$canDispatch, $message, $successCardComment] = $this->service->store($request);
+
+        SuccessCardCommentedEvent::dispatchIf(
+            $canDispatch,
+            $successCardComment->successCard,
+            $successCardComment->user
+        );
+
+        return response([
+            "message" => $message,
+            "data" => $successCardComment,
+        ], 200);
     }
 
     /**
@@ -34,9 +56,9 @@ class SuccessCardCommentController extends Controller
      * @param  \App\Models\SuccessCardComment  $successCardComment
      * @return \Illuminate\Http\Response
      */
-    public function show(SuccessCardComment $successCardComment)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
@@ -57,8 +79,13 @@ class SuccessCardCommentController extends Controller
      * @param  \App\Models\SuccessCardComment  $successCardComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SuccessCardComment $successCardComment)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response([
+            "status" => $deleted,
+            "message" => $message,
+        ], 200);
     }
 }

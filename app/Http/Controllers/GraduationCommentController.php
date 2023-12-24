@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GraduationCommentedEvent;
+use App\Http\Services\GraduationCommentService;
 use App\Models\GraduationComment;
 use Illuminate\Http\Request;
 
 class GraduationCommentController extends Controller
 {
+    public function __construct(protected GraduationCommentService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +32,22 @@ class GraduationCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        [$canDispatch, $message, $graduationComment] = $this->service->store($request);
+
+        GraduationCommentedEvent::dispatchIf(
+            $canDispatch,
+            $graduationComment->graduation,
+            $graduationComment->user
+        );
+
+        return response([
+            "message" => $message,
+            "data" => $graduationComment,
+        ], 200);
     }
 
     /**
@@ -34,9 +56,9 @@ class GraduationCommentController extends Controller
      * @param  \App\Models\GraduationComment  $graduationComment
      * @return \Illuminate\Http\Response
      */
-    public function show(GraduationComment $graduationComment)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
@@ -57,8 +79,13 @@ class GraduationCommentController extends Controller
      * @param  \App\Models\GraduationComment  $graduationComment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GraduationComment $graduationComment)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response([
+            "status" => $deleted,
+            "message" => $message,
+        ], 200);
     }
 }

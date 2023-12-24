@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GraduationCommentLikedEvent;
+use App\Http\Services\GraduationCommentLikeService;
 use App\Models\GraduationCommentLike;
 use Illuminate\Http\Request;
 
 class GraduationCommentLikeController extends Controller
 {
+    public function __construct(protected GraduationCommentLikeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +32,18 @@ class GraduationCommentLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $like] = $this->service->store($request);
+
+        GraduationCommentLikedEvent::dispatchIf(
+            $saved,
+            $like->comment,
+            $like->user
+        );
+
+        return response([
+            "message" => $message,
+            "data" => $like,
+        ], 200);
     }
 
     /**

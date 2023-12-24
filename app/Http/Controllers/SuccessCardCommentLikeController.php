@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SuccessCardCommentLikedEvent;
+use App\Http\Services\SuccessCardCommentLikeService;
 use App\Models\SuccessCardCommentLike;
 use Illuminate\Http\Request;
 
 class SuccessCardCommentLikeController extends Controller
 {
+    public function __construct(protected SuccessCardCommentLikeService $service)
+    {
+        //
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +32,18 @@ class SuccessCardCommentLikeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        [$saved, $message, $like] = $this->service->store($request);
+
+        SuccessCardCommentLikedEvent::dispatchIf(
+            $saved,
+            $like->comment,
+            $like->user
+        );
+
+        return response([
+            "message" => $message,
+            "data" => $like,
+        ], 200);
     }
 
     /**
