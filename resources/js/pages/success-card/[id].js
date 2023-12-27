@@ -7,37 +7,57 @@ import MyLink from "@/components/Core/MyLink"
 import SocialMediaInput from "@/components/Core/SocialMediaInput"
 import CommentMedia from "@/components/Core/CommentMedia"
 
-const WeddingShow = (props) => {
+import HeartFilledSVG from "@/svgs/HeartFilledSVG"
+import HeartSVG from "@/svgs/HeartSVG"
+
+const show = (props) => {
 	const { id } = useParams()
 
-	const [wedding, setWedding] = useState({})
-	const [weddingComments, setWeddingComments] = useState([])
+	const [successCard, setSuccessCard] = useState({})
+	const [successCardComments, setSuccessCardComments] = useState([])
+	const [hasLiked, setHasLiked] = useState()
 	const [deletedIds, setDeletedIds] = useState([])
 	const [pageLoader, setPageLoader] = useState(true)
 
 	useEffect(() => {
-		Axios.get(`api/weddings/${id}`)
+		Axios.get(`api/success-cards/${id}`)
 			.then((res) => {
 				setPageLoader(false)
-				// Set Wedding Announcement
-				setWedding(res.data.data)
+				setSuccessCard(res.data.data)
+				setHasLiked(res.data.data.hasLiked)
 			})
 			.catch((err) => props.getErrors(err))
 
-		// Fetch Wedding Announcements Comments
-		props.get(`wedding-comments/${id}`, setWeddingComments)
+		// Fetch Success Card s Comments
+		props.get(`success-card-comments/${id}`, setSuccessCardComments)
 	}, [])
+
+	// Function for liking Success Card
+	const onLike = (successCardId) => {
+		setHasLiked(!hasLiked)
+
+		// Add like to database
+		Axios.post(`/api/success-card-likes`, {
+			successCardId: successCardId,
+		})
+			.then((res) => {
+				props.setMessages([res.data.message])
+				// Update Success Card s
+				props.get(`success-cards/${id}`, setSuccessCard)
+			})
+			.catch((err) => props.getErrors(err))
+	}
 
 	/*
 	 * Function for liking comments */
 	const onCommentLike = (commentId) => {
 		// Add like to database
-		Axios.post(`/api/wedding-comment-likes`, {
+		Axios.post(`/api/success-card-comment-likes`, {
 			commentId: commentId,
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				props.get(`wedding-comments/${id}`, setVideoComments)
+				props.get(`success-card-comments/${id}`, setSuccessCardComments)
 			})
 			.catch((err) => props.getErrors(err))
 	}
@@ -48,7 +68,7 @@ const WeddingShow = (props) => {
 		// Remove deleted comment
 		setDeletedIds([...deletedIds, commentId])
 
-		Axios.delete(`/api/wedding-comments/${commentId}`)
+		Axios.delete(`/api/success-card-comments/${commentId}`)
 			.then((res) => props.setMessages([res.data.message]))
 			.catch((err) => props.getErrors(err))
 	}
@@ -73,93 +93,165 @@ const WeddingShow = (props) => {
 					{/* Main Image */}
 					<div className="death-poster">
 						<Img
-							src={wedding.poster}
+							src={successCard.poster}
 							width="100%"
 							height="auto"
 						/>
 					</div>
 					{/* Main Image End */}
 
-					{/* Wedding Announcement Info */}
+					{/* Success Card  Info */}
 					<div className="row">
 						<div className="col-sm-3 mb-4 px-3">
-							{/* User info */}
-							<div
-								className="d-flex p-1"
-								style={{ maxWidth: "220em" }}>
-								{/* Avatar */}
+							<div className="border rounded my-2 px-2 pb-5">
+								{/* User info */}
 								<div
-									className="py-2"
-									style={{ minWidth: "40px" }}>
-									<Link to={`/profile/show/${wedding.userId}`}>
-										<Img
-											src={wedding.userAvatar}
-											className="rounded-circle"
-											width="30px"
-											height="30px"
-											alt="user"
-											loading="lazy"
-										/>
-									</Link>
+									className="d-flex p-1"
+									style={{ maxWidth: "220em" }}>
+									{/* Avatar */}
+									<div
+										className="py-2"
+										style={{ minWidth: "40px" }}>
+										<Link to={`/profile/show/${successCard.userId}`}>
+											<Img
+												src={successCard.userAvatar}
+												className="rounded-circle"
+												width="30px"
+												height="30px"
+												alt="user"
+												loading="lazy"
+											/>
+										</Link>
+									</div>
+									{/* Avatar End */}
+									{/* Service Provider Name */}
+									<div className="flex-grow-1">
+										<h6
+											className="mt-1 pt-2 px-1"
+											style={{
+												width: "10em",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip",
+												textAlign: "left",
+											}}>
+											{successCard.userName}
+										</h6>
+									</div>
+									{/* Service Provider Name End */}
+									{/* Likes */}
+									<div
+										className="p-2"
+										style={{ cursor: "pointer" }}
+										onClick={() => onLike(id)}>
+										{hasLiked ? (
+											<div>
+												<span style={{ color: "#fb3958", fontSize: "1.2em" }}>
+													<HeartFilledSVG />
+												</span>
+												<small
+													className="ms-1"
+													style={{ color: "#fb3958", fontWeight: "100" }}>
+													{successCard.likes}
+												</small>
+											</div>
+										) : (
+											<div>
+												<span style={{ color: "inherit", fontSize: "1.2em" }}>
+													<HeartSVG />
+												</span>
+												<small
+													className="ms-1"
+													style={{ color: "inherit", fontWeight: "100" }}>
+													{successCard.likes}
+												</small>
+											</div>
+										)}
+									</div>
+									{/* Likes End */}
 								</div>
-								{/* Avatar End */}
-								{/* Service Provider Name */}
-								<div className="flex-grow-1">
-									<h6
-										className="mt-1 pt-2 px-1"
-										style={{
-											width: "10em",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip",
-											textAlign: "left",
-										}}>
-										{wedding.userName}
-									</h6>
-								</div>
-								{/* Service Provider Name End */}
-								{/* Edit Button */}
-								<div>
-									{wedding.userId == props.auth?.id && (
-										<div>
-											<MyLink
-												linkTo={`/weddings/edit/${id}`}
-												text="edit"
+								{/* User info End */}
+								<h2>{successCard.title}</h2>
+								<hr />
+								<h6>{successCard.announcement}</h6>
+								<hr />
+								<h6 className="text-start">
+									Tier:{" "}
+									<small
+										className="bg-2 my-1 p-1 text-white text-uppercase"
+										style={{ fontSize: "0.8em" }}>
+										{successCard.tier}
+									</small>
+								</h6>
+								<h6 className="text-capitalize">
+									Locale: {successCard.locale}
+								</h6>
+							</div>
+						</div>
+						<div className="col-sm-9">
+							<div className="border rounded my-2 px-2 pt-3 pb-5">
+								{/* List Images */}
+								<h5>Photos</h5>
+								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll custom-scroll">
+									{successCard.photos?.map((photo, key) => (
+										<div
+											key={key}
+											className="shadow m-1 p-1">
+											<Img
+												src={`/storage/${photo}`}
+												className="mx-2"
+												style={{ width: "10em", height: "auto" }}
 											/>
 										</div>
-									)}
-									{/* Edit Button End */}
+									))}
 								</div>
+								{/* List Images End */}
+
+								{/* List Videos */}
+								<h5>Videos</h5>
+								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
+									{successCard.videos?.map((video, key) => (
+										<div
+											key={key}
+											className="shadow m-1 p-1">
+											<video
+												className="mx-2"
+												style={{ width: "25em", height: "auto" }}
+												controls>
+												<source
+													src={`/storage/${video}`}
+													// type="video/mp4"
+												/>
+												Your browser does not support the video tag.
+											</video>
+										</div>
+									))}
+								</div>
+								{/* List Videos End */}
 							</div>
-							{/* User info End */}
-							<h2>{wedding.name}</h2>
-						</div>
-						<div className="col-sm-9 border-start">
-							<h2>Eulogy</h2>
-							<p>{wedding.eulogy}</p>
 						</div>
 					</div>
-					{/* Wedding Announcement Info End */}
+					{/* Success Card  Info End */}
 
 					{/* Comments */}
 					<div>
-						{wedding.userId != props.auth?.id && (
+						{successCard.userId != props.auth?.id && (
 							<SocialMediaInput
 								{...props}
-								id={wedding.id}
+								id={successCard.id}
 								placeholder="Write Something"
-								urlTo="/wedding-comments"
+								urlTo="/success-card-comments"
 								editing={false}
 								stateToUpdate={() => {
 									props.get(
-										`wedding-comments/${id}`,
-										setWeddingComments
+										`success-card-comments/${id}`,
+										setSuccessCardComments
 									)
 								}}
 							/>
 						)}
 						<br />
-						{weddingComments
+						{successCardComments
 							.filter((comment) => !deletedIds.includes(comment.id))
 							.map((comment, key) => (
 								<CommentMedia
@@ -175,9 +267,19 @@ const WeddingShow = (props) => {
 
 					<br />
 					<center>
+						{/* Edit Button */}
+						{successCard.userId == props.auth?.id && (
+							<div className="mb-2">
+								<MyLink
+									linkTo={`/success-cards/edit/${id}`}
+									text="edit success card announcement"
+								/>
+							</div>
+						)}
+						{/* Edit Button End */}
 						<MyLink
 							linkTo="/"
-							text="back to wedding announcements"
+							text="back to success card announcements"
 						/>
 					</center>
 				</div>
@@ -187,4 +289,4 @@ const WeddingShow = (props) => {
 	)
 }
 
-export default WeddingShow
+export default show

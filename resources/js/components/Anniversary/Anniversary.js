@@ -7,6 +7,7 @@ import SocialMediaInput from "@/components/Core/SocialMediaInput"
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
+import LocationSVG from "@/svgs/LocationSVG"
 
 const Anniversary = (props) => {
 	const [hasLiked, setHasLiked] = useState(props.anniversary.hasLiked)
@@ -73,6 +74,9 @@ const Anniversary = (props) => {
 				{/* User info End */}
 				<h3 className="death-name px-2 mb-0">{props.anniversary.title}</h3>
 				<p className="mb-0 px-2 text-start">{props.anniversary.announcement}</p>
+				<p className="death-name mb-1 px-2 text-start">
+					<LocationSVG /> {props.anniversary.venue}
+				</p>
 				<p className="mb-0 px-2 text-start">
 					<small
 						className="bg-2 my-1 p-1 text-white text-uppercase"

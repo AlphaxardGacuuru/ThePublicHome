@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Events\GraduationLikedEvent;
+use App\Http\Services\GraduationLikeService;
 use App\Models\GraduationLike;
 use Illuminate\Http\Request;
 
 class GraduationLikeController extends Controller
 {
+	public function __construct(protected GraduationLikeService $service)
+	{
+		// 
+	}
+
     /**
      * Display a listing of the resource.
      *

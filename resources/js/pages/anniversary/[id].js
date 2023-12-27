@@ -7,37 +7,57 @@ import MyLink from "@/components/Core/MyLink"
 import SocialMediaInput from "@/components/Core/SocialMediaInput"
 import CommentMedia from "@/components/Core/CommentMedia"
 
-const DeathShow = (props) => {
+import HeartFilledSVG from "@/svgs/HeartFilledSVG"
+import HeartSVG from "@/svgs/HeartSVG"
+
+const show = (props) => {
 	const { id } = useParams()
 
-	const [death, setDeath] = useState({})
-	const [deathComments, setDeathComments] = useState([])
+	const [anniversary, setAnniversary] = useState({})
+	const [anniversaryComments, setAnniversaryComments] = useState([])
+	const [hasLiked, setHasLiked] = useState()
 	const [deletedIds, setDeletedIds] = useState([])
 	const [pageLoader, setPageLoader] = useState(true)
 
 	useEffect(() => {
-		Axios.get(`api/deaths/${id}`)
+		Axios.get(`api/anniversaries/${id}`)
 			.then((res) => {
 				setPageLoader(false)
-				// Set Death 
-				setDeath(res.data.data)
+				setAnniversary(res.data.data)
+				setHasLiked(res.data.data.hasLiked)
 			})
 			.catch((err) => props.getErrors(err))
 
-		// Fetch Death s Comments
-		props.get(`death-comments/${id}`, setDeathComments)
+		// Fetch Anniversary s Comments
+		props.get(`anniversary-comments/${id}`, setAnniversaryComments)
 	}, [])
+
+	// Function for liking Anniversary
+	const onLike = (anniversaryId) => {
+		setHasLiked(!hasLiked)
+
+		// Add like to database
+		Axios.post(`/api/anniversary-likes`, {
+			anniversaryId: anniversaryId,
+		})
+			.then((res) => {
+				props.setMessages([res.data.message])
+				// Update Anniversary s
+				props.get(`anniversaries/${id}`, setAnniversary)
+			})
+			.catch((err) => props.getErrors(err))
+	}
 
 	/*
 	 * Function for liking comments */
 	const onCommentLike = (commentId) => {
 		// Add like to database
-		Axios.post(`/api/death-comment-likes`, {
+		Axios.post(`/api/anniversary-comment-likes`, {
 			commentId: commentId,
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				props.get(`death-comments/${id}`, setVideoComments)
+				props.get(`anniversary-comments/${id}`, setAnniversaryComments)
 			})
 			.catch((err) => props.getErrors(err))
 	}
@@ -48,7 +68,7 @@ const DeathShow = (props) => {
 		// Remove deleted comment
 		setDeletedIds([...deletedIds, commentId])
 
-		Axios.delete(`/api/death-comments/${commentId}`)
+		Axios.delete(`/api/anniversary-comments/${commentId}`)
 			.then((res) => props.setMessages([res.data.message]))
 			.catch((err) => props.getErrors(err))
 	}
@@ -73,93 +93,161 @@ const DeathShow = (props) => {
 					{/* Main Image */}
 					<div className="death-poster">
 						<Img
-							src={death.poster}
+							src={anniversary.poster}
 							width="100%"
 							height="auto"
 						/>
 					</div>
 					{/* Main Image End */}
 
-					{/* Death  Info */}
+					{/* Anniversary  Info */}
 					<div className="row">
 						<div className="col-sm-3 mb-4 px-3">
-							{/* User info */}
-							<div
-								className="d-flex p-1"
-								style={{ maxWidth: "220em" }}>
-								{/* Avatar */}
+							<div className="border rounded my-2 px-2 pb-5">
+								{/* User info */}
 								<div
-									className="py-2"
-									style={{ minWidth: "40px" }}>
-									<Link to={`/profile/show/${death.userId}`}>
-										<Img
-											src={death.userAvatar}
-											className="rounded-circle"
-											width="30px"
-											height="30px"
-											alt="user"
-											loading="lazy"
-										/>
-									</Link>
+									className="d-flex p-1"
+									style={{ maxWidth: "220em" }}>
+									{/* Avatar */}
+									<div
+										className="py-2"
+										style={{ minWidth: "40px" }}>
+										<Link to={`/profile/show/${anniversary.userId}`}>
+											<Img
+												src={anniversary.userAvatar}
+												className="rounded-circle"
+												width="30px"
+												height="30px"
+												alt="user"
+												loading="lazy"
+											/>
+										</Link>
+									</div>
+									{/* Avatar End */}
+									{/* Service Provider Name */}
+									<div className="flex-grow-1">
+										<h6
+											className="mt-1 pt-2 px-1"
+											style={{
+												width: "10em",
+												whiteSpace: "nowrap",
+												overflow: "hidden",
+												textOverflow: "clip",
+												textAlign: "left",
+											}}>
+											{anniversary.userName}
+										</h6>
+									</div>
+									{/* Service Provider Name End */}
+									{/* Likes */}
+									<div
+										className="p-2"
+										style={{ cursor: "pointer" }}
+										onClick={() => onLike(id)}>
+										{hasLiked ? (
+											<div>
+												<span style={{ color: "#fb3958", fontSize: "1.2em" }}>
+													<HeartFilledSVG />
+												</span>
+												<small
+													className="ms-1"
+													style={{ color: "#fb3958", fontWeight: "100" }}>
+													{anniversary.likes}
+												</small>
+											</div>
+										) : (
+											<div>
+												<span style={{ color: "inherit", fontSize: "1.2em" }}>
+													<HeartSVG />
+												</span>
+												<small
+													className="ms-1"
+													style={{ color: "inherit", fontWeight: "100" }}>
+													{anniversary.likes}
+												</small>
+											</div>
+										)}
+									</div>
+									{/* Likes End */}
 								</div>
-								{/* Avatar End */}
-								{/* Service Provider Name */}
-								<div className="flex-grow-1">
-									<h6
-										className="mt-1 pt-2 px-1"
-										style={{
-											width: "10em",
-											whiteSpace: "nowrap",
-											overflow: "hidden",
-											textOverflow: "clip",
-											textAlign: "left",
-										}}>
-										{death.userName}
-									</h6>
-								</div>
-								{/* Service Provider Name End */}
-								{/* Edit Button */}
-								<div>
-									{death.userId == props.auth?.id && (
-										<div>
-											<MyLink
-												linkTo={`/deaths/edit/${id}`}
-												text="edit"
+								{/* User info End */}
+								<h2>{anniversary.title}</h2>
+								<hr />
+								<h6>{anniversary.announcement}</h6>
+								<hr />
+								<h6 className="text-start">
+									Tier:{" "}
+									<small
+										className="bg-2 my-1 p-1 text-white text-uppercase"
+										style={{ fontSize: "0.8em" }}>
+										{anniversary.tier}
+									</small>
+								</h6>
+								<h6 className="text-capitalize">Locale: {anniversary.locale}</h6>
+								<h6>Anniversary Date: {anniversary.anniversaryDateFormated}</h6>
+							</div>
+						</div>
+						<div className="col-sm-9">
+							<div className="border rounded my-2 px-2 pt-3 pb-5">
+								{/* List Images */}
+								<h5>Photos</h5>
+								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll custom-scroll">
+									{anniversary.photos?.map((photo, key) => (
+										<div
+											key={key}
+											className="shadow m-1 p-1">
+											<Img
+												src={`/storage/${photo}`}
+												className="mx-2"
+												style={{ width: "10em", height: "auto" }}
 											/>
 										</div>
-									)}
-									{/* Edit Button End */}
+									))}
 								</div>
+								{/* List Images End */}
+
+								{/* List Videos */}
+								<h5>Videos</h5>
+								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
+									{anniversary.videos?.map((video, key) => (
+										<div
+											key={key}
+											className="shadow m-1 p-1">
+											<video
+												className="mx-2"
+												style={{ width: "25em", height: "auto" }}
+												controls>
+												<source
+													src={`/storage/${video}`}
+													// type="video/mp4"
+												/>
+												Your browser does not support the video tag.
+											</video>
+										</div>
+									))}
+								</div>
+								{/* List Videos End */}
 							</div>
-							{/* User info End */}
-							<h2>{death.name}</h2>
-						</div>
-						<div className="col-sm-9 border-start">
-							<h2>Eulogy</h2>
-							<p>{death.eulogy}</p>
 						</div>
 					</div>
-					{/* Death  Info End */}
+					{/* Anniversary  Info End */}
 
 					{/* Comments */}
 					<div>
-						{death.userId != props.auth?.id && (
+						{anniversary.userId != props.auth?.id && (
 							<SocialMediaInput
 								{...props}
-								id={death.id}
+								id={anniversary.id}
 								placeholder="Write Something"
-								urlTo="/death-comments"
+								urlTo="/anniversary-comments"
 								editing={false}
 								stateToUpdate={() => {
-									props.get(
-										`death-comments/${id}`,
-										setDeathComments
-									)
+									props.get(`anniversary-comments/${id}`, setAnniversaryComments)
 								}}
 							/>
 						)}
 						<br />
-						{deathComments
+						{anniversaryComments
 							.filter((comment) => !deletedIds.includes(comment.id))
 							.map((comment, key) => (
 								<CommentMedia
@@ -175,9 +263,19 @@ const DeathShow = (props) => {
 
 					<br />
 					<center>
+						{/* Edit Button */}
+						{anniversary.userId == props.auth?.id && (
+							<div className="mb-2">
+								<MyLink
+									linkTo={`/anniversaries/edit/${id}`}
+									text="edit anniversary announcement"
+								/>
+							</div>
+						)}
+						{/* Edit Button End */}
 						<MyLink
 							linkTo="/"
-							text="back to death announcements"
+							text="back to anniversary announcements"
 						/>
 					</center>
 				</div>
@@ -187,4 +285,4 @@ const DeathShow = (props) => {
 	)
 }
 
-export default DeathShow
+export default show

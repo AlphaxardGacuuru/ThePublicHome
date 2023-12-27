@@ -31,7 +31,21 @@ class GraduationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "title" => "required|string",
+            "poster" => "required|string",
+            "announcement" => "required|string",
+            "venue" => "required|string",
+            "graduationDate" => "required|string",
+        ]);
+
+        [$saved, $message, $graduation] = $this->service->store($request);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $graduation,
+        ], 200);
     }
 
     /**
@@ -40,9 +54,9 @@ class GraduationController extends Controller
      * @param  \App\Models\Graduation  $graduation
      * @return \Illuminate\Http\Response
      */
-    public function show(Graduation $graduation)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
@@ -52,9 +66,23 @@ class GraduationController extends Controller
      * @param  \App\Models\Graduation  $graduation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Graduation $graduation)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            "title" => "nullable|string",
+            "poster" => "nullable|string",
+            "announcement" => "nullable|string",
+            "venue" => "nullable|string",
+            "graduationDate" => "nullable|string",
+        ]);
+
+        [$saved, $message, $graduation] = $this->service->update($request, $id);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $graduation,
+        ], 200);
     }
 
     /**
@@ -63,8 +91,13 @@ class GraduationController extends Controller
      * @param  \App\Models\Graduation  $graduation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Graduation $graduation)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response([
+            "status" => $deleted,
+            "message" => $message,
+        ], 200);
     }
 }

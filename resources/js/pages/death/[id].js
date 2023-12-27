@@ -10,7 +10,7 @@ import CommentMedia from "@/components/Core/CommentMedia"
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
 
-const DeathShow = (props) => {
+const show = (props) => {
 	const { id } = useParams()
 
 	const [death, setDeath] = useState({})
@@ -24,7 +24,7 @@ const DeathShow = (props) => {
 			.then((res) => {
 				setPageLoader(false)
 				setDeath(res.data.data)
-				setHasLiked(death.hasLiked)
+				setHasLiked(res.data.data.hasLiked)
 			})
 			.catch((err) => props.getErrors(err))
 
@@ -290,4 +290,4 @@ const DeathShow = (props) => {
 	)
 }
 
-export default DeathShow
+export default show
