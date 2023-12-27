@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Resources\AnniversaryResource;
 use App\Models\Anniversary;
+use App\Models\UserMembership;
 use Illuminate\Support\Facades\Storage;
 
 class AnniversaryService extends Service
@@ -35,7 +36,9 @@ class AnniversaryService extends Service
     {
         $anniversary = new Anniversary;
         $anniversary->user_id = $this->id;
-        $anniversary->name = $request->name;
+        $anniversary->membership_id = $request->membershipId;
+        $anniversary->locale = $request->locale;
+        $anniversary->title = $request->title;
         $anniversary->poster = $request->poster;
         $anniversary->announcement = $request->announcement;
         $anniversary->venue = $request->venue;
@@ -43,7 +46,15 @@ class AnniversaryService extends Service
 
         $saved = $anniversary->save();
 
-        $message = $anniversary->name . " announcement created";
+        // Update Membership
+        $membership = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->where("status", "pending")
+            ->first();
+        $membership->status = "used";
+        $membership->save();
+
+        $message = $anniversary->title . " announcement created";
 
         return [$saved, $message, $anniversary];
     }

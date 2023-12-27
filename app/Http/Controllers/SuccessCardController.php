@@ -31,7 +31,18 @@ class SuccessCardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            "title" => "required|string",
+            "announcement" => "required|string",
+        ]);
+
+        [$saved, $message, $successCard] = $this->service->store($request);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $successCard,
+        ], 200);
     }
 
     /**
@@ -40,9 +51,9 @@ class SuccessCardController extends Controller
      * @param  \App\Models\SuccessCard  $successCard
      * @return \Illuminate\Http\Response
      */
-    public function show(SuccessCard $successCard)
+    public function show($id)
     {
-        //
+        return $this->service->show($id);
     }
 
     /**
@@ -52,9 +63,21 @@ class SuccessCardController extends Controller
      * @param  \App\Models\SuccessCard  $successCard
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SuccessCard $successCard)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            "title" => "nullable|string",
+            "poster" => "nullable|string",
+            "announcement" => "nullable|string",
+        ]);
+
+        [$saved, $message, $successCard] = $this->service->update($request, $id);
+
+        return response([
+            "status" => $saved,
+            "message" => $message,
+            "data" => $successCard,
+        ], 200);
     }
 
     /**
@@ -63,8 +86,13 @@ class SuccessCardController extends Controller
      * @param  \App\Models\SuccessCard  $successCard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SuccessCard $successCard)
+    public function destroy($id)
     {
-        //
+        [$deleted, $message] = $this->service->destroy($id);
+
+        return response([
+            "status" => $deleted,
+            "message" => $message,
+        ], 200);
     }
 }

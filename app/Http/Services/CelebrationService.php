@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Resources\CelebrationResource;
 use App\Models\Celebration;
+use App\Models\UserMembership;
 use Illuminate\Support\Facades\Storage;
 
 class CelebrationService extends Service
@@ -35,7 +36,9 @@ class CelebrationService extends Service
     {
         $celebration = new Celebration;
         $celebration->user_id = $this->id;
-        $celebration->name = $request->name;
+        $celebration->membership_id = $request->membershipId;
+        $celebration->locale = $request->locale;
+        $celebration->title = $request->title;
         $celebration->poster = $request->poster;
         $celebration->announcement = $request->announcement;
         $celebration->venue = $request->venue;
@@ -43,7 +46,15 @@ class CelebrationService extends Service
 
         $saved = $celebration->save();
 
-        $message = $celebration->name . " announcement created";
+        // Update Membership
+        $membership = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->where("status", "pending")
+            ->first();
+        $membership->status = "used";
+        $membership->save();
+
+        $message = $celebration->title . " announcement created";
 
         return [$saved, $message, $celebration];
     }

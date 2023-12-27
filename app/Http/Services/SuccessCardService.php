@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Resources\SuccessCardResource;
 use App\Models\SuccessCard;
+use App\Models\UserMembership;
 use Illuminate\Support\Facades\Storage;
 
 class SuccessCardService extends Service
@@ -35,15 +36,23 @@ class SuccessCardService extends Service
     {
         $successCard = new SuccessCard;
         $successCard->user_id = $this->id;
+        $successCard->membership_id = $request->membershipId;
+        $successCard->locale = $request->locale;
         $successCard->title = $request->title;
         $successCard->poster = $request->poster;
         $successCard->announcement = $request->announcement;
-        $successCard->venue = $request->venue;
-        $successCard->successCard_date = $request->successCardDate;
 
         $saved = $successCard->save();
 
-        $message = $successCard->name . " announcement created";
+        // Update Membership
+        $membership = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->where("status", "pending")
+            ->first();
+        $membership->status = "used";
+        $membership->save();
+
+        $message = $successCard->title . " announcement created";
 
         return [$saved, $message, $successCard];
     }

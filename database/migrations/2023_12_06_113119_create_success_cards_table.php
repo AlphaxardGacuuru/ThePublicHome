@@ -25,8 +25,10 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('locale')->nullable();
             $table->string('title');
-            $table->string('poster');
             $table->string('announcement');
+            $table->string('poster')->nullable();
+            $table->jsonb('photos')->nullable();
+            $table->jsonb('videos')->nullable();
 			$table->integer('likes')->default(0);
             $table->timestamps();
         });

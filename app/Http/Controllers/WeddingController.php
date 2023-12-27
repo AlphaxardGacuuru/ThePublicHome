@@ -33,7 +33,6 @@ class WeddingController extends Controller
     {
         $this->validate($request, [
             "title" => "required|string",
-            "poster" => "required|string",
             "announcement" => "required|string",
             "venue" => "required|string",
             "weddingDate" => "required|string",

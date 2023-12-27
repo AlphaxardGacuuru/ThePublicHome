@@ -32,12 +32,10 @@ class AnniversaryController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "name" => "required|string",
-            "poster" => "required|string",
+            "title" => "required|string",
             "announcement" => "required|string",
-            "eulogy" => "required|string",
-            "locale" => "required|string",
-            "burialDate" => "required|string",
+            "venue" => "required|string",
+            "anniversaryDate" => "required|string",
         ]);
 
         [$saved, $message, $anniversary] = $this->service->store($request);
@@ -70,12 +68,10 @@ class AnniversaryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            "name" => "nullable|string",
-            "poster" => "nullable|string",
+            "title" => "nullable|string",
             "announcement" => "nullable|string",
-            "eulogy" => "nullable|string",
-            "locale" => "nullable|string",
-            "burialDate" => "nullable|string",
+            "venue" => "nullable|string",
+            "anniversaryDate" => "nullable|string",
         ]);
 
         [$saved, $message, $anniversary] = $this->service->update($request, $id);

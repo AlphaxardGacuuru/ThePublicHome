@@ -32,12 +32,10 @@ class CelebrationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            "name" => "required|string",
-            "poster" => "required|string",
+            "title" => "required|string",
             "announcement" => "required|string",
-            "eulogy" => "required|string",
-            "locale" => "required|string",
-            "burialDate" => "required|string",
+            "venue" => "required|string",
+            "celebrationDate" => "required|string",
         ]);
 
         [$saved, $message, $celebration] = $this->service->store($request);
@@ -70,12 +68,10 @@ class CelebrationController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            "name" => "nullable|string",
-            "poster" => "nullable|string",
+            "title" => "nullable|string",
             "announcement" => "nullable|string",
-            "eulogy" => "nullable|string",
-            "locale" => "nullable|string",
-            "burialDate" => "nullable|string",
+            "venue" => "nullable|string",
+            "graduationDate" => "nullable|string",
         ]);
 
         [$saved, $message, $celebration] = $this->service->update($request, $id);

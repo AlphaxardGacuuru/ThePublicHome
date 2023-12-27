@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 // import Axios from "axios"
 
@@ -33,16 +33,27 @@ registerPlugin(
 	FilePondPluginFileValidateSize
 )
 
-const DeathCreate = (props) => {
+const create = (props) => {
 	// Declare states
 	const [locale, setLocale] = useState()
-	const [name, setName] = useState()
-	const [poster, setPoster] = useState("")
-	const [eulogy, setEulogy] = useState()
-	const [loadingBtn, setLoadingBtn] = useState()
+	const [title, setTitle] = useState()
+	const [venue, setVenue] = useState("")
+	const [celebrationDate, setCelebrationDate] = useState("")
+	const [announcement, setAnnouncement] = useState("")
+	const [loadingBtn, setLoadingBtn] = useState("")
 
 	// Get history for page location
 	const router = useHistory()
+
+	useEffect(() => {
+		// Redirect if user has no membership
+		if (!props.auth.membershipId) {
+			router.push("/profile/membership")
+		}
+	}, [])
+
+	// Get Word limit for announcement based on user's membership
+	var wordLimit = props.auth.membershipFeatures?.announcement
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -50,22 +61,27 @@ const DeathCreate = (props) => {
 		// Show loader and disable button
 		setLoadingBtn(true)
 
-		// Add form data to FormData object
-		const formData = new FormData()
-		formData.append("locale", locale)
-		formData.append("name", name)
-		formData.append("poster", poster)
-		formData.append("eulogy", eulogy)
-
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
-		Axios.post(`/api/deaths`, formData)
+		Axios.post(`/api/celebrations`, {
+			membershipId: props.auth.membershipId,
+			locale: locale,
+			title: title,
+			venue: venue,
+			celebrationDate: celebrationDate,
+			announcement: announcement,
+		})
 			.then((res) => {
 				props.setMessages([res.data.message])
 				// Remove loader for button
 				setLoadingBtn(false)
-				// Redirect to Show Death
-				setTimeout(() => router.push(`/death/show/${res.data.data.id}`), 500)
+				// Redirect to Show Celebration
+				Axios.get("api/auth").then((res2) => {
+					// Set Auth
+					props.setAuth(res2.data.data)
+					// Push to edit page
+					router.push(`/celebrations/edit/${res.data.data.id}`)
+				})
 			})
 			.catch((err) => {
 				// Remove loader for button
@@ -79,52 +95,15 @@ const DeathCreate = (props) => {
 			<div className="col-sm-2"></div>
 			<div className="col-sm-8">
 				<center>
-					<h2>Upload your Death Announcement</h2>
+					<h2 className="mb-4">Upload your Celebration Announcement</h2>
 
-					<br />
-
-					<form onSubmit={onSubmit}>
-						{/* Death  Poster */}
-						<label>Upload Death Announcement Poster</label>
-						<br />
-
-						<div className="row">
-							<div className="col-lg-4"></div>
-							<div className="col-lg-4 col-sm-12">
-								<FilePond
-									name="filepond-poster"
-									labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-									imageCropAspectRatio="16:9"
-									acceptedFileTypes={["image/*"]}
-									stylePanelAspectRatio="16:9"
-									allowRevert={true}
-									server={{
-										url: `/api/filepond`,
-										process: {
-											url: "/death-poster",
-											onload: (res) => setPoster(res),
-											onerror: (err) => console.log(err.response.data),
-										},
-										revert: {
-											url: `/death-poster/${poster.substr(27)}`,
-											onload: (res) => {
-												props.setMessages([res])
-												// Clear Poster
-												setPoster("")
-											},
-										},
-									}}
-								/>
-							</div>
-							<div className="col-lg-4"></div>
-						</div>
-						<br />
-						<br />
-
+					<form
+						onSubmit={onSubmit}
+						className="mb-5">
 						<select
 							type="text"
 							name="locale"
-							className="form-control"
+							className="form-control mb-2"
 							placeholder="locale"
 							required={true}
 							onChange={(e) => setLocale(e.target.value)}>
@@ -132,117 +111,65 @@ const DeathCreate = (props) => {
 							<option value="home">Home</option>
 							<option value="international">International</option>
 						</select>
-						<br />
 
 						<input
 							type="text"
 							name="name"
-							className="form-control mb-2"
-							placeholder="Name"
+							className="form-control text-secondary mb-2"
+							placeholder="Title"
 							required={true}
-							onChange={(e) => setName(e.target.value)}
-						/>
-
-						<input
-							type="text"
-							name="name"
-							className="form-control mb-2"
-							placeholder="Sunrise"
-							required={true}
-							onChange={(e) => setName(e.target.value)}
-						/>
-
-						<input
-							type="text"
-							name="name"
-							className="form-control mb-2"
-							placeholder="Sunset"
-							required={true}
-							onChange={(e) => setName(e.target.value)}
+							onChange={(e) => setTitle(e.target.value)}
 						/>
 
 						<textarea
 							type="text"
 							name="description"
-							className="form-control"
-							placeholder="Say something about your death announcement"
+							className="form-control mb-2"
+							placeholder="Write your celebration announcement"
 							cols="30"
 							rows="5"
+							onChange={(e) => setAnnouncement(e.target.value)}
+							required={true}></textarea>
+
+						<input
+							type="text"
+							name="name"
+							className="form-control text-secondary mb-2"
+							placeholder="Venue"
 							required={true}
-							onChange={(e) => setEulogy(e.target.value)}
+							onChange={(e) => setVenue(e.target.value)}
 						/>
-						<br />
 
-						{/* Death  Poster */}
-						<label>Upload Related Images</label>
-						<br />
+						<div className="ms-2 mb-2 d-flex justify-content-start">
+							<label htmlFor="">Celebration Date</label>
+						</div>
+						<input
+							type="date"
+							name="name"
+							className="form-control text-secondary mb-2"
+							placeholder="Celebration Date"
+							required={true}
+							onChange={(e) => setCelebrationDate(e.target.value)}
+						/>
 
-						<div className="row">
-							<div className="col-lg-4"></div>
-							<div className="col-lg-4 col-sm-12">
-								<FilePond
-									name="filepond-poster"
-									labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-									imageCropAspectRatio="16:9"
-									acceptedFileTypes={["image/*"]}
-									stylePanelAspectRatio="16:9"
-									allowRevert={true}
-									server={{
-										url: `/api/filepond`,
-										process: {
-											url: "/death-poster",
-											onload: (res) => setPoster(res),
-											onerror: (err) => console.log(err.response.data),
-										},
-										revert: {
-											url: `/death-poster/${poster.substr(27)}`,
-											onload: (res) => {
-												props.setMessages([res])
-												// Clear Poster
-												setPoster("")
-											},
-										},
-									}}
-								/>
-							</div>
-							<div className="col-lg-4"></div>
+						<div className="d-flex justify-content-end py-4">
+							<small
+								className={`p-1
+									${
+										announcement.length > wordLimit * 0.8
+											? announcement.length <= wordLimit
+												? "bg-warning-subtle"
+												: "bg-danger-subtle"
+											: "bg-secondary-subtle"
+									}
+								`}>
+								Word Count: {announcement.length} /{" "}
+								{wordLimit == 1000000 ? "Unlimited" : wordLimit}
+							</small>
 						</div>
 
-						{/* Death  Poster */}
-						<label>Upload Eulogy</label>
-						<br />
-						<div className="row">
-							<div className="col-lg-4"></div>
-							<div className="col-lg-4 col-sm-12">
-								<FilePond
-									name="filepond-poster"
-									labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-									imageCropAspectRatio="16:9"
-									acceptedFileTypes={["image/*"]}
-									stylePanelAspectRatio="16:9"
-									allowRevert={true}
-									server={{
-										url: `/api/filepond`,
-										process: {
-											url: "/death-poster",
-											onload: (res) => setPoster(res),
-											onerror: (err) => console.log(err.response.data),
-										},
-										revert: {
-											url: `/death-poster/${poster.substr(27)}`,
-											onload: (res) => {
-												props.setMessages([res])
-												// Clear Poster
-												setPoster("")
-											},
-										},
-									}}
-								/>
-							</div>
-						</div>
-						
 						<Btn
-							btnText="create death announcement"
+							btnText="create celebration announcement"
 							loading={loadingBtn}
 							disabled={loadingBtn}
 						/>
@@ -250,8 +177,8 @@ const DeathCreate = (props) => {
 						<br />
 
 						<MyLink
-							linkTo="/deaths"
-							text="back to death announcements"
+							linkTo="/celebrations"
+							text="back to celebration announcements"
 						/>
 					</form>
 				</center>
@@ -261,4 +188,4 @@ const DeathCreate = (props) => {
 	)
 }
 
-export default DeathCreate
+export default create

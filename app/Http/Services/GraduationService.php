@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Resources\GraduationResource;
 use App\Models\Graduation;
+use App\Models\UserMembership;
 use Illuminate\Support\Facades\Storage;
 
 class GraduationService extends Service
@@ -35,6 +36,8 @@ class GraduationService extends Service
     {
         $graduation = new Graduation;
         $graduation->user_id = $this->id;
+        $graduation->membership_id = $request->membershipId;
+        $graduation->locale = $request->locale;
         $graduation->title = $request->title;
         $graduation->poster = $request->poster;
         $graduation->announcement = $request->announcement;
@@ -43,7 +46,15 @@ class GraduationService extends Service
 
         $saved = $graduation->save();
 
-        $message = $graduation->name . " announcement created";
+        // Update Membership
+        $membership = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->where("status", "pending")
+            ->first();
+        $membership->status = "used";
+        $membership->save();
+
+        $message = $graduation->title . " announcement created";
 
         return [$saved, $message, $graduation];
     }

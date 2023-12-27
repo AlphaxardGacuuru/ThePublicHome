@@ -78,9 +78,9 @@ const DeathCreate = (props) => {
 				// Remove loader for button
 				setLoadingBtn(false)
 				// Redirect to Show Death
-				Axios.get("api/auth").then((res) => {
+				Axios.get("api/auth").then((res2) => {
 					// Set Auth
-					props.setAuth(res.data.data)
+					props.setAuth(res2.data.data)
 					// Push to edit page
 					router.push(`/deaths/edit/${res.data.data.id}`)
 				})

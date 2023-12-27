@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Resources\WeddingResource;
+use App\Models\UserMembership;
 use App\Models\Wedding;
 use Illuminate\Support\Facades\Storage;
 
@@ -35,6 +36,8 @@ class WeddingService extends Service
     {
         $wedding = new Wedding;
         $wedding->user_id = $this->id;
+        $wedding->membership_id = $request->membershipId;
+        $wedding->locale = $request->locale;
         $wedding->title = $request->title;
         $wedding->poster = $request->poster;
         $wedding->announcement = $request->announcement;
@@ -43,7 +46,15 @@ class WeddingService extends Service
 
         $saved = $wedding->save();
 
-        $message = $wedding->name . " announcement created";
+        // Update Membership
+        $membership = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->where("status", "pending")
+            ->first();
+        $membership->status = "used";
+        $membership->save();
+
+        $message = $wedding->title . " announcement created";
 
         return [$saved, $message, $wedding];
     }

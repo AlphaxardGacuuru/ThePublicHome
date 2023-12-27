@@ -33,7 +33,6 @@ class GraduationController extends Controller
     {
         $this->validate($request, [
             "title" => "required|string",
-            "poster" => "required|string",
             "announcement" => "required|string",
             "venue" => "required|string",
             "graduationDate" => "required|string",
@@ -70,7 +69,6 @@ class GraduationController extends Controller
     {
         $this->validate($request, [
             "title" => "nullable|string",
-            "poster" => "nullable|string",
             "announcement" => "nullable|string",
             "venue" => "nullable|string",
             "graduationDate" => "nullable|string",
