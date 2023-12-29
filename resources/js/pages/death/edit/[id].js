@@ -333,7 +333,7 @@ const DeathEdit = (props) => {
 								server={{
 									url: `/api/filepond`,
 									process: {
-										url: `/death-poster/${id}`,
+										url: `/poster/death/${id}`,
 										onload: () => props.get(`deaths/${id}`, setDeath),
 										onerror: (err) => console.log(err.response.data),
 									},
@@ -363,9 +363,10 @@ const DeathEdit = (props) => {
 								server={{
 									url: `/api/filepond`,
 									process: {
-										url: `/death-photos/${id}/${death.photoLimit}`,
+										url: `/photos/death/${id}/${death.photoLimit}`,
 										onload: () => props.get(`deaths/${id}`, setDeath),
-										onerror: (err) => console.log(err),
+										onerror: (err) =>
+											props.setErrors([JSON.parse(err).message]),
 									},
 								}}
 							/>
@@ -386,9 +387,10 @@ const DeathEdit = (props) => {
 								server={{
 									url: `/api/filepond`,
 									process: {
-										url: `/death-videos/${id}/${death.videoLimit}`,
+										url: `/videos/death/${id}/${death.videoLimit}`,
 										onload: () => props.get(`deaths/${id}`, setDeath),
-										onerror: (err) => console.log(err),
+										onerror: (err) =>
+											props.setErrors([JSON.parse(err).message]),
 									},
 								}}
 							/>
@@ -409,7 +411,8 @@ const DeathEdit = (props) => {
 									process: {
 										url: `/eulogy/${id}/${death.eulogyLimit}`,
 										onload: (res) => props.get(`deaths/${id}`, setDeath),
-										onerror: (err) => console.log(err.response.data),
+										onerror: (err) =>
+											props.setErrors([JSON.parse(err).message]),
 									},
 									revert: {
 										url: `/eulogy/${eulogy.substr(9)}`,

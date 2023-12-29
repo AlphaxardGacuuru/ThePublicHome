@@ -79,15 +79,15 @@ Route::apiResources([
 Route::prefix('filepond')->group(function () {
     Route::controller(FilePondController::class)->group(function () {
 
-        // Death
-        Route::post('death-poster/{id}', 'storeDeathPoster');
-        Route::post('death-photos/{id}/{limit}', 'storeDeathPhotos');
-        Route::post('death-videos/{id}/{limit}', 'storeDeathVideos');
-        Route::post('eulogy/{id}/{limit}', 'storeEulogy');
-        Route::delete('death-poster/{id}', 'destoryDeathPoster');
-        Route::delete('eulogy/{id}', 'destoryEulogy');
-
         // User
         Route::post('avatar/{id}', 'updateAvatar');
+
+        // Media
+        Route::post('poster/{type}/{id}', 'storePoster');
+        Route::post('photos/{type}/{id}/{limit}', 'storePhotos');
+        Route::post('videos/{type}/{id}/{limit}', 'storeVideos');
+        Route::post('eulogy/{id}/{limit}', 'storeEulogy');
+        Route::delete('poster/{type}/{id}', 'destoryPoster');
+        Route::delete('eulogy/{type}/{id}', 'destoryEulogy');
     });
 });

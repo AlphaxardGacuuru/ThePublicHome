@@ -29,6 +29,27 @@ class Death extends Model
         );
     }
 
+    protected function sunrise(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Carbon::parse($value)->format('d M Y'),
+        );
+    }
+
+    protected function sunset(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Carbon::parse($value)->format('d M Y'),
+        );
+    }
+
+    protected function burialDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Carbon::parse($value)->format('d M Y'),
+        );
+    }
+
     protected function updatedAt(): Attribute
     {
         return Attribute::make(

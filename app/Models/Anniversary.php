@@ -11,6 +11,12 @@ class Anniversary extends Model
 {
     use HasFactory;
 
+	// Casts
+	protected $casts = [
+		"photos" => "array",
+		"videos" => "array",
+	];
+
     /**
      * Accesors.
      *

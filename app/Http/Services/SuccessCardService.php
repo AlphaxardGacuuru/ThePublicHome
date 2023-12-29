@@ -64,6 +64,10 @@ class SuccessCardService extends Service
     {
         $successCard = SuccessCard::findOrFail($id);
 
+        if ($request->locale) {
+            $successCard->locale = $request->locale;
+        }
+
         if ($request->title) {
             $successCard->title = $request->title;
         }
@@ -81,17 +85,31 @@ class SuccessCardService extends Service
             $successCard->announcement = $request->announcement;
         }
 
-        if ($request->venue) {
-            $successCard->venue = $request->venue;
+        if ($request->photo) {
+            // Delete photo from storage
+            Storage::disk("public")->delete($request->photo);
+
+            // Remove photo from array
+            $successCard->photos = collect($successCard->photos)
+                ->reject(fn($photo) => $photo == $request->photo)
+                ->values()
+                ->all();
         }
 
-        if ($request->successCardDate) {
-            $successCard->successCard_date = $request->successCardDate;
+        if ($request->video) {
+            // Delete video from storage
+            Storage::disk("public")->delete($request->video);
+
+            // Remove video from array
+            $successCard->videos = collect($successCard->videos)
+                ->reject(fn($video) => $video == $request->video)
+                ->values()
+                ->all();
         }
 
         $saved = $successCard->save();
         // Define Message
-        $message = $successCard->name . " updated";
+        $message = $successCard->title . " updated";
 
         return [$saved, $message, $successCard];
     }

@@ -66,6 +66,10 @@ class WeddingService extends Service
     {
         $wedding = Wedding::findOrFail($id);
 
+        if ($request->locale) {
+            $wedding->locale = $request->locale;
+        }
+
         if ($request->title) {
             $wedding->title = $request->title;
         }
@@ -91,9 +95,31 @@ class WeddingService extends Service
             $wedding->wedding_date = $request->weddingDate;
         }
 
+        if ($request->photo) {
+            // Delete photo from storage
+            Storage::disk("public")->delete($request->photo);
+
+            // Remove photo from array
+            $wedding->photos = collect($wedding->photos)
+                ->reject(fn($photo) => $photo == $request->photo)
+                ->values()
+                ->all();
+        }
+
+        if ($request->video) {
+            // Delete video from storage
+            Storage::disk("public")->delete($request->video);
+
+            // Remove video from array
+            $wedding->videos = collect($wedding->videos)
+                ->reject(fn($video) => $video == $request->video)
+                ->values()
+                ->all();
+        }
+
         $saved = $wedding->save();
         // Define Message
-        $message = $wedding->name . " updated";
+        $message = $wedding->title . " updated";
 
         return [$saved, $message, $wedding];
     }

@@ -66,6 +66,10 @@ class GraduationService extends Service
     {
         $graduation = Graduation::findOrFail($id);
 
+        if ($request->locale) {
+            $graduation->locale = $request->locale;
+        }
+
         if ($request->title) {
             $graduation->title = $request->title;
         }
@@ -91,9 +95,31 @@ class GraduationService extends Service
             $graduation->graduation_date = $request->graduationDate;
         }
 
+        if ($request->photo) {
+            // Delete photo from storage
+            Storage::disk("public")->delete($request->photo);
+
+            // Remove photo from array
+            $graduation->photos = collect($graduation->photos)
+                ->reject(fn($photo) => $photo == $request->photo)
+                ->values()
+                ->all();
+        }
+
+        if ($request->video) {
+            // Delete video from storage
+            Storage::disk("public")->delete($request->video);
+
+            // Remove video from array
+            $graduation->videos = collect($graduation->videos)
+                ->reject(fn($video) => $video == $request->video)
+                ->values()
+                ->all();
+        }
+
         $saved = $graduation->save();
         // Define Message
-        $message = $graduation->name . " updated";
+        $message = $graduation->title . " updated";
 
         return [$saved, $message, $graduation];
     }

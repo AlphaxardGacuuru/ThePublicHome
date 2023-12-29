@@ -66,8 +66,12 @@ class AnniversaryService extends Service
     {
         $anniversary = Anniversary::findOrFail($id);
 
-        if ($request->name) {
-            $anniversary->name = $request->name;
+        if ($request->locale) {
+            $anniversary->locale = $request->locale;
+        }
+
+        if ($request->title) {
+            $anniversary->title = $request->title;
         }
 
         if ($request->poster) {
@@ -91,9 +95,31 @@ class AnniversaryService extends Service
             $anniversary->anniversary_date = $request->anniversaryDate;
         }
 
+        if ($request->photo) {
+            // Delete photo from storage
+            Storage::disk("public")->delete($request->photo);
+
+            // Remove photo from array
+            $anniversary->photos = collect($anniversary->photos)
+                ->reject(fn($photo) => $photo == $request->photo)
+                ->values()
+                ->all();
+        }
+
+        if ($request->video) {
+            // Delete video from storage
+            Storage::disk("public")->delete($request->video);
+
+            // Remove video from array
+            $anniversary->videos = collect($anniversary->videos)
+                ->reject(fn($video) => $video == $request->video)
+                ->values()
+                ->all();
+        }
+
         $saved = $anniversary->save();
         // Define Message
-        $message = $anniversary->name . " updated";
+        $message = $anniversary->title . " updated";
 
         return [$saved, $message, $anniversary];
     }

@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             "avatar" => $this->avatar,
             "membershipId" => $this->membership()?->id,
             "membershipName" => $this->membership()?->name,
+            "membershipTier" => $this->membership()?->tier,
             "membershipFeatures" => $this->membership()?->features,
             "createdAt" => $this->created_at,
         ];

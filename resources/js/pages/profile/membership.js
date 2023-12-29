@@ -85,7 +85,21 @@ const membership = (props) => {
 										className="card-text mb-2">
 										<div className="d-flex justify-content-between">
 											<h4 className="text-capitalize">{membership.tier}</h4>
-											{!props.auth.membershipName && (
+											{props.auth.membershipName ? (
+												<React.Fragment>
+													{props.auth.membershipName.match(
+														memberships[0].name
+													) &&
+													props.auth.membershipTier.match(membership.tier) ? (
+														<Btn
+															btnText="current"
+															btnClass="btn-sm px-4"
+														/>
+													) : (
+														""
+													)}
+												</React.Fragment>
+											) : (
 												<Btn
 													btnText="get"
 													btnClass="btn-sm px-4"

@@ -66,8 +66,12 @@ class CelebrationService extends Service
     {
         $celebration = Celebration::findOrFail($id);
 
-        if ($request->name) {
-            $celebration->name = $request->name;
+        if ($request->locale) {
+            $celebration->locale = $request->locale;
+        }
+
+        if ($request->title) {
+            $celebration->title = $request->title;
         }
 
         if ($request->poster) {
@@ -91,9 +95,31 @@ class CelebrationService extends Service
             $celebration->celebration_date = $request->celebrationDate;
         }
 
+        if ($request->photo) {
+            // Delete photo from storage
+            Storage::disk("public")->delete($request->photo);
+
+            // Remove photo from array
+            $celebration->photos = collect($celebration->photos)
+                ->reject(fn($photo) => $photo == $request->photo)
+                ->values()
+                ->all();
+        }
+
+        if ($request->video) {
+            // Delete video from storage
+            Storage::disk("public")->delete($request->video);
+
+            // Remove video from array
+            $celebration->videos = collect($celebration->videos)
+                ->reject(fn($video) => $video == $request->video)
+                ->values()
+                ->all();
+        }
+
         $saved = $celebration->save();
         // Define Message
-        $message = $celebration->name . " updated";
+        $message = $celebration->title . " updated";
 
         return [$saved, $message, $celebration];
     }
