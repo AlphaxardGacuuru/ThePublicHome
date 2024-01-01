@@ -137,6 +137,20 @@ class AnniversaryService extends Service
 
         Storage::disk("public")->delete($oldPoster);
 
+        // Delete Photos
+        if ($anniversary->photos) {
+            foreach ($anniversary->photos as $photo) {
+                Storage::disk("public")->delete($photo);
+            }
+        }
+
+        // Delete Videos
+        if ($anniversary->videos) {
+            foreach ($anniversary->videos as $video) {
+                Storage::disk("public")->delete($video);
+            }
+        }
+
         // Delete Anniversary
         $deleted = $anniversary->delete();
 

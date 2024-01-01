@@ -137,6 +137,20 @@ class GraduationService extends Service
 
         Storage::disk("public")->delete($oldPoster);
 
+        // Delete Photos
+        if ($graduation->photos) {
+            foreach ($graduation->photos as $photo) {
+                Storage::disk("public")->delete($photo);
+            }
+        }
+
+        // Delete Videos
+        if ($graduation->videos) {
+            foreach ($graduation->videos as $video) {
+                Storage::disk("public")->delete($video);
+            }
+        }
+
         // Delete Club
         $deleted = $graduation->delete();
 

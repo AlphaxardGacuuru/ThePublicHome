@@ -137,6 +137,20 @@ class WeddingService extends Service
 
         Storage::disk("public")->delete($oldPoster);
 
+        // Delete Photos
+        if ($wedding->photos) {
+            foreach ($wedding->photos as $photo) {
+                Storage::disk("public")->delete($photo);
+            }
+        }
+
+        // Delete Videos
+        if ($wedding->videos) {
+            foreach ($wedding->videos as $video) {
+                Storage::disk("public")->delete($video);
+            }
+        }
+
         // Delete Club
         $deleted = $wedding->delete();
 

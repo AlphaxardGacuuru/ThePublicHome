@@ -250,12 +250,12 @@ const edit = (props) => {
 									id="collapseExample">
 									<div className="text-center mb-2 py-4">
 										<h4>
-											Are you sure you want to delete the success card announcement
+											Are you sure you want to delete the success card
+											announcement
 										</h4>
 										<h5>This process is irreversible</h5>
 										<br />
 										<Btn
-											btnClass="btn-outline-danger text-white rounded-0"
 											btnText="delete success card announcement"
 											loading={loadingBtn2}
 											disabled={loadingBtn2}
@@ -283,7 +283,9 @@ const edit = (props) => {
 						<h3 className="text-center mb-4">Upload Media</h3>
 
 						<div className="w-100 mb-4 mx-auto text-center">
-							<label className="mb-2">Upload Success Card Announcement Poster</label>
+							<label className="mb-2">
+								Upload Success Card Announcement Poster
+							</label>
 							<FilePond
 								name="filepond-poster"
 								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
@@ -296,7 +298,8 @@ const edit = (props) => {
 									url: `/api/filepond`,
 									process: {
 										url: `/poster/success-card/${id}`,
-										onload: () => props.get(`success-cards/${id}`, setSuccessCard),
+										onload: () =>
+											props.get(`success-cards/${id}`, setSuccessCard),
 										onerror: (err) => console.log(err.response.data),
 									},
 									revert: {
@@ -326,7 +329,8 @@ const edit = (props) => {
 									url: `/api/filepond`,
 									process: {
 										url: `/photos/success-card/${id}/${successCard.photoLimit}`,
-										onload: () => props.get(`success-cards/${id}`, setSuccessCard),
+										onload: () =>
+											props.get(`success-cards/${id}`, setSuccessCard),
 										onerror: (err) =>
 											props.setErrors([JSON.parse(err).message]),
 									},
@@ -350,7 +354,8 @@ const edit = (props) => {
 									url: `/api/filepond`,
 									process: {
 										url: `/videos/success-card/${id}/${successCard.videoLimit}`,
-										onload: () => props.get(`success-cards/${id}`, setSuccessCard),
+										onload: () =>
+											props.get(`success-cards/${id}`, setSuccessCard),
 										onerror: (err) =>
 											props.setErrors([JSON.parse(err).message]),
 									},

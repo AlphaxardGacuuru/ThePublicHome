@@ -293,7 +293,6 @@ const DeathEdit = (props) => {
 										<h5>This process is irreversible</h5>
 										<br />
 										<Btn
-											btnClass="btn-outline-danger text-white rounded-0"
 											btnText="delete death announcement"
 											loading={loadingBtn2}
 											disabled={loadingBtn2}

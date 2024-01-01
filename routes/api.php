@@ -18,6 +18,7 @@ use App\Http\Controllers\GraduationCommentLikeController;
 use App\Http\Controllers\GraduationController;
 use App\Http\Controllers\GraduationLikeController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SuccessCardCommentController;
 use App\Http\Controllers\SuccessCardCommentLikeController;
 use App\Http\Controllers\SuccessCardController;
@@ -46,13 +47,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('auth', [UserController::class, 'auth']);
 
 Route::apiResources([
+    "users" => UserController::class,
+    "user-memberships" => UserMembershipController::class,
+    "memberships" => MembershipController::class,
+    'notifications' => NotificationController::class,
     "deaths" => DeathController::class,
     "death-likes" => DeathLikeController::class,
     "death-comments" => DeathCommentController::class,
     "death-comment-likes" => DeathCommentLikeController::class,
-    "users" => UserController::class,
-    "user-memberships" => UserMembershipController::class,
-    "memberships" => MembershipController::class,
     "weddings" => WeddingController::class,
     "wedding-likes" => WeddingLikeController::class,
     "wedding-comments" => WeddingCommentController::class,

@@ -272,12 +272,12 @@ const edit = (props) => {
 									id="collapseExample">
 									<div className="text-center mb-2 py-4">
 										<h4>
-											Are you sure you want to delete the anniversary announcement
+											Are you sure you want to delete the anniversary
+											announcement
 										</h4>
 										<h5>This process is irreversible</h5>
 										<br />
 										<Btn
-											btnClass="btn-outline-danger text-white rounded-0"
 											btnText="delete anniversary announcement"
 											loading={loadingBtn2}
 											disabled={loadingBtn2}
@@ -305,7 +305,9 @@ const edit = (props) => {
 						<h3 className="text-center mb-4">Upload Media</h3>
 
 						<div className="w-100 mb-4 mx-auto text-center">
-							<label className="mb-2">Upload Anniversary Announcement Poster</label>
+							<label className="mb-2">
+								Upload Anniversary Announcement Poster
+							</label>
 							<FilePond
 								name="filepond-poster"
 								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
@@ -318,7 +320,8 @@ const edit = (props) => {
 									url: `/api/filepond`,
 									process: {
 										url: `/poster/anniversary/${id}`,
-										onload: () => props.get(`anniversaries/${id}`, setAnniversary),
+										onload: () =>
+											props.get(`anniversaries/${id}`, setAnniversary),
 										onerror: (err) => console.log(err.response.data),
 									},
 									revert: {
@@ -348,7 +351,8 @@ const edit = (props) => {
 									url: `/api/filepond`,
 									process: {
 										url: `/photos/anniversary/${id}/${anniversary.photoLimit}`,
-										onload: () => props.get(`anniversaries/${id}`, setAnniversary),
+										onload: () =>
+											props.get(`anniversaries/${id}`, setAnniversary),
 										onerror: (err) =>
 											props.setErrors([JSON.parse(err).message]),
 									},
@@ -372,7 +376,8 @@ const edit = (props) => {
 									url: `/api/filepond`,
 									process: {
 										url: `/videos/anniversary/${id}/${anniversary.videoLimit}`,
-										onload: () => props.get(`anniversaries/${id}`, setAnniversary),
+										onload: () =>
+											props.get(`anniversaries/${id}`, setAnniversary),
 										onerror: (err) =>
 											props.setErrors([JSON.parse(err).message]),
 									},

@@ -7,8 +7,8 @@ import CloseSVG from "@/svgs/CloseSVG"
 import LogoutSVG from "@/svgs/LogoutSVG"
 import DownloadSVG from "@/svgs/DownloadSVG"
 import PrivacySVG from "@/svgs/PrivacySVG"
-import HomeSVG from "@/svgs/HomeSVG"
 import MenuSVG from "@/svgs/MenuSVG"
+import BellSVG from "@/svgs/BellSVG"
 // import PersonSVG from "@/svgs/PersonSVG"
 // import HomeSVG from "@/svgs/HomeSVG"
 
@@ -18,6 +18,30 @@ const TopNav = (props) => {
 
 	const [menu, setMenu] = useState("")
 	const [bottomMenu, setBottomMenu] = useState("")
+
+	const [notifications, setNotifications] = useState([])
+
+	useEffect(() => {
+		// Fetch Notifications
+		props.get("notifications", setNotifications)
+	}, [])
+
+	const onNotification = () => {
+		// Axios.put(`/api/notifications/update`).then((res) => {
+		// Update notifications
+		// props.get("notifications", setNotifications)
+		// })
+	}
+
+	const onDeleteNotifications = (id) => {
+		// Clear the notifications array
+		setNotifications([])
+
+		Axios.delete(`/api/notifications/${id}`).then((res) => {
+			// Update Notifications
+			props.get("notifications", setNotifications)
+		})
+	}
 
 	const logout = () => {
 		Axios.post(`/logout`)
@@ -176,87 +200,159 @@ const TopNav = (props) => {
 													Login
 												</Link>
 											) : (
-												<div className="dropdown-center">
-													{/* Avatar Dropdown */}
-													{/* Avatar */}
-													<a
-														href="#"
-														role="button"
-														className="hidden"
-														data-bs-toggle="dropdown"
-														aria-expanded="false">
-														<Img
-															src={props.auth?.avatar}
-															className="rounded-circle bg-light p-1"
-															width="40px"
-															height="40px"
-															alt="Avatar"
-														/>
-													</a>
-													{/* For small screens */}
-													<span
-														className="anti-hidden me-2"
-														onClick={() => {
-															setBottomMenu(bottomMenu ? "" : "menu-open")
-														}}>
-														<Img
-															src={props.auth?.avatar}
-															className="rounded-circle anti-hidden"
-															width="20px"
-															height="20px"
-															alt="Avatar"
-														/>
-													</span>
-													{/* Avatar End */}
-													<div className="dropdown-menu rounded-0 m-0 p-0 bg-white">
-														<Link
-															to={`/profile/show/${props.auth.id}`}
-															className="p-2 px-3 pt-3 dropdown-item">
-															<div className="d-flex">
-																<div className="align-items-center">
-																	<Img
-																		src={props.auth?.avatar}
-																		className="rounded-circle"
-																		width="25px"
-																		height="25px"
-																		alt="Avatar"
-																	/>
-																</div>
-																<div className="ps-2">
-																	<h5 className="text-wrap">
-																		{props.auth?.name}
-																	</h5>
-																</div>
-															</div>
-														</Link>
-														<Link
-															to="/download"
-															className="p-2 px-3 dropdown-item"
-															style={{
-																display: props.downloadLink ? "block" : "none",
-															}}>
-															<h6>
-																<span className="me-2">
-																	<DownloadSVG />
-																</span>
-																Get App
-															</h6>
-														</Link>
+												<React.Fragment>
+													{/* Notification Dropdown */}
+													<div className="dropdown-center me-3">
 														<Link
 															to="#"
-															className="p-2 px-3 dropdown-item"
-															onClick={(e) => logout(e)}>
-															<h6>
-																<span className="me-2">
-																	<LogoutSVG />
-																</span>
-																Logout
-															</h6>
+															role="button"
+															id="dropdownMenua"
+															className="text-white"
+															data-bs-toggle="dropdown"
+															aria-haspopup="true"
+															aria-expanded="false"
+															style={{
+																textAlign: "center",
+																fontWeight: "100",
+																position: "relative",
+															}}
+															onClick={onNotification}>
+															<BellSVG />
+															<span
+																className="position-absolute start-200 translate-middle badge rounded-circle bg-danger fw-lighter py-1"
+																style={{ fontSize: "0.6em", top: "0.2em" }}>
+																{notifications.filter(
+																	(notification) => !notification.isRead
+																).length > 0 &&
+																	notifications.filter(
+																		(notification) => !notification.isRead
+																	).length}
+															</span>
 														</Link>
+														<div
+															style={{
+																borderRadius: "0",
+																minWidth: "20em",
+																maxWidth: "40em",
+															}}
+															className="dropdown-menu m-0 p-0"
+															aria-labelledby="dropdownMenuButton">
+															<div className="dropdown-header border-bottom border-dark">
+																Notifications
+															</div>
+															<div
+																style={{
+																	maxHeight: "500px",
+																	overflowY: "scroll",
+																}}>
+																{/* Get Notifications */}
+																{notifications.map((notification, key) => (
+																	<Link
+																		key={key}
+																		to={notification.url}
+																		className="p-2 dropdown-item border-bottom text-dark border-dark text-wrap"
+																		onClick={() =>
+																			onDeleteNotifications(notification.id)
+																		}>
+																		<small>{notification.message}</small>
+																	</Link>
+																))}
+															</div>
+															{notifications.length > 0 && (
+																<div
+																	className="dropdown-header"
+																	style={{ cursor: "pointer" }}
+																	onClick={() => onDeleteNotifications(0)}>
+																	Clear notifications
+																</div>
+															)}
+														</div>
 													</div>
-												</div>
+													{/* Notification Dropdown End */}
+													{/* Avatar Dropdown */}
+													<div className="dropdown-center">
+														{/* Avatar */}
+														<a
+															href="#"
+															role="button"
+															className="hidden"
+															data-bs-toggle="dropdown"
+															aria-expanded="false">
+															<Img
+																src={props.auth?.avatar}
+																className="rounded-circle bg-light p-1"
+																width="40px"
+																height="40px"
+																alt="Avatar"
+															/>
+														</a>
+														{/* For small screens */}
+														<span
+															className="anti-hidden me-2"
+															onClick={() => {
+																setBottomMenu(bottomMenu ? "" : "menu-open")
+															}}>
+															<Img
+																src={props.auth?.avatar}
+																className="rounded-circle anti-hidden"
+																width="20px"
+																height="20px"
+																alt="Avatar"
+															/>
+														</span>
+														{/* Avatar End */}
+														<div className="dropdown-menu rounded-0 m-0 p-0 bg-white">
+															<Link
+																to={`/profile/show/${props.auth.id}`}
+																className="p-2 px-3 pt-3 dropdown-item">
+																<div className="d-flex">
+																	<div className="align-items-center">
+																		<Img
+																			src={props.auth?.avatar}
+																			className="rounded-circle"
+																			width="25px"
+																			height="25px"
+																			alt="Avatar"
+																		/>
+																	</div>
+																	<div className="ps-2">
+																		<h5 className="text-wrap">
+																			{props.auth?.name}
+																		</h5>
+																	</div>
+																</div>
+															</Link>
+															<Link
+																to="/download"
+																className="p-2 px-3 dropdown-item"
+																style={{
+																	display: props.downloadLink
+																		? "block"
+																		: "none",
+																}}>
+																<h6>
+																	<span className="me-2">
+																		<DownloadSVG />
+																	</span>
+																	Get App
+																</h6>
+															</Link>
+															<Link
+																to="#"
+																className="p-2 px-3 dropdown-item"
+																onClick={(e) => logout(e)}>
+																<h6>
+																	<span className="me-2">
+																		<LogoutSVG />
+																	</span>
+																	Logout
+																</h6>
+															</Link>
+														</div>
+													</div>
+													{/* Avatar Dropdown End */}
+												</React.Fragment>
 											)}
-											{/* Avatar Dropdown End */}
 										</div>
 										{/* <!-- Menu Icon --> */}
 										<a

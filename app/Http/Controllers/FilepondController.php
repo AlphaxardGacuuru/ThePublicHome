@@ -176,6 +176,9 @@ class FilePondController extends Controller
 
             $death = Death::findOrFail($id);
 
+			// Delete Old Eulogy
+			Storage::disk("public")->delete($death->eulogy);
+
             $death->eulogy = $eulogy;
 
             return $death->save();

@@ -127,6 +127,20 @@ class SuccessCardService extends Service
 
         Storage::disk("public")->delete($oldPoster);
 
+        // Delete Photos
+        if ($successCard->photos) {
+            foreach ($successCard->photos as $photo) {
+                Storage::disk("public")->delete($photo);
+            }
+        }
+
+        // Delete Videos
+        if ($successCard->videos) {
+            foreach ($successCard->videos as $video) {
+                Storage::disk("public")->delete($video);
+            }
+        }
+
         // Delete Club
         $deleted = $successCard->delete();
 

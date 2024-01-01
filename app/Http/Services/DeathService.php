@@ -121,10 +121,6 @@ class DeathService extends Service
                 ->all();
         }
 
-        if ($request->eulogy) {
-            $death->eulogy = $request->eulogy;
-        }
-
         $saved = $death->save();
         // Define Message
         $message = $death->name . " updated";
@@ -146,14 +142,21 @@ class DeathService extends Service
         Storage::disk("public")->delete($poster);
 
         // Delete Photos
-        foreach ($death->photos as $photo) {
-            Storage::disk("public")->delete($photo);
+        if ($death->photos) {
+            foreach ($death->photos as $photo) {
+                Storage::disk("public")->delete($photo);
+            }
         }
 
         // Delete Videos
-        foreach ($death->videos as $video) {
-            Storage::disk("public")->delete($video);
+        if ($death->videos) {
+            foreach ($death->videos as $video) {
+                Storage::disk("public")->delete($video);
+            }
         }
+
+        // Delete Eulogy
+        Storage::disk("public")->delete($death->eulogy);
 
         // Delete Death
         $deleted = $death->delete();
