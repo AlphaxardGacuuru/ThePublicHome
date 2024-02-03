@@ -11,14 +11,18 @@ class DeathLikedNotification extends Notification
 {
     use Queueable;
 
+	public $death;
+	public $user;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($death, $user)
     {
-        //
+        $this->death = $death;
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +33,7 @@ class DeathLikedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +59,9 @@ class DeathLikedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+			'url' => '/audio/show/' . $this->death->id,
+			'from' => $this->user->name,
+			'message' => $this->user->name . ' liked ' . $this->death->name
         ];
     }
 }

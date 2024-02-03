@@ -22,6 +22,7 @@ class WeddingResource extends JsonResource
 
         return [
             "id" => $this->id,
+            "model" => "Wedding",
             "userId" => $this->user_id,
             "userName" => $this->user->name,
             "userAvatar" => $this->user->avatar,
@@ -35,6 +36,7 @@ class WeddingResource extends JsonResource
             "venue" => $this->venue,
             "weddingDateFormated" => $this->wedding_date,
             "weddingDate" => Carbon::parse($this->wedding_date)->format("Y-m-d"),
+            "recap" => $this->recap,
             "likes" => $this->likes,
             "hasLiked" => $this->hasLiked($id),
             "wordLimit" => $this->membership->features["announcement"],

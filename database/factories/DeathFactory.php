@@ -35,6 +35,7 @@ class DeathFactory extends Factory
             'burial_date' => Carbon::now()->addDays(rand(1, 10)),
             'poster' => 'death-posters/' . rand(1, 5) . '.jpg',
             'announcement' => fake()->catchPhrase(),
+			'recap' => 'recaps/' . rand(1, 4) . '.mp4',
             'likes' => rand(1, 10),
         ];
     }

@@ -32,6 +32,7 @@ class SuccessCardFactory extends Factory
             'title' => 'Success to ' . fake()->firstName(),
             'poster' => 'success-card-posters/' . rand(1, 5) . '.jpg',
             'announcement' => fake()->catchPhrase(),
+			'recap' => 'recaps/' . rand(1, 4) . '.mp4',
 			'likes' => rand(1, 10)
         ];
     }

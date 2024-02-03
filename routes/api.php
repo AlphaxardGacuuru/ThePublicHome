@@ -19,6 +19,7 @@ use App\Http\Controllers\GraduationController;
 use App\Http\Controllers\GraduationLikeController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\RecapController;
 use App\Http\Controllers\SuccessCardCommentController;
 use App\Http\Controllers\SuccessCardCommentLikeController;
 use App\Http\Controllers\SuccessCardController;
@@ -76,6 +77,9 @@ Route::apiResources([
     "celebration-comments" => CelebrationCommentController::class,
     "celebration-comment-likes" => CelebrationCommentLikeController::class,
 ]);
+
+// Recap
+Route::get("recaps", [RecapController::class, "index"]);
 
 // Filepond Controller
 Route::prefix('filepond')->group(function () {

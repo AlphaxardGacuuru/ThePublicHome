@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\DeathLikedEvent;
+use App\Notifications\DeathLikedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +27,9 @@ class DeathLikedListener
      */
     public function handle(DeathLikedEvent $event)
     {
-        //
+        $event
+            ->death
+            ->user
+            ->notify(new DeathLikedNotification($event->death, $event->user));
     }
 }

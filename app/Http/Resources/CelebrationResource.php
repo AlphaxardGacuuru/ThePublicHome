@@ -22,6 +22,7 @@ class CelebrationResource extends JsonResource
 
         return [
             "id" => $this->id,
+            "model" => "Celebration",
             "userId" => $this->user_id,
             "userName" => $this->user->name,
             "userAvatar" => $this->user->avatar,
@@ -35,6 +36,7 @@ class CelebrationResource extends JsonResource
             "venue" => $this->venue,
             "celebrationDateFormated" => $this->celebration_date,
             "celebrationDate" => Carbon::parse($this->celebration_date)->format("Y-m-d"),
+            "recap" => $this->recap,
             "likes" => $this->likes,
             "hasLiked" => $this->hasLiked($id),
             "wordLimit" => $this->membership->features["announcement"],

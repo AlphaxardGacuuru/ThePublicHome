@@ -14,14 +14,18 @@ class DeathLikedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+	public $death;
+	public $user;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($death, $user)
     {
-        //
+        $this->death = $death;
+        $this->user = $user;
     }
 
     /**

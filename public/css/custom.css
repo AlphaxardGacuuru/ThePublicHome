@@ -1888,3 +1888,18 @@ div.hidden-scroll span {
 	background-color: none;
 	color: rgb(186, 173, 123);
 }
+
+/* Karaoke */
+.karaoke-media {
+	border-radius: 0px;
+	text-align: center;
+	width: 15vw;
+	height: auto;
+}
+
+@media only screen and (max-width: 767px) {
+	.karaoke-media {
+		width: 45vw;
+		height: auto;
+	}
+}

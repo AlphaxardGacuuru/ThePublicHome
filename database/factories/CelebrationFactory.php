@@ -34,6 +34,7 @@ class CelebrationFactory extends Factory
             'announcement' => fake()->catchPhrase(),
             'venue' => fake()->address(),
             'celebration_date' => Carbon::now()->addDays(rand(1, 10)),
+			'recap' => 'recaps/' . rand(1, 4) . '.mp4',
 			'likes' => rand(1, 10)
         ];
     }

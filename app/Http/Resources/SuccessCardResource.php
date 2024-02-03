@@ -21,6 +21,7 @@ class SuccessCardResource extends JsonResource
 
         return [
             "id" => $this->id,
+            "model" => "SuccessCard",
             "userId" => $this->user_id,
             "userName" => $this->user->name,
             "userAvatar" => $this->user->avatar,
@@ -31,6 +32,7 @@ class SuccessCardResource extends JsonResource
             "poster" => $this->poster,
             "photos" => $this->photos,
             "videos" => $this->videos,
+            "recap" => $this->recap,
             "likes" => $this->likes,
             "hasLiked" => $this->hasLiked($id),
             "wordLimit" => $this->membership->features["announcement"],

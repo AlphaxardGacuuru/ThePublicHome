@@ -22,6 +22,7 @@ class DeathResource extends JsonResource
 
         return [
             "id" => $this->id,
+            "model" => "Death",
             "userId" => $this->user_id,
             "userName" => $this->user->name,
             "userAvatar" => $this->user->avatar,
@@ -39,6 +40,7 @@ class DeathResource extends JsonResource
             "photos" => $this->photos,
             "videos" => $this->videos,
             "eulogy" => $this->eulogy,
+            "recap" => $this->recap,
             "likes" => $this->likes,
             "hasLiked" => $this->hasLiked($id),
             "wordLimit" => $this->membership->features["announcement"],
