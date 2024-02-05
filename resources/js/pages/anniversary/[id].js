@@ -183,7 +183,9 @@ const show = (props) => {
 										{anniversary.tier}
 									</small>
 								</h6>
-								<h6 className="text-capitalize">Locale: {anniversary.locale}</h6>
+								<h6 className="text-capitalize">
+									Locale: {anniversary.locale}
+								</h6>
 								<h6>Anniversary Date: {anniversary.anniversaryDateFormated}</h6>
 							</div>
 						</div>
@@ -232,6 +234,23 @@ const show = (props) => {
 					</div>
 					{/* Anniversary  Info End */}
 
+					<div className="text-center my-4">
+						{/* Edit Button */}
+						{anniversary.userId == props.auth?.id && (
+							<div className="mb-2">
+								<MyLink
+									linkTo={`/anniversaries/edit/${id}`}
+									text="edit anniversary announcement"
+								/>
+							</div>
+						)}
+						{/* Edit Button End */}
+						<MyLink
+							linkTo="/"
+							text="back to anniversary announcements"
+						/>
+					</div>
+
 					{/* Comments */}
 					<div>
 						{anniversary.userId != props.auth?.id && (
@@ -242,7 +261,10 @@ const show = (props) => {
 								urlTo="/anniversary-comments"
 								editing={false}
 								stateToUpdate={() => {
-									props.get(`anniversary-comments/${id}`, setAnniversaryComments)
+									props.get(
+										`anniversary-comments/${id}`,
+										setAnniversaryComments
+									)
 								}}
 							/>
 						)}
@@ -260,24 +282,6 @@ const show = (props) => {
 							))}
 					</div>
 					{/* Comments End */}
-
-					<br />
-					<center>
-						{/* Edit Button */}
-						{anniversary.userId == props.auth?.id && (
-							<div className="mb-2">
-								<MyLink
-									linkTo={`/anniversaries/edit/${id}`}
-									text="edit anniversary announcement"
-								/>
-							</div>
-						)}
-						{/* Edit Button End */}
-						<MyLink
-							linkTo="/"
-							text="back to anniversary announcements"
-						/>
-					</center>
 				</div>
 				<div className="col-sm-1"></div>
 			</div>

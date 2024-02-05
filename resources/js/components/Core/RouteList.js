@@ -40,7 +40,6 @@ import ProfileEdit from "@/pages/profile/edit/[id]"
 import Membership from "@/pages/profile/membership"
 
 import RecapIndex from "@/pages/recap"
-import RecapCreate from "@/pages/recap/create"
 
 import Socialite from "@/components/Auth/Socialite"
 
@@ -153,10 +152,6 @@ const RouteList = (GLOBAL_STATE) => {
 		{
 			path: "/recaps",
 			component: <RecapIndex {...GLOBAL_STATE} />,
-		},
-		{
-			path: "/recaps/create",
-			component: <RecapCreate {...GLOBAL_STATE} />,
 		},
 	]
 

@@ -233,6 +233,23 @@ const show = (props) => {
 					</div>
 					{/* Success Card  Info End */}
 
+					<div className="text-center my-4">
+						{/* Edit Button */}
+						{successCard.userId == props.auth?.id && (
+							<div className="mb-2">
+								<MyLink
+									linkTo={`/success-cards/edit/${id}`}
+									text="edit success card announcement"
+								/>
+							</div>
+						)}
+						{/* Edit Button End */}
+						<MyLink
+							linkTo="/"
+							text="back to success card announcements"
+						/>
+					</div>
+
 					{/* Comments */}
 					<div>
 						{successCard.userId != props.auth?.id && (
@@ -264,24 +281,6 @@ const show = (props) => {
 							))}
 					</div>
 					{/* Comments End */}
-
-					<br />
-					<center>
-						{/* Edit Button */}
-						{successCard.userId == props.auth?.id && (
-							<div className="mb-2">
-								<MyLink
-									linkTo={`/success-cards/edit/${id}`}
-									text="edit success card announcement"
-								/>
-							</div>
-						)}
-						{/* Edit Button End */}
-						<MyLink
-							linkTo="/"
-							text="back to success card announcements"
-						/>
-					</center>
 				</div>
 				<div className="col-sm-1"></div>
 			</div>

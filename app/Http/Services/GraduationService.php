@@ -118,6 +118,7 @@ class GraduationService extends Service
         }
 
         $saved = $graduation->save();
+
         // Define Message
         $message = $graduation->title . " updated";
 
@@ -157,4 +158,13 @@ class GraduationService extends Service
         return [$deleted, $graduation->name . " announcement deleted"];
     }
 
+    /*
+     * By User ID
+     */
+    public function byUserId($id)
+    {
+        $getGraduations = Graduation::where("user_id", $id)->get();
+
+        return GraduationResource::collection($getGraduations);
+    }
 }

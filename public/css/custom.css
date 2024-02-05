@@ -1890,7 +1890,7 @@ div.hidden-scroll span {
 }
 
 /* Karaoke */
-.karaoke-media {
+.recap-media {
 	border-radius: 0px;
 	text-align: center;
 	width: 15vw;
@@ -1898,7 +1898,7 @@ div.hidden-scroll span {
 }
 
 @media only screen and (max-width: 767px) {
-	.karaoke-media {
+	.recap-media {
 		width: 45vw;
 		height: auto;
 	}

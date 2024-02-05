@@ -11,12 +11,20 @@ class RecapController extends Controller
 	{
 		// 
 	}
-	
+
     /*
 	* Get Recaps
 	*/
 	public function index()
 	{
 		return $this->service->index();
+	}
+
+	/*
+	* Get By User ID
+	*/ 
+	public function byUserId($id)
+	{
+		return $this->service->byUserId($id);
 	}
 }

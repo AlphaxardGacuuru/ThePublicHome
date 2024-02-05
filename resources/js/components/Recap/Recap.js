@@ -2,11 +2,12 @@ import React from "react"
 import { Link } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
-import Btn from "@/components/Core/Btn"
+
+import OptionsSVG from "@/svgs/OptionsSVG"
 
 const Recap = (props) => {
 	return (
-		<div className="m-1 karaoke-media">
+		<div className="m-1 recap-media">
 			<div>
 				<video
 					src={props.recap.recap}
@@ -15,7 +16,9 @@ const Recap = (props) => {
 					autoPlay
 					muted
 					loop
-					playsInline></video>
+					playsInline
+					controls
+					loading="lazy"></video>
 			</div>
 			<div className="d-flex">
 				<div>
@@ -40,12 +43,32 @@ const Recap = (props) => {
 						textOverflow: "clip",
 					}}>
 					<h6 className="m-0 px-1">{props.recap.userName}</h6>
-					<Btn
-						btnText="delete"
-						btnClass="btn-sm"
-						onClick={() => props.onDelete(props.recap.id, props.recap.model)}
-					/>
 				</div>
+				{/* <!-- Options dropup button --> */}
+				<div className="btn-group dropup mt-1">
+					<a
+						href="#"
+						className="p-2"
+						data-bs-toggle="dropdown"
+						aria-expanded="false">
+						<OptionsSVG />
+					</a>
+					<ul className="dropdown-menu dropdown-menu-right">
+						{/* <!-- Dropdown menu links --> */}
+						<span style={{ cursor: "pointer" }}>
+							{props.auth.id == props.recap.userId && (
+								<li
+									className="dropdown-item"
+									onClick={() =>
+										props.onDelete(props.recap.id, props.recap.model)
+									}>
+									Delete
+								</li>
+							)}
+						</span>
+					</ul>
+				</div>
+				{/* <!-- Options dropup button End --> */}
 			</div>
 		</div>
 	)

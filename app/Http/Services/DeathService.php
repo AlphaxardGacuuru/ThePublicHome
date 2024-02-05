@@ -122,6 +122,7 @@ class DeathService extends Service
         }
 
         $saved = $death->save();
+
         // Define Message
         $message = $death->name . " updated";
 
@@ -161,9 +162,18 @@ class DeathService extends Service
         // Delete Death
         $deleted = $death->delete();
 
-        $message = $death->name . " announcement deleted";
+        $message = $death->title . " announcement deleted";
 
         return [$deleted, $message];
     }
 
+    /*
+     * By User ID
+     */
+    public function byUserId($id)
+    {
+        $getDeaths = Death::where("user_id", $id)->get();
+
+        return DeathResource::collection($getDeaths);
+    }
 }

@@ -183,7 +183,9 @@ const show = (props) => {
 										{celebration.tier}
 									</small>
 								</h6>
-								<h6 className="text-capitalize">Locale: {celebration.locale}</h6>
+								<h6 className="text-capitalize">
+									Locale: {celebration.locale}
+								</h6>
 								<h6>Celebration Date: {celebration.celebrationDateFormated}</h6>
 							</div>
 						</div>
@@ -232,6 +234,23 @@ const show = (props) => {
 					</div>
 					{/* Celebration  Info End */}
 
+					<div className="text-center my-4">
+						{/* Edit Button */}
+						{celebration.userId == props.auth?.id && (
+							<div className="mb-2">
+								<MyLink
+									linkTo={`/celebrations/edit/${id}`}
+									text="edit celebration announcement"
+								/>
+							</div>
+						)}
+						{/* Edit Button End */}
+						<MyLink
+							linkTo="/"
+							text="back to celebration announcements"
+						/>
+					</div>
+
 					{/* Comments */}
 					<div>
 						{celebration.userId != props.auth?.id && (
@@ -242,7 +261,10 @@ const show = (props) => {
 								urlTo="/celebration-comments"
 								editing={false}
 								stateToUpdate={() => {
-									props.get(`celebration-comments/${id}`, setCelebrationComments)
+									props.get(
+										`celebration-comments/${id}`,
+										setCelebrationComments
+									)
 								}}
 							/>
 						)}
@@ -260,24 +282,6 @@ const show = (props) => {
 							))}
 					</div>
 					{/* Comments End */}
-
-					<br />
-					<center>
-						{/* Edit Button */}
-						{celebration.userId == props.auth?.id && (
-							<div className="mb-2">
-								<MyLink
-									linkTo={`/celebrations/edit/${id}`}
-									text="edit celebration announcement"
-								/>
-							</div>
-						)}
-						{/* Edit Button End */}
-						<MyLink
-							linkTo="/"
-							text="back to celebration announcements"
-						/>
-					</center>
 				</div>
 				<div className="col-sm-1"></div>
 			</div>

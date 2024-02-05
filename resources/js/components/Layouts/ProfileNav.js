@@ -21,6 +21,16 @@ const ProfileNav = (props) => {
 		return location.pathname == check && "active"
 	}
 
+	// Function for showing active color
+	const active2 = (check) => {
+		return location.pathname.match(check) ? "active" : "text-white"
+	}
+
+	// Function for showing active color
+	const activeStrict2 = (check) => {
+		return location.pathname == check ? "active" : "text-white"
+	}
+
 	return (
 		<div
 			id="MyElement"
@@ -44,16 +54,20 @@ const ProfileNav = (props) => {
 									<div className="nav-link-text">Profile</div>
 								</Link>
 							</li>
-							<li className={`nav-item`}>
-								<Link
-									to={`/profile/membership`}
-									className={`nav-link ${active("/profile/membership")}`}>
-									<div className="nav-link-icon">
-										<MembershipSVG />
-									</div>
-									<div className="nav-link-text">Membership</div>
-								</Link>
-							</li>
+							{props.isAuth && (
+								<React.Fragment>
+									<li className={`nav-item`}>
+										<Link
+											to={`/profile/membership`}
+											className={`nav-link ${active("/profile/membership")}`}>
+											<div className="nav-link-icon">
+												<MembershipSVG />
+											</div>
+											<div className="nav-link-text">Membership</div>
+										</Link>
+									</li>
+								</React.Fragment>
+							)}
 						</ul>
 					</nav>
 				</div>

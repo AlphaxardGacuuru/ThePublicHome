@@ -36,12 +36,15 @@ const index = (props) => {
 					return "SuccessCards"
 				case model == "Anniversary":
 					return "Anniversary"
-				case model == "Celebrations":
-					return "Celebrations"
+
+				default:
+					return "celebrations"
 			}
 		}
 
-		Axios.delete(`/api/${url()}/id`).then((res) => props.setMessages([res]))
+		Axios.put(`/api/${url()}/${id}`, { recap: "remove" })
+			.then((res) => props.setMessages([res.data.message]))
+			.catch((err) => props.getErrors(err))
 	}
 
 	const activeLocale = (current) => {
@@ -62,14 +65,6 @@ const index = (props) => {
 		<div className="row p-0">
 			<div className="col-sm-1"></div>
 			<div className="col-sm-10 p-0">
-				{/* Chat button */}
-
-				<Link
-					to="/recaps"
-					id="chatFloatBtn">
-					<PlusSVG />
-				</Link>
-
 				<center>
 					<h1>Recaps</h1>
 

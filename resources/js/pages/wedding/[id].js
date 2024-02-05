@@ -232,6 +232,23 @@ const show = (props) => {
 					</div>
 					{/* Wedding  Info End */}
 
+					<div className="text-center my-4">
+						{/* Edit Button */}
+						{wedding.userId == props.auth?.id && (
+							<div className="mb-2">
+								<MyLink
+									linkTo={`/weddings/edit/${id}`}
+									text="edit wedding announcement"
+								/>
+							</div>
+						)}
+						{/* Edit Button End */}
+						<MyLink
+							linkTo="/"
+							text="back to wedding announcements"
+						/>
+					</div>
+
 					{/* Comments */}
 					<div>
 						{wedding.userId != props.auth?.id && (
@@ -260,24 +277,6 @@ const show = (props) => {
 							))}
 					</div>
 					{/* Comments End */}
-
-					<br />
-					<center>
-						{/* Edit Button */}
-						{wedding.userId == props.auth?.id && (
-							<div className="mb-2">
-								<MyLink
-									linkTo={`/weddings/edit/${id}`}
-									text="edit wedding announcement"
-								/>
-							</div>
-						)}
-						{/* Edit Button End */}
-						<MyLink
-							linkTo="/"
-							text="back to wedding announcements"
-						/>
-					</center>
 				</div>
 				<div className="col-sm-1"></div>
 			</div>

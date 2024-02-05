@@ -49,6 +49,7 @@ const App = () => {
 	const [login, setLogin] = useState(false)
 	const [leftMenu, setLeftMenu] = useState("left-open")
 	const [auth, setAuth] = useState(getLocalStorageAuth("auth"))
+	const [isAuth, setIsAuth] = useState()
 
 	const [deaths, setDeaths] = useState(getLocalStorage("deaths"))
 	const [weddings, setWeddings] = useState(getLocalStorage("weddings"))
@@ -156,6 +157,8 @@ const App = () => {
 		setMessages,
 		errors,
 		setErrors,
+		isAuth,
+		setIsAuth,
 
 		// State
 		deaths,

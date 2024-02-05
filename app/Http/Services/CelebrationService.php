@@ -118,6 +118,7 @@ class CelebrationService extends Service
         }
 
         $saved = $celebration->save();
+
         // Define Message
         $message = $celebration->title . " updated";
 
@@ -157,4 +158,13 @@ class CelebrationService extends Service
         return [$deleted, $celebration->name . " announcement deleted"];
     }
 
+    /*
+     * By User ID
+     */
+    public function byUserId($id)
+    {
+        $getCelebrations = Celebration::where("user_id", $id)->get();
+
+        return CelebrationResource::collection($getCelebrations);
+    }
 }

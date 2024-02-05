@@ -3,15 +3,36 @@ import { Link, useParams } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
 import MyLink from "@/components/Core/MyLink"
+import Death from "@/components/Death/Death"
+import Wedding from "@/components/Wedding/Wedding"
+import Graduation from "@/components/Graduation/Graduation"
+import SuccessCard from "@/components/SuccessCard/SuccessCard"
+import Anniversary from "@/components/Anniversary/Anniversary"
+import Celebration from "@/components/Celebration/Celebration"
+import Recap from "@/components/Recap/Recap"
+import LoadingDeath from "@/components/Death/LoadingDeath"
+import LoadingWedding from "@/components/Wedding/LoadingWedding"
+import LoadingGraduation from "@/components/Graduation/LoadingGraduation"
+import LoadingSuccessCard from "@/components/SuccessCard/LoadingSuccessCard"
+import LoadingAnniversary from "@/components/Anniversary/LoadingAnniversary"
+import LoadingCelebration from "@/components/Celebration/LoadingCelebration"
+import LoadingRecap from "@/components/Recap/LoadingRecap"
 
 const ProfileShow = (props) => {
 	let { id } = useParams()
 
 	const [user, setUser] = useState({})
+	const [deaths, setDeaths] = useState([])
+	const [weddings, setWeddings] = useState([])
+	const [graduations, setGraduations] = useState([])
+	const [successCards, setSuccesCards] = useState([])
+	const [anniversaries, setAnniversaries] = useState([])
+	const [celebrations, setCelebrations] = useState([])
+	const [recaps, setRecaps] = useState([])
 	const [pageLoader, setPageLoader] = useState(true)
 
 	useEffect(() => {
-		Axios.get(`api/users/${props.auth.id}`)
+		Axios.get(`api/users/${id}`)
 			.then((res) => {
 				// Remove loader
 				setPageLoader(false)
@@ -19,12 +40,59 @@ const ProfileShow = (props) => {
 			})
 			.catch((err) => props.getErrors(err))
 
+		// Set Current User to hide Side Nav links
+		props.setIsAuth(props.auth.id == id)
+
+		props.get(`deaths/by-user-id/${id}`, setDeaths)
+		props.get(`weddings/by-user-id/${id}`, setWeddings)
+		props.get(`graduations/by-user-id/${id}`, setGraduations)
+		props.get(`success-cards/by-user-id/${id}`, setSuccesCards)
+		props.get(`anniversaries/by-user-id/${id}`, setAnniversaries)
+		props.get(`celebrations/by-user-id/${id}`, setCelebrations)
+		props.get(`recaps/by-user-id/${id}`, setRecaps)
+
 		/* Fetch every time id changes, 
 			fix for clicking profile link when viewing another user's profile */
 	}, [id])
 
+	/*
+	 * Delete Recap
+	 */
+	const onDelete = (id, model) => {
+		/*
+		 * Check Model
+		 */
+		const url = () => {
+			switch (model) {
+				case model == "Death":
+					return "deaths"
+				case model == "Wedding":
+					return "weddings"
+				case model == "Graduation":
+					return "graduations"
+				case model == "SuccessCard":
+					return "success-cards"
+				case model == "Anniversary":
+					return "anniversaries"
+
+				default:
+					return "celebrations"
+			}
+		}
+
+		Axios.put(`/api/${url()}/${id}`, { recap: "remove" })
+			.then((res) => {
+				props.setMessages([res.data.message])
+				// Remove Recap
+				setRecaps(recaps.filter((recap) => recap.id != id))
+			})
+			.catch((err) => props.getErrors(err))
+	}
+
 	return (
-		<div className="row">
+		<div
+			className="row"
+			style={{ backgroundColor: "rgba(36, 37, 37, 0.1)" }}>
 			{/* Page Loader */}
 			{pageLoader && (
 				<div
@@ -32,15 +100,15 @@ const ProfileShow = (props) => {
 					style={{ top: 60 }}>
 					<div className="preload-content mb-3">
 						<div
-							className="spinner-grow text-primary"
+							className="spinner-grow text-secondary"
 							style={{ width: "10em", height: "10em" }}></div>
 					</div>
 				</div>
 			)}
 			{/* Page Loader End */}
 
-			<div className="col-sm-2"></div>
-			<div className="col-sm-8">
+			<div className="col-sm-1"></div>
+			<div className="col-sm-10">
 				<center>
 					{/* Profile Area */}
 					<div
@@ -64,7 +132,7 @@ const ProfileShow = (props) => {
 					{/* Show edit button */}
 					{user.id == props.auth?.id && (
 						<React.Fragment>
-							<hr className="w-50 mx-auto" />
+							<hr className="w-75 mx-auto" />
 
 							{/* Edit button */}
 							<MyLink
@@ -76,10 +144,408 @@ const ProfileShow = (props) => {
 						</React.Fragment>
 					)}
 
-					<hr className="w-50 mx-auto" />
+					<hr className="w-75 mx-auto" />
+
+					{/* Death Announcements */}
+					<h1 className="my-2">Death Announcements</h1>
+
+					{/* Loading Death Announcement items */}
+					{deaths.length < 1 && (
+						<h5 className="text-muted text-center">No Death Announcements</h5>
+					)}
+
+					<div className="d-flex flex-wrap justify-content-center mb-2">
+						<div className="table-responsive">
+							<table className="table table-hover table-light">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Locale</th>
+										<th>Tier</th>
+										<th>Name</th>
+										<th>Sunrise</th>
+										<th>Sunset</th>
+										<th>Burial</th>
+										<th>Has Recap</th>
+										<th>Likes</th>
+										<th>Date Created</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{deaths.map((death, key) => (
+										<tr>
+											<td>{key + 1}</td>
+											<td className="text-capitalize">{death.locale}</td>
+											<td className="text-capitalize">{death.tier}</td>
+											<td className="text-capitalize">{death.name}</td>
+											<td className="text-capitalize">
+												{death.sunriseFormated}
+											</td>
+											<td className="text-capitalize">
+												{death.sunsetFormated}
+											</td>
+											<td className="text-capitalize">
+												{death.burialDateFormated}
+											</td>
+											<td className="text-capitalize">
+												{death.recap ? "Yes" : "No"}
+											</td>
+											<td className="text-capitalize">{death.likes}</td>
+											<td className="text-capitalize">{death.createdAt}</td>
+											<td>
+												<MyLink
+													linkTo={`/deaths/show/${death.id}`}
+													className="btn-sm"
+													text="view"
+												/>
+
+												<MyLink
+													linkTo={`/deaths/edit/${death.id}`}
+													className="btn-sm ms-2"
+													text="add recap"
+												/>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					{/* Death Announcements End */}
+
+					<hr className="w-75 mx-auto" />
+
+					{/* Wedding Announcements */}
+					<h1 className="my-2">Wedding Announcements</h1>
+
+					{/* Loading Wedding Announcement items */}
+					{weddings.length < 1 && (
+						<h5 className="text-muted text-center">No Wedding Announcements</h5>
+					)}
+
+					<div className="d-flex flex-wrap justify-content-center mb-2">
+						<div className="table-responsive">
+							<table className="table table-hover table-light">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Locale</th>
+										<th>Tier</th>
+										<th>Title</th>
+										<th>Venue</th>
+										<th>Date</th>
+										<th>Has Recap</th>
+										<th>Likes</th>
+										<th>Date Created</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{weddings.map((wedding, key) => (
+										<tr>
+											<td>{key + 1}</td>
+											<td className="text-capitalize">{wedding.locale}</td>
+											<td className="text-capitalize">{wedding.tier}</td>
+											<td className="text-capitalize">{wedding.title}</td>
+											<td className="text-capitalize">{wedding.venue}</td>
+											<td className="text-capitalize">
+												{wedding.weddingDateFormated}
+											</td>
+											<td className="text-capitalize">
+												{wedding.recap ? "Yes" : "No"}
+											</td>
+											<td className="text-capitalize">{wedding.likes}</td>
+											<td className="text-capitalize">{wedding.createdAt}</td>
+											<td>
+												<MyLink
+													linkTo={`/weddings/show/${wedding.id}`}
+													className="btn-sm"
+													text="view"
+												/>
+
+												<MyLink
+													linkTo={`/weddings/edit/${wedding.id}`}
+													className="btn-sm ms-2"
+													text="add recap"
+												/>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					{/* Wedding Announcements End */}
+
+					<hr className="w-75 mx-auto" />
+
+					{/* Graduation Announcements */}
+					<h1 className="my-2">Graduation Announcements</h1>
+
+					{/* Loading Graduation Announcement items */}
+					{graduations.length < 1 && (
+						<h5 className="text-muted text-center">
+							No Graduation Announcements
+						</h5>
+					)}
+
+					<div className="d-flex flex-wrap justify-content-center mb-2">
+						<div className="table-responsive">
+							<table className="table table-hover table-light">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Locale</th>
+										<th>Tier</th>
+										<th>Title</th>
+										<th>Venue</th>
+										<th>Date</th>
+										<th>Has Recap</th>
+										<th>Likes</th>
+										<th>Date Created</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{graduations.map((graduation, key) => (
+										<tr>
+											<td>{key + 1}</td>
+											<td className="text-capitalize">{graduation.locale}</td>
+											<td className="text-capitalize">{graduation.tier}</td>
+											<td className="text-capitalize">{graduation.title}</td>
+											<td className="text-capitalize">{graduation.venue}</td>
+											<td className="text-capitalize">
+												{graduation.graduationDateFormated}
+											</td>
+											<td className="text-capitalize">
+												{graduation.recap ? "Yes" : "No"}
+											</td>
+											<td className="text-capitalize">{graduation.likes}</td>
+											<td className="text-capitalize">
+												{graduation.createdAt}
+											</td>
+											<td>
+												<MyLink
+													linkTo={`/graduations/show/${graduation.id}`}
+													className="btn-sm"
+													text="view"
+												/>
+
+												<MyLink
+													linkTo={`/graduations/edit/${graduation.id}`}
+													className="btn-sm ms-2"
+													text="add recap"
+												/>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					{/* Graduation Announcements End */}
+
+					<hr className="w-75 mx-auto" />
+
+					{/* Success Card Announcements */}
+					<h1 className="my-2">Success Card Announcements</h1>
+
+					{/* Loading Success Card Announcement items */}
+					{successCards.length < 1 && (
+						<h5 className="text-muted text-center">
+							No Success Card Announcements
+						</h5>
+					)}
+
+					<div className="d-flex flex-wrap justify-content-center mb-2">
+						<div className="table-responsive">
+							<table className="table table-hover table-light">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Locale</th>
+										<th>Tier</th>
+										<th>Title</th>
+										<th>Has Recap</th>
+										<th>Likes</th>
+										<th>Date Created</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{successCards.map((successCard, key) => (
+										<tr>
+											<td>{key + 1}</td>
+											<td className="text-capitalize">{successCard.locale}</td>
+											<td className="text-capitalize">{successCard.tier}</td>
+											<td className="text-capitalize">{successCard.title}</td>
+											<td className="text-capitalize">
+												{successCard.recap ? "Yes" : "No"}
+											</td>
+											<td className="text-capitalize">{successCard.likes}</td>
+											<td className="text-capitalize">
+												{successCard.createdAt}
+											</td>
+											<td>
+												<MyLink
+													linkTo={`/success-cards/show/${successCard.id}`}
+													className="btn-sm"
+													text="view"
+												/>
+
+												<MyLink
+													linkTo={`/success-cards/edit/${successCard.id}`}
+													className="btn-sm ms-2"
+													text="add recap"
+												/>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					{/* Success Card Announcements End */}
+
+					<hr className="w-75 mx-auto" />
+
+					{/* Anniversary Announcements */}
+					<h1 className="my-2">Anniversary Announcements</h1>
+
+					{/* Loading Anniversary Announcement items */}
+					{anniversaries.length < 1 && (
+						<h5 className="text-muted text-center">
+							No Anniversary Announcements
+						</h5>
+					)}
+
+					<div className="d-flex flex-wrap justify-content-center mb-2">
+						<div className="table-responsive">
+							<table className="table table-hover table-light">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Locale</th>
+										<th>Tier</th>
+										<th>Title</th>
+										<th>Venue</th>
+										<th>Date</th>
+										<th>Has Recap</th>
+										<th>Likes</th>
+										<th>Date Created</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{anniversaries.map((anniversary, key) => (
+										<tr>
+											<td>{key + 1}</td>
+											<td className="text-capitalize">{anniversary.locale}</td>
+											<td className="text-capitalize">{anniversary.tier}</td>
+											<td className="text-capitalize">{anniversary.title}</td>
+											<td className="text-capitalize">{anniversary.venue}</td>
+											<td className="text-capitalize">
+												{anniversary.anniversaryDateFormated}
+											</td>
+											<td className="text-capitalize">
+												{anniversary.recap ? "Yes" : "No"}
+											</td>
+											<td className="text-capitalize">{anniversary.likes}</td>
+											<td className="text-capitalize">
+												{anniversary.createdAt}
+											</td>
+											<td>
+												<MyLink
+													linkTo={`/anniversaries/show/${anniversary.id}`}
+													className="btn-sm"
+													text="view"
+												/>
+
+												<MyLink
+													linkTo={`/anniversaries/edit/${anniversary.id}`}
+													className="btn-sm ms-2"
+													text="add recap"
+												/>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					{/* Anniversary Announcements End */}
+
+					<hr className="w-75 mx-auto" />
+
+					{/* Celebration Announcements */}
+					<h1 className="my-2">Celebration Announcements</h1>
+
+					{/* Loading Celebration Announcement items */}
+					{celebrations.length < 1 && (
+						<h5 className="text-muted text-center">
+							No Celebration Announcements
+						</h5>
+					)}
+
+					<div className="d-flex flex-wrap justify-content-center mb-2">
+						<div className="table-responsive">
+							<table className="table table-hover table-light">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Locale</th>
+										<th>Tier</th>
+										<th>Title</th>
+										<th>Venue</th>
+										<th>Date</th>
+										<th>Has Recap</th>
+										<th>Likes</th>
+										<th>Date Created</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{celebrations.map((celebration, key) => (
+										<tr>
+											<td>{key + 1}</td>
+											<td className="text-capitalize">{celebration.locale}</td>
+											<td className="text-capitalize">{celebration.tier}</td>
+											<td className="text-capitalize">{celebration.title}</td>
+											<td className="text-capitalize">{celebration.venue}</td>
+											<td className="text-capitalize">
+												{celebration.celebrationDateFormated}
+											</td>
+											<td className="text-capitalize">
+												{celebration.recap ? "Yes" : "No"}
+											</td>
+											<td className="text-capitalize">{celebration.likes}</td>
+											<td className="text-capitalize">
+												{celebration.createdAt}
+											</td>
+											<td>
+												<MyLink
+													linkTo={`/celebrations/show/${celebration.id}`}
+													className="btn-sm"
+													text="view"
+												/>
+
+												<MyLink
+													linkTo={`/celebrations/edit/${celebration.id}`}
+													className="btn-sm ms-2"
+													text="add recap"
+												/>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					{/* Celebration Announcements End */}
 				</center>
 			</div>
-			<div className="col-sm-2"></div>
+			<div className="col-sm-1"></div>
 		</div>
 	)
 }

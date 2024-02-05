@@ -108,6 +108,7 @@ class SuccessCardService extends Service
         }
 
         $saved = $successCard->save();
+
         // Define Message
         $message = $successCard->title . " updated";
 
@@ -147,4 +148,13 @@ class SuccessCardService extends Service
         return [$deleted, $successCard->name . " announcement deleted"];
     }
 
+    /*
+     * By User ID
+     */
+    public function byUserId($id)
+    {
+        $getSuccessCards = SuccessCard::where("user_id", $id)->get();
+
+        return SuccessCardResource::collection($getSuccessCards);
+    }
 }

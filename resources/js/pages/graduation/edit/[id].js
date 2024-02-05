@@ -381,6 +381,31 @@ const edit = (props) => {
 								}}
 							/>
 						</div>
+
+						<div className="w-100 mb-4 mx-auto text-center">
+							<label className="mb-2">Upload Recap</label>
+
+							<FilePond
+								name="filepond-recap"
+								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								// imageCropAspectRatio="16:9"
+								acceptedFileTypes={["video/*"]}
+								allowMultiple={true}
+								allowRevert={false}
+								allowRemove={false}
+								maxTotalFileSize={`${graduation.videoLimit}MB`}
+								server={{
+									url: `/api/filepond`,
+									process: {
+										url: `/recaps/graduation/${id}`,
+										onload: () =>
+											props.get(`graduations/${id}`, setGraduation),
+										onerror: (err) =>
+											props.setErrors([JSON.parse(err).message]),
+									},
+								}}
+							/>
+						</div>
 					</div>
 				</div>
 

@@ -14,9 +14,9 @@ class AnniversaryService extends Service
      */
     public function index()
     {
-        $getAnniversarys = Anniversary::all();
+        $getAnniversaries = Anniversary::all();
 
-        return AnniversaryResource::collection($getAnniversarys);
+        return AnniversaryResource::collection($getAnniversaries);
     }
 
     /*
@@ -118,6 +118,7 @@ class AnniversaryService extends Service
         }
 
         $saved = $anniversary->save();
+
         // Define Message
         $message = $anniversary->title . " updated";
 
@@ -157,4 +158,13 @@ class AnniversaryService extends Service
         return [$deleted, $anniversary->name . " announcement deleted"];
     }
 
+    /*
+     * By User ID
+     */
+    public function byUserId($id)
+    {
+        $getAnniversaries = Anniversary::where("user_id", $id)->get();
+
+        return AnniversaryResource::collection($getAnniversaries);
+    }
 }

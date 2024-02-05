@@ -176,8 +176,8 @@ class FilePondController extends Controller
 
             $death = Death::findOrFail($id);
 
-			// Delete Old Eulogy
-			Storage::disk("public")->delete($death->eulogy);
+            // Delete Old Eulogy
+            Storage::disk("public")->delete($death->eulogy);
 
             $death->eulogy = $eulogy;
 
@@ -188,6 +188,35 @@ class FilePondController extends Controller
                 "message" => "Eulogy cannot have more than " . $limit . " pages",
             ], 422);
         }
+    }
+
+    /*
+     * Handle Recaps Upload */
+    public function storeRecaps(Request $request, $type, $id)
+    {
+        $this->validate($request, [
+            'filepond-recap' => 'required|file',
+        ]);
+
+        // Update Model
+        $model = $this->getModel($type, $id);
+
+        $recap = $request
+            ->file('filepond-recap')
+            ->store('public/' . $type . '-recaps');
+
+        // Delete Old Recap
+        $oldRecap = substr($model->recap, 8);
+
+        Storage::disk("public")->delete($oldRecap);
+
+        $recap = substr($recap, 7);
+
+        $model->recap = $recap;
+
+        $model->save();
+
+        return $recap;
     }
 
     /*

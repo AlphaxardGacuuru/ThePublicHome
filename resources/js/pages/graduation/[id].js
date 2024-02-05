@@ -232,6 +232,23 @@ const show = (props) => {
 					</div>
 					{/* Graduation  Info End */}
 
+					<div className="text-center my-4">
+						{/* Edit Button */}
+						{graduation.userId == props.auth?.id && (
+							<div className="mb-2">
+								<MyLink
+									linkTo={`/graduations/edit/${id}`}
+									text="edit graduation announcement"
+								/>
+							</div>
+						)}
+						{/* Edit Button End */}
+						<MyLink
+							linkTo="/"
+							text="back to graduation announcements"
+						/>
+					</div>
+
 					{/* Comments */}
 					<div>
 						{graduation.userId != props.auth?.id && (
@@ -260,24 +277,6 @@ const show = (props) => {
 							))}
 					</div>
 					{/* Comments End */}
-
-					<br />
-					<center>
-						{/* Edit Button */}
-						{graduation.userId == props.auth?.id && (
-							<div className="mb-2">
-								<MyLink
-									linkTo={`/graduations/edit/${id}`}
-									text="edit graduation announcement"
-								/>
-							</div>
-						)}
-						{/* Edit Button End */}
-						<MyLink
-							linkTo="/"
-							text="back to graduation announcements"
-						/>
-					</center>
 				</div>
 				<div className="col-sm-1"></div>
 			</div>

@@ -118,6 +118,7 @@ class WeddingService extends Service
         }
 
         $saved = $wedding->save();
+
         // Define Message
         $message = $wedding->title . " updated";
 
@@ -157,4 +158,13 @@ class WeddingService extends Service
         return [$deleted, $wedding->name . " announcement deleted"];
     }
 
+    /*
+     * By User ID
+     */
+    public function byUserId($id)
+    {
+        $getWeddings = Wedding::where("user_id", $id)->get();
+
+        return WeddingResource::collection($getWeddings);
+    }
 }

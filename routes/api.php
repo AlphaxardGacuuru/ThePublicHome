@@ -76,10 +76,17 @@ Route::apiResources([
     "celebration-likes" => CelebrationLikeController::class,
     "celebration-comments" => CelebrationCommentController::class,
     "celebration-comment-likes" => CelebrationCommentLikeController::class,
+    "recaps" => CelebrationController::class,
 ]);
 
-// Recap
-Route::get("recaps", [RecapController::class, "index"]);
+// By User ID
+Route::get("deaths/by-user-id/{id}", [DeathController::class, "byUserId"]);
+Route::get("weddings/by-user-id/{id}", [WeddingController::class, "byUserId"]);
+Route::get("graduations/by-user-id/{id}", [GraduationController::class, "byUserId"]);
+Route::get("success-cards/by-user-id/{id}", [SuccessCardController::class, "byUserId"]);
+Route::get("anniversaries/by-user-id/{id}", [AnniversaryController::class, "byUserId"]);
+Route::get("celebrations/by-user-id/{id}", [CelebrationController::class, "byUserId"]);
+Route::get("recaps/by-user-id/{id}", [RecapController::class, "byUserId"]);
 
 // Filepond Controller
 Route::prefix('filepond')->group(function () {
@@ -93,6 +100,7 @@ Route::prefix('filepond')->group(function () {
         Route::post('photos/{type}/{id}/{limit}', 'storePhotos');
         Route::post('videos/{type}/{id}/{limit}', 'storeVideos');
         Route::post('eulogy/{id}/{limit}', 'storeEulogy');
+        Route::post('recaps/{type}/{id}', 'storeRecaps');
         Route::delete('poster/{type}/{id}', 'destoryPoster');
         Route::delete('eulogy/{type}/{id}', 'destoryEulogy');
     });

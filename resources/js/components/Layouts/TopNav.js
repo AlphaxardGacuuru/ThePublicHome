@@ -9,8 +9,7 @@ import DownloadSVG from "@/svgs/DownloadSVG"
 import PrivacySVG from "@/svgs/PrivacySVG"
 import MenuSVG from "@/svgs/MenuSVG"
 import BellSVG from "@/svgs/BellSVG"
-// import PersonSVG from "@/svgs/PersonSVG"
-// import HomeSVG from "@/svgs/HomeSVG"
+import PersonSVG from "@/svgs/PersonSVG"
 
 const TopNav = (props) => {
 	const location = useLocation()
@@ -209,6 +208,21 @@ const TopNav = (props) => {
 												</Link>
 											) : (
 												<React.Fragment>
+													{/* Admin Link */}
+													<div>
+														<Link
+															to="/admin"
+															className="text-white"
+															style={{
+																textAlign: "center",
+																fontWeight: "100",
+																position: "relative",
+															}}>
+															<PersonSVG />
+														</Link>
+													</div>
+													{/* Admin Link End */}
+
 													{/* Notification Dropdown */}
 													<div className="dropdown-center me-3">
 														<Link
