@@ -41,6 +41,8 @@ import Membership from "@/pages/profile/membership"
 
 import RecapIndex from "@/pages/recap"
 
+import AdminIndex from "@/pages/admin"
+
 import Socialite from "@/components/Auth/Socialite"
 
 const RouteList = (GLOBAL_STATE) => {
@@ -170,6 +172,13 @@ const RouteList = (GLOBAL_STATE) => {
 		},
 	]
 
+	const adminRoutes = [
+		{
+			path: "/admin",
+			component: <AdminIndex {...GLOBAL_STATE} />,
+		},
+	]
+
 	return (
 		<React.Fragment>
 			{routes.map((route, key) => (
@@ -191,6 +200,15 @@ const RouteList = (GLOBAL_STATE) => {
 					/>
 				))}
 			</ProfileNav>
+
+			{adminRoutes.map((route, key) => (
+				<Route
+					key={key}
+					path={route.path}
+					exact
+					render={() => route.component}
+				/>
+			))}
 		</React.Fragment>
 	)
 }

@@ -209,18 +209,16 @@ const TopNav = (props) => {
 											) : (
 												<React.Fragment>
 													{/* Admin Link */}
-													<div>
-														<Link
-															to="/admin"
-															className="text-white"
-															style={{
-																textAlign: "center",
-																fontWeight: "100",
-																position: "relative",
-															}}>
-															<PersonSVG />
-														</Link>
-													</div>
+													{/* <Link
+														to="/admin"
+														className="text-white mt-2 me-2"
+														style={{
+															textAlign: "center",
+															fontWeight: "100",
+															position: "relative",
+														}}>
+														<PersonSVG />
+													</Link> */}
 													{/* Admin Link End */}
 
 													{/* Notification Dropdown */}

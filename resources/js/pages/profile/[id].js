@@ -3,20 +3,6 @@ import { Link, useParams } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
 import MyLink from "@/components/Core/MyLink"
-import Death from "@/components/Death/Death"
-import Wedding from "@/components/Wedding/Wedding"
-import Graduation from "@/components/Graduation/Graduation"
-import SuccessCard from "@/components/SuccessCard/SuccessCard"
-import Anniversary from "@/components/Anniversary/Anniversary"
-import Celebration from "@/components/Celebration/Celebration"
-import Recap from "@/components/Recap/Recap"
-import LoadingDeath from "@/components/Death/LoadingDeath"
-import LoadingWedding from "@/components/Wedding/LoadingWedding"
-import LoadingGraduation from "@/components/Graduation/LoadingGraduation"
-import LoadingSuccessCard from "@/components/SuccessCard/LoadingSuccessCard"
-import LoadingAnniversary from "@/components/Anniversary/LoadingAnniversary"
-import LoadingCelebration from "@/components/Celebration/LoadingCelebration"
-import LoadingRecap from "@/components/Recap/LoadingRecap"
 
 const ProfileShow = (props) => {
 	let { id } = useParams()
@@ -54,40 +40,6 @@ const ProfileShow = (props) => {
 		/* Fetch every time id changes, 
 			fix for clicking profile link when viewing another user's profile */
 	}, [id])
-
-	/*
-	 * Delete Recap
-	 */
-	const onDelete = (id, model) => {
-		/*
-		 * Check Model
-		 */
-		const url = () => {
-			switch (model) {
-				case model == "Death":
-					return "deaths"
-				case model == "Wedding":
-					return "weddings"
-				case model == "Graduation":
-					return "graduations"
-				case model == "SuccessCard":
-					return "success-cards"
-				case model == "Anniversary":
-					return "anniversaries"
-
-				default:
-					return "celebrations"
-			}
-		}
-
-		Axios.put(`/api/${url()}/${id}`, { recap: "remove" })
-			.then((res) => {
-				props.setMessages([res.data.message])
-				// Remove Recap
-				setRecaps(recaps.filter((recap) => recap.id != id))
-			})
-			.catch((err) => props.getErrors(err))
-	}
 
 	return (
 		<div
