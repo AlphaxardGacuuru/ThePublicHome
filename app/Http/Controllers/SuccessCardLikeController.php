@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Events\SuccessCardLikedEvent;
+use App\Http\Services\SuccessCardLikeService;
 use App\Models\SuccessCardLike;
 use Illuminate\Http\Request;
 
 class SuccessCardLikeController extends Controller
 {
+	public function __construct(protected SuccessCardLikeService $service)
+	{
+		// 
+	}
+	
     /**
      * Display a listing of the resource.
      *

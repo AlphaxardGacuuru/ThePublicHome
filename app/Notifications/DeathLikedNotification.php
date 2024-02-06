@@ -59,9 +59,9 @@ class DeathLikedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-			'url' => '/audio/show/' . $this->death->id,
+			'url' => '/deaths/show/' . $this->death->id,
 			'from' => $this->user->name,
-			'message' => $this->user->name . ' liked ' . $this->death->name
+			'message' => $this->user->name . ' sends their condolences to ' . $this->death->name
         ];
     }
 }

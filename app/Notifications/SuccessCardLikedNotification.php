@@ -11,14 +11,18 @@ class SuccessCardLikedNotification extends Notification
 {
     use Queueable;
 
+	public $successCard;
+	public $user;
+
     /**
-     * Create a new notification instance.
+     * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($successCard, $user)
     {
-        //
+        $this->successCard = $successCard;
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +33,7 @@ class SuccessCardLikedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +59,9 @@ class SuccessCardLikedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+			'url' => '/success-cards/show/' . $this->successCard->id,
+			'from' => $this->user->name,
+			'message' => $this->user->name . ' liked ' . $this->successCard->name
         ];
     }
 }

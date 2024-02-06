@@ -14,14 +14,18 @@ class SuccessCardLikedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+	public $successCard;
+	public $user;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($successCard, $user)
     {
-        //
+        $this->successCard = $successCard;
+        $this->user = $user;
     }
 
     /**

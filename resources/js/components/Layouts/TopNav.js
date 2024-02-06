@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
+import MyLink from "@/components/Core/MyLink"
 
 import CloseSVG from "@/svgs/CloseSVG"
 import LogoutSVG from "@/svgs/LogoutSVG"
@@ -64,7 +65,8 @@ const TopNav = (props) => {
 	const display =
 		location.pathname.match("/404") ||
 		location.pathname.match("/login") ||
-		location.pathname.match("/register")
+		location.pathname.match("/register") ||
+		location.pathname.match("/admin")
 			? "d-none"
 			: ""
 
@@ -209,16 +211,11 @@ const TopNav = (props) => {
 											) : (
 												<React.Fragment>
 													{/* Admin Link */}
-													{/* <Link
-														to="/admin"
-														className="text-white mt-2 me-2"
-														style={{
-															textAlign: "center",
-															fontWeight: "100",
-															position: "relative",
-														}}>
-														<PersonSVG />
-													</Link> */}
+													<MyLink
+														linkTo="/admin"
+														text="Visit Admin"
+														className="text-white btn-sm me-3"
+													/>
 													{/* Admin Link End */}
 
 													{/* Notification Dropdown */}
@@ -257,7 +254,7 @@ const TopNav = (props) => {
 															}}
 															className="dropdown-menu m-0 p-0"
 															aria-labelledby="dropdownMenuButton">
-															<div className="dropdown-header border-bottom border-dark">
+															<div className="dropdown-header border border-secondary-subtle border-start-0 border-end-0">
 																Notifications
 															</div>
 															<div
@@ -270,7 +267,7 @@ const TopNav = (props) => {
 																	<Link
 																		key={key}
 																		to={notification.url}
-																		className="p-2 dropdown-item border-bottom text-dark border-dark text-wrap"
+																		className="p-2 dropdown-item text-dark text-wrap"
 																		onClick={() =>
 																			onDeleteNotifications(notification.id)
 																		}>
@@ -490,8 +487,8 @@ const TopNav = (props) => {
 					</div>
 					<br />
 				</div>
+				{/* <!-- ***** Side Menu Area End ***** --> */}
 			</div>
-			{/* <!-- ***** Side Menu Area End ***** --> */}
 
 			{/* Sliding Bottom Nav */}
 			<div className={bottomMenu}>

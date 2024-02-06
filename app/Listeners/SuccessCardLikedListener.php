@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\SuccessCardLikedEvent;
+use App\Notifications\SuccessCardLikedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +27,9 @@ class SuccessCardLikedListener
      */
     public function handle(SuccessCardLikedEvent $event)
     {
-        //
+        $event
+            ->successCard
+            ->user
+            ->notify(new SuccessCardLikedNotification($event->successCard, $event->user));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\WeddingLikedEvent;
+use App\Notifications\WeddingLikedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +27,9 @@ class WeddingLikedListener
      */
     public function handle(WeddingLikedEvent $event)
     {
-        //
+        $event
+            ->wedding
+            ->user
+            ->notify(new WeddingLikedNotification($event->wedding, $event->user));
     }
 }

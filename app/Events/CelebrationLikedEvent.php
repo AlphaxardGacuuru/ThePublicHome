@@ -14,14 +14,18 @@ class CelebrationLikedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+	public $celebration;
+	public $user;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($celebration, $user)
     {
-        //
+        $this->celebration = $celebration;
+        $this->user = $user;
     }
 
     /**

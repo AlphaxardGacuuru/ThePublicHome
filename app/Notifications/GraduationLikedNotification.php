@@ -11,14 +11,18 @@ class GraduationLikedNotification extends Notification
 {
     use Queueable;
 
+	public $graduation;
+	public $user;
+
     /**
-     * Create a new notification instance.
+     * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($graduation, $user)
     {
-        //
+        $this->graduation = $graduation;
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +33,7 @@ class GraduationLikedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +59,9 @@ class GraduationLikedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+			'url' => '/graduations/show/' . $this->graduation->id,
+			'from' => $this->user->name,
+			'message' => $this->user->name . ' liked ' . $this->graduation->name
         ];
     }
 }

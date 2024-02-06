@@ -13,7 +13,7 @@ class SuccessCardLikeService extends Service
      */
     public function store($request)
     {
-        $getLike = SuccessCardLike::where("success_card_id", $request->successId)
+        $getLike = SuccessCardLike::where("success_card_id", $request->successCardId)
             ->where("user_id", $this->id);
 
         $hasLiked = $getLike->exists();
@@ -28,7 +28,7 @@ class SuccessCardLikeService extends Service
                 $getLike->delete();
 
                 // Decrement Likes
-                SuccessCard::find($request->successId)
+                SuccessCard::find($request->successCardId)
                     ->decrement("likes");
             });
 
@@ -38,13 +38,13 @@ class SuccessCardLikeService extends Service
         } else {
             $like = new SuccessCardLike;
             $like->user_id = $this->id;
-            $like->success_card_id = $request->successId;
+            $like->success_card_id = $request->successCardId;
 
             DB::transaction(function () use ($like, $request) {
                 $like->save();
 
                 // Increment Likes
-                SuccessCard::find($request->successId)
+                SuccessCard::find($request->successCardId)
                     ->increment("likes");
             });
 

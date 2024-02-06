@@ -11,14 +11,18 @@ class AnniversaryLikedNotification extends Notification
 {
     use Queueable;
 
+	public $anniversary;
+	public $user;
+
     /**
-     * Create a new notification instance.
+     * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($anniversary, $user)
     {
-        //
+        $this->anniversary = $anniversary;
+        $this->user = $user;
     }
 
     /**
@@ -29,7 +33,7 @@ class AnniversaryLikedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +59,9 @@ class AnniversaryLikedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+			'url' => '/anniversaries/show/' . $this->anniversary->id,
+			'from' => $this->user->name,
+			'message' => $this->user->name . ' liked ' . $this->anniversary->name
         ];
     }
 }

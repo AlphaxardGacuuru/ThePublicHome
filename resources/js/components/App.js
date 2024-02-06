@@ -48,6 +48,7 @@ const App = () => {
 	const [errors, setErrors] = useState([])
 	const [login, setLogin] = useState(false)
 	const [leftMenu, setLeftMenu] = useState("left-open")
+	const [adminMenu, setAdminMenu] = useState("left-open")
 	const [auth, setAuth] = useState(getLocalStorageAuth("auth"))
 	const [isAuth, setIsAuth] = useState()
 
@@ -150,6 +151,8 @@ const App = () => {
 		setLogin,
 		leftMenu,
 		setLeftMenu,
+		adminMenu,
+		setAdminMenu,
 		url,
 		auth,
 		setAuth,

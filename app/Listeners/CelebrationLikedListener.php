@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\CelebrationLikedEvent;
+use App\Notifications\CelebrationLikedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +27,9 @@ class CelebrationLikedListener
      */
     public function handle(CelebrationLikedEvent $event)
     {
-        //
+        $event
+            ->celebration
+            ->user
+            ->notify(new CelebrationLikedNotification($event->celebration, $event->user));
     }
 }

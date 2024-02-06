@@ -14,14 +14,18 @@ class GraduationLikedEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+	public $graduation;
+	public $user;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($graduation, $user)
     {
-        //
+        $this->graduation = $graduation;
+        $this->user = $user;
     }
 
     /**

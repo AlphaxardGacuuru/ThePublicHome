@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\GraduationLikedEvent;
+use App\Notifications\GraduationLikedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +27,9 @@ class GraduationLikedListener
      */
     public function handle(GraduationLikedEvent $event)
     {
-        //
+        $event
+            ->graduation
+            ->user
+            ->notify(new GraduationLikedNotification($event->graduation, $event->user));
     }
 }

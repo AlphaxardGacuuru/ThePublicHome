@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\AnniversaryLikedEvent;
+use App\Notifications\AnniversaryLikedNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
@@ -26,6 +27,9 @@ class AnniversaryLikedListener
      */
     public function handle(AnniversaryLikedEvent $event)
     {
-        //
+        $event
+            ->anniversary
+            ->user
+            ->notify(new AnniversaryLikedNotification($event->anniversary, $event->user));
     }
 }

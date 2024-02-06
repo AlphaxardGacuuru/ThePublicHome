@@ -2,6 +2,7 @@ import React from "react"
 import { Route } from "react-router-dom"
 
 import ProfileNav from "@/components/Layouts/ProfileNav"
+import AdminNav from "../Layouts/AdminNav"
 
 import Index from "@/pages/index"
 
@@ -41,7 +42,14 @@ import Membership from "@/pages/profile/membership"
 
 import RecapIndex from "@/pages/recap"
 
-import AdminIndex from "@/pages/admin"
+import Admin from "@/pages/admin"
+import AdminDeath from "@/pages/admin/deaths"
+import AdminWedding from "@/pages/admin/weddings"
+import AdminGraduation from "@/pages/admin/graduations"
+import AdminSuccessCard from "@/pages/admin/success-cards"
+import AdminAnniversary from "@/pages/admin/anniversaries"
+import AdminCelebration from "@/pages/admin/celebrations"
+import AdminRecap from "@/pages/admin/recaps"
 
 import Socialite from "@/components/Auth/Socialite"
 
@@ -175,7 +183,35 @@ const RouteList = (GLOBAL_STATE) => {
 	const adminRoutes = [
 		{
 			path: "/admin",
-			component: <AdminIndex {...GLOBAL_STATE} />,
+			component: <Admin {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/admin/deaths",
+			component: <AdminDeath {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/admin/weddings",
+			component: <AdminWedding {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/admin/graduations",
+			component: <AdminGraduation {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/admin/success-cards",
+			component: <AdminSuccessCard {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/admin/anniversaries",
+			component: <AdminAnniversary {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/admin/celebrations",
+			component: <AdminCelebration {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/admin/recaps",
+			component: <AdminRecap {...GLOBAL_STATE} />,
 		},
 	]
 
@@ -201,14 +237,16 @@ const RouteList = (GLOBAL_STATE) => {
 				))}
 			</ProfileNav>
 
-			{adminRoutes.map((route, key) => (
-				<Route
-					key={key}
-					path={route.path}
-					exact
-					render={() => route.component}
-				/>
-			))}
+			<AdminNav {...GLOBAL_STATE}>
+				{adminRoutes.map((route, key) => (
+					<Route
+						key={key}
+						path={route.path}
+						exact
+						render={() => route.component}
+					/>
+				))}
+			</AdminNav>
 		</React.Fragment>
 	)
 }
