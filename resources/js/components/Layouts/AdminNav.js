@@ -196,9 +196,11 @@ const AdminMenu = (props) => {
 						</div>
 					</div>
 				</header>
-				
+
 				<span>
 					<br />
+					<br />
+					<br className="hidden" />
 					<br className="hidden" />
 				</span>
 
