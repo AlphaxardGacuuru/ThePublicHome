@@ -213,7 +213,7 @@ const TopNav = (props) => {
 													{/* Admin Link */}
 													<MyLink
 														linkTo="/admin"
-														text="Visit Admin"
+														text="Admin"
 														className="text-white btn-sm me-3"
 													/>
 													{/* Admin Link End */}

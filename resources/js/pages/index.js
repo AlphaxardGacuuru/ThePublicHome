@@ -84,6 +84,13 @@ const index = (props) => {
 							<h3>Celebration Announcements</h3>
 						</Link>
 					</div>
+					<div className="m-2">
+						<Link
+							to="/recaps"
+							className="card m-2 p-5 mx-auto">
+							<h3>Recaps</h3>
+						</Link>
+					</div>
 				</div>
 			</center>
 		</div>

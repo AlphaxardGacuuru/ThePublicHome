@@ -47,10 +47,10 @@ const App = () => {
 	const [messages, setMessages] = useState([])
 	const [errors, setErrors] = useState([])
 	const [login, setLogin] = useState(false)
-	const [leftMenu, setLeftMenu] = useState("left-open")
+	const [leftMenu, setLeftMenu] = useState("")
 	const [adminMenu, setAdminMenu] = useState("left-open")
 	const [auth, setAuth] = useState(getLocalStorageAuth("auth"))
-	const [isAuth, setIsAuth] = useState()
+	const [isAuth, setIsAuth] = useState(true)
 
 	const [deaths, setDeaths] = useState(getLocalStorage("deaths"))
 	const [weddings, setWeddings] = useState(getLocalStorage("weddings"))

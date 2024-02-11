@@ -51,7 +51,7 @@ const index = (props) => {
 				</Link>
 
 				<center>
-					<h1>Graduation and Funeral Announcements</h1>
+					<h1>Graduation Announcements</h1>
 
 					<form
 						className="mt-4 mx-auto w-75"

@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { Link, useLocation, useHistory } from "react-router-dom"
 
-import CloseSVG from "@/svgs/CloseSVG"
 import PersonSVG from "@/svgs/PersonSVG"
 import MembershipSVG from "@/svgs/MembershipSVG"
 
@@ -14,21 +13,6 @@ const ProfileNav = (props) => {
 	// Function for showing active color
 	const active = (check) => {
 		return location.pathname.match(check) && "active"
-	}
-
-	// Function for showing active color
-	const activeStrict = (check) => {
-		return location.pathname == check && "active"
-	}
-
-	// Function for showing active color
-	const active2 = (check) => {
-		return location.pathname.match(check) ? "active" : "text-white"
-	}
-
-	// Function for showing active color
-	const activeStrict2 = (check) => {
-		return location.pathname == check ? "active" : "text-white"
 	}
 
 	return (
