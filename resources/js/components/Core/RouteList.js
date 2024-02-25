@@ -4,6 +4,8 @@ import { Route } from "react-router-dom"
 import ProfileNav from "@/components/Layouts/ProfileNav"
 import AdminNav from "../Layouts/AdminNav"
 
+import About from "@/pages/about"
+
 import DeathIndex from "@/pages/death"
 import DeathCreate from "@/pages/death/create"
 import DeathShow from "@/pages/death/[id]"
@@ -56,6 +58,10 @@ const RouteList = (GLOBAL_STATE) => {
 		{
 			path: "/socialite/:message/:token",
 			component: <Socialite {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/about",
+			component: <About {...GLOBAL_STATE} />,
 		},
 		{
 			path: "/",

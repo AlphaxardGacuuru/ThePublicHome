@@ -12,11 +12,19 @@ import MenuSVG from "@/svgs/MenuSVG"
 import BellSVG from "@/svgs/BellSVG"
 import PersonSVG from "@/svgs/PersonSVG"
 
+import DeathSVG from "@/svgs/DeathSVG"
+import RecapSVG from "@/svgs/RecapSVG"
+import CelebrationSVG from "@/svgs/CelebrationSVG"
+import AnniversarySVG from "@/svgs/AnniversarySVG"
+import SuccessCardSVG from "@/svgs/SuccessCardSVG"
+import GraduationSVG from "@/svgs/GraduationSVG"
+import WeddingSVG from "@/svgs/WeddingSVG"
+
 const TopNav = (props) => {
 	const location = useLocation()
 	const router = useHistory()
 
-	const [menu, setMenu] = useState("")
+	const [menu, setMenu] = useState("menu-open")
 	const [bottomMenu, setBottomMenu] = useState("")
 
 	const [notifications, setNotifications] = useState([])
@@ -136,6 +144,9 @@ const TopNav = (props) => {
 												to="/"
 												className={`nav-link mx-4 ${activeStrict("/")}`}
 												onClick={() => setMenu("")}>
+												<span>
+													<DeathSVG />
+												</span>
 												Deaths
 											</Link>
 										</div>
@@ -144,6 +155,9 @@ const TopNav = (props) => {
 												to="/weddings"
 												className={`nav-link mx-4 ${active("/weddings")}`}
 												onClick={() => setMenu("")}>
+												<span>
+													<WeddingSVG />
+												</span>
 												Weddings
 											</Link>
 										</div>
@@ -152,6 +166,9 @@ const TopNav = (props) => {
 												to="/graduations"
 												className={`nav-link mx-4 ${active("/graduations")}`}
 												onClick={() => setMenu("")}>
+												<span>
+													<GraduationSVG />
+												</span>
 												Graduations
 											</Link>
 										</div>
@@ -160,6 +177,9 @@ const TopNav = (props) => {
 												to="/success-cards"
 												className={`nav-link mx-4 ${active("/success-cards")}`}
 												onClick={() => setMenu("")}>
+												<span>
+													<SuccessCardSVG />
+												</span>
 												Success Cards
 											</Link>
 										</div>
@@ -168,6 +188,9 @@ const TopNav = (props) => {
 												to="/anniversaries"
 												className={`nav-link mx-4 ${active("/anniversaries")}`}
 												onClick={() => setMenu("")}>
+												<span>
+													<AnniversarySVG />
+												</span>
 												Anniversaries
 											</Link>
 										</div>
@@ -176,6 +199,9 @@ const TopNav = (props) => {
 												to="/celebrations"
 												className={`nav-link mx-4 ${active("/celebrations")}`}
 												onClick={() => setMenu("")}>
+												<span>
+													<CelebrationSVG />
+												</span>
 												Celebrations
 											</Link>
 										</div>
@@ -184,6 +210,9 @@ const TopNav = (props) => {
 												to="/recaps"
 												className={`nav-link mx-4 ${active("/recaps")}`}
 												onClick={() => setMenu("")}>
+												<span>
+													<RecapSVG />
+												</span>
 												Recaps
 											</Link>
 										</div>
@@ -417,6 +446,9 @@ const TopNav = (props) => {
 										to="/"
 										className={`nav-link ${activeStrict2("/")}`}
 										onClick={() => setMenu("")}>
+										<span>
+											<DeathSVG />
+										</span>
 										Deaths
 									</Link>
 								</li>
@@ -425,6 +457,9 @@ const TopNav = (props) => {
 										to="/weddings"
 										className={`nav-link ${active2("/weddings")}`}
 										onClick={() => setMenu("")}>
+										<span>
+											<WeddingSVG />
+										</span>
 										Weddings
 									</Link>
 								</li>
@@ -433,6 +468,9 @@ const TopNav = (props) => {
 										to="/graduations"
 										className={`nav-link ${active2("/graduations")}`}
 										onClick={() => setMenu("")}>
+										<span>
+											<GraduationSVG />
+										</span>
 										Graduations
 									</Link>
 								</li>
@@ -441,6 +479,9 @@ const TopNav = (props) => {
 										to="/success-cards"
 										className={`nav-link ${active2("/success-cards")}`}
 										onClick={() => setMenu("")}>
+										<span>
+											<SuccessCardSVG />
+										</span>
 										Success Cards
 									</Link>
 								</li>
@@ -449,6 +490,9 @@ const TopNav = (props) => {
 										to="/anniversaries"
 										className={`nav-link ${active2("/anniversaries")}`}
 										onClick={() => setMenu("")}>
+										<span>
+											<AnniversarySVG />
+										</span>
 										Anniversaries
 									</Link>
 								</li>
@@ -457,6 +501,9 @@ const TopNav = (props) => {
 										to="/celebrations"
 										className={`nav-link ${active2("/celebrations")}`}
 										onClick={() => setMenu("")}>
+										<span>
+											<CelebrationSVG />
+										</span>
 										Celebrations
 									</Link>
 								</li>
@@ -465,6 +512,9 @@ const TopNav = (props) => {
 										to="/recaps"
 										className={`nav-link ${active2("/recaps")}`}
 										onClick={() => setMenu("")}>
+										<span>
+											<RecapSVG />
+										</span>
 										Recaps
 									</Link>
 								</li>
