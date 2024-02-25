@@ -136,14 +136,6 @@ const TopNav = (props) => {
 												to="/"
 												className={`nav-link mx-4 ${activeStrict("/")}`}
 												onClick={() => setMenu("")}>
-												Home
-											</Link>
-										</div>
-										<div className="hidden">
-											<Link
-												to="/deaths"
-												className={`nav-link mx-4 ${active("/deaths")}`}
-												onClick={() => setMenu("")}>
 												Deaths
 											</Link>
 										</div>
@@ -424,14 +416,6 @@ const TopNav = (props) => {
 									<Link
 										to="/"
 										className={`nav-link ${activeStrict2("/")}`}
-										onClick={() => setMenu("")}>
-										Home
-									</Link>
-								</li>
-								<li className="nav-item">
-									<Link
-										to="/deaths"
-										className={`nav-link ${active2("/deaths")}`}
 										onClick={() => setMenu("")}>
 										Deaths
 									</Link>
