@@ -70,7 +70,11 @@ const show = (props) => {
 		setDeletedIds([...deletedIds, commentId])
 
 		Axios.delete(`/api/wedding-comments/${commentId}`)
-			.then((res) => props.setMessages([res.data.message]))
+			.then((res) => {
+				props.setMessages([res.data.message])
+				// Update Weddings
+				props.get(`weddings/${id}`, setWedding)
+			})
 			.catch((err) => props.getErrors(err))
 	}
 

@@ -70,7 +70,11 @@ const show = (props) => {
 		setDeletedIds([...deletedIds, commentId])
 
 		Axios.delete(`/api/success-card-comments/${commentId}`)
-			.then((res) => props.setMessages([res.data.message]))
+			.then((res) => {
+				props.setMessages([res.data.message])
+				// Update Success Card s
+				props.get(`success-cards/${id}`, setSuccessCard)
+			})
 			.catch((err) => props.getErrors(err))
 	}
 

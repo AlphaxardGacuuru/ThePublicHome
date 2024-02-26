@@ -70,7 +70,11 @@ const show = (props) => {
 		setDeletedIds([...deletedIds, commentId])
 
 		Axios.delete(`/api/graduation-comments/${commentId}`)
-			.then((res) => props.setMessages([res.data.message]))
+			.then((res) => {
+				props.setMessages([res.data.message])
+				// Update Graduation s
+				props.get(`graduations/${id}`, setGraduation)
+			})
 			.catch((err) => props.getErrors(err))
 	}
 
