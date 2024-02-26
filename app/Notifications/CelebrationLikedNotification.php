@@ -61,7 +61,7 @@ class CelebrationLikedNotification extends Notification
         return [
 			'url' => '/celebrations/show/' . $this->celebration->id,
 			'from' => $this->user->name,
-			'message' => $this->user->name . ' liked ' . $this->celebration->name
+			'message' => $this->user->name . ': ALL THE BEST'
         ];
     }
 }

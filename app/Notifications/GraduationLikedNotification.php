@@ -61,7 +61,7 @@ class GraduationLikedNotification extends Notification
         return [
 			'url' => '/graduations/show/' . $this->graduation->id,
 			'from' => $this->user->name,
-			'message' => $this->user->name . ' liked ' . $this->graduation->name
+			'message' => $this->user->name . ': ALL THE BEST'
         ];
     }
 }

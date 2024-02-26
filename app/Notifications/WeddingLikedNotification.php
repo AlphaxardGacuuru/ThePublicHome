@@ -61,7 +61,7 @@ class WeddingLikedNotification extends Notification
         return [
 			'url' => '/weddings/show/' . $this->wedding->id,
 			'from' => $this->user->name,
-			'message' => $this->user->name . ' liked ' . $this->wedding->name
+			'message' => $this->user->name . ': ALL THE BEST'
         ];
     }
 }

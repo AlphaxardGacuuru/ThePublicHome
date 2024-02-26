@@ -61,7 +61,7 @@ class AnniversaryLikedNotification extends Notification
         return [
 			'url' => '/anniversaries/show/' . $this->anniversary->id,
 			'from' => $this->user->name,
-			'message' => $this->user->name . ' liked ' . $this->anniversary->name
+			'message' => $this->user->name . ': ALL THE BEST'
         ];
     }
 }

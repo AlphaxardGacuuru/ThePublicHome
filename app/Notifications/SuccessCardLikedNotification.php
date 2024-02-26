@@ -61,7 +61,7 @@ class SuccessCardLikedNotification extends Notification
         return [
 			'url' => '/success-cards/show/' . $this->successCard->id,
 			'from' => $this->user->name,
-			'message' => $this->user->name . ' liked ' . $this->successCard->name
+			'message' => $this->user->name . ': ALL THE BEST'
         ];
     }
 }

@@ -146,17 +146,22 @@ const ProfileShow = (props) => {
 											<td className="text-capitalize">{death.likes}</td>
 											<td className="text-capitalize">{death.createdAt}</td>
 											<td>
-												<MyLink
-													linkTo={`/deaths/show/${death.id}`}
-													className="btn-sm"
-													text="view"
-												/>
+												<div className="d-flex justify-content-between">
+													<MyLink
+														linkTo={`/deaths/show/${death.id}`}
+														className="btn-sm"
+														text="view"
+													/>
 
-												<MyLink
-													linkTo={`/deaths/edit/${death.id}`}
-													className="btn-sm ms-2"
-													text="add recap"
-												/>
+													{props.auth.id == id && (
+														<MyLink
+															linkTo={`/deaths/edit/${death.id}`}
+															className="btn-sm ms-2"
+															style={{ minWidth: "10em" }}
+															text="add recap"
+														/>
+													)}
+												</div>
 											</td>
 										</tr>
 									))}
@@ -210,17 +215,22 @@ const ProfileShow = (props) => {
 											<td className="text-capitalize">{wedding.likes}</td>
 											<td className="text-capitalize">{wedding.createdAt}</td>
 											<td>
-												<MyLink
-													linkTo={`/weddings/show/${wedding.id}`}
-													className="btn-sm"
-													text="view"
-												/>
+												<div className="d-flex justify-content-between">
+													<MyLink
+														linkTo={`/weddings/show/${wedding.id}`}
+														className="btn-sm"
+														text="view"
+													/>
 
-												<MyLink
-													linkTo={`/weddings/edit/${wedding.id}`}
-													className="btn-sm ms-2"
-													text="add recap"
-												/>
+													{props.auth.id == id && (
+														<MyLink
+															linkTo={`/weddings/edit/${wedding.id}`}
+															className="btn-sm ms-2"
+															style={{ minWidth: "10em" }}
+															text="add recap"
+														/>
+													)}
+												</div>
 											</td>
 										</tr>
 									))}
@@ -278,17 +288,22 @@ const ProfileShow = (props) => {
 												{graduation.createdAt}
 											</td>
 											<td>
-												<MyLink
-													linkTo={`/graduations/show/${graduation.id}`}
-													className="btn-sm"
-													text="view"
-												/>
+												<div className="d-flex justify-content-between">
+													<MyLink
+														linkTo={`/graduations/show/${graduation.id}`}
+														className="btn-sm"
+														text="view"
+													/>
 
-												<MyLink
-													linkTo={`/graduations/edit/${graduation.id}`}
-													className="btn-sm ms-2"
-													text="add recap"
-												/>
+													{props.auth.id == id && (
+														<MyLink
+															linkTo={`/graduations/edit/${graduation.id}`}
+															className="btn-sm ms-2"
+															style={{ minWidth: "10em" }}
+															text="add recap"
+														/>
+													)}
+												</div>
 											</td>
 										</tr>
 									))}
@@ -340,17 +355,22 @@ const ProfileShow = (props) => {
 												{successCard.createdAt}
 											</td>
 											<td>
-												<MyLink
-													linkTo={`/success-cards/show/${successCard.id}`}
-													className="btn-sm"
-													text="view"
-												/>
+												<div className="d-flex justify-content-between">
+													<MyLink
+														linkTo={`/success-cards/show/${successCard.id}`}
+														className="btn-sm"
+														text="view"
+													/>
 
-												<MyLink
-													linkTo={`/success-cards/edit/${successCard.id}`}
-													className="btn-sm ms-2"
-													text="add recap"
-												/>
+													{props.auth.id == id && (
+														<MyLink
+															linkTo={`/success-cards/edit/${successCard.id}`}
+															className="btn-sm ms-2"
+															style={{ minWidth: "10em" }}
+															text="add recap"
+														/>
+													)}
+												</div>
 											</td>
 										</tr>
 									))}
@@ -408,17 +428,22 @@ const ProfileShow = (props) => {
 												{anniversary.createdAt}
 											</td>
 											<td>
-												<MyLink
-													linkTo={`/anniversaries/show/${anniversary.id}`}
-													className="btn-sm"
-													text="view"
-												/>
+												<div className="d-flex justify-content-between">
+													<MyLink
+														linkTo={`/anniversaries/show/${anniversary.id}`}
+														className="btn-sm"
+														text="view"
+													/>
 
-												<MyLink
-													linkTo={`/anniversaries/edit/${anniversary.id}`}
-													className="btn-sm ms-2"
-													text="add recap"
-												/>
+													{props.auth.id == id && (
+														<MyLink
+															linkTo={`/anniversaries/edit/${anniversary.id}`}
+															className="btn-sm ms-2"
+															style={{ minWidth: "10em" }}
+															text="add recap"
+														/>
+													)}
+												</div>
 											</td>
 										</tr>
 									))}
@@ -476,17 +501,22 @@ const ProfileShow = (props) => {
 												{celebration.createdAt}
 											</td>
 											<td>
-												<MyLink
-													linkTo={`/celebrations/show/${celebration.id}`}
-													className="btn-sm"
-													text="view"
-												/>
+												<div className="d-flex justify-content-between">
+													<MyLink
+														linkTo={`/celebrations/show/${celebration.id}`}
+														className="btn-sm"
+														text="view"
+													/>
 
-												<MyLink
-													linkTo={`/celebrations/edit/${celebration.id}`}
-													className="btn-sm ms-2"
-													text="add recap"
-												/>
+													{props.auth.id == id && (
+														<MyLink
+															linkTo={`/celebrations/edit/${celebration.id}`}
+															className="btn-sm ms-2"
+															style={{ minWidth: "10em" }}
+															text="add recap"
+														/>
+													)}
+												</div>
 											</td>
 										</tr>
 									))}

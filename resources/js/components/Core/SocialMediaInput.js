@@ -133,6 +133,7 @@ const SocialMediaInput = (props) => {
 }
 
 SocialMediaInput.defaultProps = {
+	placeholder: "Write Something",
 	required: true,
 	btnText: "send",
 }

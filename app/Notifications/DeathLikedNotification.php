@@ -61,7 +61,7 @@ class DeathLikedNotification extends Notification
         return [
 			'url' => '/deaths/show/' . $this->death->id,
 			'from' => $this->user->name,
-			'message' => $this->user->name . ' sends their condolences to ' . $this->death->name
+			'message' => $this->user->name . ': RIP'
         ];
     }
 }

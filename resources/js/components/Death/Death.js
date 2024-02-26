@@ -154,7 +154,7 @@ const Death = (props) => {
 					<SocialMediaInput
 						{...props}
 						id={props.death.id}
-						placeholder="Write Something"
+						placeholder="Write Condolences"
 						urlTo="/death-comments"
 						stateToUpdate={() => props.get("deaths", props.setDeaths)}
 						editing={false}
