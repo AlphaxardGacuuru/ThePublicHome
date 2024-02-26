@@ -9,6 +9,7 @@ import CommentMedia from "@/components/Core/CommentMedia"
 
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
+import CommentSVG from "@/svgs/CommentSVG"
 
 const show = (props) => {
 	const { id } = useParams()
@@ -42,7 +43,7 @@ const show = (props) => {
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				// Update Celebration s
+				// Update Celebrations
 				props.get(`celebrations/${id}`, setCelebration)
 			})
 			.catch((err) => props.getErrors(err))
@@ -169,6 +170,19 @@ const show = (props) => {
 										)}
 									</div>
 									{/* Likes End */}
+
+									{/* Comments */}
+									<div className="flex-grow-1 text-start p-2">
+										<span style={{ fontSize: "1.2em" }}>
+											<CommentSVG />
+										</span>
+										<small
+											className="ms-1"
+											style={{ color: "inherit", fontWeight: "100" }}>
+											{celebration.comments}
+										</small>
+									</div>
+									{/* Comments End */}
 								</div>
 								{/* User info End */}
 								<h2>{celebration.title}</h2>
@@ -261,6 +275,7 @@ const show = (props) => {
 								urlTo="/celebration-comments"
 								editing={false}
 								stateToUpdate={() => {
+									props.get(`celebrations/${id}`, setCelebration)
 									props.get(
 										`celebration-comments/${id}`,
 										setCelebrationComments

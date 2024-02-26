@@ -24,7 +24,7 @@ const TopNav = (props) => {
 	const location = useLocation()
 	const router = useHistory()
 
-	const [menu, setMenu] = useState("menu-open")
+	const [menu, setMenu] = useState("")
 	const [bottomMenu, setBottomMenu] = useState("")
 
 	const [notifications, setNotifications] = useState([])
@@ -142,7 +142,9 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/"
-												className={`nav-link mx-4 ${activeStrict("/")}`}
+												className={`nav-link mx-4 ${
+													activeStrict("/") || active("/deaths")
+												}`}
 												onClick={() => setMenu("")}>
 												<span>
 													<DeathSVG />
@@ -444,7 +446,9 @@ const TopNav = (props) => {
 								<li className="nav-item">
 									<Link
 										to="/"
-										className={`nav-link ${activeStrict2("/")}`}
+										className={`nav-link ${
+											activeStrict2("/") || active2("/deaths")
+										}`}
 										onClick={() => setMenu("")}>
 										<span>
 											<DeathSVG />

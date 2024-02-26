@@ -38,6 +38,7 @@ class GraduationResource extends JsonResource
             "graduationDate" => Carbon::parse($this->graduation_date)->format("Y-m-d"),
             "recap" => $this->recap,
             "likes" => $this->likes,
+            "comments" => $this->comments,
             "hasLiked" => $this->hasLiked($id),
             "wordLimit" => $this->membership->features["announcement"],
             "photoLimit" => $this->membership->features["photos"],

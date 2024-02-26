@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Resources\GraduationCommentResource;
 use App\Models\GraduationComment;
+use Illuminate\Support\Facades\DB;
 
 class GraduationCommentService extends Service
 {
@@ -29,18 +30,25 @@ class GraduationCommentService extends Service
     public function store($request)
     {
         /* Create new post */
-        $graduationComment = new GraduationComment;
-        $graduationComment->graduation_id = $request->input('id');
-        $graduationComment->user_id = auth('sanctum')->user()->id;
-        $graduationComment->text = $request->input('text');
+        $comment = new GraduationComment;
+        $comment->graduation_id = $request->input('id');
+        $comment->user_id = auth('sanctum')->user()->id;
+        $comment->text = $request->input('text');
 
-        $saved = $graduationComment->save();
-        // Check if commenter is owner of graduations
-        $notCurrentUser = $graduationComment->graduation->user_id != $this->id;
-        // Dispatch if comment is saved successfully and commenter is not owner of audio
+        $saved = DB::transaction(function () use ($comment) {
+            // Increment Comments
+            $comment->graduation->increment("comments");
+
+            return $comment->save();
+        });
+
+		// Check if commenter is owner of graduations
+        $notCurrentUser = $comment->graduation->user_id != $this->id;
+        
+		// Dispatch if comment is saved successfully and commenter is not owner of audio
         $canDispatch = $notCurrentUser && $saved;
 
-        return [$canDispatch, "Comment posted", $graduationComment];
+        return [$canDispatch, "Comment posted", $comment];
     }
 
     /**
@@ -49,7 +57,15 @@ class GraduationCommentService extends Service
      */
     public function destroy($id)
     {
-        $deleted = GraduationComment::findOrFail($id)->delete();
+        $deleted = DB::transaction(function () use ($id) {
+			$comment = GraduationComment::findOrFail($id);
+			
+            // Decrement Comment
+            $comment->graduation->decrement("comments");
+			
+            // Delete Comment
+			return $comment->delete();
+        });
 
         return [$deleted, "Comment deleted"];
     }

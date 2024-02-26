@@ -9,6 +9,7 @@ import CommentMedia from "@/components/Core/CommentMedia"
 
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
+import CommentSVG from "@/svgs/CommentSVG"
 
 const show = (props) => {
 	const { id } = useParams()
@@ -42,7 +43,7 @@ const show = (props) => {
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				// Update Anniversary s
+				// Update Anniversaries
 				props.get(`anniversaries/${id}`, setAnniversary)
 			})
 			.catch((err) => props.getErrors(err))
@@ -169,6 +170,19 @@ const show = (props) => {
 										)}
 									</div>
 									{/* Likes End */}
+
+									{/* Comments */}
+									<div className="flex-grow-1 text-start p-2">
+										<span style={{ fontSize: "1.2em" }}>
+											<CommentSVG />
+										</span>
+										<small
+											className="ms-1"
+											style={{ color: "inherit", fontWeight: "100" }}>
+											{anniversary.comments}
+										</small>
+									</div>
+									{/* Comments End */}
 								</div>
 								{/* User info End */}
 								<h2>{anniversary.title}</h2>
@@ -261,6 +275,7 @@ const show = (props) => {
 								urlTo="/anniversary-comments"
 								editing={false}
 								stateToUpdate={() => {
+									props.get(`anniversaries/${id}`, setAnniversary)
 									props.get(
 										`anniversary-comments/${id}`,
 										setAnniversaryComments

@@ -6,6 +6,7 @@ import SocialMediaInput from "@/components/Core/SocialMediaInput"
 
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
+import CommentSVG from "@/svgs/CommentSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
 
 const SuccessCard = (props) => {
@@ -110,6 +111,20 @@ const SuccessCard = (props) => {
 							</div>
 						)}
 					</div>
+
+					{/* Comments */}
+					<div className="flex-grow-1 text-start p-2">
+						<span style={{ fontSize: "1.2em" }}>
+							<CommentSVG />
+						</span>
+						<small
+							className="ms-1"
+							style={{ color: "inherit", fontWeight: "100" }}>
+							{props.successCard.comments}
+						</small>
+					</div>
+					{/* Comments End */}
+
 					{/* <!-- Options dropup button --> */}
 					<div className="btn-group dropup mt-1">
 						<a
@@ -141,6 +156,7 @@ const SuccessCard = (props) => {
 						id={props.successCard.id}
 						placeholder="Write Something"
 						urlTo="/success-card-comments"
+						stateToUpdate={() => props.get("success-cards", props.setSuccessCards)}
 						editing={false}
 					/>
 				</div>

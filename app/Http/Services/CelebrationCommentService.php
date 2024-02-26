@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Resources\CelebrationCommentResource;
 use App\Models\CelebrationComment;
+use Illuminate\Support\Facades\DB;
 
 class CelebrationCommentService extends Service
 {
@@ -29,18 +30,25 @@ class CelebrationCommentService extends Service
     public function store($request)
     {
         /* Create new post */
-        $celebrationComment = new CelebrationComment;
-        $celebrationComment->celebration_id = $request->input('id');
-        $celebrationComment->user_id = auth('sanctum')->user()->id;
-        $celebrationComment->text = $request->input('text');
+        $comment = new CelebrationComment;
+        $comment->celebration_id = $request->input('id');
+        $comment->user_id = auth('sanctum')->user()->id;
+        $comment->text = $request->input('text');
 
-        $saved = $celebrationComment->save();
-        // Check if commenter is owner of celebrations
-        $notCurrentUser = $celebrationComment->celebration->user_id != $this->id;
+        $saved = DB::transaction(function () use ($comment) {
+            // Increment Comments
+            $comment->celebration->increment("comments");
+
+            return $comment->save();
+        });
+
+		// Check if commenter is owner of celebrations
+        $notCurrentUser = $comment->celebration->user_id != $this->id;
+
         // Dispatch if comment is saved successfully and commenter is not owner of audio
         $canDispatch = $notCurrentUser && $saved;
 
-        return [$canDispatch, "Comment posted", $celebrationComment];
+        return [$canDispatch, "Comment posted", $comment];
     }
 
     /**
@@ -49,7 +57,15 @@ class CelebrationCommentService extends Service
      */
     public function destroy($id)
     {
-        $deleted = CelebrationComment::findOrFail($id)->delete();
+        $deleted = DB::transaction(function () use ($id) {
+			$comment = CelebrationComment::findOrFail($id);
+			
+            // Decrement Comment
+            $comment->celebration->decrement("comments");
+			
+            // Delete Comment
+			return $comment->delete();
+        });
 
         return [$deleted, "Comment deleted"];
     }

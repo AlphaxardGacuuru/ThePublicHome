@@ -6,6 +6,7 @@ import SocialMediaInput from "@/components/Core/SocialMediaInput"
 
 import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
+import CommentSVG from "@/svgs/CommentSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
 import LocationSVG from "@/svgs/LocationSVG"
 
@@ -114,6 +115,20 @@ const Wedding = (props) => {
 							</div>
 						)}
 					</div>
+
+					{/* Comments */}
+					<div className="flex-grow-1 text-start p-2">
+						<span style={{ fontSize: "1.2em" }}>
+							<CommentSVG />
+						</span>
+						<small
+							className="ms-1"
+							style={{ color: "inherit", fontWeight: "100" }}>
+							{props.wedding.comments}
+						</small>
+					</div>
+					{/* Comments End */}
+
 					{/* <!-- Options dropup button --> */}
 					<div className="btn-group dropup mt-1">
 						<a
@@ -145,6 +160,7 @@ const Wedding = (props) => {
 						id={props.wedding.id}
 						placeholder="Write Something"
 						urlTo="/wedding-comments"
+						stateToUpdate={() => props.get("weddings", props.setWeddings)}
 						editing={false}
 					/>
 				</div>
