@@ -159,7 +159,7 @@ const Wedding = (props) => {
 						{...props}
 						id={props.wedding.id}
 						placeholder="Write Something"
-						urlTo="/wedding-comments"
+						urlTo="wedding-comments"
 						stateToUpdate={() => props.get("weddings", props.setWeddings)}
 						editing={false}
 					/>

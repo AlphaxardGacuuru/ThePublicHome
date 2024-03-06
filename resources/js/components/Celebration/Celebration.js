@@ -159,7 +159,7 @@ const Celebration = (props) => {
 						{...props}
 						id={props.celebration.id}
 						placeholder="Write Something"
-						urlTo="/celebration-comments"
+						urlTo="celebration-comments"
 						stateToUpdate={() => props.get("celebrations", props.setCelebrations)}
 						editing={false}
 					/>

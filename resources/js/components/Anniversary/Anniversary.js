@@ -159,7 +159,7 @@ const Anniversary = (props) => {
 						{...props}
 						id={props.anniversary.id}
 						placeholder="Write Something"
-						urlTo="/anniversary-comments"
+						urlTo="anniversary-comments"
 						stateToUpdate={() => props.get("anniversaries", props.setAnniversaries)}
 						editing={false}
 					/>

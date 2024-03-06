@@ -155,7 +155,7 @@ const SuccessCard = (props) => {
 						{...props}
 						id={props.successCard.id}
 						placeholder="Write Something"
-						urlTo="/success-card-comments"
+						urlTo="success-card-comments"
 						stateToUpdate={() => props.get("success-cards", props.setSuccessCards)}
 						editing={false}
 					/>

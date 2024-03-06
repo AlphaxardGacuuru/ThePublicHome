@@ -159,7 +159,7 @@ const Graduation = (props) => {
 						{...props}
 						id={props.graduation.id}
 						placeholder="Write Something"
-						urlTo="/graduation-comments"
+						urlTo="graduation-comments"
 						stateToUpdate={() => props.get("graduations", props.setGraduations)}
 						editing={false}
 					/>

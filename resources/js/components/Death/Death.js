@@ -155,7 +155,7 @@ const Death = (props) => {
 						{...props}
 						id={props.death.id}
 						placeholder="Write Condolences"
-						urlTo="/death-comments"
+						urlTo="death-comments"
 						stateToUpdate={() => props.get("deaths", props.setDeaths)}
 						editing={false}
 					/>
