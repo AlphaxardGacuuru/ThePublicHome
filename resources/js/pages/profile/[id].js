@@ -126,7 +126,7 @@ const ProfileShow = (props) => {
 								</thead>
 								<tbody>
 									{deaths.map((death, key) => (
-										<tr>
+										<tr key={key}>
 											<td>{key + 1}</td>
 											<td className="text-capitalize">{death.locale}</td>
 											<td className="text-capitalize">{death.tier}</td>
@@ -200,7 +200,7 @@ const ProfileShow = (props) => {
 								</thead>
 								<tbody>
 									{weddings.map((wedding, key) => (
-										<tr>
+										<tr key={key}>
 											<td>{key + 1}</td>
 											<td className="text-capitalize">{wedding.locale}</td>
 											<td className="text-capitalize">{wedding.tier}</td>
@@ -271,7 +271,7 @@ const ProfileShow = (props) => {
 								</thead>
 								<tbody>
 									{graduations.map((graduation, key) => (
-										<tr>
+										<tr key={key}>
 											<td>{key + 1}</td>
 											<td className="text-capitalize">{graduation.locale}</td>
 											<td className="text-capitalize">{graduation.tier}</td>
@@ -342,7 +342,7 @@ const ProfileShow = (props) => {
 								</thead>
 								<tbody>
 									{successCards.map((successCard, key) => (
-										<tr>
+										<tr key={key}>
 											<td>{key + 1}</td>
 											<td className="text-capitalize">{successCard.locale}</td>
 											<td className="text-capitalize">{successCard.tier}</td>
@@ -411,7 +411,7 @@ const ProfileShow = (props) => {
 								</thead>
 								<tbody>
 									{anniversaries.map((anniversary, key) => (
-										<tr>
+										<tr key={key}>
 											<td>{key + 1}</td>
 											<td className="text-capitalize">{anniversary.locale}</td>
 											<td className="text-capitalize">{anniversary.tier}</td>
@@ -484,7 +484,7 @@ const ProfileShow = (props) => {
 								</thead>
 								<tbody>
 									{celebrations.map((celebration, key) => (
-										<tr>
+										<tr key={key}>
 											<td>{key + 1}</td>
 											<td className="text-capitalize">{celebration.locale}</td>
 											<td className="text-capitalize">{celebration.tier}</td>
