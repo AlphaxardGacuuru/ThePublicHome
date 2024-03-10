@@ -28,7 +28,10 @@ class FilePondController extends Controller
             'filepond-avatar' => 'required|image',
         ]);
 
-        $avatar = $request->file('filepond-avatar')->store('public/avatars');
+        $avatar = $request
+            ->file('filepond-avatar'
+            )->store('public/avatars');
+
         $avatar = substr($avatar, 7);
 
         $user = User::findOrFail($id);
@@ -61,7 +64,9 @@ class FilePondController extends Controller
         ]);
 
         // Store poster
-        $poster = $request->file('filepond-poster')->store('public/' . $type . '-posters');
+        $poster = $request
+            ->file('filepond-poster')
+            ->store('public/' . $type . '-posters');
 
         $poster = substr($poster, 7);
 
@@ -163,21 +168,27 @@ class FilePondController extends Controller
             'filepond-eulogy' => 'required|file',
         ]);
 
-        $eulogy = $request->file('filepond-eulogy')->getRealPath();
+        $eulogy = $request
+            ->file('filepond-eulogy')
+            ->getRealPath();
 
         $pdf = new Pdf($eulogy);
 
-        $pageCount = $pdf->getNumberOfPages();
+        return $pageCount = $pdf->getNumberOfPages();
 
         if ($pageCount <= $limit) {
-            $eulogy = $request->file('filepond-eulogy')->store('public/eulogies');
+            $eulogy = $request
+                ->file('filepond-eulogy')
+                ->store('public/eulogies');
 
             $eulogy = substr($eulogy, 7);
 
             $death = Death::findOrFail($id);
 
             // Delete Old Eulogy
-            $death->eulogy && Storage::disk("public")->delete($death->eulogy);
+            $death->eulogy &&
+            Storage::disk("public")
+                ->delete($death->eulogy);
 
             $death->eulogy = $eulogy;
 
@@ -266,13 +277,14 @@ class FilePondController extends Controller
     public function calculateFileSize($filePaths)
     {
         // Calculate the total size of the specified files in bytes
-        $totalSize = collect($filePaths)->reduce(function ($carry, $file) {
-            // Check if the file exists in the storage
-            if (Storage::disk("public")->exists($file)) {
-                return $carry + Storage::disk("public")->size($file);
-            }
-            return $carry;
-        }, 0);
+        $totalSize = collect($filePaths)
+            ->reduce(function ($carry, $file) {
+                // Check if the file exists in the storage
+                if (Storage::disk("public")->exists($file)) {
+                    return $carry + Storage::disk("public")->size($file);
+                }
+                return $carry;
+            }, 0);
 
         $mbs = $totalSize / (1024 * 1024);
 
