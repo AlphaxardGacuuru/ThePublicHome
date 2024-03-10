@@ -164,11 +164,12 @@ class FilePondController extends Controller
      * Handle Eulogy Upload */
     public function storeEulogy(Request $request, $id, $limit)
     {
+		return 0;
         $this->validate($request, [
             'filepond-eulogy' => 'required|file',
         ]);
 
-        return $eulogy = $request
+        $eulogy = $request
             ->file('filepond-eulogy')
             ->getRealPath();
 
