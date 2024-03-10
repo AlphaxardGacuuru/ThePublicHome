@@ -353,7 +353,7 @@ const DeathEdit = (props) => {
 
 							<FilePond
 								name="filepond-photos"
-								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
 								// imageCropAspectRatio="16:9"
 								acceptedFileTypes={["image/*"]}
 								allowMultiple={true}
@@ -376,7 +376,7 @@ const DeathEdit = (props) => {
 
 							<FilePond
 								name="filepond-videos"
-								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
 								// imageCropAspectRatio="16:9"
 								acceptedFileTypes={["video/*"]}
 								allowMultiple={true}
@@ -400,7 +400,7 @@ const DeathEdit = (props) => {
 
 							<FilePond
 								name="filepond-eulogy"
-								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
 								// imageCropAspectRatio="16:9"
 								acceptedFileTypes={["application/pdf"]}
 								// stylePanelAspectRatio="16:9"
@@ -430,7 +430,7 @@ const DeathEdit = (props) => {
 
 							<FilePond
 								name="filepond-recap"
-								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+								labelIdle='Drag & Drop your Video or <span class="filepond--label-action text-dark"> Browse </span>'
 								// imageCropAspectRatio="16:9"
 								acceptedFileTypes={["video/*"]}
 								allowMultiple={true}
