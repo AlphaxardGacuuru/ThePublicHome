@@ -172,9 +172,9 @@ class FilePondController extends Controller
             ->file('filepond-eulogy')
             ->getRealPath();
 
-        $pdf = new Pdf($eulogy);
+        return $pdf = new Pdf($eulogy);
 
-        return $pageCount = $pdf->getNumberOfPages();
+        $pageCount = $pdf->getNumberOfPages();
 
         if ($pageCount <= $limit) {
             $eulogy = $request
