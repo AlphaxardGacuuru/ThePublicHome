@@ -133,7 +133,7 @@ const LoginPopUp = (props) => {
 								onClick={() => onSocial("google")}
 							/>
 
-							{!location.pathname.match("/http/") && (
+							{!window.location.href.match(/https/) && (
 								<Btn
 									btnClass="mt-1 w-75"
 									btnText="login with email"

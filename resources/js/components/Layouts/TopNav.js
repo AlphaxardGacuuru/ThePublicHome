@@ -35,10 +35,10 @@ const TopNav = (props) => {
 	}, [])
 
 	const onNotification = () => {
-		// Axios.put(`/api/notifications/update`).then((res) => {
-		// Update notifications
-		// props.get("notifications", setNotifications)
-		// })
+		Axios.put(`/api/notifications/update`).then((res) => {
+			// Update notifications
+			props.get("notifications", setNotifications)
+		})
 	}
 
 	const onDeleteNotifications = (id) => {
