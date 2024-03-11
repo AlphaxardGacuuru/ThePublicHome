@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 import Btn from "@/components/Core/Btn"
+import MyLink from "@/components/Core/MyLink"
 
 const membership = (props) => {
+	// Get history for page location
+	const router = useHistory()
+
 	const [groupedMemberships, setGroupedMemberships] = useState([])
 	const [loading, setLoading] = useState("")
 
@@ -31,8 +36,13 @@ const membership = (props) => {
 				setLoading()
 				// Set Messages
 				props.setMessages([res.data.message])
-				// Update Auth
-				props.get("auth", props.setAuth, "auth")
+				// Redirect to Create page
+				Axios.get("api/auth").then((res2) => {
+					// Set Auth
+					props.setAuth(res2.data.data)
+					// Push to edit page
+					router.push(createUrl(res.data.data.membership.name))
+				})
 			})
 			.catch((err) => {
 				// Remove loader
@@ -40,6 +50,25 @@ const membership = (props) => {
 				// Set Errors
 				props.getErrors(err)
 			})
+	}
+
+	/*
+	 * Function for generating url
+	 */
+	const createUrl = (membership) => {
+		switch (membership) {
+			case "success_card":
+				return `/success-cards/create`
+				break
+
+			case "anniversary":
+				return `/anniversaries/create`
+				break
+
+			default:
+				return `/${membership}s/create`
+				break
+		}
 	}
 
 	return (
@@ -91,9 +120,9 @@ const membership = (props) => {
 														memberships[0].name
 													) &&
 													props.auth.membershipTier.match(membership.tier) ? (
-														<Btn
-															btnText="current"
-															btnClass="btn-sm px-4"
+														<MyLink
+															linkTo={createUrl(memberships[0].name)}
+															text="current"
 														/>
 													) : (
 														""
@@ -133,13 +162,15 @@ const membership = (props) => {
 										) : (
 											""
 										)}
-										<div>
-											Eulogy:{" "}
-											{membership.features.eulogy == 1000000
-												? "Unlimited"
-												: membership.features.eulogy}{" "}
-											pages
-										</div>
+										{membership.features.eulogy && (
+											<div>
+												Eulogy:{" "}
+												{membership.features.eulogy == 1000000
+													? "Unlimited"
+													: membership.features.eulogy}{" "}
+												pages
+											</div>
+										)}
 										<div>Price: ${membership.price}</div>
 									</div>
 								))}

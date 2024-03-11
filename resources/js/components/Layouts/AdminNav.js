@@ -15,10 +15,6 @@ const AdminMenu = (props) => {
 	const [bottomMenu, setBottomMenu] = useState()
 	const [avatarVisibility, setAvatarVisibility] = useState("")
 
-	useEffect(() => {
-		var isInAdminPage = location.pathname.match("/admin")
-	}, [])
-
 	const logout = () => {
 		Axios.post(`/logout`)
 			.then((res) => {

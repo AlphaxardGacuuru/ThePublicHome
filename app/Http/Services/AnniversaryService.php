@@ -5,6 +5,8 @@ namespace App\Http\Services;
 use App\Http\Resources\AnniversaryResource;
 use App\Models\Anniversary;
 use App\Models\UserMembership;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
 
 class AnniversaryService extends Service
@@ -34,6 +36,17 @@ class AnniversaryService extends Service
      */
     public function store($request)
     {
+        $membershipQuery = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->where("status", "pending");
+
+        // Check if User Has Membership
+        if ($membershipQuery->doesntExist()) {
+            throw ValidationException::withMessages([
+                'membership' => ['Membership Not Found.'],
+            ]);
+        }
+
         $anniversary = new Anniversary;
         $anniversary->user_id = $this->id;
         $anniversary->membership_id = $request->membershipId;
@@ -44,15 +57,16 @@ class AnniversaryService extends Service
         $anniversary->venue = $request->venue;
         $anniversary->anniversary_date = $request->anniversaryDate;
 
-        $saved = $anniversary->save();
+        // Try and save Death and update UserMembership
+        $saved = DB::transaction(function () use ($anniversary, $membershipQuery) {
+            $anniversary->save();
 
-        // Update Membership
-        $membership = UserMembership::where("user_id", $this->id)
-            ->where("membership_id", $request->membershipId)
-            ->where("status", "pending")
-            ->first();
-        $membership->status = "used";
-        $membership->save();
+            // Update Membership
+            $membership = $membershipQuery->first();
+            $membership->status = "used";
+
+            return $membership->save();
+        });
 
         $message = $anniversary->title . " announcement created";
 

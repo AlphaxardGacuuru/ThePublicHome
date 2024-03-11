@@ -3,8 +3,10 @@
 namespace App\Http\Services;
 
 use App\Http\Resources\WeddingResource;
-use App\Models\UserMembership;
 use App\Models\Wedding;
+use App\Models\UserMembership;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
 
 class WeddingService extends Service
@@ -34,6 +36,17 @@ class WeddingService extends Service
      */
     public function store($request)
     {
+        $membershipQuery = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->where("status", "pending");
+
+        // Check if User Has Membership
+        if ($membershipQuery->doesntExist()) {
+            throw ValidationException::withMessages([
+                'membership' => ['Membership Not Found.'],
+            ]);
+        }
+
         $wedding = new Wedding;
         $wedding->user_id = $this->id;
         $wedding->membership_id = $request->membershipId;
@@ -44,15 +57,16 @@ class WeddingService extends Service
         $wedding->venue = $request->venue;
         $wedding->wedding_date = $request->weddingDate;
 
-        $saved = $wedding->save();
+        // Try and save Death and update UserMembership
+        $saved = DB::transaction(function () use ($wedding, $membershipQuery) {
+            $wedding->save();
 
-        // Update Membership
-        $membership = UserMembership::where("user_id", $this->id)
-            ->where("membership_id", $request->membershipId)
-            ->where("status", "pending")
-            ->first();
-        $membership->status = "used";
-        $membership->save();
+            // Update Membership
+            $membership = $membershipQuery->first();
+            $membership->status = "used";
+
+            return $membership->save();
+        });
 
         $message = $wedding->title . " announcement created";
 

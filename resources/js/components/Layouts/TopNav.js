@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Link, useLocation, useHistory } from "react-router-dom"
+import { Link, useLocation, useHistory, withRouter } from "react-router-dom"
 
 import Img from "@/components/Core/Img"
 import MyLink from "@/components/Core/MyLink"
@@ -30,9 +30,16 @@ const TopNav = (props) => {
 	const [notifications, setNotifications] = useState([])
 
 	useEffect(() => {
+		var isInCreatePage = location.pathname.match("/create")
+
+		// Handle Redirects for Admin
+		if (isInCreatePage && !props.auth?.membershipName) {
+			setTimeout(() => router.push("/profile/membership"), 2000)
+		}
+
 		// Fetch Notifications
 		props.get("notifications", setNotifications)
-	}, [])
+	}, [props.location])
 
 	const onNotification = () => {
 		Axios.put(`/api/notifications/update`).then((res) => {
@@ -630,4 +637,4 @@ const TopNav = (props) => {
 	)
 }
 
-export default TopNav
+export default withRouter(TopNav)

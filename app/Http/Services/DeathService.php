@@ -5,6 +5,8 @@ namespace App\Http\Services;
 use App\Http\Resources\DeathResource;
 use App\Models\Death;
 use App\Models\UserMembership;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
 
 class DeathService extends Service
@@ -34,6 +36,17 @@ class DeathService extends Service
      */
     public function store($request)
     {
+        $membershipQuery = UserMembership::where("user_id", $this->id)
+            ->where("membership_id", $request->membershipId)
+            ->where("status", "pending");
+
+        // Check if User Has Membership
+        if ($membershipQuery->doesntExist()) {
+            throw ValidationException::withMessages([
+                'membership' => ['Membership Not Found.'],
+            ]);
+        }
+
         $death = new Death;
         $death->user_id = $this->id;
         $death->membership_id = $request->membershipId;
@@ -44,15 +57,16 @@ class DeathService extends Service
         $death->burial_date = $request->burialDate;
         $death->announcement = $request->announcement;
 
-        $saved = $death->save();
+        // Try and save Death and update UserMembership
+        $saved = DB::transaction(function () use ($death, $membershipQuery) {
+            $death->save();
 
-        // Update Membership
-        $membership = UserMembership::where("user_id", $this->id)
-            ->where("membership_id", $request->membershipId)
-            ->where("status", "pending")
-            ->first();
-        $membership->status = "used";
-        $membership->save();
+            // Update Membership
+            $membership = $membershipQuery->first();
+            $membership->status = "used";
+
+            return $membership->save();
+        });
 
         $message = $death->name . " announcement created";
 
