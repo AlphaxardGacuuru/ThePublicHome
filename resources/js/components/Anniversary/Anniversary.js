@@ -141,12 +141,6 @@ const Anniversary = (props) => {
 						<ul className="dropdown-menu dropdown-menu-right">
 							{/* <!-- Dropdown menu links --> */}
 							<a href="#">
-								<li className="dropdown-item">Download</li>
-							</a>
-							<a href="#">
-								<li className="dropdown-item">Mute</li>
-							</a>
-							<a href="#">
 								<li className="dropdown-item">Report Issue</li>
 							</a>
 						</ul>
