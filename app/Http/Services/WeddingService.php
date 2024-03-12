@@ -148,9 +148,11 @@ class WeddingService extends Service
         $wedding = Wedding::findOrFail($id);
 
         // Get old poster and delete it
-        $deleted = $oldPoster = substr($wedding->poster, 8);
+        $poster = substr($wedding->poster, 8);
 
-        Storage::disk("public")->delete($oldPoster);
+        if ($poster) {
+            Storage::disk("public")->delete($poster);
+        }
 
         // Delete Photos
         if ($wedding->photos) {

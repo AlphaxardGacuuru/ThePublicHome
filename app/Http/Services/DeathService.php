@@ -6,8 +6,8 @@ use App\Http\Resources\DeathResource;
 use App\Models\Death;
 use App\Models\UserMembership;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class DeathService extends Service
 {
@@ -154,7 +154,9 @@ class DeathService extends Service
         // Get old poster and delete it
         $poster = substr($death->poster, 8);
 
-        Storage::disk("public")->delete($poster);
+        if ($poster) {
+            Storage::disk("public")->delete($poster);
+        }
 
         // Delete Photos
         if ($death->photos) {
@@ -171,12 +173,14 @@ class DeathService extends Service
         }
 
         // Delete Eulogy
-        Storage::disk("public")->delete($death->eulogy);
+        if ($death->eulogy) {
+            Storage::disk("public")->delete($death->eulogy);
+        }
 
         // Delete Death
         $deleted = $death->delete();
 
-        $message = $death->title . " announcement deleted";
+        $message = $death->name . " announcement deleted";
 
         return [$deleted, $message];
     }

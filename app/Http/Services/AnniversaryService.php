@@ -6,8 +6,8 @@ use App\Http\Resources\AnniversaryResource;
 use App\Models\Anniversary;
 use App\Models\UserMembership;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class AnniversaryService extends Service
 {
@@ -148,9 +148,11 @@ class AnniversaryService extends Service
         $anniversary = Anniversary::findOrFail($id);
 
         // Get old poster and delete it
-        $deleted = $oldPoster = substr($anniversary->poster, 8);
+        $poster = substr($anniversary->poster, 8);
 
-        Storage::disk("public")->delete($oldPoster);
+        if ($poster) {
+            Storage::disk("public")->delete($poster);
+        }
 
         // Delete Photos
         if ($anniversary->photos) {

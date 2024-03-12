@@ -148,9 +148,11 @@ class CelebrationService extends Service
         $celebration = Celebration::findOrFail($id);
 
         // Get old poster and delete it
-        $deleted = $oldPoster = substr($celebration->poster, 8);
+        $poster = substr($celebration->poster, 8);
 
-        Storage::disk("public")->delete($oldPoster);
+        if ($poster) {
+            Storage::disk("public")->delete($poster);
+        }
 
         // Delete Photos
         if ($celebration->photos) {

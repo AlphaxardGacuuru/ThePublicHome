@@ -138,9 +138,11 @@ class SuccessCardService extends Service
         $successCard = SuccessCard::findOrFail($id);
 
         // Get old poster and delete it
-        $deleted = $oldPoster = substr($successCard->poster, 8);
+        $poster = substr($successCard->poster, 8);
 
-        Storage::disk("public")->delete($oldPoster);
+        if ($poster) {
+            Storage::disk("public")->delete($poster);
+        }
 
         // Delete Photos
         if ($successCard->photos) {

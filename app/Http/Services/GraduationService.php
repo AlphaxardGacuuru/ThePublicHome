@@ -148,9 +148,11 @@ class GraduationService extends Service
         $graduation = Graduation::findOrFail($id);
 
         // Get old poster and delete it
-        $deleted = $oldPoster = substr($graduation->poster, 8);
+        $poster = substr($graduation->poster, 8);
 
-        Storage::disk("public")->delete($oldPoster);
+        if ($poster) {
+            Storage::disk("public")->delete($poster);
+        }
 
         // Delete Photos
         if ($graduation->photos) {
