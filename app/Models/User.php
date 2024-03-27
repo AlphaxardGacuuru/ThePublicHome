@@ -92,10 +92,8 @@ class User extends Authenticatable
     public function membership()
     {
         return $this->userMemberships
-            ->map(fn($userMembership) => $userMembership
-                    ->where("status", "pending")
-                    ->first()
-                    ?->membership)
-                ->first();
+            ->where("status", "pending")
+            ->first()
+        ?->membership;
     }
 }

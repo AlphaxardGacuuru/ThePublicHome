@@ -192,7 +192,7 @@ const DeathCreate = (props) => {
 						<br />
 
 						<MyLink
-							linkTo="/deaths"
+							linkTo="/"
 							text="back to death announcements"
 						/>
 					</form>
