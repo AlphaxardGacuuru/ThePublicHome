@@ -91,9 +91,19 @@ const App = () => {
 	// Fetch data on page load
 	useEffect(() => {
 		get("auth", setAuth, "auth", false)
+		Axios.get(`/api/auth`)
+			.then((res) => {
+				setAuth(res.data.data)
+				setLocalStorage("auth", res.data.data)
+			})
+			.catch(() => {
+				setErrors([`Failed to fetch auth`])
+				// Remove phone from localStorage
+				localStorage.clear()
+				// Reload
+				window.location.reload()
+			})
 	}, [])
-
-	console.log("rendered")
 
 	/*
 	 *
