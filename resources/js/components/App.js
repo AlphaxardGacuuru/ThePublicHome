@@ -99,9 +99,6 @@ const App = () => {
 				setErrors([`Failed to fetch auth`])
 				// Remove phone from localStorage
 				localStorage.clear()
-				console.log("cleared")
-				// Reload
-				window.location.reload()
 			})
 	}, [])
 
