@@ -194,7 +194,8 @@ const edit = (props) => {
 								type="text"
 								name="title"
 								className="form-control text-secondary mb-2"
-								placeholder={celebration.title}
+								placeholder="Title"
+								defaultValue={celebration.title}
 								required={true}
 								onChange={(e) => setTitle(e.target.value)}
 							/>
@@ -203,7 +204,8 @@ const edit = (props) => {
 								type="text"
 								name="description"
 								className="form-control mb-2"
-								placeholder={celebration.announcement}
+								placeholder="Announcement"
+								defaultValue={celebration.announcement}
 								cols="30"
 								rows="5"
 								onChange={(e) => setAnnouncement(e.target.value)}
@@ -213,7 +215,8 @@ const edit = (props) => {
 								type="text"
 								name="venue"
 								className="form-control text-secondary mb-2"
-								placeholder={celebration.venue}
+								placeholder="Venue"
+								defaultValue={celebration.venue}
 								onChange={(e) => setVenue(e.target.value)}
 							/>
 
@@ -224,7 +227,6 @@ const edit = (props) => {
 								type="date"
 								name="name"
 								className="form-control text-secondary mb-2"
-								placeholder="Celebration Date"
 								defaultValue={celebration.celebrationDate}
 								onChange={(e) => setCelebrationDate(e.target.value)}
 							/>

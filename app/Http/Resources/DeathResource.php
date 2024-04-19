@@ -40,6 +40,7 @@ class DeathResource extends JsonResource
             "photos" => $this->photos,
             "videos" => $this->videos,
             "eulogy" => $this->eulogy,
+            "eulogyWords" => $this->eulogy_words,
             "recap" => $this->recap,
             "likes" => $this->likes,
             "comments" => $this->comments,
@@ -47,7 +48,8 @@ class DeathResource extends JsonResource
             "wordLimit" => $this->membership->features["announcement"],
             "photoLimit" => $this->membership->features["photos"],
             "videoLimit" => $this->membership->features["videos"],
-            "eulogyLimit" => $this->membership->features["eulogy"],
+            "eulogyLimit" => $this->membership->features["eulogy"][0],
+            "eulogyWordLimit" => $this->membership->features["eulogy"][1],
             "updatedAt" => $this->updated_at,
             "createdAt" => $this->created_at,
         ];

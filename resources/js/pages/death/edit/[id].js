@@ -49,6 +49,7 @@ const DeathEdit = (props) => {
 	const [sunset, setSunset] = useState("")
 	const [burialDate, setBurialDate] = useState("")
 	const [announcement, setAnnouncement] = useState("")
+	const [eulogyWords, setEulogyWords] = useState("")
 	const [eulogy, setEulogy] = useState("")
 	const [loadingBtn, setLoadingBtn] = useState()
 	const [loadingBtn2, setLoadingBtn2] = useState()
@@ -61,8 +62,19 @@ const DeathEdit = (props) => {
 
 		// Check if announcement limit is reached
 		if (announcement.length > death.wordLimit) {
+			setLoadingBtn(false)
+
 			return props.setErrors([
 				`Announcement cannot be greater than ${death.wordLimit} words`,
+			])
+		}
+
+		// Check if eulogy limit is reached
+		if (eulogyWords.length > death.eulogyWordLimit) {
+			setLoadingBtn(false)
+
+			return props.setErrors([
+				`Eulogy cannot be greater than ${death.eulogyWordLimit} words`,
 			])
 		}
 
@@ -76,6 +88,7 @@ const DeathEdit = (props) => {
 			sunset: sunset,
 			burialDate: burialDate,
 			announcement: announcement,
+			eulogyWords: eulogyWords,
 			_method: "PUT",
 		})
 			.then((res) => {
@@ -194,7 +207,8 @@ const DeathEdit = (props) => {
 								type="text"
 								name="name"
 								className="form-control text-secondary mb-2"
-								placeholder={death.name}
+								placeholder="Name"
+								defaultValue={death.name}
 								required={true}
 								onChange={(e) => setName(e.target.value)}
 							/>
@@ -237,11 +251,16 @@ const DeathEdit = (props) => {
 								onChange={(e) => setBurialDate(e.target.value)}
 							/>
 
+							<div className="ms-2 mb-2 d-flex justify-content-start">
+								<label htmlFor="">Announcement</label>
+							</div>
+
 							<textarea
 								type="text"
 								name="description"
 								className="form-control"
-								placeholder={death.announcement}
+								placeholder="Announcement"
+								defaultValue={death.announcement}
 								cols="30"
 								rows="5"
 								onChange={(e) => setAnnouncement(e.target.value)}
@@ -260,6 +279,38 @@ const DeathEdit = (props) => {
 								`}>
 									Word Count: {announcement.length} /{" "}
 									{death.wordLimit == 1000000 ? "Unlimited" : death.wordLimit}
+								</small>
+							</div>
+
+							<div className="ms-2 mb-2 d-flex justify-content-start">
+								<label htmlFor="">Eulogy</label>
+							</div>
+
+							<textarea
+								type="text"
+								name="eulogyWords"
+								className="form-control"
+								placeholder="Eulogy"
+								defaultValue={death.eulogyWords}
+								cols="30"
+								rows="10"
+								onChange={(e) => setEulogyWords(e.target.value)}></textarea>
+
+							<div className="d-flex justify-content-end py-2">
+								<small
+									className={`p-1
+									${
+										eulogyWords.length > death.eulogyWordLimit * 0.8
+											? eulogyWords.length <= death.eulogyWordLimit
+												? "bg-warning-subtle"
+												: "bg-danger-subtle"
+											: "bg-secondary-subtle"
+									}
+								`}>
+									Word Count: {eulogyWords.length} /{" "}
+									{death.eulogyWordLimit == 1000000
+										? "Unlimited"
+										: death.eulogyWordLimit}
 								</small>
 							</div>
 

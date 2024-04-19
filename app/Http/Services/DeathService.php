@@ -56,6 +56,7 @@ class DeathService extends Service
         $death->sunset = $request->sunset;
         $death->burial_date = $request->burialDate;
         $death->announcement = $request->announcement;
+        $death->eulogy_words = $request->eulogyWords;
 
         // Try and save Death and update UserMembership
         $saved = DB::transaction(function () use ($death, $membershipQuery) {
@@ -102,6 +103,10 @@ class DeathService extends Service
 
         if ($request->announcement) {
             $death->announcement = $request->announcement;
+        }
+
+        if ($request->eulogyWords) {
+            $death->eulogy_words = $request->eulogyWords;
         }
 
         if ($request->poster) {

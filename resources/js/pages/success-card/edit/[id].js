@@ -192,7 +192,8 @@ const edit = (props) => {
 								type="text"
 								name="title"
 								className="form-control text-secondary mb-2"
-								placeholder={successCard.title}
+								placeholder="Title"
+								defaultValue={successCard.title}
 								required={true}
 								onChange={(e) => setTitle(e.target.value)}
 							/>
@@ -201,7 +202,8 @@ const edit = (props) => {
 								type="text"
 								name="description"
 								className="form-control mb-2"
-								placeholder={successCard.announcement}
+								placeholder="Announcement"
+								defaultValue={successCard.announcement}
 								cols="30"
 								rows="5"
 								onChange={(e) => setAnnouncement(e.target.value)}

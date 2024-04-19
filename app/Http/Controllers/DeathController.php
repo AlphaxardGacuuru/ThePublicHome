@@ -77,6 +77,7 @@ class DeathController extends Controller
             "sunset" => "nullable|string",
             "burialDate" => "nullable|string",
             "announcement" => "nullable|string",
+            "eulogyWords" => "nullable|string",
 			"photo" => "nullable|string",
 			"video" => "nullable|string"
         ]);

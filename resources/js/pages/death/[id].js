@@ -193,6 +193,8 @@ const show = (props) => {
 								<hr />
 								<h6>{death.announcement}</h6>
 								<hr />
+								<h6>{death.eulogyWords}</h6>
+								<hr />
 								<h6 className="text-capitalize">Locale: {death.locale}</h6>
 								<h6>Sunrise: {death.sunriseFormated}</h6>
 								<h6>Sunset: {death.sunsetFormated}</h6>

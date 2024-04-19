@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('sunrise')->nullable();
             $table->string('sunset')->nullable();
             $table->string('burial_date')->nullable();
-            $table->string('announcement');
+            $table->longText('announcement');
+            $table->longText('eulogy_words')->nullable();
             $table->string('poster')->nullable();
             $table->jsonb('photos')->nullable();
             $table->jsonb('videos')->nullable();
