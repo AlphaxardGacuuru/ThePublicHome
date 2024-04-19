@@ -61,6 +61,15 @@ const create = (props) => {
 		// Show loader and disable button
 		setLoadingBtn(true)
 
+		// Check if announcement limit is reached
+		if (announcement.length > wordLimit) {
+			setLoadingBtn(false)
+
+			return props.setErrors([
+				`Announcement cannot be greater than ${wordLimit} words`,
+			])
+		}
+
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		Axios.post(`/api/success-cards`, {

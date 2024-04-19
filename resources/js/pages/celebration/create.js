@@ -61,6 +61,15 @@ const create = (props) => {
 		// Show loader and disable button
 		setLoadingBtn(true)
 
+		// Check if announcement limit is reached
+		if (announcement.length > wordLimit) {
+			setLoadingBtn(false)
+
+			return props.setErrors([
+				`Announcement cannot be greater than ${wordLimit} words`,
+			])
+		}
+
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		Axios.post(`/api/celebrations`, {
@@ -121,16 +130,6 @@ const create = (props) => {
 							onChange={(e) => setTitle(e.target.value)}
 						/>
 
-						<textarea
-							type="text"
-							name="description"
-							className="form-control mb-2"
-							placeholder="Write your celebration announcement"
-							cols="30"
-							rows="5"
-							onChange={(e) => setAnnouncement(e.target.value)}
-							required={true}></textarea>
-
 						<input
 							type="text"
 							name="name"
@@ -151,6 +150,16 @@ const create = (props) => {
 							required={true}
 							onChange={(e) => setCelebrationDate(e.target.value)}
 						/>
+
+						<textarea
+							type="text"
+							name="description"
+							className="form-control mb-2"
+							placeholder="Write your celebration announcement"
+							cols="30"
+							rows="5"
+							onChange={(e) => setAnnouncement(e.target.value)}
+							required={true}></textarea>
 
 						<div className="d-flex justify-content-end py-4">
 							<small

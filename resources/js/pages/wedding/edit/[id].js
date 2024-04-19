@@ -200,17 +200,6 @@ const edit = (props) => {
 								onChange={(e) => setTitle(e.target.value)}
 							/>
 
-							<textarea
-								type="text"
-								name="description"
-								className="form-control mb-2"
-								placeholder="Announcement"
-								defaultValue={wedding.announcement}
-								cols="30"
-								rows="5"
-								onChange={(e) => setAnnouncement(e.target.value)}
-								required={true}></textarea>
-
 							<input
 								type="text"
 								name="venue"
@@ -230,6 +219,17 @@ const edit = (props) => {
 								defaultValue={wedding.weddingDate}
 								onChange={(e) => setWeddingDate(e.target.value)}
 							/>
+
+							<textarea
+								type="text"
+								name="description"
+								className="form-control mb-2"
+								placeholder="Announcement"
+								defaultValue={wedding.announcement}
+								cols="30"
+								rows="5"
+								onChange={(e) => setAnnouncement(e.target.value)}
+								required={true}></textarea>
 
 							<div className="d-flex justify-content-end py-2">
 								<small
@@ -397,8 +397,7 @@ const edit = (props) => {
 									url: `/api/filepond`,
 									process: {
 										url: `/recaps/wedding/${id}`,
-										onload: () =>
-											props.get(`weddings/${id}`, setWedding),
+										onload: () => props.get(`weddings/${id}`, setWedding),
 										onerror: (err) =>
 											props.setErrors([JSON.parse(err).message]),
 									},

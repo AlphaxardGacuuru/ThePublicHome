@@ -64,6 +64,24 @@ const DeathCreate = (props) => {
 		// Show loader and disable button
 		setLoadingBtn(true)
 
+		// Check if announcement limit is reached
+		if (announcement.length > wordLimit) {
+			setLoadingBtn(false)
+
+			return props.setErrors([
+				`Announcement cannot be greater than ${wordLimit} words`,
+			])
+		}
+
+		// Check if eulogy limit is reached
+		if (eulogyWords.length > eulogyWordLimit) {
+			setLoadingBtn(false)
+
+			return props.setErrors([
+				`Eulogy cannot be greater than ${eulogyWordLimit} words`,
+			])
+		}
+
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		Axios.post(`/api/deaths`, {

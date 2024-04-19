@@ -25,7 +25,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('locale')->nullable();
             $table->string('title');
-            $table->string('announcement');
+            $table->longText('announcement');
             $table->string('venue')->nullable();
             $table->timestamp('graduation_date')->nullable();
             $table->string('poster')->nullable();
