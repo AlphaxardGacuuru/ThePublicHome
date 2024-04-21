@@ -3,7 +3,7 @@
 	"short_name": "The Public Home",
 	"start_url": ".",
 	"display": "standalone",
-	"theme_color": "#232323",
+	"theme_color": "#242525",
 	"background_color": "#FFF",
 	"orientation": "portrait-primary",
 	"description": "The Public Home",
