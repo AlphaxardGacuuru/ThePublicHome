@@ -169,7 +169,7 @@ const DeathEdit = (props) => {
 	return (
 		<div className="mb-5">
 			<div className="border rounded m-2 p-2">
-				<h2 className="text-center">Upload your Death Announcement</h2>
+				<h2 className="text-center">Edit your Death Announcement</h2>
 			</div>
 
 			<div className="row p-0">
@@ -422,29 +422,31 @@ const DeathEdit = (props) => {
 							/>
 						</div>
 
-						<div className="w-100 mb-4 mx-auto text-center">
-							<label className="mb-2">Upload Related Videos</label>
+						{death.videoLimit > 0 && (
+							<div className="w-100 mb-4 mx-auto text-center">
+								<label className="mb-2">Upload Related Videos</label>
 
-							<FilePond
-								name="filepond-videos"
-								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-								// imageCropAspectRatio="16:9"
-								acceptedFileTypes={["video/*"]}
-								allowMultiple={true}
-								allowRevert={false}
-								allowRemove={false}
-								maxTotalFileSize={`${death.videoLimit}MB`}
-								server={{
-									url: `/api/filepond`,
-									process: {
-										url: `/videos/death/${id}/${death.videoLimit}`,
-										onload: () => props.get(`deaths/${id}`, setDeath),
-										onerror: (err) =>
-											props.setErrors([JSON.parse(err).message]),
-									},
-								}}
-							/>
-						</div>
+								<FilePond
+									name="filepond-videos"
+									labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+									// imageCropAspectRatio="16:9"
+									acceptedFileTypes={["video/*"]}
+									allowMultiple={true}
+									allowRevert={false}
+									allowRemove={false}
+									maxTotalFileSize={`${death.videoLimit}MB`}
+									server={{
+										url: `/api/filepond`,
+										process: {
+											url: `/videos/death/${id}/${death.videoLimit}`,
+											onload: () => props.get(`deaths/${id}`, setDeath),
+											onerror: (err) =>
+												props.setErrors([JSON.parse(err).message]),
+										},
+									}}
+								/>
+							</div>
+						)}
 
 						<div className="w-100 mb-4 mx-auto text-center">
 							<label className="mb-2">Upload Eulogy</label>
@@ -546,6 +548,8 @@ const DeathEdit = (props) => {
 						{/* List Images End */}
 
 						{/* List Videos */}
+						{death.videoLimit > 0 && (						
+						<React.Fragment>
 						<h5>Videos</h5>
 						<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
 							{death.videos?.map((video, key) => (
@@ -573,6 +577,7 @@ const DeathEdit = (props) => {
 								</div>
 							))}
 						</div>
+						</React.Fragment>)}
 						{/* List Videos End */}
 
 						{/* Eulogy */}

@@ -156,7 +156,7 @@ const edit = (props) => {
 	return (
 		<div className="mb-5">
 			<div className="border rounded m-2 p-2">
-				<h2 className="text-center">Upload your Graduation Announcement</h2>
+				<h2 className="text-center">Edit your Graduation Announcement</h2>
 			</div>
 
 			<div className="row p-0">
@@ -360,29 +360,34 @@ const edit = (props) => {
 							/>
 						</div>
 
-						<div className="w-100 mb-4 mx-auto text-center">
-							<label className="mb-2">Upload Related Videos</label>
+						{graduation.videoLimit > 0 && (
+							<React.Fragment>
+								<div className="w-100 mb-4 mx-auto text-center">
+									<label className="mb-2">Upload Related Videos</label>
 
-							<FilePond
-								name="filepond-videos"
-								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-								// imageCropAspectRatio="16:9"
-								acceptedFileTypes={["video/*"]}
-								allowMultiple={true}
-								allowRevert={false}
-								allowRemove={false}
-								maxTotalFileSize={`${graduation.videoLimit}MB`}
-								server={{
-									url: `/api/filepond`,
-									process: {
-										url: `/videos/graduation/${id}/${graduation.videoLimit}`,
-										onload: () => props.get(`graduations/${id}`, setGraduation),
-										onerror: (err) =>
-											props.setErrors([JSON.parse(err).message]),
-									},
-								}}
-							/>
-						</div>
+									<FilePond
+										name="filepond-videos"
+										// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+										// imageCropAspectRatio="16:9"
+										acceptedFileTypes={["video/*"]}
+										allowMultiple={true}
+										allowRevert={false}
+										allowRemove={false}
+										maxTotalFileSize={`${graduation.videoLimit}MB`}
+										server={{
+											url: `/api/filepond`,
+											process: {
+												url: `/videos/graduation/${id}/${graduation.videoLimit}`,
+												onload: () =>
+													props.get(`graduations/${id}`, setGraduation),
+												onerror: (err) =>
+													props.setErrors([JSON.parse(err).message]),
+											},
+										}}
+									/>
+								</div>
+							</React.Fragment>
+						)}
 
 						<div className="w-100 mb-4 mx-auto text-center">
 							<label className="mb-2">Upload Recap</label>
@@ -400,8 +405,7 @@ const edit = (props) => {
 									url: `/api/filepond`,
 									process: {
 										url: `/recaps/graduation/${id}`,
-										onload: () =>
-											props.get(`graduations/${id}`, setGraduation),
+										onload: () => props.get(`graduations/${id}`, setGraduation),
 										onerror: (err) =>
 											props.setErrors([JSON.parse(err).message]),
 									},

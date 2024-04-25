@@ -227,25 +227,29 @@ const show = (props) => {
 								{/* List Images End */}
 
 								{/* List Videos */}
-								<h5>Videos</h5>
-								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
-									{anniversary.videos?.map((video, key) => (
-										<div
-											key={key}
-											className="shadow m-1 p-1">
-											<video
-												className="mx-2"
-												style={{ width: "25em", height: "auto" }}
-												controls>
-												<source
-													src={`/storage/${video}`}
-													// type="video/mp4"
-												/>
-												Your browser does not support the video tag.
-											</video>
+								{anniversary.videoLimit > 0 && (
+									<React.Fragment>
+										<h5>Videos</h5>
+										<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
+											{anniversary.videos?.map((video, key) => (
+												<div
+													key={key}
+													className="shadow m-1 p-1">
+													<video
+														className="mx-2"
+														style={{ width: "25em", height: "auto" }}
+														controls>
+														<source
+															src={`/storage/${video}`}
+															// type="video/mp4"
+														/>
+														Your browser does not support the video tag.
+													</video>
+												</div>
+											))}
 										</div>
-									))}
-								</div>
+									</React.Fragment>
+								)}
 								{/* List Videos End */}
 							</div>
 						</div>

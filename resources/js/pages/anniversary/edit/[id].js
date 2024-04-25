@@ -156,7 +156,7 @@ const edit = (props) => {
 	return (
 		<div className="mb-5">
 			<div className="border rounded m-2 p-2">
-				<h2 className="text-center">Upload your Anniversary Announcement</h2>
+				<h2 className="text-center">Edit your Anniversary Announcement</h2>
 			</div>
 
 			<div className="row p-0">
@@ -362,30 +362,34 @@ const edit = (props) => {
 							/>
 						</div>
 
-						<div className="w-100 mb-4 mx-auto text-center">
-							<label className="mb-2">Upload Related Videos</label>
+						{anniversary.videoLimit > 0 && (
+							<React.Fragment>
+								<div className="w-100 mb-4 mx-auto text-center">
+									<label className="mb-2">Upload Related Videos</label>
 
-							<FilePond
-								name="filepond-videos"
-								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-								// imageCropAspectRatio="16:9"
-								acceptedFileTypes={["video/*"]}
-								allowMultiple={true}
-								allowRevert={false}
-								allowRemove={false}
-								maxTotalFileSize={`${anniversary.videoLimit}MB`}
-								server={{
-									url: `/api/filepond`,
-									process: {
-										url: `/videos/anniversary/${id}/${anniversary.videoLimit}`,
-										onload: () =>
-											props.get(`anniversaries/${id}`, setAnniversary),
-										onerror: (err) =>
-											props.setErrors([JSON.parse(err).message]),
-									},
-								}}
-							/>
-						</div>
+									<FilePond
+										name="filepond-videos"
+										// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+										// imageCropAspectRatio="16:9"
+										acceptedFileTypes={["video/*"]}
+										allowMultiple={true}
+										allowRevert={false}
+										allowRemove={false}
+										maxTotalFileSize={`${anniversary.videoLimit}MB`}
+										server={{
+											url: `/api/filepond`,
+											process: {
+												url: `/videos/anniversary/${id}/${anniversary.videoLimit}`,
+												onload: () =>
+													props.get(`anniversaries/${id}`, setAnniversary),
+												onerror: (err) =>
+													props.setErrors([JSON.parse(err).message]),
+											},
+										}}
+									/>
+								</div>
+							</React.Fragment>
+						)}
 
 						<div className="w-100 mb-4 mx-auto text-center">
 							<label className="mb-2">Upload Recap</label>
@@ -458,33 +462,37 @@ const edit = (props) => {
 						{/* List Images End */}
 
 						{/* List Videos */}
-						<h5>Videos</h5>
-						<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
-							{anniversary.videos?.map((video, key) => (
-								<div
-									key={key}
-									className="shadow m-1 p-1">
-									<div className="text-end">
-										<span
-											className="text-muted p-1"
-											style={{ cursor: "pointer" }}
-											onClick={() => onDeleteVideos(video)}>
-											<CloseSVG />
-										</span>
-									</div>
-									<video
-										className="mx-2"
-										style={{ width: "20em", height: "auto" }}
-										controls>
-										<source
-											src={`/storage/${video}`}
-											// type="video/mp4"
-										/>
-										Your browser does not support the video tag.
-									</video>
+						{anniversary.videoLimit > 0 && (
+							<React.Fragment>
+								<h5>Videos</h5>
+								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
+									{anniversary.videos?.map((video, key) => (
+										<div
+											key={key}
+											className="shadow m-1 p-1">
+											<div className="text-end">
+												<span
+													className="text-muted p-1"
+													style={{ cursor: "pointer" }}
+													onClick={() => onDeleteVideos(video)}>
+													<CloseSVG />
+												</span>
+											</div>
+											<video
+												className="mx-2"
+												style={{ width: "20em", height: "auto" }}
+												controls>
+												<source
+													src={`/storage/${video}`}
+													// type="video/mp4"
+												/>
+												Your browser does not support the video tag.
+											</video>
+										</div>
+									))}
 								</div>
-							))}
-						</div>
+							</React.Fragment>
+						)}
 						{/* List Videos End */}
 					</div>
 				</div>
