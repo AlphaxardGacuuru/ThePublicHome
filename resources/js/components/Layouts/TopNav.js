@@ -457,7 +457,7 @@ const TopNav = (props) => {
 											activeStrict2("/") || active2("/deaths")
 										}`}
 										onClick={() => setMenu("")}>
-										<span>
+										<span className="fs-5">
 											<DeathSVG />
 										</span>
 										Deaths
@@ -468,7 +468,7 @@ const TopNav = (props) => {
 										to="/weddings"
 										className={`nav-link ${active2("/weddings")}`}
 										onClick={() => setMenu("")}>
-										<span>
+										<span className="fs-5">
 											<WeddingSVG />
 										</span>
 										Weddings
@@ -479,7 +479,7 @@ const TopNav = (props) => {
 										to="/graduations"
 										className={`nav-link ${active2("/graduations")}`}
 										onClick={() => setMenu("")}>
-										<span>
+										<span className="fs-5">
 											<GraduationSVG />
 										</span>
 										Graduations
@@ -490,7 +490,7 @@ const TopNav = (props) => {
 										to="/success-cards"
 										className={`nav-link ${active2("/success-cards")}`}
 										onClick={() => setMenu("")}>
-										<span>
+										<span className="fs-5">
 											<SuccessCardSVG />
 										</span>
 										Success Cards
@@ -501,7 +501,7 @@ const TopNav = (props) => {
 										to="/anniversaries"
 										className={`nav-link ${active2("/anniversaries")}`}
 										onClick={() => setMenu("")}>
-										<span>
+										<span className="fs-5">
 											<AnniversarySVG />
 										</span>
 										Anniversaries
@@ -512,7 +512,7 @@ const TopNav = (props) => {
 										to="/celebrations"
 										className={`nav-link ${active2("/celebrations")}`}
 										onClick={() => setMenu("")}>
-										<span>
+										<span className="fs-5">
 											<CelebrationSVG />
 										</span>
 										Celebrations
@@ -523,7 +523,7 @@ const TopNav = (props) => {
 										to="/recaps"
 										className={`nav-link ${active2("/recaps")}`}
 										onClick={() => setMenu("")}>
-										<span>
+										<span className="fs-5">
 											<RecapSVG />
 										</span>
 										Recaps
