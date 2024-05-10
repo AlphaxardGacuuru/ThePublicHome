@@ -13,7 +13,7 @@ class AnniversaryLikeService extends Service
      */
     public function store($request)
     {
-        $getLike = AnniversaryLike::where("anniversary_id", $request->anniversaryId)
+        $getLike = AnniversaryLike::where("anniversary_id", $request->id)
             ->where("user_id", $this->id);
 
         $hasLiked = $getLike->exists();
@@ -28,7 +28,7 @@ class AnniversaryLikeService extends Service
                 $getLike->delete();
 
                 // Decrement Likes
-                Anniversary::find($request->anniversaryId)
+                Anniversary::find($request->id)
                     ->decrement("likes");
             });
 
@@ -38,13 +38,13 @@ class AnniversaryLikeService extends Service
         } else {
             $like = new AnniversaryLike;
             $like->user_id = $this->id;
-            $like->anniversary_id = $request->anniversaryId;
+            $like->anniversary_id = $request->id;
 
             DB::transaction(function () use ($like, $request) {
                 $like->save();
 
                 // Increment Likes
-                Anniversary::find($request->anniversaryId)
+                Anniversary::find($request->id)
                     ->increment("likes");
             });
 

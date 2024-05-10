@@ -13,7 +13,7 @@ class WeddingLikeService extends Service
      */
     public function store($request)
     {
-        $getLike = WeddingLike::where("wedding_id", $request->weddingId)
+        $getLike = WeddingLike::where("wedding_id", $request->id)
             ->where("user_id", $this->id);
 
         $hasLiked = $getLike->exists();
@@ -28,7 +28,7 @@ class WeddingLikeService extends Service
                 $getLike->delete();
 
                 // Decrement Likes
-                Wedding::find($request->weddingId)
+                Wedding::find($request->id)
                     ->decrement("likes");
             });
 
@@ -38,13 +38,13 @@ class WeddingLikeService extends Service
         } else {
             $like = new WeddingLike;
             $like->user_id = $this->id;
-            $like->wedding_id = $request->weddingId;
+            $like->wedding_id = $request->id;
 
             DB::transaction(function () use ($like, $request) {
                 $like->save();
 
                 // Increment Likes
-                Wedding::find($request->weddingId)
+                Wedding::find($request->id)
                     ->increment("likes");
             });
 

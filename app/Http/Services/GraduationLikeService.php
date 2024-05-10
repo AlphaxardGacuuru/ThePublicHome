@@ -13,7 +13,7 @@ class GraduationLikeService extends Service
      */
     public function store($request)
     {
-        $getLike = GraduationLike::where("graduation_id", $request->graduationId)
+        $getLike = GraduationLike::where("graduation_id", $request->id)
             ->where("user_id", $this->id);
 
         $hasLiked = $getLike->exists();
@@ -28,7 +28,7 @@ class GraduationLikeService extends Service
                 $getLike->delete();
 
                 // Decrement Likes
-                Graduation::find($request->graduationId)
+                Graduation::find($request->id)
                     ->decrement("likes");
             });
 
@@ -38,13 +38,13 @@ class GraduationLikeService extends Service
         } else {
             $like = new GraduationLike;
             $like->user_id = $this->id;
-            $like->graduation_id = $request->graduationId;
+            $like->graduation_id = $request->id;
 
             DB::transaction(function () use ($like, $request) {
                 $like->save();
 
                 // Increment Likes
-                Graduation::find($request->graduationId)
+                Graduation::find($request->id)
                     ->increment("likes");
             });
 

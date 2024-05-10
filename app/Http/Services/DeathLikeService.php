@@ -13,7 +13,7 @@ class DeathLikeService extends Service
      */
     public function store($request)
     {
-        $getLike = DeathLike::where("death_id", $request->deathId)
+        $getLike = DeathLike::where("death_id", $request->id)
             ->where("user_id", $this->id);
 
         $hasLiked = $getLike->exists();
@@ -28,7 +28,7 @@ class DeathLikeService extends Service
                 $getLike->delete();
 
                 // Decrement Likes
-                Death::find($request->deathId)
+                Death::find($request->id)
                     ->decrement("likes");
             });
 
@@ -38,13 +38,13 @@ class DeathLikeService extends Service
         } else {
             $like = new DeathLike;
             $like->user_id = $this->id;
-            $like->death_id = $request->deathId;
+            $like->death_id = $request->id;
 
             DB::transaction(function () use ($like, $request) {
                 $like->save();
 
                 // Increment Likes
-                Death::find($request->deathId)
+                Death::find($request->id)
                     ->increment("likes");
             });
 

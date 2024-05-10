@@ -13,7 +13,7 @@ class CelebrationLikeService extends Service
      */
     public function store($request)
     {
-        $getLike = CelebrationLike::where("celebration_id", $request->celebrationId)
+        $getLike = CelebrationLike::where("celebration_id", $request->id)
             ->where("user_id", $this->id);
 
         $hasLiked = $getLike->exists();
@@ -28,7 +28,7 @@ class CelebrationLikeService extends Service
                 $getLike->delete();
 
                 // Decrement Likes
-                Celebration::find($request->celebrationId)
+                Celebration::find($request->id)
                     ->decrement("likes");
             });
 
@@ -38,13 +38,13 @@ class CelebrationLikeService extends Service
         } else {
             $like = new CelebrationLike;
             $like->user_id = $this->id;
-            $like->celebration_id = $request->celebrationId;
+            $like->celebration_id = $request->id;
 
             DB::transaction(function () use ($like, $request) {
                 $like->save();
 
                 // Increment Likes
-                Celebration::find($request->celebrationId)
+                Celebration::find($request->id)
                     ->increment("likes");
             });
 

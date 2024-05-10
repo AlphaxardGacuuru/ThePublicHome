@@ -32,6 +32,10 @@ class AnniversaryLikeController extends Controller
      */
     public function store(Request $request)
     {
+		$this->validate($request, [
+			"id" => "integer|required"
+		]);
+
         [$saved, $message, $like] = $this->service->store($request);
 
         AnniversaryLikedEvent::dispatchIf(

@@ -149,11 +149,11 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/"
-												className={`nav-link mx-4 ${
+												className={`mx-4 ${
 													activeStrict("/") || active("/deaths")
 												}`}
 												onClick={() => setMenu("")}>
-												<span>
+												<span className="me-2">
 													<DeathSVG />
 												</span>
 												Deaths
@@ -162,9 +162,9 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/weddings"
-												className={`nav-link mx-4 ${active("/weddings")}`}
+												className={`mx-4 ${active("/weddings")}`}
 												onClick={() => setMenu("")}>
-												<span>
+												<span className="me-2">
 													<WeddingSVG />
 												</span>
 												Weddings
@@ -173,9 +173,9 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/graduations"
-												className={`nav-link mx-4 ${active("/graduations")}`}
+												className={`mx-4 ${active("/graduations")}`}
 												onClick={() => setMenu("")}>
-												<span>
+												<span className="me-2">
 													<GraduationSVG />
 												</span>
 												Graduations
@@ -184,9 +184,9 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/success-cards"
-												className={`nav-link mx-4 ${active("/success-cards")}`}
+												className={`mx-4 ${active("/success-cards")}`}
 												onClick={() => setMenu("")}>
-												<span>
+												<span className="me-2">
 													<SuccessCardSVG />
 												</span>
 												Success Cards
@@ -195,9 +195,9 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/anniversaries"
-												className={`nav-link mx-4 ${active("/anniversaries")}`}
+												className={`mx-4 ${active("/anniversaries")}`}
 												onClick={() => setMenu("")}>
-												<span>
+												<span className="me-2">
 													<AnniversarySVG />
 												</span>
 												Anniversaries
@@ -206,9 +206,9 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/celebrations"
-												className={`nav-link mx-4 ${active("/celebrations")}`}
+												className={`mx-4 ${active("/celebrations")}`}
 												onClick={() => setMenu("")}>
-												<span>
+												<span className="me-2">
 													<CelebrationSVG />
 												</span>
 												Celebrations
@@ -217,9 +217,9 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/recaps"
-												className={`nav-link mx-4 ${active("/recaps")}`}
+												className={`mx-4 ${active("/recaps")}`}
 												onClick={() => setMenu("")}>
-												<span>
+												<span className="me-2">
 													<RecapSVG />
 												</span>
 												Recaps
@@ -450,7 +450,7 @@ const TopNav = (props) => {
 						data-wow-delay="1s">
 						<nav>
 							<ul>
-								<li className="nav-item">
+								<li className="nav-items">
 									<Link
 										to="/"
 										className={`nav-link ${
@@ -463,7 +463,7 @@ const TopNav = (props) => {
 										Deaths
 									</Link>
 								</li>
-								<li className="nav-item">
+								<li className="nav-items">
 									<Link
 										to="/weddings"
 										className={`nav-link ${active2("/weddings")}`}
@@ -474,7 +474,7 @@ const TopNav = (props) => {
 										Weddings
 									</Link>
 								</li>
-								<li className="nav-item">
+								<li className="nav-items">
 									<Link
 										to="/graduations"
 										className={`nav-link ${active2("/graduations")}`}
@@ -485,7 +485,7 @@ const TopNav = (props) => {
 										Graduations
 									</Link>
 								</li>
-								<li className="nav-item">
+								<li className="nav-items">
 									<Link
 										to="/success-cards"
 										className={`nav-link ${active2("/success-cards")}`}
@@ -496,7 +496,7 @@ const TopNav = (props) => {
 										Success Cards
 									</Link>
 								</li>
-								<li className="nav-item">
+								<li className="nav-items">
 									<Link
 										to="/anniversaries"
 										className={`nav-link ${active2("/anniversaries")}`}
@@ -507,7 +507,7 @@ const TopNav = (props) => {
 										Anniversaries
 									</Link>
 								</li>
-								<li className="nav-item">
+								<li className="nav-items">
 									<Link
 										to="/celebrations"
 										className={`nav-link ${active2("/celebrations")}`}
@@ -518,7 +518,7 @@ const TopNav = (props) => {
 										Celebrations
 									</Link>
 								</li>
-								<li className="nav-item">
+								<li className="nav-items">
 									<Link
 										to="/recaps"
 										className={`nav-link ${active2("/recaps")}`}
