@@ -191,8 +191,10 @@ const show = (props) => {
 								{/* User info End */}
 								<h2>{death.name}</h2>
 								<hr />
+								<h5>Announcement</h5>
 								<h6>{death.announcement}</h6>
 								<hr />
+								<h5>Eulogy</h5>
 								<h6>{death.eulogyWords}</h6>
 								<hr />
 								<h6 className="text-capitalize">Locale: {death.locale}</h6>

@@ -206,27 +206,6 @@ p {
 	}
 }
 
-/* .mainMenu .nav-link::after {
-	content: "";
-	top: 0;
-	width: 30px;
-	height: 1px;
-	background-color: rgb(186, 173, 123);
-	left: 50%;
-	-webkit-transform: translateX(-50%);
-	transform: translateX(-50%);
-	position: absolute;
-	z-index: 5;
-	-webkit-transition-duration: 500ms;
-	transition-duration: 500ms;
-}
-
-.mainMenu .nav-link:hover::after,
-.mainMenu .nav-link:focus::after {
-	width: 70px;
-	background-color: rgb(186, 173, 123);
-} */
-
 .nav-link span {
 	float: left;
 	padding-right: 20px;
@@ -543,10 +522,10 @@ p {
 	border: none;
 	outline: none;
 	cursor: pointer;
-	background-color: #FFFFFF;
+	background-color: rgb(186, 173, 123);
 	border-radius: 50%;
 	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
-	color: #232323;
+	color: #FFFFFF;
 	font-size: 30px;
 	height: 70px;
 	text-align: center;
@@ -555,7 +534,7 @@ p {
 }
 
 #scrollUpBtn:hover {
-	background-color: rgba(255, 255, 255, 0.3);
+	opacity: 0.8;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -1162,6 +1141,7 @@ div.hidden-scroll span {
 	/* position: relative; */
 	margin: 0;
 	padding: 0;
+	max-width: 24em;
 }
 
 .death-poster {

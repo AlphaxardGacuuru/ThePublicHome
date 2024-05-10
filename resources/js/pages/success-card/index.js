@@ -13,7 +13,7 @@ const index = (props) => {
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
-		props.get("success-cards", props.setSuccessCards)
+		props.get("success-cards", props.setSuccessCards, "success-cards")
 	}, [])
 
 	const onSubmit = (e) => {

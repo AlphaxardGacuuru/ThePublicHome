@@ -90,6 +90,12 @@ const App = () => {
 
 	// Fetch data on page load
 	useEffect(() => {
+		get("deaths", setDeaths, "deaths")
+		get("anniversaries", setAnniversaries, "anniversaries")
+		get("celebrations", setCelebrations, "celebrations")
+		get("graduations", setGraduations, "graduations")
+		get("success-cards", setSuccessCards, "success-cards")
+		get("weddings", setWeddings, "weddings")
 		get("auth", setAuth, "auth", false)
 	}, [])
 

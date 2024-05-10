@@ -13,7 +13,7 @@ const index = (props) => {
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
-		props.get("anniversaries", props.setAnniversaries)
+		props.get("anniversaries", props.setAnniversaries, "anniversaries")
 	}, [])
 
 	const onSubmit = (e) => {
@@ -146,8 +146,12 @@ const index = (props) => {
 
 						{/* Real Anniversary Announcement items */}
 						{props.anniversaries
-							.filter((anniversary) => anniversary.title.toLowerCase().match(query))
-							.filter((anniversary) => (locale ? anniversary.locale == locale : true))
+							.filter((anniversary) =>
+								anniversary.title.toLowerCase().match(query)
+							)
+							.filter((anniversary) =>
+								locale ? anniversary.locale == locale : true
+							)
 							.filter((anniversary) => (tier ? anniversary.tier == tier : true))
 							.map((anniversary, key) => (
 								<Anniversary

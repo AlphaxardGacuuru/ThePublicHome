@@ -13,7 +13,7 @@ const index = (props) => {
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
-		props.get("graduations", props.setGraduations)
+		props.get("graduations", props.setGraduations, "graduations")
 	}, [])
 
 	const onSubmit = (e) => {

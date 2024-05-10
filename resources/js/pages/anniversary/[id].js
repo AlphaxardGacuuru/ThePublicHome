@@ -191,6 +191,7 @@ const show = (props) => {
 								{/* User info End */}
 								<h2>{anniversary.title}</h2>
 								<hr />
+								<h5>Announcement</h5>
 								<h6>{anniversary.announcement}</h6>
 								<hr />
 								<h6 className="text-start">

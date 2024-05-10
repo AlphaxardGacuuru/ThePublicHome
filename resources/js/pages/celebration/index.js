@@ -13,7 +13,7 @@ const index = (props) => {
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
-		props.get("celebrations", props.setCelebrations)
+		props.get("celebrations", props.setCelebrations, "celebrations")
 	}, [])
 
 	const onSubmit = (e) => {

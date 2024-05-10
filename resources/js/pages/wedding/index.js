@@ -13,7 +13,7 @@ const index = (props) => {
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
-		props.get("weddings", props.setWeddings)
+		props.get("weddings", props.setWeddings, "weddings")
 	}, [])
 
 	const onSubmit = (e) => {

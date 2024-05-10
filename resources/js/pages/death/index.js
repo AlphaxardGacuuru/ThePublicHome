@@ -13,7 +13,7 @@ const index = (props) => {
 	const [loader, setLoader] = useState()
 
 	useEffect(() => {
-		props.get("deaths", props.setDeaths)
+		props.get("deaths", props.setDeaths, "deaths")
 	}, [])
 
 	const onSubmit = (e) => {
