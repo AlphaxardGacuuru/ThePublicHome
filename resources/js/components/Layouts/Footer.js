@@ -46,7 +46,8 @@ const Footer = () => {
 					<h1 className="text-white">The Public Home</h1>
 					<p className="text-white">
 						The Public Home is an online funeral and burial announcement
-						platform that seeks to provide more tailored death announcements.
+						platform that seeks to provide more tailored death, anniversary,
+						celebration, success card and wedding announcements.
 					</p>
 				</div>
 				<div className="col-sm-1"></div>

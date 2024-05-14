@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 
 import Media from "@/components/Core/Media"
@@ -39,28 +39,84 @@ const ListingPage = (props) => {
 	}
 
 	const [model, setModel] = useState(getModel(props.model))
-	console.log(getModel(props.model))
 
-	const [query, setQuery] = useState("")
+	const [name, setName] = useState("")
 	const [locale, setLocale] = useState("")
 	const [tier, setTier] = useState("")
 	const [loader, setLoader] = useState()
+	const [page, setPage] = useState(5)
+	// Set Ref to reference the Intersection Observer
+	const observerRef = useRef(null)
+
+	/*
+	 * Fetch Models on load and on every search
+	 */
+	useEffect(() => {
+		props.getPaginated(
+			`${formatedModel()}s?
+			name=${name}&
+			locale=${locale}&
+			tier=${tier}`,
+			setModel,
+			`${formatedModel()}s`
+		)
+	}, [name, locale, tier])
+
+	/*
+	 * Fetch Models when nth element is in view
+	 */
+	const fetchModel = () => {
+		Axios.get(
+			`${model.links.next}&
+						name=${name}&
+						locale=${locale}&
+						tier=${tier}`
+		)
+			.then((res) => {
+				setModel({
+					data: [...model.data, ...res.data.data],
+					links: res.data.links,
+					meta: res.data.meta,
+				})
+			})
+			.catch((err) => {
+				// Set Errors
+				props.setErrors([`Failed to fetch ${formatedModel()}s`])
+			})
+	}
+
+	/*
+	 * Intersection Observer API Callback function */
+	let callback = (entries, observer) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				// Disconnect Previous Intersection Observer
+				observerRef.current.disconnect()
+				// Increment page
+				setPage(page + 5)
+
+				requestIdleCallback(fetchModel)
+			}
+		})
+	}
 
 	useEffect(() => {
-		props.get(
-			`${
-				props.model == "anniversary"
-					? props.model.replace("y", "ie")
-					: props.model
-			}s`,
-			setModel,
-			`${
-				props.model == "anniversary"
-					? props.model.replace("y", "ie")
-					: props.model
-			}s`
-		)
-	}, [])
+		/*
+		 * Intersection Observer API
+		 * Fetch on every change of the state page
+		 */
+		observerRef.current = new IntersectionObserver(callback, {
+			root: null,
+			rootMargin: "0px",
+			threshold: 1.0,
+		})
+
+		const mediaItem = document.getElementById(`media${page}`)
+
+		if (mediaItem) {
+			observerRef.current.observe(mediaItem)
+		}
+	}, [page])
 
 	const activeLocale = (current) => {
 		if (locale == current) {
@@ -74,27 +130,29 @@ const ListingPage = (props) => {
 		}
 	}
 
+	const formatedModel = () => {
+		return props.model == "anniversary"
+			? props.model.replace("y", "ie")
+			: props.model
+	}
+
 	const dummyArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 	return (
 		<div className="row p-0">
 			<div className="col-sm-1"></div>
 			<div className="col-sm-10 p-0">
-				{/* Chat button */}
-
+				{/* Create Link */}
 				<Link
 					to={
 						props.auth?.membershipName == props.model
-							? `/${
-									props.model == "anniversary"
-										? props.model.replace("y", "ie")
-										: props.model
-							  }s/create`
+							? `/${formatedModel()}s/create`
 							: "/profile/membership"
 					}
 					id="chatFloatBtn">
 					<PlusSVG />
 				</Link>
+				{/* Create Link End */}
 
 				<center>
 					<h1>{props.title}</h1>
@@ -106,7 +164,7 @@ const ListingPage = (props) => {
 								className="form-control rounded-0"
 								placeholder={`Search ${props.title} by Name`}
 								required={true}
-								onChange={(e) => setQuery(e.target.value)}
+								onChange={(e) => setName(e.target.value)}
 							/>
 							<button
 								id="button-addon2"
@@ -187,23 +245,16 @@ const ListingPage = (props) => {
 							))}
 
 						{/* Real Model Announcement items */}
-						{model
-							.filter((model) =>
-								model.name
-									? model.name.toLowerCase().match(query)
-									: model.title.toLowerCase().match(query)
-							)
-							.filter((model) => (locale ? model.locale == locale : true))
-							.filter((model) => (tier ? model.tier == tier : true))
-							.map((model, key) => (
-								<Media
-									{...props}
-									key={key}
-									model={model}
-									setModel={setModel}
-									modelToGet={props.model}
-								/>
-							))}
+						{model.data?.map((model, key) => (
+							<Media
+								{...props}
+								key={key}
+								index={key}
+								model={model}
+								setModel={setModel}
+								modelToGet={props.model}
+							/>
+						))}
 					</div>
 					{/* Model Announcements End */}
 				</center>

@@ -12,13 +12,19 @@ use Illuminate\Support\Facades\Storage;
 class GraduationService extends Service
 {
     /*
-     * Get All Graduation s
+     * Get All Graduations
      */
-    public function index()
+    public function index($request)
     {
-        $getGraduations = Graduation::all();
+        $graduationsQuery = new Graduation;
 
-        return GraduationResource::collection($getGraduations);
+        $graduationsQuery = $this->search($graduationsQuery, $request);
+
+        $graduations = $graduationsQuery
+            ->orderBy("id", "DESC")
+            ->paginate(20);
+
+        return GraduationResource::collection($graduations);
     }
 
     /*
@@ -57,7 +63,7 @@ class GraduationService extends Service
         $graduation->venue = $request->venue;
         $graduation->graduation_date = $request->graduationDate;
 
-        // Try and save Death and update UserMembership
+        // Try and save Graduation and update UserMembership
         $saved = DB::transaction(function () use ($graduation, $membershipQuery) {
             $graduation->save();
 
@@ -182,5 +188,31 @@ class GraduationService extends Service
         $getGraduations = Graduation::where("user_id", $id)->get();
 
         return GraduationResource::collection($getGraduations);
+    }
+
+    /*
+     * Handle Search
+     */
+    public function search($query, $request)
+    {
+        if ($request->filled("name")) {
+            $query = $query
+                ->where("name", "LIKE", "%" . $request->input("name") . "%");
+        }
+
+        if ($request->filled("locale")) {
+            $query = $query->where("locale", $request->input("locale"));
+        }
+
+        $tier = $request->input("tier");
+
+        if ($request->filled("tier")) {
+            $query = $query
+                ->whereHas("membership", function ($query) use ($tier) {
+                    $query->where("tier", $tier);
+                });
+        }
+
+        return $query;
     }
 }

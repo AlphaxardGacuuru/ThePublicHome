@@ -12,13 +12,19 @@ use Illuminate\Support\Facades\Storage;
 class SuccessCardService extends Service
 {
     /*
-     * Get All SuccessCard s
+     * Get All Success Cards
      */
-    public function index()
+    public function index($request)
     {
-        $getSuccessCards = SuccessCard::all();
+        $successCardsQuery = new SuccessCard;
 
-        return SuccessCardResource::collection($getSuccessCards);
+        $successCardsQuery = $this->search($successCardsQuery, $request);
+
+        $successCards = $successCardsQuery
+            ->orderBy("id", "DESC")
+            ->paginate(20);
+
+        return SuccessCardResource::collection($successCards);
     }
 
     /*
@@ -55,7 +61,7 @@ class SuccessCardService extends Service
         $successCard->poster = $request->poster;
         $successCard->announcement = $request->announcement;
 
-        // Try and save Death and update UserMembership
+        // Try and save Success Card and update UserMembership
         $saved = DB::transaction(function () use ($successCard, $membershipQuery) {
             $successCard->save();
 
@@ -172,5 +178,31 @@ class SuccessCardService extends Service
         $getSuccessCards = SuccessCard::where("user_id", $id)->get();
 
         return SuccessCardResource::collection($getSuccessCards);
+    }
+
+    /*
+     * Handle Search
+     */
+    public function search($query, $request)
+    {
+        if ($request->filled("name")) {
+            $query = $query
+                ->where("name", "LIKE", "%" . $request->input("name") . "%");
+        }
+
+        if ($request->filled("locale")) {
+            $query = $query->where("locale", $request->input("locale"));
+        }
+
+        $tier = $request->input("tier");
+
+        if ($request->filled("tier")) {
+            $query = $query
+                ->whereHas("membership", function ($query) use ($tier) {
+                    $query->where("tier", $tier);
+                });
+        }
+
+        return $query;
     }
 }

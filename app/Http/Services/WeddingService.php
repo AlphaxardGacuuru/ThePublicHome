@@ -12,13 +12,19 @@ use Illuminate\Support\Facades\Storage;
 class WeddingService extends Service
 {
     /*
-     * Get All Wedding s
+     * Get All Weddings
      */
-    public function index()
+    public function index($request)
     {
-        $getWeddings = Wedding::all();
+        $weddingsQuery = new Wedding;
 
-        return WeddingResource::collection($getWeddings);
+        $weddingsQuery = $this->search($weddingsQuery, $request);
+
+        $weddings = $weddingsQuery
+            ->orderBy("id", "DESC")
+            ->paginate(20);
+
+        return WeddingResource::collection($weddings);
     }
 
     /*
@@ -57,7 +63,7 @@ class WeddingService extends Service
         $wedding->venue = $request->venue;
         $wedding->wedding_date = $request->weddingDate;
 
-        // Try and save Death and update UserMembership
+        // Try and save Wedding and update UserMembership
         $saved = DB::transaction(function () use ($wedding, $membershipQuery) {
             $wedding->save();
 
@@ -182,5 +188,31 @@ class WeddingService extends Service
         $getWeddings = Wedding::where("user_id", $id)->get();
 
         return WeddingResource::collection($getWeddings);
+    }
+
+    /*
+     * Handle Search
+     */
+    public function search($query, $request)
+    {
+        if ($request->filled("name")) {
+            $query = $query
+                ->where("name", "LIKE", "%" . $request->input("name") . "%");
+        }
+
+        if ($request->filled("locale")) {
+            $query = $query->where("locale", $request->input("locale"));
+        }
+
+        $tier = $request->input("tier");
+
+        if ($request->filled("tier")) {
+            $query = $query
+                ->whereHas("membership", function ($query) use ($tier) {
+                    $query->where("tier", $tier);
+                });
+        }
+
+        return $query;
     }
 }

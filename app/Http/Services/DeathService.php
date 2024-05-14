@@ -12,13 +12,19 @@ use Illuminate\Validation\ValidationException;
 class DeathService extends Service
 {
     /*
-     * Get All Death s
+     * Get All Deaths
      */
-    public function index()
+    public function index($request)
     {
-        $getDeaths = Death::all();
+        $deathsQuery = new Death;
 
-        return DeathResource::collection($getDeaths);
+        $deathsQuery = $this->search($deathsQuery, $request);
+
+        $deaths = $deathsQuery
+            ->orderBy("id", "DESC")
+            ->cursorPaginate(20);
+
+        return DeathResource::collection($deaths);
     }
 
     /*
@@ -198,5 +204,31 @@ class DeathService extends Service
         $getDeaths = Death::where("user_id", $id)->get();
 
         return DeathResource::collection($getDeaths);
+    }
+
+    /*
+     * Handle Search
+     */
+    public function search($query, $request)
+    {
+        if ($request->filled("name")) {
+            $query = $query
+                ->where("name", "LIKE", "%" . $request->input("name") . "%");
+        }
+
+        if ($request->filled("locale")) {
+            $query = $query->where("locale", $request->input("locale"));
+        }
+
+        $tier = $request->input("tier");
+
+        if ($request->filled("tier")) {
+            $query = $query
+                ->whereHas("membership", function ($query) use ($tier) {
+                    $query->where("tier", $tier);
+                });
+        }
+
+        return $query;
     }
 }

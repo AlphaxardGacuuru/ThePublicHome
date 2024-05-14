@@ -40,13 +40,20 @@ const Media = (props) => {
 			.catch((err) => props.getErrors(err))
 	}
 
+	const formatedModel = () => {
+		return props.modelToGet == "anniversary"
+			? props.modelToGet.replace("y", "ie")
+			: props.modelToGet
+	}
+
 	return (
 		<span
+			id={`media${props.index}`}
 			className="my-2 mx-2 pt-0 px-0 pb-2 card bg-white"
 			style={{ display: "inline-block" }}>
 			<div className="model-media">
 				<div className="model-thumbnail">
-					<Link to={`/models/show/${props.model.id}`}>
+					<Link to={`/${formatedModel()}s/show/${props.model.id}`}>
 						<Img src={props.model.poster} />
 					</Link>
 				</div>
@@ -160,14 +167,7 @@ const Media = (props) => {
 						placeholder="Write Condolences"
 						urlTo={`${props.modelToGet}-comments`}
 						stateToUpdate={() =>
-							props.get(
-								`${
-									props.modelToGet == "anniversary"
-										? props.modelToGet.replace("y", "ie")
-										: props.modelToGet
-								}s`,
-								props.setModel
-							)
+							props.get(`${formatedModel()}s`, props.setModel)
 						}
 						editing={false}
 					/>

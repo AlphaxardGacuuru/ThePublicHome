@@ -11,11 +11,11 @@ class Death extends Model
 {
     use HasFactory;
 
-	// Casts
-	protected $casts = [
-		"photos" => "array",
-		"videos" => "array",
-	];
+    // Casts
+    protected $casts = [
+        "photos" => "array",
+        "videos" => "array",
+    ];
 
     /**
      * Accesors.
@@ -28,7 +28,7 @@ class Death extends Model
             get: fn($value) => $value ? "/storage/" . $value : null
         );
     }
-	
+
     protected function poster(): Attribute
     {
         return Attribute::make(

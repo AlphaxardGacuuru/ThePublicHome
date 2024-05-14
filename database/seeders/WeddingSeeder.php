@@ -16,7 +16,7 @@ class WeddingSeeder extends Seeder
     public function run()
     {
         Wedding::factory()
-		->count(20)
+		->count(100)
 		->hasWeddingComments(rand(1, 10))
 		->create();
     }

@@ -65,7 +65,9 @@ const App = () => {
 		getLocalStorage("celebrations")
 	)
 
-	// Function for fetching data from API
+	/*
+	 * Function for fetching data from API
+	 */
 	const get = (endpoint, setState, storage = null, errors = true) => {
 		Axios.get(`/api/${endpoint}`)
 			.then((res) => {
@@ -76,7 +78,34 @@ const App = () => {
 			.catch(() => errors && setErrors([`Failed to fetch ${endpoint}`]))
 	}
 
-	// Function for getting errors from responses
+	/*
+	 * Function for fetching paginated data from API
+	 */
+	const getPaginated = (endpoint, setState, storage = null, errors = true) => {
+		Axios.get(`/api/${endpoint}`)
+			.then((res) => {
+				// Set State
+				var data = res.data ? res.data : []
+				setState(data)
+				// Set Local Storage
+				storage && setLocalStorage(storage, data)
+			})
+			.catch(() => {
+				// Set Errors
+				errors && setErrors([`Failed to fetch ${endpoint}`])
+			})
+	}
+
+	/*
+	 * Function for showing iteration
+	 */
+	const iterator = (key, list) => {
+		return key + 1 + list.meta.per_page * (list.meta.current_page - 1)
+	}
+
+	/*
+	 * Function for getting errors from responses
+	 */
 	const getErrors = (err, message = false) => {
 		const resErrors = err.response.data.errors
 		var newError = []
@@ -90,12 +119,12 @@ const App = () => {
 
 	// Fetch data on page load
 	useEffect(() => {
-		get("deaths", setDeaths, "deaths")
-		get("anniversaries", setAnniversaries, "anniversaries")
-		get("celebrations", setCelebrations, "celebrations")
-		get("graduations", setGraduations, "graduations")
-		get("success-cards", setSuccessCards, "success-cards")
-		get("weddings", setWeddings, "weddings")
+		getPaginated("deaths", setDeaths, "deaths")
+		getPaginated("anniversaries", setAnniversaries, "anniversaries")
+		getPaginated("celebrations", setCelebrations, "celebrations")
+		getPaginated("graduations", setGraduations, "graduations")
+		getPaginated("success-cards", setSuccessCards, "success-cards")
+		getPaginated("weddings", setWeddings, "weddings")
 		get("auth", setAuth, "auth", false)
 	}, [])
 
@@ -150,6 +179,8 @@ const App = () => {
 	// All states
 	const GLOBAL_STATE = {
 		get,
+		getPaginated,
+		iterator,
 		getErrors,
 		getLocalStorage,
 		setLocalStorage,

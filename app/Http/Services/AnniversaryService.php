@@ -14,11 +14,17 @@ class AnniversaryService extends Service
     /*
      * Get All Anniversary s
      */
-    public function index()
+    public function index($request)
     {
-        $getAnniversaries = Anniversary::all();
+        $anniversariesQuery = new Anniversary;
 
-        return AnniversaryResource::collection($getAnniversaries);
+        $anniversariesQuery = $this->search($anniversariesQuery, $request);
+
+        $anniversaries = $anniversariesQuery
+            ->orderBy("id", "DESC")
+            ->paginate(20);
+
+        return AnniversaryResource::collection($anniversaries);
     }
 
     /*
@@ -57,7 +63,7 @@ class AnniversaryService extends Service
         $anniversary->venue = $request->venue;
         $anniversary->anniversary_date = $request->anniversaryDate;
 
-        // Try and save Death and update UserMembership
+        // Try and save Anniversary and update UserMembership
         $saved = DB::transaction(function () use ($anniversary, $membershipQuery) {
             $anniversary->save();
 
@@ -182,5 +188,31 @@ class AnniversaryService extends Service
         $getAnniversaries = Anniversary::where("user_id", $id)->get();
 
         return AnniversaryResource::collection($getAnniversaries);
+    }
+
+    /*
+     * Handle Search
+     */
+    public function search($query, $request)
+    {
+        if ($request->filled("name")) {
+            $query = $query
+                ->where("name", "LIKE", "%" . $request->input("name") . "%");
+        }
+
+        if ($request->filled("locale")) {
+            $query = $query->where("locale", $request->input("locale"));
+        }
+
+        $tier = $request->input("tier");
+
+        if ($request->filled("tier")) {
+            $query = $query
+                ->whereHas("membership", function ($query) use ($tier) {
+                    $query->where("tier", $tier);
+                });
+        }
+
+        return $query;
     }
 }

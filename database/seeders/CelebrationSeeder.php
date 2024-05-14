@@ -15,7 +15,7 @@ class CelebrationSeeder extends Seeder
     public function run()
     {
         Celebration::factory()
-            ->count(20)
+            ->count(100)
             ->hasCelebrationComments(rand(1, 10))
             ->create();
     }

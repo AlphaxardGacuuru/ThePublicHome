@@ -16,7 +16,7 @@ class DeathSeeder extends Seeder
     public function run()
     {
         Death::factory()
-		->count(20)
+		->count(100)
 		->hasDeathComments(rand(1, 10))
 		->create();
     }

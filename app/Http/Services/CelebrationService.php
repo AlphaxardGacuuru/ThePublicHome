@@ -12,13 +12,19 @@ use Illuminate\Validation\ValidationException;
 class CelebrationService extends Service
 {
     /*
-     * Get All Celebration s
+     * Get All Celebrations
      */
-    public function index()
+    public function index($request)
     {
-        $getCelebrations = Celebration::all();
+        $celebrationsQuery = new Celebration;
 
-        return CelebrationResource::collection($getCelebrations);
+        $celebrationsQuery = $this->search($celebrationsQuery, $request);
+
+        $celebrations = $celebrationsQuery
+            ->orderBy("id", "DESC")
+            ->paginate(20);
+
+        return CelebrationResource::collection($celebrations);
     }
 
     /*
@@ -57,7 +63,7 @@ class CelebrationService extends Service
         $celebration->venue = $request->venue;
         $celebration->celebration_date = $request->celebrationDate;
 
-        // Try and save Death and update UserMembership
+        // Try and save Celebration and update UserMembership
         $saved = DB::transaction(function () use ($celebration, $membershipQuery) {
             $celebration->save();
 
@@ -182,5 +188,31 @@ class CelebrationService extends Service
         $getCelebrations = Celebration::where("user_id", $id)->get();
 
         return CelebrationResource::collection($getCelebrations);
+    }
+
+    /*
+     * Handle Search
+     */
+    public function search($query, $request)
+    {
+        if ($request->filled("name")) {
+            $query = $query
+                ->where("name", "LIKE", "%" . $request->input("name") . "%");
+        }
+
+        if ($request->filled("locale")) {
+            $query = $query->where("locale", $request->input("locale"));
+        }
+
+        $tier = $request->input("tier");
+
+        if ($request->filled("tier")) {
+            $query = $query
+                ->whereHas("membership", function ($query) use ($tier) {
+                    $query->where("tier", $tier);
+                });
+        }
+
+        return $query;
     }
 }

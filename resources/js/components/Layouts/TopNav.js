@@ -149,9 +149,7 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/"
-												className={`mx-4 ${
-													activeStrict("/") || active("/deaths")
-												}`}
+												className={`mx-4 ${activeStrict("/") || active("/deaths")}`}
 												onClick={() => setMenu("")}>
 												<span className="me-2">
 													<DeathSVG />

@@ -18,9 +18,9 @@ class AnniversaryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->service->index();
+        return $this->service->index($request);
     }
 
     /**
@@ -99,11 +99,11 @@ class AnniversaryController extends Controller
         ], 200);
     }
 
-	/*
-	* Get By User ID
-	*/ 
-	public function byUserId($id)
-	{
-		return $this->service->byUserId($id);
-	}
+    /*
+     * Get By User ID
+     */
+    public function byUserId($id)
+    {
+        return $this->service->byUserId($id);
+    }
 }

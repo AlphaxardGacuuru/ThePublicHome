@@ -16,7 +16,7 @@ class AnniversarySeeder extends Seeder
     public function run()
     {
         Anniversary::factory()
-		->count(20)
+		->count(100)
 		->hasAnniversaryComments(rand(1, 10))
 		->create();
     }
