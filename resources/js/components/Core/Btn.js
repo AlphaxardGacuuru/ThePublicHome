@@ -1,11 +1,11 @@
 import React from "react"
 
-const Btn = ({ btnStyle, btnClass, btnText, onClick, loading }) => (
+const Btn = ({ btnStyle, btnClass, btnText, onClick, loading, disabled }) => (
 	<button
 		style={btnStyle}
 		className={`btn text-uppercase rounded-0 ${btnClass}`}
 		onClick={onClick}
-		disabled={loading}>
+		disabled={loading || disabled}>
 		{btnText}
 		{loading && (
 			<div

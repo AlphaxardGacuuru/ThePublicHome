@@ -7,7 +7,7 @@ const index = (props) => {
 		<ListingPage
 			{...props}
 			title="Graduation Announcements"
-			model="graduation"
+			announcement="graduation"
 		/>
 	)
 }

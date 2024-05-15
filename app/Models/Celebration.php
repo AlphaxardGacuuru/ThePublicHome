@@ -36,6 +36,13 @@ class Celebration extends Model
         );
     }
 
+    protected function celebrationDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => Carbon::parse($value)->format('d M Y'),
+        );
+    }
+
     protected function updatedAt(): Attribute
     {
         return Attribute::make(

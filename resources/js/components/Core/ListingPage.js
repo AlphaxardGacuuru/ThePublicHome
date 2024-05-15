@@ -8,10 +8,10 @@ import PlusSVG from "@/svgs/PlusSVG"
 
 const ListingPage = (props) => {
 	/*
-	 * Get Respective Model
+	 * Get Respective Announcement
 	 */
-	const getModel = (importedModel) => {
-		switch (importedModel) {
+	const getAnnouncement = (importedAnnouncement) => {
+		switch (importedAnnouncement) {
 			case "death":
 				return props.deaths
 				break
@@ -38,7 +38,7 @@ const ListingPage = (props) => {
 		}
 	}
 
-	const [model, setModel] = useState(getModel(props.model))
+	const [announcements, setAnnouncements] = useState(getAnnouncement(props.announcements))
 
 	const [name, setName] = useState("")
 	const [locale, setLocale] = useState("")
@@ -49,39 +49,39 @@ const ListingPage = (props) => {
 	const observerRef = useRef(null)
 
 	/*
-	 * Fetch Models on load and on every search
+	 * Fetch Announcements on load and on every search
 	 */
 	useEffect(() => {
 		props.getPaginated(
-			`${formatedModel()}s?
+			`${formatedAnnouncement()}s?
 			name=${name}&
 			locale=${locale}&
 			tier=${tier}`,
-			setModel,
-			`${formatedModel()}s`
+			setAnnouncements,
+			`${formatedAnnouncement()}s`
 		)
 	}, [name, locale, tier])
 
 	/*
-	 * Fetch Models when nth element is in view
+	 * Fetch Announcements when nth element is in view
 	 */
-	const fetchModel = () => {
+	const fetchAnnouncement = () => {
 		Axios.get(
-			`${model.links.next}&
+			`${announcements.links.next}&
 						name=${name}&
 						locale=${locale}&
 						tier=${tier}`
 		)
 			.then((res) => {
-				setModel({
-					data: [...model.data, ...res.data.data],
+				setAnnouncements({
+					data: [...announcements.data, ...res.data.data],
 					links: res.data.links,
 					meta: res.data.meta,
 				})
 			})
 			.catch((err) => {
 				// Set Errors
-				props.setErrors([`Failed to fetch ${formatedModel()}s`])
+				props.setErrors([`Failed to fetch ${formatedAnnouncement()}s`])
 			})
 	}
 
@@ -95,7 +95,7 @@ const ListingPage = (props) => {
 				// Increment page
 				setPage(page + 5)
 
-				requestIdleCallback(fetchModel)
+				requestIdleCallback(fetchAnnouncement)
 			}
 		})
 	}
@@ -130,10 +130,10 @@ const ListingPage = (props) => {
 		}
 	}
 
-	const formatedModel = () => {
-		return props.model == "anniversary"
-			? props.model.replace("y", "ie")
-			: props.model
+	const formatedAnnouncement = () => {
+		return props.announcement == "anniversary"
+			? props.announcement.replace("y", "ie")
+			: props.announcement
 	}
 
 	const dummyArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -145,8 +145,8 @@ const ListingPage = (props) => {
 				{/* Create Link */}
 				<Link
 					to={
-						props.auth?.membershipName == props.model
-							? `/${formatedModel()}s/create`
+						props.auth?.membershipName == props.announcement
+							? `/${formatedAnnouncement()}s/create`
 							: "/profile/membership"
 					}
 					id="chatFloatBtn">
@@ -235,28 +235,28 @@ const ListingPage = (props) => {
 					</div>
 					{/* Tiers End */}
 
-					{/* Model Announcements */}
+					{/* Announcements */}
 					<div className="d-flex flex-wrap justify-content-center mb-2">
-						{/* Loading Model Announcement items */}
+						{/* Loading Announcement items */}
 						{dummyArray
-							.filter(() => model.length < 1)
+							.filter(() => announcements.length < 1)
 							.map((item, key) => (
 								<LoadingMedia key={key} />
 							))}
 
-						{/* Real Model Announcement items */}
-						{model.data?.map((model, key) => (
+						{/* Real Announcement items */}
+						{announcements.data?.map((announcement, key) => (
 							<Media
 								{...props}
 								key={key}
 								index={key}
-								model={model}
-								setModel={setModel}
-								modelToGet={props.model}
+								announcement={announcement}
+								setAnnouncements={setAnnouncements}
+								announcementToGet={props.announcement}
 							/>
 						))}
 					</div>
-					{/* Model Announcements End */}
+					{/* Announcements End */}
 				</center>
 			</div>
 			<div className="col-sm-1"></div>

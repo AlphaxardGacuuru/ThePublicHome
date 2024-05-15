@@ -7,7 +7,7 @@ const index = (props) => {
 		<ListingPage
 			{...props}
 			title="Wedding Announcements"
-			model="wedding"
+			announcement="wedding"
 		/>
 	)
 }

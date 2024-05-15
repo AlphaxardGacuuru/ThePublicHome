@@ -10,40 +10,40 @@ import CommentSVG from "@/svgs/CommentSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
 
 const Media = (props) => {
-	const [hasLiked, setHasLiked] = useState(props.model.hasLiked)
+	const [hasLiked, setHasLiked] = useState(props.announcement.hasLiked)
 
 	useEffect(() => {
 		// Set new cart with data with auth
-		setHasLiked(props.model.hasLiked)
-	}, [props.model])
+		setHasLiked(props.announcement.hasLiked)
+	}, [props.announcement])
 
-	// Function for liking Model
-	const onLike = (modelId) => {
+	// Function for liking Announcement
+	const onLike = (announcementId) => {
 		setHasLiked(!hasLiked)
 
 		// Add like to database
-		Axios.post(`api/${props.modelToGet}-likes`, {
-			id: modelId,
+		Axios.post(`api/${props.announcementToGet}-likes`, {
+			id: announcementId,
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
-				// Update Model
+				// Update Announcement
 				props.get(
 					`${
-						props.modelToGet == "anniversary"
-							? props.modelToGet.replace("y", "ie")
-							: props.modelToGet
+						props.announcementToGet == "anniversary"
+							? props.announcementToGet.replace("y", "ie")
+							: props.announcementToGet
 					}s`,
-					props.setModel
+					props.setAnnouncements
 				)
 			})
 			.catch((err) => props.getErrors(err))
 	}
 
-	const formatedModel = () => {
-		return props.modelToGet == "anniversary"
-			? props.modelToGet.replace("y", "ie")
-			: props.modelToGet
+	const formatedAnnouncement = () => {
+		return props.announcementToGet == "anniversary"
+			? props.announcementToGet.replace("y", "ie")
+			: props.announcementToGet
 	}
 
 	return (
@@ -51,10 +51,11 @@ const Media = (props) => {
 			id={`media${props.index}`}
 			className="my-2 mx-2 pt-0 px-0 pb-2 card bg-white"
 			style={{ display: "inline-block" }}>
-			<div className="model-media">
-				<div className="model-thumbnail">
-					<Link to={`/${formatedModel()}s/show/${props.model.id}`}>
-						<Img src={props.model.poster} />
+			<div className="announcement-media">
+				<div className="announcement-thumbnail">
+					<Link
+						to={`/${formatedAnnouncement()}s/show/${props.announcement.id}`}>
+						<Img src={props.announcement.poster} />
 					</Link>
 				</div>
 				{/* User info */}
@@ -65,9 +66,9 @@ const Media = (props) => {
 					<div
 						className="py-2"
 						style={{ minWidth: "40px" }}>
-						<Link to={`/profile/show/${props.model.userId}`}>
+						<Link to={`/profile/show/${props.announcement.userId}`}>
 							<Img
-								src={props.model.userAvatar}
+								src={props.announcement.userAvatar}
 								className="rounded-circle"
 								width="30em"
 								height="30em"
@@ -79,30 +80,32 @@ const Media = (props) => {
 					{/* Avatar End */}
 					{/* User Name */}
 					<div className="">
-						<h6 className="model-user-name mt-1 pt-2 px-1">
-							{props.model.userName}
+						<h6 className="announcement-user-name mt-1 pt-2 px-1">
+							{props.announcement.userName}
 						</h6>
 					</div>
 					{/* User Name End */}
 				</div>
 				{/* User info End */}
-				<h3 className="model-name px-2 mb-0">
-					{props.model.name ?? props.model.title}
+				<h3 className="announcement-name px-2 mb-0">
+					{props.announcement.name ?? props.announcement.title}
 				</h3>
-				<p className="mb-0 px-2 text-start">{props.model.announcement}</p>
+				<p className="mb-0 px-2 text-start">
+					{props.announcement.announcement}
+				</p>
 				<p className="mb-0 px-2 text-start">
 					<small
 						className="bg-2 my-1 p-1 text-white text-uppercase"
 						style={{ fontSize: "0.8em" }}>
-						{props.model.tier}
+						{props.announcement.tier}
 					</small>
 				</p>
 				<div className="d-flex justify-content-start">
-					{/* Model likes */}
+					{/* Announcement likes */}
 					<div
 						className="p-2"
 						style={{ cursor: "pointer" }}
-						onClick={() => onLike(props.model.id)}>
+						onClick={() => onLike(props.announcement.id)}>
 						{hasLiked ? (
 							<div>
 								<span style={{ color: "#fb3958", fontSize: "1.2em" }}>
@@ -111,7 +114,7 @@ const Media = (props) => {
 								<small
 									className="ms-1"
 									style={{ color: "#fb3958", fontWeight: "100" }}>
-									{props.model.likes}
+									{props.announcement.likes}
 								</small>
 							</div>
 						) : (
@@ -122,7 +125,7 @@ const Media = (props) => {
 								<small
 									className="ms-1"
 									style={{ color: "inherit", fontWeight: "100" }}>
-									{props.model.likes}
+									{props.announcement.likes}
 								</small>
 							</div>
 						)}
@@ -136,7 +139,7 @@ const Media = (props) => {
 						<small
 							className="ms-1"
 							style={{ color: "inherit", fontWeight: "100" }}>
-							{props.model.comments}
+							{props.announcement.comments}
 						</small>
 					</div>
 					{/* Comments End */}
@@ -163,17 +166,17 @@ const Media = (props) => {
 				<div className="border-top border-light">
 					<SocialMediaInput
 						{...props}
-						id={props.model.id}
+						id={props.announcement.id}
 						placeholder="Write Condolences"
-						urlTo={`${props.modelToGet}-comments`}
+						urlTo={`${props.announcementToGet}-comments`}
 						stateToUpdate={() =>
-							props.get(`${formatedModel()}s`, props.setModel)
+							props.get(`${formatedAnnouncement()}s`, props.setAnnouncements)
 						}
 						editing={false}
 					/>
 				</div>
 				{/* SocialMedia Input End */}
-				{/* Model  likes End */}
+				{/* Announcement  likes End */}
 			</div>
 		</span>
 	)

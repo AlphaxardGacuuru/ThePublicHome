@@ -68,6 +68,10 @@ const RouteList = (GLOBAL_STATE) => {
 			component: <DeathIndex {...GLOBAL_STATE} />,
 		},
 		{
+			path: "/deaths",
+			component: <DeathIndex {...GLOBAL_STATE} />,
+		},
+		{
 			path: "/deaths/create",
 			component: <DeathCreate {...GLOBAL_STATE} />,
 		},

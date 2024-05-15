@@ -227,7 +227,7 @@ const edit = (props) => {
 								type="date"
 								name="name"
 								className="form-control text-secondary mb-2"
-								defaultValue={graduation.graduationDate}
+								defaultValue={graduation.date}
 								onChange={(e) => setGraduationDate(e.target.value)}
 							/>
 
