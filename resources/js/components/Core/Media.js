@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min"
 
 import Img from "@/components/Core/Img"
 import SocialMediaInput from "@/components/Core/SocialMediaInput"
@@ -10,6 +10,7 @@ import CommentSVG from "@/svgs/CommentSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
 
 const Media = (props) => {
+	const location = useLocation()
 	const [hasLiked, setHasLiked] = useState(props.announcement.hasLiked)
 
 	useEffect(() => {
@@ -167,7 +168,11 @@ const Media = (props) => {
 					<SocialMediaInput
 						{...props}
 						id={props.announcement.id}
-						placeholder={location.pathname.match("/death") ? "Write Condolences" : "Write Something"}
+						placeholder={
+							location.pathname == "/" || location.pathname.match("/deaths")
+								? "Write your Condolences"
+								: "Write Something"
+						}
 						urlTo={`${props.announcementToGet}-comments`}
 						stateToUpdate={() =>
 							props.get(`${formatedAnnouncement()}s`, props.setAnnouncements)
