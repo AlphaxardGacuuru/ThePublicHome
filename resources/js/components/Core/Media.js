@@ -167,7 +167,7 @@ const Media = (props) => {
 					<SocialMediaInput
 						{...props}
 						id={props.announcement.id}
-						placeholder="Write Condolences"
+						placeholder={location.pathname.match("/death") ? "Write Condolences" : "Write Something"}
 						urlTo={`${props.announcementToGet}-comments`}
 						stateToUpdate={() =>
 							props.get(`${formatedAnnouncement()}s`, props.setAnnouncements)

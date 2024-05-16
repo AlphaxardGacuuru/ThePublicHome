@@ -19,6 +19,7 @@ import AnniversarySVG from "@/svgs/AnniversarySVG"
 import SuccessCardSVG from "@/svgs/SuccessCardSVG"
 import GraduationSVG from "@/svgs/GraduationSVG"
 import WeddingSVG from "@/svgs/WeddingSVG"
+import LogoSVG from "@/svgs/LogoSVG"
 
 const TopNav = (props) => {
 	const location = useLocation()
@@ -135,11 +136,11 @@ const TopNav = (props) => {
 										{/* <!-- Left Menu Icon End --> */}
 
 										{/* <!-- Logo Area  --> */}
-										<div className="logo-area">
+										<div className="logo-area mb-2">
 											<Link
-												to="/"
-												className="text-white fw-lighter">
-												The Public Home
+												to="/admin"
+												className="text-white">
+												<LogoSVG />
 											</Link>
 										</div>
 									</div>
@@ -149,7 +150,9 @@ const TopNav = (props) => {
 										<div className="hidden">
 											<Link
 												to="/"
-												className={`mx-4 ${activeStrict("/") || active("/deaths")}`}
+												className={`mx-4 ${
+													activeStrict("/") || active("/deaths")
+												}`}
 												onClick={() => setMenu("")}>
 												<span className="me-2">
 													<DeathSVG />
