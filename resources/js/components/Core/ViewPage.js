@@ -385,13 +385,15 @@ const ViewPage = (props) => {
 															</div>
 														)}
 													</div>
-													<div className="modal-footer">
-														<a
-															href={`/storage/${announcement.eulogy}`}
-															className="btn rounded-0 text-uppercase">
-															download
-														</a>
-													</div>
+													{!announcement.eulogyWords && (
+														<div className="modal-footer">
+															<a
+																href={`/storage/${announcement.eulogy}`}
+																className="btn rounded-0 text-uppercase">
+																download
+															</a>
+														</div>
+													)}
 												</div>
 											</div>
 										</div>
