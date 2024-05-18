@@ -310,19 +310,7 @@ const ViewPage = (props) => {
 															aria-label="Close"></button>
 													</div>
 													<div className="modal-body text-start text-wrap">
-														<div className="d-flex justify-content-center mb-3">
-															<Btn
-																btnClass="me-1"
-																btnText="View Text"
-																onClick={() => setEulogy("text")}
-															/>
-															<Btn
-																btnClass="ms-1"
-																btnText="View File"
-																onClick={() => setEulogy("file")}
-															/>
-														</div>
-														{eulogy == "text" ? (
+														{announcement.eulogyWords ? (
 															<h6>{announcement.eulogyWords}</h6>
 														) : (
 															<div>

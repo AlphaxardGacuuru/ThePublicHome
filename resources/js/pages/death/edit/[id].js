@@ -50,6 +50,7 @@ const DeathEdit = (props) => {
 	const [burialDate, setBurialDate] = useState("")
 	const [announcement, setAnnouncement] = useState("")
 	const [eulogyWords, setEulogyWords] = useState("")
+	const [eulogyType, setEulogyType] = useState()
 	const [eulogy, setEulogy] = useState("")
 	const [loadingBtn, setLoadingBtn] = useState()
 	const [loadingBtn2, setLoadingBtn2] = useState()
@@ -182,6 +183,7 @@ const DeathEdit = (props) => {
 								{death.tier}
 							</div>
 
+							{/* Locale */}
 							<select
 								type="text"
 								name="locale"
@@ -201,8 +203,11 @@ const DeathEdit = (props) => {
 									International
 								</option>
 							</select>
+							{/* Locale End */}
+
 							<br />
 
+							{/* Name */}
 							<input
 								type="text"
 								name="name"
@@ -212,7 +217,9 @@ const DeathEdit = (props) => {
 								required={true}
 								onChange={(e) => setName(e.target.value)}
 							/>
+							{/* Name End */}
 
+							{/* Sunrise */}
 							<div className="ms-2 mb-2 d-flex justify-content-start">
 								<label htmlFor="">Sunrise</label>
 							</div>
@@ -224,7 +231,9 @@ const DeathEdit = (props) => {
 								required={true}
 								onChange={(e) => setSunrise(e.target.value)}
 							/>
+							{/* Sunrise End */}
 
+							{/* Sunset */}
 							<div className="ms-2 mb-2 d-flex justify-content-start">
 								<label htmlFor="">Sunset</label>
 							</div>
@@ -237,7 +246,9 @@ const DeathEdit = (props) => {
 								required={true}
 								onChange={(e) => setSunset(e.target.value)}
 							/>
+							{/* Sunset End */}
 
+							{/* Date of Burial */}
 							<div className="ms-2 mb-2 d-flex justify-content-start">
 								<label htmlFor="">Date of Burial</label>
 							</div>
@@ -250,7 +261,9 @@ const DeathEdit = (props) => {
 								required={true}
 								onChange={(e) => setBurialDate(e.target.value)}
 							/>
+							{/* Date of Burial End */}
 
+							{/* Announcement */}
 							<div className="ms-2 mb-2 d-flex justify-content-start">
 								<label htmlFor="">Announcement</label>
 							</div>
@@ -281,24 +294,39 @@ const DeathEdit = (props) => {
 									{death.wordLimit == 1000000 ? "Unlimited" : death.wordLimit}
 								</small>
 							</div>
+							{/* Announcement End */}
 
+							{/* Eulogy */}
 							<div className="ms-2 mb-2 d-flex justify-content-start">
 								<label htmlFor="">Eulogy</label>
 							</div>
 
-							<textarea
-								type="text"
-								name="eulogyWords"
-								className="form-control"
-								placeholder="Eulogy"
-								defaultValue={death.eulogyWords}
-								cols="30"
-								rows="10"
-								onChange={(e) => setEulogyWords(e.target.value)}></textarea>
+							{/* Eulogy Type */}
+							<select
+								className="form-control mb-2"
+								onChange={(e) => setEulogyType(e.target.value)}>
+								<option value="">Select Eulogy Type</option>
+								<option value="written">Written</option>
+								<option value="file">File</option>
+							</select>
+							{/* Eulogy Type End */}
 
-							<div className="d-flex justify-content-end py-2">
-								<small
-									className={`p-1
+							{/* Eulogy Written */}
+							{eulogyType == "written" && (
+								<React.Fragment>
+									<textarea
+										type="text"
+										name="eulogyWords"
+										className="form-control"
+										placeholder="Eulogy"
+										defaultValue={death.eulogyWords}
+										cols="30"
+										rows="10"
+										onChange={(e) => setEulogyWords(e.target.value)}></textarea>
+
+									<div className="d-flex justify-content-end py-2">
+										<small
+											className={`p-1
 									${
 										eulogyWords.length > death.eulogyWordLimit * 0.8
 											? eulogyWords.length <= death.eulogyWordLimit
@@ -306,13 +334,51 @@ const DeathEdit = (props) => {
 												: "bg-danger-subtle"
 											: "bg-secondary-subtle"
 									}
-								`}>
-									Word Count: {eulogyWords.length} /{" "}
-									{death.eulogyWordLimit == 1000000
-										? "Unlimited"
-										: death.eulogyWordLimit}
-								</small>
-							</div>
+										`}>
+											Word Count: {eulogyWords.length} /{" "}
+											{death.eulogyWordLimit == 1000000
+												? "Unlimited"
+												: death.eulogyWordLimit}
+										</small>
+									</div>
+								</React.Fragment>
+							)}
+							{/* Eulogy Written End */}
+
+							{/* Eulogy Upload */}
+							{eulogyType == "file" && (
+								<div className="w-100 mb-4 mx-auto text-center">
+									<label className="mb-2">Upload Eulogy</label>
+
+									<FilePond
+										name="filepond-eulogy"
+										// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
+										// imageCropAspectRatio="16:9"
+										acceptedFileTypes={["application/pdf"]}
+										// stylePanelAspectRatio="16:9"
+										allowRevert={true}
+										server={{
+											url: `/api/filepond`,
+											process: {
+												url: `/eulogy/${id}/${death.eulogyLimit}`,
+												onload: (res) => props.get(`deaths/${id}`, setDeath),
+												onerror: (err) =>
+													props.setErrors([JSON.parse(err).message]),
+											},
+											revert: {
+												url: `/eulogy/${eulogy.substr(9)}`,
+												onload: (res) => {
+													props.setMessages([res])
+													// Clear Poster
+													setEulogy("")
+												},
+											},
+										}}
+									/>
+								</div>
+							)}
+							{/* Eulogy Upload End */}
+							{/* Eulogy End */}
 
 							{/* Buttons */}
 							<div className="row w-75 mx-auto text-center">
@@ -370,6 +436,7 @@ const DeathEdit = (props) => {
 					<div className="text-center border rounded mx-2 my-2 px-2 py-5">
 						<h3 className="text-center mb-4">Upload Media</h3>
 
+						{/* Poster */}
 						<div className="w-100 mb-4 mx-auto text-center">
 							<label className="mb-2">Upload Death Announcement Poster</label>
 							<FilePond
@@ -398,7 +465,9 @@ const DeathEdit = (props) => {
 								}}
 							/>
 						</div>
+						{/* Poster End */}
 
+						{/* Photos */}
 						<div className="w-100 mb-4 mx-auto text-center">
 							<label className="mb-2">Upload Related Photos</label>
 
@@ -421,7 +490,9 @@ const DeathEdit = (props) => {
 								}}
 							/>
 						</div>
+						{/* Photos End */}
 
+						{/* Videos */}
 						{death.videoLimit > 0 && (
 							<div className="w-100 mb-4 mx-auto text-center">
 								<label className="mb-2">Upload Related Videos</label>
@@ -447,37 +518,9 @@ const DeathEdit = (props) => {
 								/>
 							</div>
 						)}
+						{/* Videos End */}
 
-						<div className="w-100 mb-4 mx-auto text-center">
-							<label className="mb-2">Upload Eulogy</label>
-
-							<FilePond
-								name="filepond-eulogy"
-								// labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-								// imageCropAspectRatio="16:9"
-								acceptedFileTypes={["application/pdf"]}
-								// stylePanelAspectRatio="16:9"
-								allowRevert={true}
-								server={{
-									url: `/api/filepond`,
-									process: {
-										url: `/eulogy/${id}/${death.eulogyLimit}`,
-										onload: (res) => props.get(`deaths/${id}`, setDeath),
-										onerror: (err) =>
-											props.setErrors([JSON.parse(err).message]),
-									},
-									revert: {
-										url: `/eulogy/${eulogy.substr(9)}`,
-										onload: (res) => {
-											props.setMessages([res])
-											// Clear Poster
-											setEulogy("")
-										},
-									},
-								}}
-							/>
-						</div>
-
+						{/* Recap */}
 						<div className="w-100 mb-4 mx-auto text-center">
 							<label className="mb-2">Upload Recap</label>
 
@@ -501,6 +544,7 @@ const DeathEdit = (props) => {
 								}}
 							/>
 						</div>
+						{/* Recap End */}
 					</div>
 				</div>
 
@@ -548,36 +592,37 @@ const DeathEdit = (props) => {
 						{/* List Images End */}
 
 						{/* List Videos */}
-						{death.videoLimit > 0 && (						
-						<React.Fragment>
-						<h5>Videos</h5>
-						<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
-							{death.videos?.map((video, key) => (
-								<div
-									key={key}
-									className="shadow m-1 p-1">
-									<div className="text-end">
-										<span
-											className="text-muted p-1"
-											style={{ cursor: "pointer" }}
-											onClick={() => onDeleteVideos(video)}>
-											<CloseSVG />
-										</span>
-									</div>
-									<video
-										className="mx-2"
-										style={{ width: "20em", height: "auto" }}
-										controls>
-										<source
-											src={`/storage/${video}`}
-											// type="video/mp4"
-										/>
-										Your browser does not support the video tag.
-									</video>
+						{death.videoLimit > 0 && (
+							<React.Fragment>
+								<h5>Videos</h5>
+								<div className="d-flex justify-content-start mb-4 p-2 overflow-x-scroll">
+									{death.videos?.map((video, key) => (
+										<div
+											key={key}
+											className="shadow m-1 p-1">
+											<div className="text-end">
+												<span
+													className="text-muted p-1"
+													style={{ cursor: "pointer" }}
+													onClick={() => onDeleteVideos(video)}>
+													<CloseSVG />
+												</span>
+											</div>
+											<video
+												className="mx-2"
+												style={{ width: "20em", height: "auto" }}
+												controls>
+												<source
+													src={`/storage/${video}`}
+													// type="video/mp4"
+												/>
+												Your browser does not support the video tag.
+											</video>
+										</div>
+									))}
 								</div>
-							))}
-						</div>
-						</React.Fragment>)}
+							</React.Fragment>
+						)}
 						{/* List Videos End */}
 
 						{/* Eulogy */}
