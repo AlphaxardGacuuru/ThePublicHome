@@ -91,7 +91,7 @@ const Media = (props) => {
 				<h3 className="announcement-name px-2 mb-0">
 					{props.announcement.name ?? props.announcement.title}
 				</h3>
-				<p className="mb-0 px-2 text-start">
+				<p className="announcement-announcement mb-0 px-2 text-start">
 					{props.announcement.announcement}
 				</p>
 				<p className="mb-0 px-2 text-start">

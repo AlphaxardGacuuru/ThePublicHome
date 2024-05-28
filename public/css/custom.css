@@ -1206,6 +1206,11 @@ div.hidden-scroll span {
 	}
 }
 
+.announcement-announcement {
+	max-height: 10em;
+	overflow: hidden;
+}
+
 /* Death Media End */
 
 /* Event Media */
