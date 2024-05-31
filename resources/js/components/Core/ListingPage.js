@@ -38,7 +38,9 @@ const ListingPage = (props) => {
 		}
 	}
 
-	const [announcements, setAnnouncements] = useState(getAnnouncement(props.announcements))
+	const [announcements, setAnnouncements] = useState(
+		getAnnouncement(props.announcements)
+	)
 
 	const [name, setName] = useState("")
 	const [locale, setLocale] = useState("")
@@ -48,10 +50,7 @@ const ListingPage = (props) => {
 	// Set Ref to reference the Intersection Observer
 	const observerRef = useRef(null)
 
-	/*
-	 * Fetch Announcements on load and on every search
-	 */
-	useEffect(() => {
+	const fetchAnnouncements = () => {
 		props.getPaginated(
 			`${formatedAnnouncement()}s?
 			name=${name}&
@@ -60,12 +59,19 @@ const ListingPage = (props) => {
 			setAnnouncements,
 			`${formatedAnnouncement()}s`
 		)
+	}
+
+	/*
+	 * Fetch Announcements on load and on every search
+	 */
+	useEffect(() => {
+		fetchAnnouncements()
 	}, [name, locale, tier])
 
 	/*
 	 * Fetch Announcements when nth element is in view
 	 */
-	const fetchAnnouncement = () => {
+	const fetchNextAnnouncement = () => {
 		Axios.get(
 			`${announcements.links.next}&
 						name=${name}&
@@ -95,7 +101,7 @@ const ListingPage = (props) => {
 				// Increment page
 				setPage(page + 5)
 
-				requestIdleCallback(fetchAnnouncement)
+				requestIdleCallback(fetchNextAnnouncement)
 			}
 		})
 	}
@@ -251,8 +257,8 @@ const ListingPage = (props) => {
 								key={key}
 								index={key}
 								announcement={announcement}
-								setAnnouncements={setAnnouncements}
 								announcementToGet={props.announcement}
+								fetchAnnouncements={fetchAnnouncements}
 							/>
 						))}
 					</div>

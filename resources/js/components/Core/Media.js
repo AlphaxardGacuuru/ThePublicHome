@@ -29,14 +29,7 @@ const Media = (props) => {
 			.then((res) => {
 				props.setMessages([res.data.message])
 				// Update Announcement
-				props.get(
-					`${
-						props.announcementToGet == "anniversary"
-							? props.announcementToGet.replace("y", "ie")
-							: props.announcementToGet
-					}s`,
-					props.setAnnouncements
-				)
+				props.fetchAnnouncements()
 			})
 			.catch((err) => props.getErrors(err))
 	}
@@ -174,9 +167,7 @@ const Media = (props) => {
 								: "Write Something"
 						}
 						urlTo={`${props.announcementToGet}-comments`}
-						stateToUpdate={() =>
-							props.get(`${formatedAnnouncement()}s`, props.setAnnouncements)
-						}
+						stateToUpdate={() => props.fetchAnnouncements()}
 						editing={false}
 					/>
 				</div>
