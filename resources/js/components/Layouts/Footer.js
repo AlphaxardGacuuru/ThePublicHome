@@ -62,22 +62,22 @@ const Footer = () => {
 							</span>
 							Privacy Policy
 						</Link>
-						<Link
-							to="/feedback"
+						<a
+							href="mailto:thepublichome@gmail.com?subject=Feedback&body=Enquiry"
 							className="text-white">
 							<span className="me-2">
 								<ChatSVG />
 							</span>
 							Feedback
-						</Link>
-						<Link
-							to="/help"
+						</a>
+						<a
+							href="mailto:thepublichome@gmail.com?subject=Help&body=Enquiry"
 							className="text-white">
 							<span className="me-2">
 								<PrivacySVG />
 							</span>
 							Help
-						</Link>
+						</a>
 						<Link
 							to="/about"
 							className="text-white">
@@ -86,14 +86,14 @@ const Footer = () => {
 							</span>
 							About Us
 						</Link>
-						<Link
-							to="/about"
+						<a
+							href="mailto:thepublichome@gmail.com?subject=ReportProblem&body=Enquiry"
 							className="text-white">
 							<span className="me-2">
 								<PrivacySVG />
 							</span>
 							Report Problem
-						</Link>
+						</a>
 					</div>
 				</div>
 				<div className="col-sm-1"></div>
