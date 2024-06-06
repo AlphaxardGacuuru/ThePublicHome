@@ -34,7 +34,6 @@ return new class extends Migration
             $table->jsonb('photos')->nullable();
             $table->jsonb('videos')->nullable();
             $table->string('eulogy')->nullable();
-            $table->string('recap')->nullable();
             $table->integer('likes')->default(0);
             $table->integer('comments')->default(0);
             $table->timestamps();

@@ -76,7 +76,7 @@ Route::apiResources([
     "celebration-likes" => CelebrationLikeController::class,
     "celebration-comments" => CelebrationCommentController::class,
     "celebration-comment-likes" => CelebrationCommentLikeController::class,
-    "recaps" => CelebrationController::class,
+    "recaps" => RecapController::class,
 ]);
 
 // By User ID

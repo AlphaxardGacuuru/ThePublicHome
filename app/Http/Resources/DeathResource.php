@@ -41,7 +41,7 @@ class DeathResource extends JsonResource
             "videos" => $this->videos,
             "eulogy" => $this->eulogy,
             "eulogyWords" => $this->eulogy_words,
-            "recap" => $this->recap,
+            "hasRecap" => $this->recap()->exists() ? "Yes" : "No",
             "likes" => $this->likes,
             "comments" => $this->comments,
             "hasLiked" => $this->hasLiked($id),

@@ -3,7 +3,7 @@ import React from "react"
 const LoadingClubMedia = () => {
 	return (
 		<span className="my-2 mx-2 pt-0 px-0 pb-2 card">
-			<div className="model-thumbnail">
+			<div className="announcement-thumbnail">
 				<div
 					className="gradient"
 					style={{
@@ -25,7 +25,7 @@ const LoadingClubMedia = () => {
 					{/* Avatar End */}
 					{/* User Name */}
 					<h6
-						className="gradient loading-text model-user-name mt-2"
+						className="gradient loading-text announcement-user-name mt-2"
 						style={{ maxHeight: "1em" }}></h6>
 				</div>
 				{/* User Name End */}
@@ -34,14 +34,14 @@ const LoadingClubMedia = () => {
 			{/* Content */}
 			<div className="d-flex justify-content-start flex-column">
 				<h2
-					className="gradient loading-text model-name"
+					className="gradient loading-text announcement-name"
 					style={{ maxWidth: "11em" }}></h2>
-				<h6 className="gradient loading-text model-user-name"></h6>
-				<h6 className="gradient loading-text model-user-name"></h6>
-				<h6 className="gradient loading-text model-user-name"></h6>
-				<h6 className="gradient loading-text model-user-name"></h6>
+				<h6 className="gradient loading-text announcement-user-name"></h6>
+				<h6 className="gradient loading-text announcement-user-name"></h6>
+				<h6 className="gradient loading-text announcement-user-name"></h6>
+				<h6 className="gradient loading-text announcement-user-name"></h6>
 				<h2
-					className="gradient loading-text model-name"
+					className="gradient loading-text announcement-name"
 					style={{ maxWidth: "11em" }}></h2>
 			</div>
 			{/* Content End */}

@@ -1,52 +1,37 @@
 import React from "react"
 
-const LoadingKaraokeMedia = () => {
+const LoadingRecapMedia = () => {
 	return (
-		<span className="my-2 mx-2 pt-0 px-0 pb-2 card">
-			<div className="death-thumbnail">
+		<div
+			className="m-1 recap-media"
+			style={{
+				borderRadius: "0px",
+				textAlign: "center",
+				color: "#232323",
+			}}>
+			<div
+				className="recap-thumbnail gradient"
+				style={{ width: "100%", minHeight: "25.6em" }}>
 				<div
 					className="gradient"
-					style={{
-						width: "24em",
-						height: "12em",
-					}}></div>
+					style={{ width: "1080px", height: "1920px" }}></div>
 			</div>
-			<div className="d-flex justify-content-start">
-				{/* User info */}
-				<div
-					className="d-flex p-1"
-					style={{ maxWidth: "220em" }}>
-					{/* Avatar */}
-					<div style={{ minWidth: "40px" }}>
-						<div
-							className="gradient rounded-circle"
-							style={{ width: "3em", height: "3em" }}></div>
-					</div>
-					{/* Avatar End */}
-					{/* User Name */}
-					<h6
-						className="gradient loading-text death-user-name mt-2"
-						style={{ maxHeight: "1em" }}></h6>
+			<div className="d-flex">
+				<div className="p-1">
+					<div
+						className="gradient rounded-circle"
+						style={{
+							width: "3em",
+							height: "3em",
+						}}></div>
 				</div>
-				{/* User Name End */}
+				<div className="p-1 flex-grow-1">
+					<h6 className="loading-text announcement-user-name gradient w-75"></h6>
+					<h6 className="loading-text announcement-user-name gradient w-50"></h6>
+				</div>
 			</div>
-			{/* User info End */}
-			{/* Content */}
-			<div className="d-flex justify-content-start flex-column">
-				<h2
-					className="gradient loading-text death-name"
-					style={{ maxWidth: "11em" }}></h2>
-				<h6 className="gradient loading-text death-user-name"></h6>
-				<h6 className="gradient loading-text death-user-name"></h6>
-				<h6 className="gradient loading-text death-user-name"></h6>
-				<h6 className="gradient loading-text death-user-name"></h6>
-				<h2
-					className="gradient loading-text death-name"
-					style={{ maxWidth: "11em" }}></h2>
-			</div>
-			{/* Content End */}
-		</span>
+		</div>
 	)
 }
 
-export default LoadingKaraokeMedia
+export default LoadingRecapMedia

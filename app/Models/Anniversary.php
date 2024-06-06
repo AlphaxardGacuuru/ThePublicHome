@@ -22,12 +22,6 @@ class Anniversary extends Model
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
-    protected function recap(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => $value ? "/storage/" . $value : null
-        );
-    }
 	
     protected function poster(): Attribute
     {
@@ -80,6 +74,11 @@ class Anniversary extends Model
     {
         return $this->hasMany(AnniversaryComment::class);
     }
+
+	public function recap()
+	{
+		return $this->hasMany(Recap::class);
+	}
 
     /*
      *    Custom Functions

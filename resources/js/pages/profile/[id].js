@@ -141,7 +141,7 @@ const ProfileShow = (props) => {
 												{death.burialDateFormated}
 											</td>
 											<td className="text-capitalize">
-												{death.recap ? "Yes" : "No"}
+												{death.hasRecap ? "Yes" : "No"}
 											</td>
 											<td className="text-capitalize">{death.likes}</td>
 											<td className="text-capitalize">{death.createdAt}</td>
@@ -210,7 +210,7 @@ const ProfileShow = (props) => {
 												{wedding.weddingDateFormated}
 											</td>
 											<td className="text-capitalize">
-												{wedding.recap ? "Yes" : "No"}
+												{wedding.hasRecap ? "Yes" : "No"}
 											</td>
 											<td className="text-capitalize">{wedding.likes}</td>
 											<td className="text-capitalize">{wedding.createdAt}</td>
@@ -281,7 +281,7 @@ const ProfileShow = (props) => {
 												{graduation.graduationDateFormated}
 											</td>
 											<td className="text-capitalize">
-												{graduation.recap ? "Yes" : "No"}
+												{graduation.hasRecap ? "Yes" : "No"}
 											</td>
 											<td className="text-capitalize">{graduation.likes}</td>
 											<td className="text-capitalize">
@@ -348,7 +348,7 @@ const ProfileShow = (props) => {
 											<td className="text-capitalize">{successCard.tier}</td>
 											<td className="text-capitalize">{successCard.title}</td>
 											<td className="text-capitalize">
-												{successCard.recap ? "Yes" : "No"}
+												{successCard.hasRecap ? "Yes" : "No"}
 											</td>
 											<td className="text-capitalize">{successCard.likes}</td>
 											<td className="text-capitalize">
@@ -421,7 +421,7 @@ const ProfileShow = (props) => {
 												{anniversary.anniversaryDateFormated}
 											</td>
 											<td className="text-capitalize">
-												{anniversary.recap ? "Yes" : "No"}
+												{anniversary.hasRecap ? "Yes" : "No"}
 											</td>
 											<td className="text-capitalize">{anniversary.likes}</td>
 											<td className="text-capitalize">
@@ -494,7 +494,7 @@ const ProfileShow = (props) => {
 												{celebration.celebrationDateFormated}
 											</td>
 											<td className="text-capitalize">
-												{celebration.recap ? "Yes" : "No"}
+												{celebration.hasRecap ? "Yes" : "No"}
 											</td>
 											<td className="text-capitalize">{celebration.likes}</td>
 											<td className="text-capitalize">

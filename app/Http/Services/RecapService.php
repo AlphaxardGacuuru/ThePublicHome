@@ -2,80 +2,80 @@
 
 namespace App\Http\Services;
 
-use App\Http\Resources\AnniversaryResource;
-use App\Http\Resources\CelebrationResource;
-use App\Http\Resources\DeathResource;
-use App\Http\Resources\GraduationResource;
-use App\Http\Resources\SuccessCardResource;
-use App\Http\Resources\WeddingResource;
-use App\Models\Anniversary;
-use App\Models\Celebration;
-use App\Models\Death;
-use App\Models\Graduation;
-use App\Models\SuccessCard;
-use App\Models\Wedding;
+use App\Http\Resources\RecapResource;
+use App\Models\Recap;
+use Illuminate\Support\Facades\Storage;
 
 class RecapService extends Service
 {
     /*
      * Get Recaps
      */
-    public function index()
+    public function index($request)
     {
-        $deaths = Death::whereNotNull("recap")->get();
-        $weddings = Wedding::whereNotNull("recap")->get();
-        $graduations = Graduation::whereNotNull("recap")->get();
-        $successCards = SuccessCard::whereNotNull("recap")->get();
-        $anniversaries = Anniversary::whereNotNull("recap")->get();
-        $celebrations = Celebration::whereNotNull("recap")->get();
+        $recapsQuery = new Recap();
 
-        // $deaths = DeathResource::collection($deaths);
-        // $weddings = WeddingResource::collection($weddings);
-        // $graduations = GraduationResource::collection($graduations);
-        // $successCards = SuccessCardResource::collection($successCards);
-        // $anniversaries = AnniversaryResource::collection($anniversaries);
-        // $celebrations = CelebrationResource::collection($celebrations);
+        $recapsQuery = $this->search($recapsQuery, $request);
 
-        $mergedData = Collection::make([
-            'deaths' => DeathResource::collection($deaths)->toArray(request()),
-            // 'weddings' => WeddingResource::collection($weddings)->toArray(request()),
-            // 'graduations' => GraduationResource::collection($graduations)->toArray(request()),
-            // 'successCards' => SuccessCardResource::collection($successCards)->toArray(request()),
-            // 'anniversaries' => AnniversaryResource::collection($anniversaries)->toArray(request()),
-            // 'celebrations' => CelebrationResource::collection($celebrations)->toArray(request()),
-        ])->all();
+        $recaps = $recapsQuery
+            ->orderBy("id", "DESC")
+            ->cursorPaginate(20);
 
-        return response(["data" => $mergedData], 200);
+        return RecapResource::collection($recaps);
     }
 
     /*
-     * By User ID
+     * Delete Recap
+     */
+
+    public function destroy($id)
+    {
+        $recap = Recap::findOrFail($id);
+
+        // Delete Old Video
+        $oldVideo = substr($recap->video, 8);
+
+        Storage::disk("public")->delete($oldVideo);
+
+        $deleted = $recap->delete();
+
+        return [$deleted, "Recap deleted successfully", $recap];
+    }
+
+    /*
+     * Recaps by User ID
      */
     public function byUserId($id)
     {
-        $deaths = Death::where("user_id", $id)->whereNotNull("recap")->get();
-        $weddings = Wedding::where("user_id", $id)->whereNotNull("recap")->get();
-        $graduations = Graduation::where("user_id", $id)->whereNotNull("recap")->get();
-        $successCards = SuccessCard::where("user_id", $id)->whereNotNull("recap")->get();
-        $anniversaries = Anniversary::where("user_id", $id)->whereNotNull("recap")->get();
-        $celebrations = Celebration::where("user_id", $id)->whereNotNull("recap")->get();
+        $recaps = Recap::where("user_id", $id)
+            ->orderBy("id", "DESC")
+            ->get();
 
-        $deaths = DeathResource::collection($deaths);
-        $weddings = WeddingResource::collection($weddings);
-        $graduations = GraduationResource::collection($graduations);
-        $successCards = SuccessCardResource::collection($successCards);
-        $anniversaries = AnniversaryResource::collection($anniversaries);
-        $celebrations = CelebrationResource::collection($celebrations);
+        return RecapResource::collection($recaps);
+    }
 
-        return response([
-            "data" => [
-                ...$deaths,
-                ...$weddings,
-                ...$graduations,
-                ...$successCards,
-                ...$anniversaries,
-                ...$celebrations,
-            ],
-        ], 200);
+    /*
+     * Handle Search
+     */
+    public function search($query, $request)
+    {
+        $locale = $request->input("locale");
+
+        if ($request->filled("locale")) {
+            $query = $query
+                ->whereHas("death", function ($query) use ($locale) {
+                    $query->where("locale", $locale);
+                })->orWhereHas("wedding", function ($query) use ($locale) {
+                $query->where("locale", $locale);
+            })->orWhereHas("successCard", function ($query) use ($locale) {
+                $query->where("locale", $locale);
+            })->orWhereHas("graduation", function ($query) use ($locale) {
+                $query->where("locale", $locale);
+            })->orWhereHas("celebration", function ($query) use ($locale) {
+                $query->where("locale", $locale);
+            });
+        }
+
+        return $query;
     }
 }

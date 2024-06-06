@@ -31,6 +31,11 @@ const TopNav = (props) => {
 	const [notifications, setNotifications] = useState([])
 
 	useEffect(() => {
+		// Redirect if logged out
+		if (props.auth.name == "Guest") {
+			setTimeout(() => router.push("/"), 2000)
+		}
+
 		var isInCreatePage = location.pathname.match("/create")
 
 		// Handle Redirects for Admin
@@ -138,7 +143,7 @@ const TopNav = (props) => {
 										{/* <!-- Logo Area  --> */}
 										<div className="logo-area mb-2">
 											<Link
-												to="/admin"
+												to="/"
 												className="text-white">
 												<LogoSVG />
 											</Link>

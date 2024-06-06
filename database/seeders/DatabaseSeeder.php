@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
 			GraduationSeeder::class,
 			SuccessCardSeeder::class,
 			AnniversarySeeder::class,
-			CelebrationSeeder::class
+			CelebrationSeeder::class,
+			RecapSeeder::class
         ]);
     }
 }

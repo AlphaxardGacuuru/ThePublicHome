@@ -7,10 +7,12 @@ import OptionsSVG from "@/svgs/OptionsSVG"
 
 const Recap = (props) => {
 	return (
-		<div className="m-1 recap-media">
+		<div
+			id={`media${props.index}`}
+			className="m-1 recap-media">
 			<div>
 				<video
-					src={props.recap.recap}
+					src={props.recap.video}
 					width="100%"
 					preload="none"
 					autoPlay
@@ -59,9 +61,7 @@ const Recap = (props) => {
 							{props.auth.id == props.recap.userId && (
 								<li
 									className="dropdown-item"
-									onClick={() =>
-										props.onDelete(props.recap.id, props.recap.model)
-									}>
+									onClick={() => props.onDelete(props.recap.id)}>
 									Delete
 								</li>
 							)}

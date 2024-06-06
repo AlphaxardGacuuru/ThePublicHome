@@ -36,7 +36,7 @@ class CelebrationResource extends JsonResource
             "venue" => $this->venue,
             "dateFormated" => $this->celebration_date,
             "date" => Carbon::parse($this->celebration_date)->format("Y-m-d"),
-            "recap" => $this->recap,
+            "hasRecap" => $this->recap()->exists() ? "Yes" : "No",
             "likes" => $this->likes,
             "comments" => $this->comments,
             "hasLiked" => $this->hasLiked($id),

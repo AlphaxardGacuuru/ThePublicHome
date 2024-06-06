@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
 
 import Recap from "@/components/Recap/Recap"
@@ -7,53 +7,87 @@ import LoadingRecap from "@/components/Recap/LoadingRecap"
 import PlusSVG from "@/svgs/PlusSVG"
 
 const index = (props) => {
-	const [recaps, setRecaps] = useState([])
-
 	const [locale, setLocale] = useState("")
-	const [loader, setLoader] = useState()
+	const [page, setPage] = useState(5)
+
+	// Set Ref to reference the Intersection Observer
+	const observerRef = useRef(null)
+
+	const fetchRecaps = () => {
+		props.getPaginated(`recaps?locale=${locale}`, props.setRecaps, `recaps`)
+	}
+
+	/*
+	 * Fetch Recaps on load and on every search
+	 */
+	useEffect(() => fetchRecaps(), [locale])
+
+	/*
+	 * Fetch Recaps when nth element is in view
+	 */
+	const fetchNextRecaps = () => {
+		Axios.get(`${props.recaps.links.next}&locale=${locale}`)
+			.then((res) => {
+				props.setRecaps({
+					data: [...props.recaps.data, ...res.data.data],
+					links: res.data.links,
+					meta: res.data.meta,
+				})
+			})
+			.catch((err) => {
+				// Set Errors
+				// props.setErrors([`Failed to fetch recaps`])
+			})
+	}
+
+	/*
+	 * Intersection Observer API Callback function */
+	let callback = (entries, observer) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				// Disconnect Previous Intersection Observer
+				observerRef.current.disconnect()
+				// Increment page
+				setPage(page + 5)
+
+				requestIdleCallback(fetchNextRecaps)
+			}
+		})
+	}
 
 	useEffect(() => {
-		props.get("recaps", setRecaps)
-	}, [])
+		/*
+		 * Intersection Observer API
+		 * Fetch on every change of the state page
+		 */
+		observerRef.current = new IntersectionObserver(callback, {
+			root: null,
+			rootMargin: "0px",
+			threshold: 1.0,
+		})
+
+		const mediaItem = document.getElementById(`media${page}`)
+
+		if (mediaItem) {
+			observerRef.current.observe(mediaItem)
+		}
+	}, [page])
 
 	/*
 	 * Delete Recap
 	 */
-	const onDelete = (id, model) => {
-		/*
-		 * Check Model
-		 */
-		const url = () => {
-			switch (model) {
-				case model == "Death":
-					return "deaths"
-				case model == "Weddings":
-					return "Weddings"
-				case model == "Graduations":
-					return "Graduations"
-				case model == "SuccessCards":
-					return "SuccessCards"
-				case model == "Anniversary":
-					return "Anniversary"
-
-				default:
-					return "celebrations"
-			}
-		}
-
-		Axios.put(`/api/${url()}/${id}`, { recap: "remove" })
-			.then((res) => props.setMessages([res.data.message]))
-			.catch((err) => props.getErrors(err))
+	const onDelete = (id) => {
+		Axios.delete(`/api/recaps/${id}`)
+			.then((res) => {
+				props.setMessages([res.data.message])
+			})
+			.catch((err) => {
+				props.getErrors(err)
+			})
 	}
 
 	const activeLocale = (current) => {
 		if (locale == current) {
-			return "active"
-		}
-	}
-
-	const activeTier = (current) => {
-		if (tier == current) {
 			return "active"
 		}
 	}
@@ -94,23 +128,21 @@ const index = (props) => {
 					<div className="d-flex flex-wrap justify-content-center my-2">
 						{/* Loading Recap items */}
 						{dummyArray
-							.filter(() => recaps.length < 1)
+							.filter(() => props.recaps.length < 1)
 							.map((item, key) => (
 								<LoadingRecap key={key} />
 							))}
 
 						{/* Real Recap items */}
-						{recaps
-							.filter((recap) => recap.recap)
-							.filter((recap) => (locale ? recap.locale == locale : true))
-							.map((recap, key) => (
-								<Recap
-									{...props}
-									key={key}
-									recap={recap}
-									onDelete={onDelete}
-								/>
-							))}
+						{props.recaps.data?.map((recap, key) => (
+							<Recap
+								{...props}
+								key={key}
+								index={key}
+								recap={recap}
+								onDelete={onDelete}
+							/>
+						))}
 					</div>
 					{/* Recaps End */}
 				</center>

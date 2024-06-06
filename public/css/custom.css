@@ -1882,6 +1882,12 @@ div.hidden-scroll span {
 	height: auto;
 }
 
+.recap-thumbnail {
+	width: 90px;
+	height: 220px;
+	overflow: hidden;
+}
+
 @media only screen and (max-width: 767px) {
 	.recap-media {
 		width: 45vw;

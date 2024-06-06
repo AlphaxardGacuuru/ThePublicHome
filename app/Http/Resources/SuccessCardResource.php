@@ -32,7 +32,7 @@ class SuccessCardResource extends JsonResource
             "poster" => $this->poster,
             "photos" => $this->photos,
             "videos" => $this->videos,
-            "recap" => $this->recap,
+            "hasRecap" => $this->recap()->exists() ? "Yes" : "No",
             "likes" => $this->likes,
             "comments" => $this->comments,
             "hasLiked" => $this->hasLiked($id),

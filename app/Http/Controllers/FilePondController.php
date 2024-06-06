@@ -6,6 +6,7 @@ use App\Models\Anniversary;
 use App\Models\Celebration;
 use App\Models\Death;
 use App\Models\Graduation;
+use App\Models\Recap;
 use App\Models\SuccessCard;
 use App\Models\User;
 use App\Models\Wedding;
@@ -209,23 +210,34 @@ class FilePondController extends Controller
             'filepond-recap' => 'required|file',
         ]);
 
-        // Update Model
+        // Get Model
+        $recap = $this->getRecapModel($type, $id);
         $model = $this->getModel($type, $id);
 
-        $recap = $request
+        $modelId = $type == "success-card" ? "success_card_id" : $type . "_id";
+
+        $video = $request
             ->file('filepond-recap')
-            ->store('public/' . $type . '-recaps');
+            ->store('public/recaps');
 
-        // Delete Old Recap
-        $oldRecap = substr($model->recap, 8);
+        $video = substr($video, 7);
 
-        Storage::disk("public")->delete($oldRecap);
+        if ($recap->doesntExist()) {
+            $recap = new Recap;
+            $recap->video = $video;
+            $recap->user_id = $model->user_id;
+            $recap->$modelId = $model->id;
+        } else {
+            // Delete Old Video
+            $oldVideo = substr($recap->video, 8);
 
-        $recap = substr($recap, 7);
+            Storage::disk("public")->delete($oldVideo);
 
-        $model->recap = $recap;
+            // Save new video
+            $recap->video = $video;
+        }
 
-        $model->save();
+        $recap->save();
 
         return $recap;
     }
@@ -267,6 +279,38 @@ class FilePondController extends Controller
 
             default:
                 return Celebration::findOrFail($id);
+                break;
+        }
+    }
+
+    /*
+     * Get Respective Model
+     */
+    public function getRecapModel($type, $id)
+    {
+        switch ($type) {
+            case "death":
+                return Recap::where("death_id", $id);
+                break;
+
+            case "wedding":
+                return Recap::where("wedding_id", $id);
+                break;
+
+            case "graduation":
+                return Recap::where("graduation_id", $id);
+                break;
+
+            case "success-card":
+                return Recap::where("success_card_id", $id);
+                break;
+
+            case "anniversary":
+                return Recap::where("anniversary_id", $id);
+                break;
+
+            default:
+                return Recap::where("celebration_id", $id)->firstOrFail();
                 break;
         }
     }

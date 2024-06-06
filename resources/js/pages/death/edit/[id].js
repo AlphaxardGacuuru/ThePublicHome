@@ -529,7 +529,6 @@ const DeathEdit = (props) => {
 								labelIdle='Drag & Drop your Video or <span class="filepond--label-action text-dark"> Browse </span>'
 								// imageCropAspectRatio="16:9"
 								acceptedFileTypes={["video/*"]}
-								allowMultiple={true}
 								allowRevert={false}
 								allowRemove={false}
 								maxTotalFileSize={`${death.videoLimit}MB`}

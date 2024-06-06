@@ -47,6 +47,7 @@ const ListingPage = (props) => {
 	const [tier, setTier] = useState("")
 	const [loader, setLoader] = useState()
 	const [page, setPage] = useState(5)
+
 	// Set Ref to reference the Intersection Observer
 	const observerRef = useRef(null)
 
@@ -87,7 +88,7 @@ const ListingPage = (props) => {
 			})
 			.catch((err) => {
 				// Set Errors
-				props.setErrors([`Failed to fetch ${formatedAnnouncement()}s`])
+				// props.setErrors([`Failed to fetch ${formatedAnnouncement()}s`])
 			})
 	}
 
