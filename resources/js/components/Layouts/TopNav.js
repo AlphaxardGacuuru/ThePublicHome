@@ -367,16 +367,18 @@ const TopNav = (props) => {
 																	</div>
 																</div>
 															</Link>
-															<Link
-																to="/admin"
-																className="p-2 px-3 dropdown-item">
-																<h6>
-																	<span className="me-2">
-																		<PersonSVG />
-																	</span>
-																	Admin
-																</h6>
-															</Link>
+															{props.auth.accountType == "admin" && (
+																<Link
+																	to="/admin"
+																	className="p-2 px-3 dropdown-item">
+																	<h6>
+																		<span className="me-2">
+																			<PersonSVG />
+																		</span>
+																		Admin
+																	</h6>
+																</Link>
+															)}
 															<Link
 																to="/download"
 																className="p-2 px-3 dropdown-item"
@@ -580,18 +582,20 @@ const TopNav = (props) => {
 								</div>
 							</div>
 						</Link>
-						<Link
-							to="/admin"
-							className="p-3 text-start"
-							onClick={() => setBottomMenu("")}
-							title="Admin">
-							<h6>
-								<span className="ms-3 me-4">
-									<PersonSVG />
-								</span>
-								Admin
-							</h6>
-						</Link>
+						{props.auth.accountType == "admin" && (
+							<Link
+								to="/admin"
+								className="p-3 text-start"
+								onClick={() => setBottomMenu("")}
+								title="Admin">
+								<h6>
+									<span className="ms-3 me-4">
+										<PersonSVG />
+									</span>
+									Admin
+								</h6>
+							</Link>
+						)}
 						<Link
 							to="/download"
 							className="p-3 text-start"

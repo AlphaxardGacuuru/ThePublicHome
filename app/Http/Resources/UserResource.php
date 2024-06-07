@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             "email" => $this->email,
             "phone" => $this->phone,
             "avatar" => $this->avatar,
+            "accountType" => $this->account_type,
             "membershipId" => $this->membership()?->id,
             "membershipName" => $this->membership()?->name,
             "membershipTier" => $this->membership()?->tier,

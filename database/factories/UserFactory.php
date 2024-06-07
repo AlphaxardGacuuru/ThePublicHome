@@ -58,6 +58,7 @@ class UserFactory extends Factory
             'phone' => '0700364446',
             'password' => Hash::make('alphaxardgacuuru47@gmail.com'),
             'remember_token' => Str::random(10),
+			'account_type' => 'admin'
         ]);
     }
 }

@@ -41,7 +41,6 @@ const DeathCreate = (props) => {
 	const [sunset, setSunset] = useState("")
 	const [burialDate, setBurialDate] = useState("")
 	const [announcement, setAnnouncement] = useState("")
-	const [eulogyWords, setEulogyWords] = useState("")
 	const [loadingBtn, setLoadingBtn] = useState("")
 
 	// Get history for page location
@@ -56,7 +55,6 @@ const DeathCreate = (props) => {
 
 	// Get Word limit for announcement based on user's membership
 	var wordLimit = props.auth.membershipFeatures?.announcement
-	var eulogyWordLimit = props.auth.membershipFeatures?.eulogy[1]
 
 	const onSubmit = (e) => {
 		e.preventDefault()
@@ -73,15 +71,6 @@ const DeathCreate = (props) => {
 			])
 		}
 
-		// Check if eulogy limit is reached
-		if (eulogyWords.length > eulogyWordLimit) {
-			setLoadingBtn(false)
-
-			return props.setErrors([
-				`Eulogy cannot be greater than ${eulogyWordLimit} words`,
-			])
-		}
-
 		// Send data to PostsController
 		// Get csrf cookie from Laravel inorder to send a POST request
 		Axios.post(`/api/deaths`, {
@@ -91,8 +80,7 @@ const DeathCreate = (props) => {
 			sunrise: sunrise,
 			sunset: sunset,
 			burialDate: burialDate,
-			announcement: announcement,
-			eulogyWords: eulogyWords,
+			announcement: announcement
 		})
 			.then((res) => {
 				props.setMessages([res.data.message])
@@ -201,37 +189,6 @@ const DeathCreate = (props) => {
 								`}>
 								Word Count: {announcement.length} /{" "}
 								{wordLimit == 1000000 ? "Unlimited" : wordLimit}
-							</small>
-						</div>
-
-						<div className="ms-2 mb-2 d-flex justify-content-start">
-							<label htmlFor="">Eulogy</label>
-						</div>
-
-						<textarea
-							type="text"
-							name="eulogyWords"
-							className="form-control"
-							placeholder="Write your death eulogy"
-							cols="30"
-							rows="10"
-							onChange={(e) => setEulogyWords(e.target.value)}></textarea>
-
-						<div className="d-flex justify-content-end py-2">
-							<small
-								className={`p-1
-									${
-										eulogyWords.length > eulogyWordLimit * 0.8
-											? eulogyWords.length <= eulogyWordLimit
-												? "bg-warning-subtle"
-												: "bg-danger-subtle"
-											: "bg-secondary-subtle"
-									}
-								`}>
-								Word Count: {eulogyWords.length} /{" "}
-								{eulogyWordLimit == 1000000
-									? "Unlimited"
-									: eulogyWordLimit}
 							</small>
 						</div>
 
