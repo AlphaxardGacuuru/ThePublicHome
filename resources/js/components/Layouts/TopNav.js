@@ -78,7 +78,7 @@ const TopNav = (props) => {
 				// Remove phone from localStorage
 				localStorage.clear()
 				// Reload
-				window.location.reload()
+				// window.location.reload()
 			})
 	}
 

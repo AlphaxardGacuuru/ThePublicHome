@@ -442,7 +442,7 @@ const DeathEdit = (props) => {
 							<FilePond
 								name="filepond-poster"
 								labelIdle='Drag & Drop your Image or <span class="filepond--label-action text-dark"> Browse </span>'
-								imageCropAspectRatio="16:9"
+								// imageCropAspectRatio="16:9"
 								acceptedFileTypes={["image/*"]}
 								// stylePanelAspectRatio="16:9"
 								allowReplace={true}

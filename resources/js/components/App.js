@@ -127,7 +127,7 @@ const App = () => {
 		getPaginated("success-cards", setSuccessCards, "success-cards")
 		getPaginated("weddings", setWeddings, "weddings")
 		get("auth", setAuth, "auth", false)
-	}, [])
+	}, [auth])
 
 	console.log("rendered")
 
