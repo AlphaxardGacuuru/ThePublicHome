@@ -315,41 +315,43 @@ const ViewPage = (props) => {
 														) : (
 															<div>
 																{/* PDF Viewer */}
-																<div className="d-flex justify-content-center p-2">
-																	<Document
-																		// className="w-100"
-																		file={`/storage/${announcement.eulogy}`}
-																		onLoadSuccess={onDocumentLoadSuccess}
-																		loading={
-																			<div
-																				className="spinner-border my-auto"
-																				style={{ color: "inherit" }}></div>
-																		}>
-																		<Outline onItemClick={onItemClick} />
-																		<Page
-																			className="hidden"
-																			width={720}
-																			pageNumber={pageNumber}
-																			scale={zoomNumber}
+																{announcement.eulogy && (
+																	<div className="d-flex justify-content-center p-2">
+																		<Document
+																			// className="w-100"
+																			file={`/storage/${announcement.eulogy}`}
+																			onLoadSuccess={onDocumentLoadSuccess}
 																			loading={
 																				<div
 																					className="spinner-border my-auto"
 																					style={{ color: "inherit" }}></div>
-																			}
-																		/>
-																		<Page
-																			className="anti-hidden"
-																			pageNumber={pageNumber}
-																			scale={zoomNumber}
-																			width={300}
-																			loading={
-																				<div
-																					className="spinner-border my-auto"
-																					style={{ color: "inherit" }}></div>
-																			}
-																		/>
-																	</Document>
-																</div>
+																			}>
+																			<Outline onItemClick={onItemClick} />
+																			<Page
+																				className="hidden"
+																				width={720}
+																				pageNumber={pageNumber}
+																				scale={zoomNumber}
+																				loading={
+																					<div
+																						className="spinner-border my-auto"
+																						style={{ color: "inherit" }}></div>
+																				}
+																			/>
+																			<Page
+																				className="anti-hidden"
+																				pageNumber={pageNumber}
+																				scale={zoomNumber}
+																				width={300}
+																				loading={
+																					<div
+																						className="spinner-border my-auto"
+																						style={{ color: "inherit" }}></div>
+																				}
+																			/>
+																		</Document>
+																	</div>
+																)}
 																{/* PDF Viewer End */}
 																<p className="text-center mt-2">
 																	Page {pageNumber} of {numPages}

@@ -5,6 +5,8 @@ import ProfileNav from "@/components/Layouts/ProfileNav"
 import AdminNav from "../Layouts/AdminNav"
 
 import About from "@/pages/about"
+import TermsAndConditions from "@/pages/terms-and-conditions"
+import PrivacyPolicy from "@/pages/privacy-policy"
 
 import DeathIndex from "@/pages/death"
 import DeathCreate from "@/pages/death/create"
@@ -62,6 +64,14 @@ const RouteList = (GLOBAL_STATE) => {
 		{
 			path: "/about",
 			component: <About {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/terms-and-conditions",
+			component: <TermsAndConditions {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/privacy-policy",
+			component: <PrivacyPolicy {...GLOBAL_STATE} />,
 		},
 		{
 			path: "/",

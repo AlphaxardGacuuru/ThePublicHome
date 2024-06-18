@@ -6,6 +6,8 @@ import PrivacySVG from "@/svgs/PrivacySVG"
 import ChatSVG from "@/svgs/ChatSVG"
 import PersonSVG from "@/svgs/PersonSVG"
 import ChevronUpSVG from "@/svgs/ChevronUpSVG"
+import TermsSVG from "@/svgs/TermsSVG"
+import HelpSVG from "@/svgs/HelpSVG"
 
 const Footer = () => {
 	const location = useLocation()
@@ -55,7 +57,15 @@ const Footer = () => {
 					<div className="d-flex flex-column">
 						<h1 className="text-white">Quick Links</h1>
 						<Link
-							to="/privacy"
+							to="/terms-and-conditions"
+							className="text-white">
+							<span className="me-2">
+								<TermsSVG />
+							</span>
+							Terms and Conditions
+						</Link>
+						<Link
+							to="/privacy-policy"
 							className="text-white">
 							<span className="me-2">
 								<PrivacySVG />
@@ -74,7 +84,7 @@ const Footer = () => {
 							href="mailto:thepublichome@gmail.com?subject=Help&body=Enquiry"
 							className="text-white">
 							<span className="me-2">
-								<PrivacySVG />
+								<HelpSVG />
 							</span>
 							Help
 						</a>
@@ -90,7 +100,7 @@ const Footer = () => {
 							href="mailto:thepublichome@gmail.com?subject=ReportProblem&body=Enquiry"
 							className="text-white">
 							<span className="me-2">
-								<PrivacySVG />
+								<HelpSVG />
 							</span>
 							Report Problem
 						</a>

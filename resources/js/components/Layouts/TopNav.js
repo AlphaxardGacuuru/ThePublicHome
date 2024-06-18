@@ -71,32 +71,14 @@ const TopNav = (props) => {
 				// Remove phone from localStorage
 				localStorage.clear()
 				// Reload
-				// window.location.reload()
-				// Set Auth to Guest
-				props.setAuth({
-					name: "Guest",
-					avatar: "/storage/avatars/male-avatar.png",
-					accountType: "normal",
-					decos: 0,
-					posts: 0,
-					fans: 0,
-				})
+				window.location.reload()
 			})
 			.catch((err) => {
 				props.getErrors(err)
 				// Remove phone from localStorage
 				localStorage.clear()
 				// Reload
-				// window.location.reload()
-				// Set Auth to Guest
-				props.setAuth({
-					name: "Guest",
-					avatar: "/storage/avatars/male-avatar.png",
-					accountType: "normal",
-					decos: 0,
-					posts: 0,
-					fans: 0,
-				})
+				window.location.reload()
 			})
 	}
 

@@ -119,6 +119,8 @@ const App = () => {
 	}
 
 	// Fetch data on page load
+	useEffect(() => get("auth", setAuth, "auth", false), [])
+
 	useEffect(() => {
 		getPaginated("deaths", setDeaths, "deaths")
 		getPaginated("anniversaries", setAnniversaries, "anniversaries")
@@ -126,7 +128,6 @@ const App = () => {
 		getPaginated("graduations", setGraduations, "graduations")
 		getPaginated("success-cards", setSuccessCards, "success-cards")
 		getPaginated("weddings", setWeddings, "weddings")
-		get("auth", setAuth, "auth", false)
 	}, [auth])
 
 	console.log("rendered")
