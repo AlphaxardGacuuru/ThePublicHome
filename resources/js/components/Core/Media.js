@@ -8,6 +8,7 @@ import HeartFilledSVG from "@/svgs/HeartFilledSVG"
 import HeartSVG from "@/svgs/HeartSVG"
 import CommentSVG from "@/svgs/CommentSVG"
 import OptionsSVG from "@/svgs/OptionsSVG"
+import HelpSVG from "@/svgs/HelpSVG"
 
 const Media = (props) => {
 	const location = useLocation()
@@ -149,8 +150,13 @@ const Media = (props) => {
 						</a>
 						<ul className="dropdown-menu dropdown-menu-right">
 							{/* <!-- Dropdown menu links --> */}
-							<a href="#">
-								<li className="dropdown-item">Report Issue</li>
+							<a
+								href={`mailto:thepublichome@gmail.com?subject=Issue with ${props.title} ID ${props.announcement.id}&body=Enquiry`}
+								className="dropdown-item">
+								<span className="me-2">
+									<HelpSVG />
+								</span>
+								Report Issue
 							</a>
 						</ul>
 					</div>

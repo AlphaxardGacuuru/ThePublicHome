@@ -257,6 +257,7 @@ const ListingPage = (props) => {
 								{...props}
 								key={key}
 								index={key}
+								title={props.title}
 								announcement={announcement}
 								announcementToGet={props.announcement}
 								fetchAnnouncements={fetchAnnouncements}
