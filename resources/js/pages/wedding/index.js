@@ -8,6 +8,8 @@ const index = (props) => {
 			{...props}
 			title="Wedding Announcements"
 			announcement="wedding"
+			announcements={props.weddings}
+			setAnnouncements={props.setWeddings}
 		/>
 	)
 }

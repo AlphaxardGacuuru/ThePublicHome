@@ -7,40 +7,6 @@ import LoadingMedia from "@/components/Core/LoadingMedia"
 import PlusSVG from "@/svgs/PlusSVG"
 
 const ListingPage = (props) => {
-	/*
-	 * Get Respective Announcement
-	 */
-	const getAnnouncement = (importedAnnouncement) => {
-		switch (importedAnnouncement) {
-			case "death":
-				return props.deaths
-				break
-
-			case "wedding":
-				return props.weddings
-				break
-
-			case "graduation":
-				return props.graduations
-				break
-
-			case "success-card":
-				return props.successCards
-				break
-
-			case "anniversary":
-				return props.anniversaries
-				break
-
-			default:
-				return props.celebrations
-				break
-		}
-	}
-
-	const [announcements, setAnnouncements] = useState(
-		getAnnouncement(props.announcements)
-	)
 
 	const [name, setName] = useState("")
 	const [locale, setLocale] = useState("")
@@ -57,7 +23,7 @@ const ListingPage = (props) => {
 			name=${name}&
 			locale=${locale}&
 			tier=${tier}`,
-			setAnnouncements,
+			props.setAnnouncements,
 			`${formatedAnnouncement()}s`
 		)
 	}
@@ -74,14 +40,14 @@ const ListingPage = (props) => {
 	 */
 	const fetchNextAnnouncement = () => {
 		Axios.get(
-			`${announcements.links.next}&
+			`${props.announcements.links.next}&
 						name=${name}&
 						locale=${locale}&
 						tier=${tier}`
 		)
 			.then((res) => {
-				setAnnouncements({
-					data: [...announcements.data, ...res.data.data],
+				props.setAnnouncements({
+					data: [...props.announcements.data, ...res.data.data],
 					links: res.data.links,
 					meta: res.data.meta,
 				})
@@ -246,13 +212,13 @@ const ListingPage = (props) => {
 					<div className="d-flex flex-wrap justify-content-center mb-2">
 						{/* Loading Announcement items */}
 						{dummyArray
-							.filter(() => announcements.length < 1)
+							.filter(() => props.announcements.length < 1)
 							.map((item, key) => (
 								<LoadingMedia key={key} />
 							))}
 
 						{/* Real Announcement items */}
-						{announcements.data?.map((announcement, key) => (
+						{props.announcements.data?.map((announcement, key) => (
 							<Media
 								{...props}
 								key={key}
