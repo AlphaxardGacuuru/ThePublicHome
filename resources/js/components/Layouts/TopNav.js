@@ -380,7 +380,7 @@ const TopNav = (props) => {
 																</Link>
 															)}
 															<Link
-																to="/download"
+																to="/download-app"
 																className="p-2 px-3 dropdown-item"
 																style={{
 																	display: props.downloadLink
@@ -597,7 +597,7 @@ const TopNav = (props) => {
 							</Link>
 						)}
 						<Link
-							to="/download"
+							to="/download-app"
 							className="p-3 text-start"
 							style={{
 								display: props.downloadLink ? "inline" : "none",
