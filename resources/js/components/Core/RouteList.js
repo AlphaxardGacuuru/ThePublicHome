@@ -4,6 +4,7 @@ import { Route } from "react-router-dom"
 import ProfileNav from "@/components/Layouts/ProfileNav"
 import AdminNav from "../Layouts/AdminNav"
 
+import DownloadApp from "@/pages/download-app"
 import About from "@/pages/about"
 import TermsAndConditions from "@/pages/terms-and-conditions"
 import PrivacyPolicy from "@/pages/privacy-policy"
@@ -64,6 +65,10 @@ const RouteList = (GLOBAL_STATE) => {
 		{
 			path: "/about",
 			component: <About {...GLOBAL_STATE} />,
+		},
+		{
+			path: "/download-app",
+			component: <DownloadApp {...GLOBAL_STATE} />,
 		},
 		{
 			path: "/terms-and-conditions",
