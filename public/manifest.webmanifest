@@ -9,7 +9,7 @@
 		"window-controls-overlay"
 	],
 	"theme_color": "#242525",
-	"background_color": "#FFF",
+	"background_color": "#242525",
 	"orientation": "portrait-primary",
 	"description": "The Public Home",
 	"icons": [
