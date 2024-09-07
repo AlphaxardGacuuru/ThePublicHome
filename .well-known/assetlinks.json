@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.thepublichome.www.twa",
+        "sha256_cert_fingerprints": ["F6:99:78:CA:87:28:84:EF:EF:FC:EB:AF:E3:24:5B:87:5D:A5:58:19:D8:23:4D:97:35:07:30:07:3B:15:CA:F1"]
+      }
+    }]
