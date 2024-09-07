@@ -28,7 +28,11 @@ class AuthenticatedSessionController extends Controller
      */
     public function handleProviderCallback($website)
     {
-        $user = Socialite::driver($website)->user();
+        try {
+            $user = Socialite::driver($website)->user();
+        } catch (InvalidStateException $e) {
+            $user = Socialite::driver($website)->stateless()->user();
+        }
 
         $name = $user->getName() ? $user->getName() : " ";
 
