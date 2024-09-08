@@ -18,7 +18,7 @@ class AuthenticatedSessionController extends Controller
      * Social Logins*/
     public function redirectToProvider($website)
     {
-        return Socialite::driver($website)->redirect();
+        return Socialite::driver($website)->stateless()->redirect();
     }
 
     /**
