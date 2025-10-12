@@ -21,10 +21,12 @@ const membership = (props) => {
 				res.data.data.success_card,
 				res.data.data.anniversary,
 				res.data.data.celebration,
-			]
+			].filter()
+			
 			setGroupedMemberships(data)
 		})
 	}, [])
+	console.info(groupedMemberships)
 
 	const onMembership = (membershipId) => {
 		// Show Loader

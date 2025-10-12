@@ -18,8 +18,9 @@ mix.react("resources/js/app.js", "public/js").sass(
 
 mix.browserSync({
 	port: 3004,
-    proxy: "http://localhost:8004",
-    reloadDelay: 500
+    proxy: "http://laravel.test",
+    reloadDelay: 500,
+	open: false
 });
 
 mix.webpackConfig({

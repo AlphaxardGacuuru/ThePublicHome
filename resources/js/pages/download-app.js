@@ -33,8 +33,9 @@ const Download = (props) => {
 					<br />
 
 					<Img
-						src="storage/img/home.png"
-						width="50%"
+						src="storage/img/android-chrome-512x512.png"
+						width="25%"
+						className="rounded-circle"
 					/>
 					<br />
 					<br />
@@ -48,43 +49,6 @@ const Download = (props) => {
 						onClick={() => props.btnAdd.current.click()}
 					/>
 					<br />
-					<br />
-					<br />
-					<br />
-
-					<a
-						href="tel:0700364446"
-						className="display-2"
-						title="Phone">
-						{/* <PhoneSVG /> */}
-					</a>
-					<br />
-					<br />
-
-					<a
-						href="sms:0700364446"
-						className="display-2"
-						title="SMS">
-						{/* <SMSSVG /> */}
-					</a>
-					<br />
-					<br />
-
-					<a
-						href="https://wa.me/+2540700364446"
-						className="display-2"
-						title="WhatsApp">
-						{/* <WhatsAppSVG /> */}
-					</a>
-					<br />
-					<br />
-
-					<a
-						href="https://www.instagram.com/officialblackkenya"
-						className="display-2"
-						title="Instagram">
-						{/* <InstagramSVG /> */}
-					</a>
 					<br />
 					<br />
 					<br />

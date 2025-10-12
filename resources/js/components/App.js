@@ -229,14 +229,10 @@ const App = () => {
 	return (
 		<HashRouter>
 			<ScrollToTop />
-
 			<TopNav {...GLOBAL_STATE} />
-
 			<RouteList {...GLOBAL_STATE} />
-
 			<LoginPopUp {...GLOBAL_STATE} />
 			<Messages {...GLOBAL_STATE} />
-
 			<Footer {...GLOBAL_STATE} />
 
 			{/* Install button */}

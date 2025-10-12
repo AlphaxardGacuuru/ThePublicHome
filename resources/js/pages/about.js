@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
-import MyLink from "@/components/core/MyLink"
+import MyLink from "@/components/Core/MyLink"
 
 const about = () => {
 	useEffect(() => {

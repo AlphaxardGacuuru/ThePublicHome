@@ -7,7 +7,6 @@ import LoadingMedia from "@/components/Core/LoadingMedia"
 import PlusSVG from "@/svgs/PlusSVG"
 
 const ListingPage = (props) => {
-
 	const [name, setName] = useState("")
 	const [locale, setLocale] = useState("")
 	const [tier, setTier] = useState("")
@@ -112,19 +111,23 @@ const ListingPage = (props) => {
 	const dummyArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 	return (
-		<div className="row p-0">
+		<div
+			className="row p-0"
+			style={{ minHeight: "60vh" }}>
 			<div className="col-sm-1"></div>
 			<div className="col-sm-10 p-0">
 				{/* Create Link */}
-				<Link
-					to={
-						props.auth?.membershipName == props.announcement
-							? `/${formatedAnnouncement()}s/create`
-							: "/profile/membership"
-					}
-					id="chatFloatBtn">
-					<PlusSVG />
-				</Link>
+				{props.auth.id && (
+					<Link
+						to={
+							props.auth?.membershipName == props.announcement
+								? `/${formatedAnnouncement()}s/create`
+								: "/profile/membership"
+						}
+						id="chatFloatBtn">
+						<PlusSVG />
+					</Link>
+				)}
 				{/* Create Link End */}
 
 				<center>
