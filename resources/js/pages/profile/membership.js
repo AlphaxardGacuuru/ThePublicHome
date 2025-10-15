@@ -21,7 +21,7 @@ const membership = (props) => {
 				res.data.data.success_card,
 				res.data.data.anniversary,
 				res.data.data.celebration,
-			].filter()
+			].filter((item) => item != null)
 			
 			setGroupedMemberships(data)
 		})
