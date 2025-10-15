@@ -26,7 +26,6 @@ const membership = (props) => {
 			setGroupedMemberships(data)
 		})
 	}, [])
-	console.info(groupedMemberships)
 
 	const onMembership = (membershipId) => {
 		// Show Loader
